@@ -31,3 +31,51 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer utilities {
+  .animation-delay-100 {
+    animation-delay: 0.1s;
+  }
+  .animation-delay-120 {
+    animation-delay: 0.12s;
+  }
+  .animation-delay-140 {
+    animation-delay: 0.14s;
+  }
+  .animation-delay-160 {
+    animation-delay: 0.16s;
+  }
+  .animation-delay-180 {
+    animation-delay: 0.18s;
+  }
+}
+
+.gutter-horizontal {
+  background-color: #6b7280;
+  width: 2px;
+  border: solid;
+  border-width: 0 3px;
+  border-color: rgb(1, 4, 9);
+  cursor: grab;
+  opacity: 50%;
+  transition-duration: 0.3s;
+}
+
+.gutter-horizontal:hover {
+  opacity: 100%;
+}
+
+.gutter-vertical {
+  background-color: #6b7280;
+  height: 2px;
+  border: solid;
+  border-width: 3px 0;
+  border-color: rgb(1, 4, 9);
+  cursor: grab;
+  opacity: 50%;
+  transition-duration: 0.3s;
+}
+
+.gutter-vertical:hover {
+  opacity: 100%;
+}
