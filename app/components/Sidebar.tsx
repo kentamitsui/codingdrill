@@ -1,32 +1,23 @@
+"use client";
+import { useState } from "react";
+import menuData from "../config/config.json";
+import Options from "./Option";
+
 export default function Sidebar() {
+  const [selected, SetSelected] = useState("");
+
   return (
-    <aside className="dark:bg-menu flex h-[500px] w-[150px] flex-col gap-1 rounded-md bg-gray-200 text-sm duration-300">
-      <label htmlFor="select-language"></label>
-      <select
-        className="dark:bg-menu m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700"
-        name="language"
-        id="select-language"
-      >
-        <option selected disabled className="text-start">
-          language
-        </option>
-        <option value="c">C</option>
-        <option value="csharp">C#</option>
-        <option value="cpp">C++</option>
-        <option value="go">Go</option>
-        <option value="java">Java</option>
-        <option value="javascript">JavaScript</option>
-        <option value="kotlin">Kotlin</option>
-        <option value="php">PHP</option>
-        <option value="python">Python</option>
-        <option value="ruby">Ruby</option>
-        <option value="rust">Rust</option>
-        <option value="swift">Swift</option>
-        <option value="typescript">TypeScript</option>
-      </select>
+    <aside className="flex h-[500px] w-[150px] flex-col gap-1 rounded-md bg-gray-200 text-sm duration-300 dark:bg-menu">
+      <Options
+        label={"select-language"}
+        data={menuData.menuLists.languages}
+        name={"language"}
+        id={"select-language"}
+        defaultSelected={"language"}
+      />
       <label htmlFor="select-difficulty"></label>
       <select
-        className="dark:bg-menu m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700"
+        className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
         name="difficulty"
         id="select-difficulty"
       >
@@ -42,7 +33,7 @@ export default function Sidebar() {
       </select>
       <label htmlFor="select-type"></label>
       <select
-        className="dark:bg-menu m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700"
+        className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
         name="type"
         id="select-type"
       >
@@ -63,7 +54,7 @@ export default function Sidebar() {
       </select>
       <label htmlFor="select-topic"></label>
       <select
-        className="dark:bg-menu m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700"
+        className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
         name="topic"
         id="select-topic"
       >
@@ -158,7 +149,7 @@ export default function Sidebar() {
       </select>
       <label htmlFor="select-display-language"></label>
       <select
-        className="dark:bg-menu m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700"
+        className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
         name="display-language"
         id="select-display-language"
       >
@@ -194,7 +185,7 @@ export default function Sidebar() {
         </div>
         <label htmlFor="savedata"></label>
         <select
-          className="dark:bg-menu m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700"
+          className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
           name="data"
           id="savedata"
         ></select>

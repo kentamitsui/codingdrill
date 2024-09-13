@@ -1,0 +1,19 @@
+{
+  "menuLists": {
+    "languages": {
+      "c": "C",
+      "csharp": "C#",
+      "cpp": "C++",
+      "go": "Go",
+      "java": "Java",
+      "javascript": "JavaScript",
+      "kotlin": "Kotlin",
+      "php": "PHP",
+      "python": "Python",
+      "ruby": "Ruby",
+      "rust": "Rust",
+      "swift": "Swift",
+      "typescript": "TypeScript"
+    }
+  }
+}
