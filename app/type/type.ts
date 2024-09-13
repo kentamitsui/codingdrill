@@ -1,6 +1,6 @@
 export interface LanguageSelectProps {
   label?: string;
-  data: { [key: string]: string }; // オブジェクトとしてデータを受け取る
+  data: { [key: string]: { [key: string]: string } | string }; // `optgroup`内に`option`を持つ可能性があるため修正
   name: string; // セレクトボックスのname属性
   id: string; // セレクトボックスのid属性
   defaultSelected?: string; // デフォルトのラベルを可変にするためのプロップ
