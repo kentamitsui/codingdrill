@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { LanguageSelectProps } from "../type/type";
 
 export const Options: React.FC<LanguageSelectProps> = ({
@@ -7,13 +8,22 @@ export const Options: React.FC<LanguageSelectProps> = ({
   id,
   defaultSelected,
 }) => {
+  const [selected, SetSelected] = useState("");
+  const handleChangeColor = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    SetSelected(event.target.value);
+  };
+
   return (
     <>
       <label htmlFor={label}></label>
       <select
-        className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
+        className={`m-1 cursor-pointer rounded-md p-1 duration-300 
+          ${selected !== "" ? "bg-gray-400" : "bg-gray-200"}
+        dark:${selected !== "" ? "bg-slate-700" : "bg-menu"}
+        hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
         id={id}
+        onChange={handleChangeColor}
       >
         <option selected disabled className="text-start">
           {defaultSelected}
