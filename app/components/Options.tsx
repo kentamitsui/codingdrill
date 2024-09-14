@@ -1,6 +1,6 @@
-import { LanguageSelectProps } from "../type/type";
+import { SelectProps } from "../type/type";
 
-export const Options: React.FC<LanguageSelectProps> = ({
+export const Options: React.FC<SelectProps> = ({
   label,
   data,
   name,
