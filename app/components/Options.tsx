@@ -1,6 +1,5 @@
 import { SelectProps } from "../type/type";
 import { useState } from "react";
-import { LanguageSelectProps } from "../type/type";
 
 export const Options: React.FC<SelectProps> = ({
   label,
