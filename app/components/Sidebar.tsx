@@ -1,11 +1,8 @@
 "use client";
-import { useState } from "react";
 import menuData from "../config/config.json";
 import Options from "./Options";
 
 export default function Sidebar() {
-  const [selected, SetSelected] = useState("");
-
   return (
     <aside className="flex h-[500px] w-[150px] flex-col gap-1 rounded-md bg-gray-200 text-sm duration-300 dark:bg-menu">
       <Options
