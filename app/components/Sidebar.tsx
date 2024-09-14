@@ -2,6 +2,7 @@
 import { useState } from "react";
 import menuData from "../config/config.json";
 import Options from "./Options";
+import Button from "./Button";
 
 export default function Sidebar() {
   const [selected, SetSelected] = useState("");
@@ -43,13 +44,7 @@ export default function Sidebar() {
         id={"select-display-language"}
         defaultSelected={"display on"}
       />
-      <button
-        id="create"
-        type="submit"
-        className="m-1 rounded-[15px] bg-gray-400 p-1 text-[1rem] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-      >
-        create problem
-      </button>
+      <Button id="create" type="submit" text="create problem" />
       <div className="mt-auto flex flex-col gap-1">
         <div
           hidden
@@ -64,27 +59,9 @@ export default function Sidebar() {
           name="data"
           id="savedata"
         ></select>
-        <button
-          id="load"
-          type="button"
-          className="m-1 rounded-[15px] bg-gray-400 p-1 text-[1rem] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-        >
-          load
-        </button>
-        <button
-          id="delete"
-          type="button"
-          className="m-1 rounded-[15px] bg-gray-400 p-1 text-[1rem] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-        >
-          delete
-        </button>
-        <button
-          id="delete-all"
-          type="button"
-          className="m-1 rounded-[15px] bg-gray-400 p-1 text-[1rem] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-        >
-          delete all
-        </button>
+        <Button id="load" type="button" text="load" />
+        <Button id="delete" type="button" text="delete" />
+        <Button id="delete-all" type="button" text="delete all" />
       </div>
     </aside>
   );
