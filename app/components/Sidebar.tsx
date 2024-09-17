@@ -5,7 +5,7 @@ import Button from "./Button";
 
 export default function Sidebar() {
   return (
-    <aside className="flex h-[500px] w-[150px] flex-col gap-1 rounded-md bg-gray-200 text-sm duration-300 dark:bg-menu">
+    <aside className="flex h-[500px] w-[150px] flex-col gap-1 rounded-md bg-gray-200 text-sm text-black duration-300 dark:bg-menu">
       <Options
         label={"select-language"}
         data={menuData.menuLists.languages}

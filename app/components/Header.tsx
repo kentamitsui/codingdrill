@@ -5,7 +5,7 @@ export default function Header() {
       <div className="ml-auto flex items-center justify-center">
         <button
           id="theme-toggle"
-          className="dark:bg-background flex h-10 w-10 items-center justify-center rounded-full"
+          className="flex h-10 w-10 items-center justify-center rounded-full dark:bg-background"
         >
           {/* light icon */}
           <svg
