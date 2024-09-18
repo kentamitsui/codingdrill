@@ -25,7 +25,10 @@ export const Options: React.FC<SelectProps> = ({
         id={id}
         onChange={handleChangeColor}
       >
-        <option selected disabled className="text-start">
+        <option
+          disabled={selected !== "" ? true : false}
+          className="text-start"
+        >
           {defaultSelected}
         </option>
         {label === "select-topic"
