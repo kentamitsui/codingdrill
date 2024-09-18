@@ -40,16 +40,24 @@
   }
 }
 
+:root {
+  --gutter-bg: #6b7280;
+  --gutter-bg-border: #f9fafb;
+}
+
+.dark {
+  --gutter-bg: #010409;
+  --gutter-bg-border: #1e1e1e;
+}
+
 .gutter-horizontal {
-  background-color: #6b7280;
+  background-color: var(--gutter-bg);
   width: 2px;
   border: solid;
   border-width: 0 3px;
-  border-color: rgb(1, 4, 9);
+  border-color: var(--gutter-bg-border);
   cursor: grab;
   opacity: 50%;
-  transition-duration: 0.3s;
-  background-position: 50%;
 }
 
 .gutter-horizontal:hover {
@@ -57,15 +65,13 @@
 }
 
 .gutter-vertical {
-  background-color: #6b7280;
+  background-color: var(--gutter-bg);
   height: 2px;
   border: solid;
   border-width: 3px 0;
-  border-color: rgb(1, 4, 9);
+  border-color: var(--gutter-bg-border);
   cursor: grab;
   opacity: 50%;
-  transition-duration: 0.3s;
-  background-position: 50%;
 }
 
 .gutter-vertical:hover {
