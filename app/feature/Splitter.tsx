@@ -75,7 +75,7 @@ const Split_Horizontal = () => {
       gutterAlign="center"
       direction="horizontal"
       onDragEnd={(newSizes) => setSizes(newSizes)}
-      className="ml-2 flex flex-grow rounded-md dark:bg-[#1e1e1e]"
+      className="ml-2 flex flex-grow rounded-md"
     >
       <ProblemSection />
       <Split_Vertical />
