@@ -19,7 +19,7 @@ export default function RootLayout({
         <meta http-equiv="Content-Type" content="charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </head>
-      <body className="mx-auto flex h-screen max-w-[1920px] flex-col bg-[#6b7280] p-5 text-black dark:bg-[#1e1e1e] dark:text-[#d4d4d4]">
+      <body className="bg-gray mx-auto flex h-screen max-w-[1920px] flex-col p-5 text-black dark:bg-[#1e1e1e] dark:text-[#d4d4d4]">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
         </ThemeProvider>
