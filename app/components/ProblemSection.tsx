@@ -7,7 +7,7 @@ export default function ProblemSection() {
       className="ml-2 flex-grow overflow-y-scroll rounded-md bg-[#1e1e1e]"
       style={{ width: "calc(50% - 83px)" }}
     >
-      <div className="sticky top-0 z-[1] flex flex-row justify-between border-b-2 border-[rgb(13,17,23)] bg-[#1e1e1e] text-[1rem] font-bold">
+      <div className="sticky top-0 z-[1] flex flex-row justify-between border-b-2 border-gray-50 text-[1rem] font-bold dark:border-[#1e1e1e]">
         <div id="problemArea-title" className="p-[4px_4px_4px_30px]">
           Problem Description Area
         </div>
