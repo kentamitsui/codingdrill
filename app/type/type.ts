@@ -1,3 +1,6 @@
+import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
+
 // 選択タグに対する型定義
 export interface SelectProps {
   label?: string;
@@ -12,4 +15,5 @@ export interface ButtonProps {
   id?: string;
   type?: "submit" | "reset" | "button" | undefined;
   text?: string;
+  onClick?: () => NextApiRequest | NextApiResponse;
 }

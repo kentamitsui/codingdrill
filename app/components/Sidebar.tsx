@@ -2,8 +2,20 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
+import axios from "axios";
 
-export default function Sidebar() {
+const handleCreateProblem = async () => {
+  try {
+    const response = await axios.post("/api/chatgpt");
+    const responseText = response.data.responseText;
+    console.log("Response from ChatGPT API:", responseText);
+    // You can now use the responseText in your UI or handle it as needed
+  } catch (error) {
+    console.error("Error occurred while creating a problem:", error);
+  }
+};
+
+export const Sidebar: React.FC = () => {
   return (
     <aside className=" flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
       <Options
@@ -41,7 +53,12 @@ export default function Sidebar() {
         id={"select-display-language"}
         defaultSelected={"display on"}
       />
-      <Button id="create" type="submit" text="create problem" />
+      <Button
+        id="create"
+        type="button"
+        text="create problem"
+        // onClick={handleCreateProblem}
+      />
       <div className="mt-auto flex flex-col gap-1">
         <div
           hidden
@@ -62,4 +79,6 @@ export default function Sidebar() {
       </div>
     </aside>
   );
-}
+};
+
+export default Sidebar;
