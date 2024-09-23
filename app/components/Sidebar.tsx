@@ -6,12 +6,14 @@ import axios from "axios";
 
 const handleCreateProblem = async () => {
   try {
-    const response = await axios.post("/api/chatgpt");
+    const response = await axios.post("/api/createProblem");
     const responseText = response.data.responseText;
-    console.log("Response from ChatGPT API:", responseText);
-    // You can now use the responseText in your UI or handle it as needed
+
+    console.log("Response from OpenAI:", responseText);
+    alert(`Problem created: ${responseText}`);
   } catch (error) {
     console.error("Error occurred while creating a problem:", error);
+    alert("Error occurred while creating the problem.");
   }
 };
 
@@ -56,8 +58,8 @@ export const Sidebar: React.FC = () => {
       <Button
         id="create"
         type="button"
-        text="create problem"
-        // onClick={handleCreateProblem}
+        text="Create Problem"
+        onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
         <div
