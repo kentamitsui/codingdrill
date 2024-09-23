@@ -2,9 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import Split from "react-split";
-import ProblemSection from "../components/ProblemSection";
-import InputSection from "../components/InputSection";
-import ReviewSection from "../components/ReviewSection";
+import ProblemSection from "../../components/ProblemSection";
+import InputSection from "../../components/InputSection";
+import ReviewSection from "../../components/ReviewSection";
 
 const Split_Vertical = () => {
   const initialSizes = [50, 50];
