@@ -15,5 +15,5 @@ export interface ButtonProps {
   id?: string;
   type?: "submit" | "reset" | "button" | undefined;
   text?: string;
-  onClick?: () => NextApiRequest | NextApiResponse;
+  onClick?: () => void | Promise<void>;
 }
