@@ -6,7 +6,7 @@ dotenv.config({ path: ".env.local" });
 const openai = new OpenAI({
   apiKey: process.env.APIKEY,
 });
-const prompt = process.env.PROMPT_CREATE || "Default prompt message.";
+const prompt = process.env.PROMPT_CREATE || "Output a sample text.";
 
 export default async function handler(
   req: NextApiRequest,
