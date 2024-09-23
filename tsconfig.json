@@ -26,7 +26,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "example.mjs"
+    "app/pages/api/example.mjs"
   ],
   "exclude": ["node_modules"]
 }
