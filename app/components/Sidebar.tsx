@@ -12,11 +12,14 @@ export const Sidebar: React.FC = () => {
   const [dataType, setDataType] = useState("");
   const [topic, setTopic] = useState("");
   const [displayLanguage, setDisplayLanguage] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
+      setDisabled(true);
+
       const response = await axios.post("/api/createProblem", {
         language,
         difficulty,
@@ -24,7 +27,12 @@ export const Sidebar: React.FC = () => {
         topic,
         displayLanguage,
       });
+
       const responseText = response.data.responseText;
+
+      if (responseText) {
+        setDisabled(false);
+      }
 
       console.log("Response from OpenAI:", responseText);
     } catch (error) {
@@ -79,6 +87,7 @@ export const Sidebar: React.FC = () => {
         id="create"
         type="button"
         text="Create Problem"
+        clicked={disabled}
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
@@ -95,9 +104,14 @@ export const Sidebar: React.FC = () => {
           name="data"
           id="savedata"
         ></select>
-        <Button id="load" type="button" text="load" />
-        <Button id="delete" type="button" text="delete" />
-        <Button id="delete-all" type="button" text="delete all" />
+        <Button id="load" type="button" text="load" clicked={disabled} />
+        <Button id="delete" type="button" text="delete" clicked={disabled} />
+        <Button
+          id="delete-all"
+          type="button"
+          text="delete all"
+          clicked={disabled}
+        />
       </div>
     </aside>
   );
