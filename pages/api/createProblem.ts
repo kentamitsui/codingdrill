@@ -15,6 +15,7 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
   }
 
+  // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
   const { language, difficulty, dataType, topic, displayLanguage } = req.body;
   const promptTemplate =
     process.env.PROMPT_CREATE ||
@@ -26,6 +27,7 @@ export default async function handler(
       .json({ error: "PROMPT_CREATE is not defined in environment variables" });
   }
 
+  // プロンプトの%で囲まれた文字列を、req.bodyのデータで置き換える
   const modifiedPrompt = promptTemplate
     .replace("%language%", language)
     .replace("%difficulty%", difficulty)
@@ -43,8 +45,6 @@ export default async function handler(
         },
       ],
     });
-
-    // console.log(modifiedPrompt);
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });

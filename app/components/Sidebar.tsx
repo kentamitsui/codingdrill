@@ -6,12 +6,15 @@ import axios from "axios";
 import { useState } from "react";
 
 export const Sidebar: React.FC = () => {
+  // 各Optionコンポーネントの値を保持する
   const [language, setLanguage] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [dataType, setDataType] = useState("");
   const [topic, setTopic] = useState("");
   const [displayLanguage, setDisplayLanguage] = useState("");
 
+  // createProblem.tsに選択後の値を送信する
+  // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
       const response = await axios.post("/api/createProblem", {
@@ -23,9 +26,7 @@ export const Sidebar: React.FC = () => {
       });
       const responseText = response.data.responseText;
 
-      // console.log(responseText, "\n");
       console.log("Response from OpenAI:", responseText);
-      alert(`Problem created: ${responseText}`);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
