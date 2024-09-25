@@ -3,21 +3,35 @@ import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
 import axios from "axios";
-
-const handleCreateProblem = async () => {
-  try {
-    const response = await axios.post("/api/createProblem");
-    const responseText = response.data.responseText;
-
-    console.log("Response from OpenAI:", responseText);
-    alert(`Problem created: ${responseText}`);
-  } catch (error) {
-    console.error("Error occurred while creating a problem:", error);
-    alert("Error occurred while creating the problem.");
-  }
-};
+import { useState } from "react";
 
 export const Sidebar: React.FC = () => {
+  const [language, setLanguage] = useState("");
+  const [difficulty, setDifficulty] = useState("");
+  const [dataType, setDataType] = useState("");
+  const [topic, setTopic] = useState("");
+  const [displayLanguage, setDisplayLanguage] = useState("");
+
+  const handleCreateProblem = async () => {
+    try {
+      const response = await axios.post("/api/createProblem", {
+        language,
+        difficulty,
+        dataType,
+        topic,
+        displayLanguage,
+      });
+      const responseText = response.data.responseText;
+
+      // console.log(responseText, "\n");
+      console.log("Response from OpenAI:", responseText);
+      alert(`Problem created: ${responseText}`);
+    } catch (error) {
+      console.error("Error occurred while creating a problem:", error);
+      alert("Error occurred while creating the problem.");
+    }
+  };
+
   return (
     <aside className=" flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
       <Options
@@ -26,6 +40,7 @@ export const Sidebar: React.FC = () => {
         name={"language"}
         id={"select-language"}
         defaultSelected={"language"}
+        setSelected={setLanguage}
       />
       <Options
         label={"select-difficulty"}
@@ -33,6 +48,7 @@ export const Sidebar: React.FC = () => {
         name={"difficulty"}
         id={"select-difficulty"}
         defaultSelected={"difficulty"}
+        setSelected={setDifficulty}
       />
       <Options
         label={"select-type"}
@@ -40,6 +56,7 @@ export const Sidebar: React.FC = () => {
         name={"type"}
         id={"select-type"}
         defaultSelected={"data type"}
+        setSelected={setDataType}
       />
       <Options
         label={"select-topic"}
@@ -47,6 +64,7 @@ export const Sidebar: React.FC = () => {
         name={"topic"}
         id={"select-topic"}
         defaultSelected={"topic"}
+        setSelected={setTopic}
       />
       <Options
         label={"select-display-language"}
@@ -54,6 +72,7 @@ export const Sidebar: React.FC = () => {
         name={"display-language"}
         id={"select-display-language"}
         defaultSelected={"display on"}
+        setSelected={setDisplayLanguage}
       />
       <Button
         id="create"
