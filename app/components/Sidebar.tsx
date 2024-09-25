@@ -18,6 +18,7 @@ export const Sidebar: React.FC = () => {
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
+      // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setDisabled(true);
 
       const response = await axios.post("/api/createProblem", {
@@ -30,11 +31,16 @@ export const Sidebar: React.FC = () => {
 
       const responseText = response.data.responseText;
 
+      // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
         setDisabled(false);
       }
 
-      console.log("Response from OpenAI:", responseText);
+      const JsonText = JSON.parse(responseText);
+      // await axios.post("./problemSection", JsonText);
+      console.log(JsonText);
+
+      // console.log("Response from OpenAI:", responseText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");

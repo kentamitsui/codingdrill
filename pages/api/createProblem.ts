@@ -38,6 +38,8 @@ export default async function handler(
   try {
     const request = await openai.chat.completions.create({
       model: "gpt-4o-mini",
+      // 出力形式をJSONで固定(プロンプトでも必ず記載が必要)
+      response_format: { type: "json_object" },
       messages: [
         {
           role: "user",
