@@ -6,7 +6,6 @@ dotenv.config({ path: ".env.local" });
 const openai = new OpenAI({
   apiKey: process.env.APIKEY,
 });
-const prompt = process.env.PROMPT_CREATE || "Output a sample text.";
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,11 +15,23 @@ export default async function handler(
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  if (!process.env.PROMPT_CREATE) {
+  const { language, difficulty, dataType, topic, displayLanguage } = req.body;
+  const promptTemplate =
+    process.env.PROMPT_CREATE ||
+    "Prompt is not defined. Only output text 'test.'";
+
+  if (!promptTemplate) {
     return res
       .status(400)
       .json({ error: "PROMPT_CREATE is not defined in environment variables" });
   }
+
+  const modifiedPrompt = promptTemplate
+    .replace("%language%", language)
+    .replace("%difficulty%", difficulty)
+    .replace("%type%", dataType)
+    .replace("%topic%", topic)
+    .replace("%display-language%", displayLanguage);
 
   try {
     const request = await openai.chat.completions.create({
@@ -28,10 +39,12 @@ export default async function handler(
       messages: [
         {
           role: "user",
-          content: prompt,
+          content: modifiedPrompt,
         },
       ],
     });
+
+    // console.log(modifiedPrompt);
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });
