@@ -7,10 +7,16 @@ export const Options: React.FC<SelectProps> = ({
   name,
   id,
   defaultSelected,
+  setSelected,
 }) => {
-  const [selected, SetSelected] = useState("");
+  const [selected, setLocalSelected] = useState("");
   const handleChangeColor = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    SetSelected(event.target.value);
+    const value = event.target.value;
+    setLocalSelected(value);
+
+    if (setSelected) {
+      setSelected(value);
+    }
   };
 
   return (

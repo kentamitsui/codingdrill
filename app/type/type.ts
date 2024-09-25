@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest } from "next/server";
+import { Dispatch, SetStateAction } from "react";
 
 // 選択タグに対する型定義
 export interface SelectProps {
@@ -8,6 +9,7 @@ export interface SelectProps {
   name: string; // セレクトボックスのname属性
   id: string; // セレクトボックスのid属性
   defaultSelected?: string; // デフォルトのラベルを可変にするためのプロップ
+  setSelected: Dispatch<SetStateAction<string>>;
 }
 
 // ボタンに対する型定義

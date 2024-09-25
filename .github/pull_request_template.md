@@ -23,7 +23,6 @@ Example:
 - Provide screenshots or GIFs if there are UI changes. This helps reviewers understand the visual impact of the changes.
 
 Example:
-![login-feature](https://example.com/screenshot.png)
 
 ### How to Test
 
