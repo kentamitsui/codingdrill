@@ -2,6 +2,13 @@
 
 A brief description of the purpose of the pull request. Explain the **what** and **why** of the changes.
 
+- #### For what?
+
+  -
+
+- #### Why changed?
+  -
+
 ### Related Issues / Tickets
 
 - Link any related issues or tickets (using the GitHub issue number or Jira ticket if applicable).

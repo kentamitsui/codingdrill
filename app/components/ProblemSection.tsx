@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function ProblemSection() {
+interface ProblemSectionProps {
+  problemData: string;
+}
+
+// 受け取ったJSONデータをキー毎に割り振る
+const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
+  const parsedData = JSON.parse(problemData);
+
   return (
     <section
       id="split-horizontal-left"
@@ -24,13 +31,17 @@ export default function ProblemSection() {
         <div
           id="description"
           className="pt-1 text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
-        ></div>
+        >
+          {parsedData?.problem_statement}
+        </div>
         <div hidden id="function-signature"></div>
         <div
           id="example-1"
           className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
         ></div>
-        <div id="example-1-input" className="font-light"></div>
+        <div id="example-1-input" className="font-light">
+          {parsedData?.example1.input}
+        </div>
         <div id="example-1-output" className="font-light"></div>
         <div id="example-1-explanation" className="font-light"></div>
         <div
@@ -58,4 +69,6 @@ export default function ProblemSection() {
       </div>
     </section>
   );
-}
+};
+
+export default ProblemSection;
