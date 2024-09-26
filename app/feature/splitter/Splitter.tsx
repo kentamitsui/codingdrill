@@ -5,6 +5,7 @@ import Split from "react-split";
 import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
+import { JSONSchemaObject } from "openai/lib/jsonschema.mjs";
 
 const Split_Vertical = () => {
   const initialSizes = [50, 50];
@@ -44,7 +45,11 @@ const Split_Vertical = () => {
   );
 };
 
-const Split_Horizontal = () => {
+interface ProblemSectionProps {
+  problemData: JSONSchemaObject | null;
+}
+
+const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
   const initialSizes = [50, 50];
   const [sizes, setSizes] = useState(initialSizes);
 
@@ -77,7 +82,8 @@ const Split_Horizontal = () => {
       onDragEnd={(newSizes) => setSizes(newSizes)}
       className="ml-2 flex flex-grow rounded-md"
     >
-      <ProblemSection />
+      {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す */}
+      <ProblemSection problemData={JSON.stringify(problemData)} />
       <Split_Vertical />
     </Split>
   );
