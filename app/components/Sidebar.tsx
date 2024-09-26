@@ -2,10 +2,13 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import axios from "axios";
 import { useState } from "react";
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  setProblemData: (data: any) => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
   const [language, setLanguage] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -21,26 +24,34 @@ export const Sidebar: React.FC = () => {
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setDisabled(true);
 
-      const response = await axios.post("/api/createProblem", {
-        language,
-        difficulty,
-        dataType,
-        topic,
-        displayLanguage,
+      const response = await fetch("/api/createProblem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          language,
+          difficulty,
+          dataType,
+          topic,
+          displayLanguage,
+        }),
       });
 
-      const responseText = response.data.responseText;
-
+      if (!response.ok) {
+        throw new Error("Failed to create a problem.");
+      }
+      const data = await response.json();
+      const responseText = data.responseText;
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
         setDisabled(false);
       }
 
       const JsonText = JSON.parse(responseText);
-      // await axios.post("./problemSection", JsonText);
+      // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
+      setProblemData(JsonText);
       console.log(JsonText);
-
-      // console.log("Response from OpenAI:", responseText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
