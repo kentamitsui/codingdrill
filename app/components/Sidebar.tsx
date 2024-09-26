@@ -2,31 +2,56 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import axios from "axios";
 import { useState } from "react";
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+  setProblemData: (data: any) => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
   const [language, setLanguage] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [dataType, setDataType] = useState("");
   const [topic, setTopic] = useState("");
   const [displayLanguage, setDisplayLanguage] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
-      const response = await axios.post("/api/createProblem", {
-        language,
-        difficulty,
-        dataType,
-        topic,
-        displayLanguage,
-      });
-      const responseText = response.data.responseText;
+      // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
+      setDisabled(true);
 
-      console.log("Response from OpenAI:", responseText);
+      const response = await fetch("/api/createProblem", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          language,
+          difficulty,
+          dataType,
+          topic,
+          displayLanguage,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create a problem.");
+      }
+      const data = await response.json();
+      const responseText = data.responseText;
+      // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
+      if (responseText) {
+        setDisabled(false);
+      }
+
+      const JsonText = JSON.parse(responseText);
+      // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
+      setProblemData(JsonText);
+      console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
@@ -79,6 +104,7 @@ export const Sidebar: React.FC = () => {
         id="create"
         type="button"
         text="Create Problem"
+        clicked={disabled}
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
@@ -95,9 +121,14 @@ export const Sidebar: React.FC = () => {
           name="data"
           id="savedata"
         ></select>
-        <Button id="load" type="button" text="load" />
-        <Button id="delete" type="button" text="delete" />
-        <Button id="delete-all" type="button" text="delete all" />
+        <Button id="load" type="button" text="load" clicked={disabled} />
+        <Button id="delete" type="button" text="delete" clicked={disabled} />
+        <Button
+          id="delete-all"
+          type="button"
+          text="delete all"
+          clicked={disabled}
+        />
       </div>
     </aside>
   );

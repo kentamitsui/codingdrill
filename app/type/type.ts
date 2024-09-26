@@ -17,5 +17,6 @@ export interface ButtonProps {
   id?: string;
   type?: "submit" | "reset" | "button" | undefined;
   text?: string;
+  clicked?: boolean;
   onClick?: () => void | Promise<void>;
 }
