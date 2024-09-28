@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ButtonProps } from "../type/type";
 
 export const Button: React.FC<ButtonProps> = ({
