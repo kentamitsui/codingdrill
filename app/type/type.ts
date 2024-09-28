@@ -20,3 +20,13 @@ export interface ButtonProps {
   clicked?: boolean;
   onClick?: () => void | Promise<void>;
 }
+
+// サイドバーに対する型定義
+export interface SidebarProps {
+  setProblemData: Dispatch<SetStateAction<null>>;
+}
+
+// レスポンスされたデータ(問題文)に対する型定義
+export interface ProblemSectionProps {
+  problemData: string;
+}
