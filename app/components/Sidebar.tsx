@@ -3,10 +3,7 @@ import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
 import { useState } from "react";
-
-interface SidebarProps {
-  setProblemData: (data: any) => void;
-}
+import { SidebarProps } from "../type/type";
 
 export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
@@ -21,6 +18,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
+      // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
+      setProblemData(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setDisabled(true);
 
@@ -51,7 +50,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
-      console.log(JsonText);
+      // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");

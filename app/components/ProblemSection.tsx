@@ -1,11 +1,8 @@
 import React from "react";
-
-interface ProblemSectionProps {
-  problemData: string;
-}
+import { DisplayProblemProps } from "../type/type";
 
 // 受け取ったJSONデータをキー毎に割り振る
-const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
+const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
   const parsedData = JSON.parse(problemData);
 
   return (
@@ -26,46 +23,92 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
       </div>
       <div
         id="problemArea"
-        className="text-[16px] width_1440px:text-[18px] width_1680px:text-[20px]"
+        className="p-[15px_30px] text-[16px] leading-[1.5] tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]"
       >
         <div
           id="description"
-          className="pt-1 text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
+          className="whitespace-break-spaces text-[20px] font-medium  width_1440px:text-[22px] width_1680px:text-[24px]"
         >
-          {parsedData?.problem_statement}
+          {parsedData ? "Description\n" + parsedData.problem_statement : null}
         </div>
         <div hidden id="function-signature"></div>
         <div
           id="example-1"
           className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
-        ></div>
-        <div id="example-1-input" className="font-light">
-          {parsedData?.example1.input}
+        >
+          {parsedData ? "Example 1" : null}
         </div>
-        <div id="example-1-output" className="font-light"></div>
-        <div id="example-1-explanation" className="font-light"></div>
+        <div id="example-1-input" className="font-light">
+          {parsedData ? "Input: " + parsedData.example1.input : null}
+        </div>
+        <div id="example-1-output" className="font-light">
+          {parsedData ? "Output: " + parsedData.example1.output : null}
+        </div>
+        <div id="example-1-explanation" className="font-light">
+          {parsedData
+            ? "Explanation: " + parsedData?.example1.explanation
+            : null}
+        </div>
         <div
           id="example-2"
           className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
-        ></div>
-        <div id="example-2-input" className="font-light"></div>
-        <div id="example-2-output" className="font-light"></div>
-        <div id="example-2-explanation" className="font-light"></div>
+        >
+          {parsedData ? "Example 2" : null}
+        </div>
+        <div id="example-2-input" className="font-light">
+          {parsedData ? "Input: " + parsedData?.example2.input : null}
+        </div>
+        <div id="example-2-output" className="font-light">
+          {parsedData ? "Output: " + parsedData?.example2.output : null}
+        </div>
+        <div id="example-2-explanation" className="font-light">
+          {parsedData
+            ? "Explanation: " + parsedData?.example2.explanation
+            : null}
+        </div>
         <div
           id="example-3"
           className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
-        ></div>
-        <div id="example-3-input" className="font-light"></div>
-        <div id="example-3-output" className="font-light"></div>
-        <div id="example-3-explanation" className="font-light"></div>
+        >
+          {parsedData ? "Example 3" : null}
+        </div>
+        <div id="example-3-input" className="font-light">
+          {parsedData ? "Input: " + parsedData?.example3.input : null}
+        </div>
+        <div id="example-3-output" className="font-light">
+          {parsedData ? "Output: " + parsedData?.example3.output : null}
+        </div>
+        <div id="example-3-explanation" className="font-light">
+          {parsedData
+            ? "Explanation: " + parsedData?.example3.explanation
+            : null}
+        </div>
         <div
           id="notes"
           className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
-        ></div>
-        <div id="notes-time-complexity" className="font-light"></div>
-        <div id="notes-space-complexity" className="font-light"></div>
-        <div id="notes-edge-cases" className="font-light"></div>
-        <div id="notes-other-considerations" className="font-light"></div>
+        >
+          {parsedData ? "Notes" : null}
+        </div>
+        <div className="grid gap-[10px]">
+          <div id="notes-time-complexity" className="font-light">
+            {parsedData
+              ? "Time Complexity: " + parsedData?.notes.time_complexity
+              : null}
+          </div>
+          <div id="notes-space-complexity" className="font-light">
+            {parsedData
+              ? "Space Complexity: " + parsedData?.notes.space_complexity
+              : null}
+          </div>
+          <div id="notes-edge-cases" className="font-light">
+            {parsedData ? "Edge Cases: " + parsedData?.notes.edge_cases : null}
+          </div>
+          <div id="notes-other-considerations" className="font-light">
+            {parsedData
+              ? "Other Consideration: " + parsedData?.notes.other_considerations
+              : null}
+          </div>
+        </div>
       </div>
     </section>
   );
