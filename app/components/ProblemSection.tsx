@@ -46,7 +46,7 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
         </div>
         <div id="example-1-explanation" className="font-light">
           {parsedData
-            ? "Explabation: " + parsedData?.example1.explanation
+            ? "Explanation: " + parsedData?.example1.explanation
             : null}
         </div>
         <div
@@ -63,7 +63,7 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
         </div>
         <div id="example-2-explanation" className="font-light">
           {parsedData
-            ? "Explabation: " + parsedData?.example2.explanation
+            ? "Explanation: " + parsedData?.example2.explanation
             : null}
         </div>
         <div
@@ -80,7 +80,7 @@ const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
         </div>
         <div id="example-3-explanation" className="font-light">
           {parsedData
-            ? "Explabation: " + parsedData?.example3.explanation
+            ? "Explanation: " + parsedData?.example3.explanation
             : null}
         </div>
         <div
