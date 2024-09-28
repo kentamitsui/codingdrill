@@ -3,10 +3,7 @@ import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
 import { useState } from "react";
-
-interface SidebarProps {
-  setProblemData: (data: any) => void;
-}
+import { SidebarProps } from "../type/type";
 
 export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
