@@ -85,27 +85,32 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
         </div>
         <div
           id="notes"
-          className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]"
+          className="mt-[30px] text-[18px] font-medium width_1440px:text-[20px] width_1680px:text-[22px]"
         >
           {parsedData ? "Notes" : null}
-        </div>
-        <div id="notes-time-complexity" className="font-light">
-          {parsedData
-            ? "Time Complexity: " + parsedData?.notes.time_complexity
-            : null}
-        </div>
-        <div id="notes-space-complexity" className="font-light">
-          {parsedData
-            ? "Space Complexity: " + parsedData?.notes.space_complexity
-            : null}
-        </div>
-        <div id="notes-edge-cases" className="font-light">
-          {parsedData ? "Edge Cases: " + parsedData?.notes.edge_cases : null}
-        </div>
-        <div id="notes-other-considerations" className="font-light">
-          {parsedData
-            ? "Other Consideration: " + parsedData?.notes.other_considerations
-            : null}
+          <div className="grid gap-[10px]">
+            <div id="notes-time-complexity" className="font-light">
+              {parsedData
+                ? "Time Complexity: " + parsedData?.notes.time_complexity
+                : null}
+            </div>
+            <div id="notes-space-complexity" className="font-light">
+              {parsedData
+                ? "Space Complexity: " + parsedData?.notes.space_complexity
+                : null}
+            </div>
+            <div id="notes-edge-cases" className="font-light">
+              {parsedData
+                ? "Edge Cases: " + parsedData?.notes.edge_cases
+                : null}
+            </div>
+            <div id="notes-other-considerations" className="font-light">
+              {parsedData
+                ? "Other Consideration: " +
+                  parsedData?.notes.other_considerations
+                : null}
+            </div>
+          </div>
         </div>
       </div>
     </section>
