@@ -28,5 +28,10 @@ export interface SidebarProps {
 
 // レスポンスされたデータ(問題文)に対する型定義
 export interface ProblemSectionProps {
+  problemData: null | string;
+}
+
+// 問題文を表示する際の型定義
+export interface DisplayProblemProps {
   problemData: string;
 }

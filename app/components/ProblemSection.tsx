@@ -1,8 +1,8 @@
 import React from "react";
-import { ProblemSectionProps } from "../type/type";
+import { DisplayProblemProps } from "../type/type";
 
 // 受け取ったJSONデータをキー毎に割り振る
-const ProblemSection: React.FC<ProblemSectionProps> = ({ problemData }) => {
+const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
   const parsedData = JSON.parse(problemData);
 
   return (

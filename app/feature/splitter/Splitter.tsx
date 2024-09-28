@@ -5,7 +5,7 @@ import Split from "react-split";
 import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
-import { JSONSchemaObject } from "openai/lib/jsonschema.mjs";
+import { ProblemSectionProps } from "@/app/type/type";
 
 const Split_Vertical = () => {
   const initialSizes = [50, 50];
@@ -44,10 +44,6 @@ const Split_Vertical = () => {
     </Split>
   );
 };
-
-interface ProblemSectionProps {
-  problemData: JSONSchemaObject | null;
-}
 
 const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
   const initialSizes = [50, 50];
