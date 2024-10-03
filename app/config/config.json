@@ -134,5 +134,9 @@
       "russian": "Russian",
       "spanish": "Spanish"
     }
+  },
+
+  "svgIcon": {
+    "language": "/language.svg"
   }
 }
