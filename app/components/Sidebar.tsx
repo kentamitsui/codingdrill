@@ -60,7 +60,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
 
   return (
     <aside className=" flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
-      <div className="flex flex-row">
+      <div className="flex w-[150px] flex-row">
         <Options
           label={"select-language"}
           data={menuData.menuLists.languages}
