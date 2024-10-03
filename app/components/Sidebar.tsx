@@ -4,6 +4,7 @@ import Options from "./Options";
 import Button from "./Button";
 import { useState } from "react";
 import { SidebarProps } from "../type/type";
+import Image from "next/image";
 
 export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
@@ -59,46 +60,91 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
 
   return (
     <aside className=" flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
-      <Options
-        label={"select-language"}
-        data={menuData.menuLists.languages}
-        name={"language"}
-        disabled={disabled}
-        defaultSelected={"language"}
-        setSelected={setLanguage}
-      />
-      <Options
-        label={"select-difficulty"}
-        data={menuData.menuLists.difficulty}
-        name={"difficulty"}
-        disabled={disabled}
-        defaultSelected={"difficulty"}
-        setSelected={setDifficulty}
-      />
-      <Options
-        label={"select-type"}
-        data={menuData.menuLists.dataType}
-        name={"type"}
-        disabled={disabled}
-        defaultSelected={"data type"}
-        setSelected={setDataType}
-      />
-      <Options
-        label={"select-topic"}
-        data={menuData.menuLists.topics}
-        name={"topic"}
-        disabled={disabled}
-        defaultSelected={"topic"}
-        setSelected={setTopic}
-      />
-      <Options
-        label={"select-display-language"}
-        data={menuData.menuLists.displayLanguages}
-        name={"display-language"}
-        disabled={disabled}
-        defaultSelected={"display on"}
-        setSelected={setDisplayLanguage}
-      />
+      <div className="flex w-[150px] flex-row">
+        <Options
+          label={"select-language"}
+          data={menuData.menuLists.languages}
+          name={"language"}
+          disabled={disabled}
+          defaultSelected={"language"}
+          setSelected={setLanguage}
+        />
+        <Image
+          src={menuData.svgIcon.language}
+          alt=""
+          className="relative -ml-10 flex items-center"
+          width={20}
+          height={20}
+        />
+      </div>
+      <div className="flex flex-row">
+        <Options
+          label={"select-difficulty"}
+          data={menuData.menuLists.difficulty}
+          name={"difficulty"}
+          disabled={disabled}
+          defaultSelected={"difficulty"}
+          setSelected={setDifficulty}
+        />
+        <Image
+          src={menuData.svgIcon.difficulty}
+          alt=""
+          className="relative -ml-10 flex items-center"
+          width={20}
+          height={20}
+        />
+      </div>
+      <div className="flex flex-row">
+        <Options
+          label={"select-type"}
+          data={menuData.menuLists.dataType}
+          name={"type"}
+          disabled={disabled}
+          defaultSelected={"data type"}
+          setSelected={setDataType}
+        />
+        <Image
+          src={menuData.svgIcon.data}
+          alt=""
+          className="relative -ml-10 flex items-center"
+          width={20}
+          height={20}
+        />
+      </div>
+      <div className="flex flex-row">
+        <Options
+          label={"select-topic"}
+          data={menuData.menuLists.topics}
+          name={"topic"}
+          disabled={disabled}
+          defaultSelected={"topic"}
+          setSelected={setTopic}
+        />
+        <Image
+          src={menuData.svgIcon.topic}
+          alt=""
+          className="relative -ml-10 flex items-center"
+          width={20}
+          height={20}
+        />
+      </div>
+      <div className="flex flex-row">
+        <Options
+          label={"select-display-language"}
+          data={menuData.menuLists.displayLanguages}
+          name={"display-language"}
+          disabled={disabled}
+          defaultSelected={"translate"}
+          setSelected={setDisplayLanguage}
+        />
+        <Image
+          src={menuData.svgIcon.translate}
+          alt=""
+          className="relative -ml-10 flex items-center"
+          width={20}
+          height={20}
+        />
+      </div>
       <Button
         id="create"
         type="button"

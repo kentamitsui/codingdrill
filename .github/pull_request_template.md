@@ -2,11 +2,7 @@
 
 A brief description of the purpose of the pull request. Explain the **what** and **why** of the changes.
 
-- #### For what?
-
-  -
-
-- #### Why changed?
+- #### For what / Why changed?
 
   -
 
