@@ -63,7 +63,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
         label={"select-language"}
         data={menuData.menuLists.languages}
         name={"language"}
-        id={"select-language"}
+        disabled={disabled}
         defaultSelected={"language"}
         setSelected={setLanguage}
       />
@@ -71,7 +71,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
         label={"select-difficulty"}
         data={menuData.menuLists.difficulty}
         name={"difficulty"}
-        id={"select-difficulty"}
+        disabled={disabled}
         defaultSelected={"difficulty"}
         setSelected={setDifficulty}
       />
@@ -79,7 +79,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
         label={"select-type"}
         data={menuData.menuLists.dataType}
         name={"type"}
-        id={"select-type"}
+        disabled={disabled}
         defaultSelected={"data type"}
         setSelected={setDataType}
       />
@@ -87,7 +87,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
         label={"select-topic"}
         data={menuData.menuLists.topics}
         name={"topic"}
-        id={"select-topic"}
+        disabled={disabled}
         defaultSelected={"topic"}
         setSelected={setTopic}
       />
@@ -95,7 +95,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
         label={"select-display-language"}
         data={menuData.menuLists.displayLanguages}
         name={"display-language"}
-        id={"select-display-language"}
+        disabled={disabled}
         defaultSelected={"display on"}
         setSelected={setDisplayLanguage}
       />
