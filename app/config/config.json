@@ -137,6 +137,10 @@
   },
 
   "svgIcon": {
-    "language": "/language.svg"
+    "language": "/language.svg",
+    "difficulty": "/difficulty.svg",
+    "data": "/data.svg",
+    "topic": "/topic.svg",
+    "translate": "/translate.svg"
   }
 }

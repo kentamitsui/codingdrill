@@ -1,7 +1,5 @@
-import { SelectProps } from "../type/type";
 import { useState } from "react";
-import Image from "next/image";
-import iconData from "../config/config.json";
+import { SelectProps } from "../type/type";
 
 export const Options: React.FC<SelectProps> = ({
   label,
@@ -24,9 +22,8 @@ export const Options: React.FC<SelectProps> = ({
   return (
     <>
       <label htmlFor={label}></label>
-      <Image src={iconData.svgIcon.language} alt="" width={15} height={15} />
       <select
-        className={`m-1 rounded-md p-1 duration-300 
+        className={`m-1 w-[142px] rounded-md p-1 duration-300 
           ${selected !== "" ? "bg-gray-400" : "bg-gray-200"}
           ${
             disabled === true
