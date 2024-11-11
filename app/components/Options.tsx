@@ -25,12 +25,8 @@ export const Options: React.FC<SelectProps> = ({
       <select
         className={`m-1 w-[142px] rounded-md p-1 duration-300 
           ${selected !== "" ? "bg-gray-400" : "bg-gray-200"}
-          ${
-            disabled === true
-              ? "cursor-not-allowed opacity-50"
-              : "cursor-pointer"
-          }
-        dark:${selected !== "" ? "bg-slate-700" : "bg-menu"}
+          dark:${selected !== "" ? "bg-slate-700" : "bg-menu"}
+          ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
         hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
         disabled={disabled}

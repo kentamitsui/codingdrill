@@ -4,7 +4,7 @@ import Options from "./Options";
 import Button from "./Button";
 import { useState } from "react";
 import { SidebarProps } from "../type/type";
-import Image from "next/image";
+// import Image from "next/image";
 
 export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
@@ -59,8 +59,8 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   };
 
   return (
-    <aside className=" flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
-      <div className="flex w-[150px] flex-row">
+    <aside className="flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
+      <div className="flex flex-row">
         <Options
           label={"select-language"}
           data={menuData.menuLists.languages}
@@ -69,13 +69,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           defaultSelected={"language"}
           setSelected={setLanguage}
         />
-        <Image
+        {/* <Image
           src={menuData.svgIcon.language}
           alt=""
-          className="relative -ml-10 flex items-center"
+          className="cursor-pointer bg-slate-700 duration-300 hover:bg-gray-400 hover:dark:bg-slate-700"
           width={20}
           height={20}
-        />
+        /> */}
       </div>
       <div className="flex flex-row">
         <Options
@@ -86,13 +86,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           defaultSelected={"difficulty"}
           setSelected={setDifficulty}
         />
-        <Image
+        {/* <Image
           src={menuData.svgIcon.difficulty}
           alt=""
-          className="relative -ml-10 flex items-center"
+          className="relative -ml-10"
           width={20}
           height={20}
-        />
+        /> */}
       </div>
       <div className="flex flex-row">
         <Options
@@ -103,13 +103,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           defaultSelected={"data type"}
           setSelected={setDataType}
         />
-        <Image
+        {/* <Image
           src={menuData.svgIcon.data}
           alt=""
-          className="relative -ml-10 flex items-center"
+          className="relative -ml-10"
           width={20}
           height={20}
-        />
+        /> */}
       </div>
       <div className="flex flex-row">
         <Options
@@ -120,13 +120,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           defaultSelected={"topic"}
           setSelected={setTopic}
         />
-        <Image
+        {/* <Image
           src={menuData.svgIcon.topic}
           alt=""
-          className="relative -ml-10 flex items-center"
+          className="relative -ml-10"
           width={20}
           height={20}
-        />
+        /> */}
       </div>
       <div className="flex flex-row">
         <Options
@@ -137,13 +137,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           defaultSelected={"translate"}
           setSelected={setDisplayLanguage}
         />
-        <Image
+        {/* <Image
           src={menuData.svgIcon.translate}
           alt=""
-          className="relative -ml-10 flex items-center"
+          className="relative -ml-10"
           width={20}
           height={20}
-        />
+        /> */}
       </div>
       <Button
         id="create"

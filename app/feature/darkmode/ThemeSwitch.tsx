@@ -17,8 +17,6 @@ export default function ThemeSwitch() {
     };
   }, []);
 
-  // サーバーサイドではユーザー側のカラーテーマを判別出来ない
-  // なので、レンダリング時にnullを返す事で、
   if (!mounted) {
     return null;
   } else if (mounted && resolvedTheme === "dark") {
