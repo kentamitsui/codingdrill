@@ -17,9 +17,7 @@ export default async function handler(
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
   const { language, difficulty, dataType, topic, displayLanguage } = req.body;
-  const promptTemplate =
-    process.env.PROMPT_CREATE ||
-    "Prompt is not defined. Only output text 'test.'";
+  const promptTemplate = process.env.PROMPT_CREATE;
 
   if (!promptTemplate) {
     return res
