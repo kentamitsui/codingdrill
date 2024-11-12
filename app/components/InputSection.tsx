@@ -1,3 +1,5 @@
+import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
+
 export default function InputSection() {
   return (
     <section id="split-horizontal-right" className="flex flex-col">
@@ -22,14 +24,15 @@ export default function InputSection() {
           submit
         </button>
       </div>
-      <form
+      {/* <form
         id="split-vertical-left"
         className="h-full bg-gray-200 dark:bg-[#0d1117]"
         action="script.js"
         method="post"
       >
         <div id="editorContainer"></div>
-      </form>
+      </form> */}
+      <MonacoEditor />
     </section>
   );
 }
