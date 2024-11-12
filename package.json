@@ -9,9 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.6.0",
     "axios": "^1.7.7",
     "dotenv": "^16.4.5",
-    "next": "14.2.13",
+    "next": "^14.2.7",
     "next-themes": "^0.3.0",
     "openai": "^4.63.0",
     "react": "^18",
@@ -23,8 +24,8 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "autoprefixer": "^10.4.20",
-    "eslint": "^9",
-    "eslint-config-next": "14.2.13",
+    "eslint": "^7",
+    "eslint-config-next": "^14.2.7",
     "eslint-plugin-tailwindcss": "^3.17.4",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.12",
