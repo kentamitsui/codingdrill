@@ -2,7 +2,11 @@ import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 
 export default function InputSection() {
   return (
-    <section id="split-horizontal-right" className="flex flex-col">
+    <section
+      id="split-horizontal-right"
+      className="flex flex-col flex-grow overflow-hidden"
+      style={{ height: "100%", width: "100%" }} // 親要素が高さを管理
+    >
       <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
         <div
           id="codeInputArea-title"
@@ -24,15 +28,9 @@ export default function InputSection() {
           submit
         </button>
       </div>
-      {/* <form
-        id="split-vertical-left"
-        className="h-full bg-gray-200 dark:bg-[#0d1117]"
-        action="script.js"
-        method="post"
-      >
-        <div id="editorContainer"></div>
-      </form> */}
-      <MonacoEditor />
+      <div className="flex-1 flex">
+        <MonacoEditor />
+      </div>
     </section>
   );
 }
