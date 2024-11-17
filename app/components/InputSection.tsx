@@ -5,7 +5,7 @@ export default function InputSection() {
     <section
       id="split-horizontal-right"
       className="flex flex-col flex-grow overflow-hidden"
-      style={{ height: "100%", width: "100%" }} // 親要素が高さを管理
+      style={{ height: "100%" }} // 親要素が高さを管理
     >
       <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
         <div
