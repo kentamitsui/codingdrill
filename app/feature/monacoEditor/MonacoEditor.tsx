@@ -22,10 +22,19 @@ export default function MonacoEditor() {
     updateDimensions();
 
     // ウィンドウリサイズ時や親要素の変更を監視
-    window.addEventListener("resize", updateDimensions);
+    const observer = new ResizeObserver(() => {
+      updateDimensions();
+    });
 
+    if (editorContainerRef.current) {
+      observer.observe(editorContainerRef.current);
+    }
+
+    // 要素のサイズ変更が完了した時点で監視を終了し、不要な計算を終了する
     return () => {
-      window.removeEventListener("resize", updateDimensions);
+      if (editorContainerRef.current) {
+        observer.unobserve(editorContainerRef.current);
+      }
     };
   }, []);
 
