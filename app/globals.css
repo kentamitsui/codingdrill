@@ -77,3 +77,15 @@
 .gutter-vertical:hover {
   opacity: 100%;
 }
+
+#split-horizontal-right {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* 親コンテナの高さにフィット */
+  width: 100%;
+}
+
+.monaco-editor-container {
+  flex: 1;
+  overflow: hidden; /* Monaco Editorの余計なスクロールを防止 */
+}

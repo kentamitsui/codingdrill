@@ -15,6 +15,11 @@ const Split_Vertical = () => {
     setSizes(initialSizes);
   };
 
+  const handleDragEnd = () => {
+    // ウィンドウサイズ更新をトリガーしてMonaco Editorの再レンダリングを促す
+    window.dispatchEvent(new Event("resize"));
+  };
+
   useEffect(() => {
     const resetButton = document.getElementById("resetLayout");
 
@@ -37,7 +42,11 @@ const Split_Vertical = () => {
       gutterSize={8}
       gutterAlign="center"
       direction="vertical"
-      onDragEnd={(newSizes) => setSizes(newSizes)}
+      onDrag={() => handleDragEnd()}
+      onDragEnd={(newSizes) => {
+        setSizes(newSizes);
+        handleDragEnd();
+      }}
     >
       <InputSection />
       <ReviewSection />
@@ -51,6 +60,11 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
 
   const resetSizes = () => {
     setSizes(initialSizes);
+  };
+
+  const handleDragEnd = () => {
+    // ウィンドウサイズ更新をトリガーしてMonaco Editorの再レンダリングを促す
+    window.dispatchEvent(new Event("resize"));
   };
 
   useEffect(() => {
@@ -75,7 +89,11 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
       gutterSize={8}
       gutterAlign="center"
       direction="horizontal"
-      onDragEnd={(newSizes) => setSizes(newSizes)}
+      onDrag={() => handleDragEnd()}
+      onDragEnd={(newSizes) => {
+        setSizes(newSizes);
+        handleDragEnd();
+      }}
       className="ml-2 flex flex-grow rounded-md"
     >
       {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す */}
