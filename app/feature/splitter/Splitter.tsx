@@ -15,9 +15,13 @@ const Split_Vertical = () => {
     setSizes(initialSizes);
   };
 
-  const handleDragEnd = () => {
-    // ウィンドウサイズ更新をトリガーしてMonaco Editorの再レンダリングを促す
-    window.dispatchEvent(new Event("resize"));
+  const handleDragEnd = (newSizes: number[]) => {
+    // 仕切り線をドラッグ&ドロップした時のみ、リサイズイベントが発火する
+    // 発火する度に、state(sizes)の数値(width,height)が更新される
+    if (JSON.stringify(newSizes) !== JSON.stringify(sizes)) {
+      window.dispatchEvent(new Event("resize"));
+      setSizes(newSizes);
+    }
   };
 
   useEffect(() => {
@@ -42,11 +46,7 @@ const Split_Vertical = () => {
       gutterSize={8}
       gutterAlign="center"
       direction="vertical"
-      onDrag={() => handleDragEnd()}
-      onDragEnd={(newSizes) => {
-        setSizes(newSizes);
-        handleDragEnd();
-      }}
+      onDragEnd={handleDragEnd}
     >
       <InputSection />
       <ReviewSection />
@@ -62,9 +62,11 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
     setSizes(initialSizes);
   };
 
-  const handleDragEnd = () => {
-    // ウィンドウサイズ更新をトリガーしてMonaco Editorの再レンダリングを促す
-    window.dispatchEvent(new Event("resize"));
+  const handleDragEnd = (newSizes: number[]) => {
+    if (JSON.stringify(newSizes) !== JSON.stringify(sizes)) {
+      window.dispatchEvent(new Event("resize"));
+      setSizes(newSizes);
+    }
   };
 
   useEffect(() => {
@@ -89,11 +91,7 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
       gutterSize={8}
       gutterAlign="center"
       direction="horizontal"
-      onDrag={() => handleDragEnd()}
-      onDragEnd={(newSizes) => {
-        setSizes(newSizes);
-        handleDragEnd();
-      }}
+      onDragEnd={handleDragEnd}
       className="ml-2 flex flex-grow rounded-md"
     >
       {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す */}

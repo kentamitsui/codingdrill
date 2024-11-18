@@ -21,16 +21,17 @@ export default function MonacoEditor() {
     // 初期サイズを設定
     updateDimensions();
 
-    // ウィンドウリサイズ時や親要素の変更を監視
+    // ウィンドウリサイズ時や親要素の変更を監視する
     const observer = new ResizeObserver(() => {
       updateDimensions();
     });
 
+    // 仕切り線のドラッグでサイズが変わる度に、updateDimensions()を呼び出す
     if (editorContainerRef.current) {
       observer.observe(editorContainerRef.current);
     }
 
-    // 要素のサイズ変更が完了した時点で監視を終了し、不要な計算を終了する
+    // 要素のサイズ変更が完了（仕切り線のドラッグが終わった）した時点で監視を終了する
     return () => {
       if (editorContainerRef.current) {
         observer.unobserve(editorContainerRef.current);
@@ -39,12 +40,17 @@ export default function MonacoEditor() {
   }, []);
 
   return (
+    // [flex: 1]は以下のスタイルを一括指定する
+    // flex-grow: 1：親要素内の余白スペースを他の要素と比率1で分配し、要素を拡大する
+    // flex-shrink: 1：親要素のサイズが縮小された際、他の要素と比率1で要素を縮小する
+    // flex-basis: 0：要素の初期サイズを0に設定する
     <div ref={editorContainerRef} style={{ flex: 1, overflow: "hidden" }}>
       <Editor
         defaultLanguage="javascript"
         height={dimensions.height} // 計算した高さを適用
         width={dimensions.width} // 計算した幅を適用
-        theme=""
+        theme="vs-dark"
+        options={{ fontSize: 14 }}
       />
     </div>
   );

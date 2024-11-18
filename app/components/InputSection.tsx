@@ -16,7 +16,7 @@ export default function InputSection() {
         </div>
         <button
           id="button-Copy-CodeInputArea"
-          className="ml-auto w-[120px] border-r-2 border-gray-50 bg-slate-700 p-1 duration-300 hover:bg-slate-500 dark:border-[#1e1e1e]"
+          className="ml-auto w-[120px] mr-[2px] border-gray-50 bg-slate-700 p-1 duration-300 hover:bg-slate-500 dark:border-[#1e1e1e]"
         >
           copy
         </button>
