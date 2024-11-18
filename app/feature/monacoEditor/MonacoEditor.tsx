@@ -2,8 +2,11 @@
 
 import Editor from "@monaco-editor/react";
 import { useEffect, useRef, useState } from "react";
+interface MonacoEditorProps {
+  selectedLanguage: string;
+}
 
-export default function MonacoEditor() {
+export default function MonacoEditor({ selectedLanguage }: MonacoEditorProps) {
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
@@ -46,7 +49,7 @@ export default function MonacoEditor() {
     // flex-basis: 0：要素の初期サイズを0に設定する
     <div ref={editorContainerRef} style={{ flex: 1, overflow: "hidden" }}>
       <Editor
-        defaultLanguage="javascript"
+        language={selectedLanguage}
         height={dimensions.height} // 計算した高さを適用
         width={dimensions.width} // 計算した幅を適用
         theme="vs-dark"
