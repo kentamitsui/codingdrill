@@ -4,11 +4,16 @@ import { useState } from "react";
 
 export default function InputSection() {
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
+  const [selectedTheme, setSelectedTheme] = useState("vs");
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setSelectedLanguage(event.target.value);
+  };
+
+  const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedTheme(event.target.value);
   };
 
   return (
@@ -24,9 +29,22 @@ export default function InputSection() {
         >
           Code
         </div>
+
+        <select
+          id="theme-select"
+          className="ml-auto mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
+          value={selectedTheme}
+          onChange={handleThemeChange}
+        >
+          <option value={"vs"}>vs</option>
+          <option value={"vs-dark"}>vs-dark</option>
+          <option value={"hc-light"}>hc-light</option>
+          <option value={"hc-black"}>hc-black</option>
+        </select>
+
         <select
           id="language-select"
-          className="ml-auto mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
+          className="mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
           value={selectedLanguage}
           onChange={handleLanguageChange}
         >
@@ -51,7 +69,10 @@ export default function InputSection() {
         </button>
       </div>
       <div className="flex flex-1">
-        <MonacoEditor selectedLanguage={selectedLanguage} />
+        <MonacoEditor
+          selectedLanguage={selectedLanguage}
+          selectedTheme={selectedTheme}
+        />
       </div>
     </section>
   );

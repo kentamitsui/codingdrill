@@ -4,7 +4,7 @@ export default function ReviewSection() {
       id="split-vertical-right"
       className="h-full overflow-y-scroll rounded-b-md bg-gray-200 dark:bg-[#0d1117]"
     >
-      <div className="sticky top-0 z-[1] flex flex-row justify-between border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117] ">
+      <div className="sticky top-0 z-[1] flex flex-row justify-between border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
         <div id="reviewDisplayArea-title" className="p-[4px_4px_4px_30px]">
           Review
         </div>
