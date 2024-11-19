@@ -3,8 +3,15 @@ import config from "../config/config.json";
 import { useState } from "react";
 
 export default function InputSection() {
+  const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("vs");
+
+  const handleFontSizeChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelectedFontSize(event.target.value);
+  };
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -31,8 +38,27 @@ export default function InputSection() {
         </div>
 
         <select
-          id="theme-select"
+          id="fontsize-select"
           className="ml-auto mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
+          value={selectedFontSize}
+          onChange={handleFontSizeChange}
+        >
+          <option value={"10"}>10</option>
+          <option value={"11"}>11</option>
+          <option value={"12"}>12</option>
+          <option value={"13"}>13</option>
+          <option value={"14"}>14</option>
+          <option value={"15"}>15</option>
+          <option value={"16"}>16</option>
+          <option value={"17"}>17</option>
+          <option value={"18"}>18</option>
+          <option value={"19"}>19</option>
+          <option value={"20"}>20</option>
+        </select>
+
+        <select
+          id="theme-select"
+          className="mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
           value={selectedTheme}
           onChange={handleThemeChange}
         >
@@ -41,7 +67,6 @@ export default function InputSection() {
           <option value={"hc-light"}>hc-light</option>
           <option value={"hc-black"}>hc-black</option>
         </select>
-
         <select
           id="language-select"
           className="mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
@@ -56,12 +81,12 @@ export default function InputSection() {
         </select>
         <button
           id="button-Copy-CodeInputArea"
-          className="mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[10px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
+          className="mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
         >
           copy
         </button>
         <button
-          className="w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[10px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+          className="w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
           id="submit"
           type="submit"
         >
@@ -70,6 +95,7 @@ export default function InputSection() {
       </div>
       <div className="flex flex-1">
         <MonacoEditor
+          selectedFontSize={Number(selectedFontSize)}
           selectedLanguage={selectedLanguage}
           selectedTheme={selectedTheme}
         />
