@@ -41,7 +41,7 @@ const Split_Vertical = () => {
   return (
     <Split
       sizes={sizes}
-      minSize={200}
+      minSize={250}
       expandToMin={false}
       gutterSize={8}
       gutterAlign="center"
@@ -86,7 +86,7 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
   return (
     <Split
       sizes={sizes}
-      minSize={400}
+      minSize={450}
       expandToMin={false}
       gutterSize={8}
       gutterAlign="center"

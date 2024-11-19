@@ -6,7 +6,7 @@ export default function InputSection() {
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
 
   const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setSelectedLanguage(event.target.value);
   };
@@ -14,7 +14,7 @@ export default function InputSection() {
   return (
     <section
       id="split-horizontal-right"
-      className="flex flex-col flex-grow overflow-hidden"
+      className="flex flex-grow flex-col overflow-hidden"
       style={{ height: "100%" }} // 親要素が高さを管理
     >
       <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
@@ -22,11 +22,11 @@ export default function InputSection() {
           id="codeInputArea-title"
           className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
         >
-          Code Input Area
+          Code
         </div>
         <select
           id="language-select"
-          className="w-[120px] text-center ml-auto mr-[2px] bg-gray-100 dark:bg-gray-800 dark:text-white"
+          className="ml-auto mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
           value={selectedLanguage}
           onChange={handleLanguageChange}
         >
@@ -38,19 +38,19 @@ export default function InputSection() {
         </select>
         <button
           id="button-Copy-CodeInputArea"
-          className="w-[120px] mr-[2px] border-gray-50 bg-slate-700 p-1 duration-300 hover:bg-slate-500 dark:border-[#1e1e1e]"
+          className="mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[10px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
         >
           copy
         </button>
         <button
-          className="w-[120px] rounded-tr-md bg-slate-700 p-1 duration-300 hover:bg-slate-500"
+          className="w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[10px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
           id="submit"
           type="submit"
         >
           submit
         </button>
       </div>
-      <div className="flex-1 flex">
+      <div className="flex flex-1">
         <MonacoEditor selectedLanguage={selectedLanguage} />
       </div>
     </section>
