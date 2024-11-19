@@ -6,11 +6,11 @@ export default function ReviewSection() {
     >
       <div className="sticky top-0 z-[1] flex flex-row justify-between border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117] ">
         <div id="reviewDisplayArea-title" className="p-[4px_4px_4px_30px]">
-          Review Display Area
+          Review
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className="w-[120px] bg-slate-700 p-1 duration-300 hover:bg-slate-500"
+          className="w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
         >
           copy
         </button>

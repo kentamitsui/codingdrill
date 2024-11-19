@@ -26,15 +26,19 @@
   .animation-delay-100 {
     animation-delay: 0.1s;
   }
+
   .animation-delay-120 {
     animation-delay: 0.12s;
   }
+
   .animation-delay-140 {
     animation-delay: 0.14s;
   }
+
   .animation-delay-160 {
     animation-delay: 0.16s;
   }
+
   .animation-delay-180 {
     animation-delay: 0.18s;
   }
@@ -52,30 +56,34 @@
 
 .gutter-horizontal {
   background-color: var(--gutter-bg);
-  width: 2px;
   border: solid;
-  border-width: 0 3px;
   border-color: var(--gutter-bg-border);
+  border-width: 0 3px;
   cursor: grab;
-  opacity: 50%;
+  opacity: 0.5;
+  transition-duration: 300ms;
+  width: 2px;
 }
 
 .gutter-horizontal:hover {
-  opacity: 100%;
+  opacity: 1;
+  transition-duration: 300ms;
 }
 
 .gutter-vertical {
   background-color: var(--gutter-bg);
-  height: 2px;
   border: solid;
-  border-width: 3px 0;
   border-color: var(--gutter-bg-border);
+  border-width: 3px 0;
   cursor: grab;
-  opacity: 50%;
+  height: 2px;
+  opacity: 0.5;
+  transition-duration: 300ms;
 }
 
 .gutter-vertical:hover {
-  opacity: 100%;
+  opacity: 1;
+  transition-duration: 300ms;
 }
 
 #split-horizontal-right {
