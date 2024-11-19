@@ -61,14 +61,14 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   return (
     <aside className="flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-row">
-        <Options
+        {/* <Options
           label={"select-language"}
           data={menuData.menuLists.languages}
           name={"language"}
           disabled={disabled}
           defaultSelected={"language"}
           setSelected={setLanguage}
-        />
+        /> */}
         {/* <Image
           src={menuData.svgIcon.language}
           alt=""
