@@ -10,7 +10,7 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
       id="split-horizontal-left"
       className="flex-grow overflow-y-scroll rounded-md bg-gray-200 dark:bg-[#0d1117]"
     >
-      <div className="sticky top-0 z-[1] flex flex-row justify-between border-b-2 border-gray-50 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
+      <div className="sticky top-0 z-10 flex flex-row justify-between border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
         <div id="problemArea-title" className="p-[4px_4px_4px_30px]">
           Description
         </div>

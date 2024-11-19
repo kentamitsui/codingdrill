@@ -3,11 +3,13 @@
 import Editor from "@monaco-editor/react";
 import { useEffect, useRef, useState } from "react";
 interface MonacoEditorProps {
+  selectedFontSize: number;
   selectedLanguage: string;
   selectedTheme: string;
 }
 
 export default function MonacoEditor({
+  selectedFontSize,
   selectedLanguage,
   selectedTheme,
 }: MonacoEditorProps) {
@@ -57,7 +59,7 @@ export default function MonacoEditor({
         theme={selectedTheme}
         height={dimensions.height} // 計算した高さを適用
         width={dimensions.width} // 計算した幅を適用
-        options={{ fontSize: 14 }}
+        options={{ fontSize: selectedFontSize }}
       />
     </div>
   );
