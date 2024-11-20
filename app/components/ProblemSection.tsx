@@ -4,6 +4,36 @@ import { DisplayProblemProps } from "../type/type";
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
   const parsedData = JSON.parse(problemData);
+  // クリップボードに文字列をコピーする関数
+  const copyToClipboard = () => {
+    const description = parsedData
+      ? `Description\n${parsedData.problem_statement}\n\n`
+      : "";
+    const example1 = parsedData
+      ? `Example 1\nInput: ${parsedData.example1.input}\nOutput: ${parsedData.example1.output}\nExplanation: ${parsedData.example1.explanation}\n\n`
+      : "";
+    const example2 = parsedData
+      ? `Example 2\nInput: ${parsedData.example2.input}\nOutput: ${parsedData.example2.output}\nExplanation: ${parsedData.example2.explanation}\n\n`
+      : "";
+    const example3 = parsedData
+      ? `Example 3\nInput: ${parsedData.example3.input}\nOutput: ${parsedData.example3.output}\nExplanation: ${parsedData.example3.explanation}\n\n`
+      : "";
+    const notes = parsedData
+      ? `Notes\nTime Complexity: ${parsedData.notes.time_complexity}\nSpace Complexity: ${parsedData.notes.space_complexity}\nEdge Cases: ${parsedData.notes.edge_cases}\nOther Consideration: ${parsedData.notes.other_considerations}\n`
+      : "";
+
+    const fullText = description + example1 + example2 + example3 + notes;
+
+    navigator.clipboard
+      .writeText(fullText)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+        alert("Failed to copy text.");
+      });
+  };
 
   return (
     <section
@@ -14,7 +44,10 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
         <div id="problemArea-title" className="p-[4px_4px_4px_30px]">
           Description
         </div>
-        <button className="w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500">
+        <button
+          className="w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+          onClick={copyToClipboard}
+        >
           copy
         </button>
       </div>
