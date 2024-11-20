@@ -1,11 +1,12 @@
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 export default function InputSection() {
   const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("vs");
+  const editorRef = useRef<any>(null);
 
   const handleFontSizeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
@@ -23,6 +24,24 @@ export default function InputSection() {
     setSelectedTheme(event.target.value);
   };
 
+  // クリップボードにコピーする関数
+  const copyToClipboard = () => {
+    if (editorRef.current) {
+      const editorContent = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
+      navigator.clipboard
+        .writeText(editorContent)
+        .then(() => {
+          alert("Copied to clipboard!");
+        })
+        .catch((err) => {
+          console.error("Failed to copy text: ", err);
+          alert("Failed to copy text.");
+        });
+    } else {
+      alert("Editor is not ready yet.");
+    }
+  };
+
   return (
     <section
       id="split-horizontal-right"
@@ -33,10 +52,10 @@ export default function InputSection() {
         <div
           id="codeInputArea-title"
           className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
+          onClick={copyToClipboard}
         >
           Code
         </div>
-
         <select
           id="fontsize-select"
           className="ml-auto mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
@@ -82,6 +101,7 @@ export default function InputSection() {
         <button
           id="button-Copy-CodeInputArea"
           className="mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
+          onClick={copyToClipboard}
         >
           copy
         </button>
@@ -95,9 +115,14 @@ export default function InputSection() {
       </div>
       <div className="flex flex-1">
         <MonacoEditor
+          // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
           selectedFontSize={Number(selectedFontSize)}
           selectedLanguage={selectedLanguage}
           selectedTheme={selectedTheme}
+          // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
+          onMount={(editor) => {
+            editorRef.current = editor;
+          }}
         />
       </div>
     </section>

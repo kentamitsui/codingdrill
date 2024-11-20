@@ -6,12 +6,14 @@ interface MonacoEditorProps {
   selectedFontSize: number;
   selectedLanguage: string;
   selectedTheme: string;
+  onMount: (editor: any) => void;
 }
 
 export default function MonacoEditor({
   selectedFontSize,
   selectedLanguage,
   selectedTheme,
+  onMount,
 }: MonacoEditorProps) {
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
@@ -60,6 +62,12 @@ export default function MonacoEditor({
         height={dimensions.height} // 計算した高さを適用
         width={dimensions.width} // 計算した幅を適用
         options={{ fontSize: selectedFontSize }}
+        // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
+        onMount={(editor) => {
+          if (onMount) {
+            onMount(editor);
+          }
+        }}
       />
     </div>
   );
