@@ -9,14 +9,14 @@ const openai = new OpenAI({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse
+  res: NextApiResponse,
 ) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const { language, difficulty, dataType, topic, displayLanguage } = req.body;
+  const { difficulty, dataType, topic, displayLanguage } = req.body;
   const promptTemplate = process.env.PROMPT_CREATE;
 
   if (!promptTemplate) {
@@ -27,7 +27,6 @@ export default async function handler(
 
   // プロンプトの%で囲まれた文字列を、req.bodyのデータで置き換える
   const modifiedPrompt = promptTemplate
-    .replace("%language%", language)
     .replace("%difficulty%", difficulty)
     .replace("%type%", dataType)
     .replace("%topic%", topic)
