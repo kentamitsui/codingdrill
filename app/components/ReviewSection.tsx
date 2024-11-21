@@ -1,4 +1,4 @@
-export default function ReviewSection() {
+export default function ReviewSection({ setResponseReviewData }) {
   return (
     <div
       id="split-vertical-right"
@@ -17,14 +17,45 @@ export default function ReviewSection() {
       </div>
       <div
         id="result_scoring"
-        className="flex flex-col whitespace-break-spaces text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
+        className="flex flex-col whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
       >
-        <div id="code-executetime-memoryconsumption"></div>
-        <div id="clarity-and-specificity"></div>
-        <div id="originality-and-applicability" className="mt-5"></div>
-        <div id="diversity-and-complexity" className="mt-5"></div>
-        <div id="technical-requirements" className="mt-5"></div>
-        <div id="evaluation-criteria" className="mt-5"></div>
+        {/* <div id="code-executetime-memoryconsumption">
+          {setResponseReviewData
+            ? "code executetime memoryconsumption\n" +
+              setResponseReviewData.clarity_and_specificity
+            : null}
+        </div> */}
+        <div id="clarity-and-specificity">
+          {setResponseReviewData
+            ? "clarity-and-specificity\n" +
+              setResponseReviewData.general_evaluation.clarity_and_specificity
+            : null}
+        </div>
+        <div id="originality-and-applicability" className="mt-5">
+          {setResponseReviewData
+            ? "originality-and-applicability\n" +
+              setResponseReviewData.general_evaluation
+                .originality_and_applicability
+            : null}
+        </div>
+        <div id="diversity-and-complexity" className="mt-5">
+          {setResponseReviewData
+            ? "diversity-and-complexity\n" +
+              setResponseReviewData.general_evaluation.diversity_and_complexity
+            : null}
+        </div>
+        <div id="technical-requirements" className="mt-5">
+          {setResponseReviewData
+            ? "technical-requirement\n" +
+              setResponseReviewData.general_evaluation.technical_requirements
+            : null}
+        </div>
+        <div id="evaluation-criteria" className="mt-5">
+          {setResponseReviewData
+            ? "evaluation-criteria\n" +
+              setResponseReviewData.general_evaluation.evaluation_criteria
+            : null}
+        </div>
       </div>
     </div>
   );

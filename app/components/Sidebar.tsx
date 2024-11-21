@@ -8,7 +8,7 @@ import { SidebarProps } from "../type/type";
 
 export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
   // 各Optionコンポーネントの値を保持する
-  const [language, setLanguage] = useState("");
+  // const [language, setLanguage] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [dataType, setDataType] = useState("");
   const [topic, setTopic] = useState("");
@@ -30,7 +30,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          language,
+          // language,
           difficulty,
           dataType,
           topic,
