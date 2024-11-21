@@ -2,7 +2,7 @@ import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState } from "react";
 
-export default function InputSection() {
+export default function InputSection({ problemData, setReviewData }: any) {
   const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("vs");
@@ -42,6 +42,46 @@ export default function InputSection() {
     }
   };
 
+  // createProblem.tsに選択後の値を送信する
+  // 正常にAPIとの送受信が行われたら、受信結果を受け取る
+  const handleCreateReview = async () => {
+    const editorContent = editorRef.current.getValue();
+
+    try {
+      // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
+      // setDisabled(true);
+      const response = await fetch("/api/createReview", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          selectedLanguage,
+          problemData,
+          editorContent,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to create a review.");
+      }
+      const data = await response.json();
+      const responseText = data.responseText;
+      // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
+      // if (responseText) {
+      //   setDisabled(false);
+      // }
+
+      const JsonText = JSON.parse(responseText);
+      // 親コンポーネント(Splitter.tsx)のセット関数にJSONオブジェクトを設置する
+      setReviewData(JsonText);
+      // console.log(JsonText);
+    } catch (error) {
+      console.error("Error occurred while creating a review:", error);
+      alert("Error occurred while creating the review.");
+    }
+  };
+
   return (
     <section
       id="split-horizontal-right"
@@ -74,7 +114,6 @@ export default function InputSection() {
           <option value={"19"}>19</option>
           <option value={"20"}>20</option>
         </select>
-
         <select
           id="theme-select"
           className="mr-[2px] w-[100px] cursor-pointer border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500"
@@ -109,6 +148,7 @@ export default function InputSection() {
           className="w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
           id="submit"
           type="submit"
+          onClick={handleCreateReview}
         >
           submit
         </button>

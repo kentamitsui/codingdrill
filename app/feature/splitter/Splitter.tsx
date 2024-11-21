@@ -7,13 +7,21 @@ import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
 import { ProblemSectionProps } from "@/app/type/type";
 
-const Split_Vertical = () => {
+const Split_Vertical = ({ problemData }) => {
   const initialSizes = [50, 50];
   const [sizes, setSizes] = useState(initialSizes);
+  const [reviewData, setReviewData] = useState<null | string>(null);
+  const [createProblemData, setCreateProblemData] = useState(null);
 
   const resetSizes = () => {
     setSizes(initialSizes);
   };
+
+  useEffect(() => {
+    if (problemData !== "") {
+      setCreateProblemData(problemData);
+    }
+  });
 
   const handleDragEnd = (newSizes: number[]) => {
     // 仕切り線をドラッグ&ドロップした時のみ、リサイズイベントが発火する
@@ -48,8 +56,11 @@ const Split_Vertical = () => {
       direction="vertical"
       onDragEnd={handleDragEnd}
     >
-      <InputSection />
-      <ReviewSection />
+      <InputSection
+        setReviewData={setReviewData}
+        problemData={JSON.stringify(createProblemData)}
+      />
+      <ReviewSection setResponseReviewData={reviewData} />
     </Split>
   );
 };
@@ -96,7 +107,7 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
     >
       {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す */}
       <ProblemSection problemData={JSON.stringify(problemData)} />
-      <Split_Vertical />
+      <Split_Vertical problemData={problemData} />
     </Split>
   );
 };
