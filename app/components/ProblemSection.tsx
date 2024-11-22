@@ -4,6 +4,7 @@ import { DisplayProblemProps } from "../type/type";
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
   const parsedData = JSON.parse(problemData);
+  // console.log(problemData);
   // クリップボードに文字列をコピーする関数
   const copyToClipboard = () => {
     const description = parsedData
@@ -53,17 +54,17 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
       </div>
       <div className="p-[15px_30px] text-[16px] leading-[1.5] tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
         <div className="whitespace-break-spaces text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Description\n" + parsedData.problem_statement : null}
+          {parsedData ? "Description\n" + parsedData?.problem_statement : null}
         </div>
         <div hidden></div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
           {parsedData ? "Example 1" : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Input: " + parsedData.example1.input : null}
+          {parsedData ? "Input: " + parsedData?.example1.input : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Output: " + parsedData.example1.output : null}
+          {parsedData ? "Output: " + parsedData?.example1.output : null}
         </div>
         <div className="font-light">
           {parsedData

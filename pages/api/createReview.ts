@@ -16,7 +16,8 @@ export default async function handler(
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const { selectedLanguage, problemData, editorContent } = req.body;
+  const { selectedLanguage, problemData, editorContent, displayLanguageData } =
+    req.body;
   const modified = process.env.CODE;
   const promptTemplate =
     problemData +
@@ -32,7 +33,12 @@ export default async function handler(
   }
 
   const modifiedPrompt =
-    promptTemplate + process.env.PROMPT_CHECK_1ST + process.env.PROMPT_CHECK;
+    promptTemplate +
+    process.env.PROMPT_CHECK_1ST +
+    process.env.PROMPT_CHECK?.replace(
+      "%display_language%",
+      displayLanguageData,
+    );
 
   console.log(modifiedPrompt);
 

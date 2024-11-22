@@ -30,7 +30,9 @@ export default async function handler(
     .replace("%difficulty%", difficulty)
     .replace("%type%", dataType)
     .replace("%topic%", topic)
-    .replace("%display-language%", displayLanguage);
+    .replace("%display_language%", displayLanguage);
+
+  console.log(modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
@@ -47,6 +49,8 @@ export default async function handler(
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });
+
+    console.log(responseText);
   } catch (error) {
     console.error("Error fetching data from OpenAI:", error);
     res.status(500).json({ error: "Failed to create a problem" });

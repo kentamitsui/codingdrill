@@ -6,7 +6,10 @@ import { useState } from "react";
 import { SidebarProps } from "../type/type";
 // import Image from "next/image";
 
-export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
+export const Sidebar: React.FC<SidebarProps> = ({
+  setProblemData,
+  setDisplayLanguageData,
+}) => {
   // 各Optionコンポーネントの値を保持する
   // const [language, setLanguage] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -51,6 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
+      setDisplayLanguageData(displayLanguage);
       // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
