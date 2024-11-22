@@ -9,13 +9,22 @@ import { useState } from "react";
 // SiderbarからAPIリクエストを行うので、セット関数を設定
 // レスポンスがあれば、その結果を[Split_Horizontal => ProblemSection]という順番で渡す
 const Main: React.FC = () => {
-  const [problemData, setProblemData] = useState<null | string>(null);
+  const [problemData, setProblemData] = useState<null | string>("");
+  const [displayLanguageData, setDisplayLanguageData] = useState<null | string>(
+    "",
+  );
 
   return (
     <main className="my-2 flex-grow overflow-hidden">
       <div className="flex h-full">
-        <Sidebar setProblemData={setProblemData} />
-        <Split_Horizontal problemData={problemData} />
+        <Sidebar
+          setProblemData={setProblemData}
+          setDisplayLanguageData={setDisplayLanguageData}
+        />
+        <Split_Horizontal
+          problemData={problemData}
+          displayLanguageData={displayLanguageData}
+        />
       </div>
     </main>
   );

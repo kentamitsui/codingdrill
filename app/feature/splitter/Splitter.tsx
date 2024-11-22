@@ -7,7 +7,7 @@ import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
 import { ProblemSectionProps } from "@/app/type/type";
 
-const Split_Vertical = ({ problemData }) => {
+const Split_Vertical = ({ problemData, displayLanguageData }) => {
   const initialSizes = [50, 50];
   const [sizes, setSizes] = useState(initialSizes);
   const [reviewData, setReviewData] = useState<null | string>(null);
@@ -59,13 +59,17 @@ const Split_Vertical = ({ problemData }) => {
       <InputSection
         setReviewData={setReviewData}
         problemData={JSON.stringify(createProblemData)}
+        displayLanguageData={displayLanguageData}
       />
       <ReviewSection setResponseReviewData={reviewData} />
     </Split>
   );
 };
 
-const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
+const Split_Horizontal: React.FC<ProblemSectionProps> = ({
+  problemData,
+  displayLanguageData,
+}) => {
   const initialSizes = [50, 50];
   const [sizes, setSizes] = useState(initialSizes);
 
@@ -105,9 +109,13 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
       onDragEnd={handleDragEnd}
       className="ml-2 flex flex-grow rounded-md"
     >
-      {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す */}
+      {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
+          Split_Verticalには、問題文のデータを渡す*/}
       <ProblemSection problemData={JSON.stringify(problemData)} />
-      <Split_Vertical problemData={problemData} />
+      <Split_Vertical
+        problemData={problemData}
+        displayLanguageData={displayLanguageData}
+      />
     </Split>
   );
 };
