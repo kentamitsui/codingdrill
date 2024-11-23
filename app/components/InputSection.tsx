@@ -86,7 +86,7 @@ export default function InputSection({
       // }
 
       const JsonText = JSON.parse(responseText);
-      // 親コンポーネント(Splitter.tsx)のセット関数にJSONオブジェクトを設置する
+      // ReviewSectionにChatGPT-APIの返信データを設置する
       setReviewData(JsonText);
       // console.log(JsonText);
     } catch (error) {

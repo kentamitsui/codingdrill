@@ -25,13 +25,30 @@ export interface SidebarProps {
   setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
 }
 
-// レスポンスされたデータ(問題文)に対する型定義
-export interface ProblemSectionProps {
-  problemData: null | string;
-  displayLanguageData: null | string;
-}
-
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
   problemData: string;
+}
+
+// Splitterに対する型定義
+export interface SplitterProps {
+  problemData: string | null;
+  displayLanguageData: string | null;
+}
+
+// ReviewSectionに対する型定義
+export interface GeneralEvaluation {
+  clarity_and_specificity: string;
+  originality_and_applicability: string;
+  diversity_and_complexity: string;
+  technical_requirements: string;
+  evaluation_criteria: string;
+}
+
+export interface ReviewResponse {
+  general_evaluation: GeneralEvaluation;
+}
+
+export interface ReviewProps {
+  setResponseReviewData: ReviewResponse | null;
 }
