@@ -1,4 +1,8 @@
-export default function ReviewSection({ setResponseReviewData }) {
+import { ReviewProps } from "../type/type";
+
+export const ReviewSection: React.FC<ReviewProps> = ({
+  setResponseReviewData,
+}) => {
   return (
     <div
       id="split-vertical-right"
@@ -59,4 +63,6 @@ export default function ReviewSection({ setResponseReviewData }) {
       </div>
     </div>
   );
-}
+};
+
+export default ReviewSection;

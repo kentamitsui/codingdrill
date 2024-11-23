@@ -5,30 +5,37 @@ import Split from "react-split";
 import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
-import { ProblemSectionProps } from "@/app/type/type";
+import { ReviewResponse, SplitterProps } from "@/app/type/type";
 
-const Split_Vertical = ({ problemData, displayLanguageData }) => {
+const Split_Vertical: React.FC<SplitterProps> = ({
+  problemData,
+  displayLanguageData,
+}) => {
   const initialSizes = [50, 50];
-  const [sizes, setSizes] = useState(initialSizes);
-  const [reviewData, setReviewData] = useState<null | string>(null);
-  const [createProblemData, setCreateProblemData] = useState(null);
+  const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
+  const [reviewContent, setReviewContent] = useState<ReviewResponse | null>(
+    null,
+  );
+  const [formattedProblemContent, setFormattedProblemContent] = useState<
+    string | null
+  >(null);
 
   const resetSizes = () => {
-    setSizes(initialSizes);
+    setSplitPanelSizes(initialSizes);
   };
 
   useEffect(() => {
-    if (problemData !== "") {
-      setCreateProblemData(problemData);
+    if (problemData !== null && problemData !== "") {
+      setFormattedProblemContent(problemData); // 型が一致
     }
-  });
+  }, [problemData]);
 
   const handleDragEnd = (newSizes: number[]) => {
     // 仕切り線をドラッグ&ドロップした時のみ、リサイズイベントが発火する
     // 発火する度に、state(sizes)の数値(width,height)が更新される
-    if (JSON.stringify(newSizes) !== JSON.stringify(sizes)) {
+    if (JSON.stringify(newSizes) !== JSON.stringify(splitPanelSizes)) {
       window.dispatchEvent(new Event("resize"));
-      setSizes(newSizes);
+      setSplitPanelSizes(newSizes);
     }
   };
 
@@ -48,7 +55,7 @@ const Split_Vertical = ({ problemData, displayLanguageData }) => {
 
   return (
     <Split
-      sizes={sizes}
+      sizes={splitPanelSizes}
       minSize={250}
       expandToMin={false}
       gutterSize={8}
@@ -57,30 +64,30 @@ const Split_Vertical = ({ problemData, displayLanguageData }) => {
       onDragEnd={handleDragEnd}
     >
       <InputSection
-        setReviewData={setReviewData}
-        problemData={JSON.stringify(createProblemData)}
+        setReviewData={setReviewContent}
+        problemData={JSON.stringify(formattedProblemContent)}
         displayLanguageData={displayLanguageData}
       />
-      <ReviewSection setResponseReviewData={reviewData} />
+      <ReviewSection setResponseReviewData={reviewContent} />
     </Split>
   );
 };
 
-const Split_Horizontal: React.FC<ProblemSectionProps> = ({
+const Split_Horizontal: React.FC<SplitterProps> = ({
   problemData,
   displayLanguageData,
 }) => {
   const initialSizes = [50, 50];
-  const [sizes, setSizes] = useState(initialSizes);
+  const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
 
   const resetSizes = () => {
-    setSizes(initialSizes);
+    setSplitPanelSizes(initialSizes);
   };
 
   const handleDragEnd = (newSizes: number[]) => {
-    if (JSON.stringify(newSizes) !== JSON.stringify(sizes)) {
+    if (JSON.stringify(newSizes) !== JSON.stringify(splitPanelSizes)) {
       window.dispatchEvent(new Event("resize"));
-      setSizes(newSizes);
+      setSplitPanelSizes(newSizes);
     }
   };
 
@@ -100,7 +107,7 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({
 
   return (
     <Split
-      sizes={sizes}
+      sizes={splitPanelSizes}
       minSize={450}
       expandToMin={false}
       gutterSize={8}
