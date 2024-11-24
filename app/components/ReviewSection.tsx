@@ -31,33 +31,33 @@ export const ReviewSection: React.FC<ReviewProps> = ({
         </div> */}
         <div id="clarity-and-specificity">
           {setResponseReviewData
-            ? "clarity-and-specificity\n" +
-              setResponseReviewData.general_evaluation.clarity_and_specificity
+            ? "clarity and specificity:\n" +
+              setResponseReviewData.generalEvaluation.clarityAndSpecificity
             : null}
         </div>
         <div id="originality-and-applicability" className="mt-5">
           {setResponseReviewData
-            ? "originality-and-applicability\n" +
-              setResponseReviewData.general_evaluation
-                .originality_and_applicability
+            ? "originality and applicability:\n" +
+              setResponseReviewData.generalEvaluation
+                .originalityAndApplicability
             : null}
         </div>
         <div id="diversity-and-complexity" className="mt-5">
           {setResponseReviewData
-            ? "diversity-and-complexity\n" +
-              setResponseReviewData.general_evaluation.diversity_and_complexity
+            ? "diversity and complexity:\n" +
+              setResponseReviewData.generalEvaluation.diversityAndComplexity
             : null}
         </div>
         <div id="technical-requirements" className="mt-5">
           {setResponseReviewData
-            ? "technical-requirement\n" +
-              setResponseReviewData.general_evaluation.technical_requirements
+            ? "technical requirement:\n" +
+              setResponseReviewData.generalEvaluation.technicalRequirements
             : null}
         </div>
         <div id="evaluation-criteria" className="mt-5">
           {setResponseReviewData
-            ? "evaluation-criteria\n" +
-              setResponseReviewData.general_evaluation.evaluation_criteria
+            ? "evaluation criteria:\n" +
+              setResponseReviewData.generalEvaluation.evaluationCriteria
             : null}
         </div>
       </div>

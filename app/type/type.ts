@@ -38,15 +38,15 @@ export interface SplitterProps {
 
 // ReviewSectionに対する型定義
 export interface GeneralEvaluation {
-  clarity_and_specificity: string;
-  originality_and_applicability: string;
-  diversity_and_complexity: string;
-  technical_requirements: string;
-  evaluation_criteria: string;
+  clarityAndSpecificity: string;
+  originalityAndApplicability: string;
+  diversityAndComplexity: string;
+  technicalRequirements: string;
+  evaluationCriteria: string;
 }
 
 export interface ReviewResponse {
-  general_evaluation: GeneralEvaluation;
+  generalEvaluation: GeneralEvaluation;
 }
 
 export interface ReviewProps {
