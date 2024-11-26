@@ -4,6 +4,41 @@ export const ReviewSection: React.FC<ReviewProps> = ({
   setResponseReviewData,
   getIsDisabledData,
 }) => {
+  const copyToClipboard = () => {
+    const clarityAndSpecificity = setResponseReviewData
+      ? `clarity and specificity:\n${setResponseReviewData.generalEvaluation.clarityAndSpecificity}\n\n`
+      : "";
+    const originalityAndApplicability = setResponseReviewData
+      ? `originality and applicability: ${setResponseReviewData.generalEvaluation.originalityAndApplicability}\n\n`
+      : "";
+    const diversityAndComplexity = setResponseReviewData
+      ? `diversity and complexity: ${setResponseReviewData.generalEvaluation.diversityAndComplexity}\n\n`
+      : "";
+    const technicalRequirements = setResponseReviewData
+      ? `technical requirements: ${setResponseReviewData.generalEvaluation.technicalRequirements}\n\n`
+      : "";
+    const evaluationCriteria = setResponseReviewData
+      ? `evaluation criteria: ${setResponseReviewData.generalEvaluation.evaluationCriteria}`
+      : "";
+
+    const fullText =
+      clarityAndSpecificity +
+      originalityAndApplicability +
+      diversityAndComplexity +
+      technicalRequirements +
+      evaluationCriteria;
+
+    navigator.clipboard
+      .writeText(fullText)
+      .then(() => {
+        alert("Copied to clipboard!");
+      })
+      .catch((err) => {
+        console.error("Failed to copy text: ", err);
+        alert("Failed to copy text.");
+      });
+  };
+
   return (
     <div
       id="split-vertical-right"
@@ -17,6 +52,7 @@ export const ReviewSection: React.FC<ReviewProps> = ({
           id="button-Copy-ReviewArea"
           className={`w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           disabled={getIsDisabledData}
+          onClick={copyToClipboard}
         >
           copy
         </button>
