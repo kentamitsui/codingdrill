@@ -59,40 +59,34 @@ export const ReviewSection: React.FC<ReviewProps> = ({
       </div>
       <div
         id="result_scoring"
-        className="flex flex-col whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
+        className="flex flex-col gap-5 whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
       >
-        {/* <div id="code-executetime-memoryconsumption">
-          {setResponseReviewData
-            ? "code executetime memoryconsumption\n" +
-              setResponseReviewData.clarity_and_specificity
-            : null}
-        </div> */}
-        <div id="clarity-and-specificity">
+        <div id="clarity-and-specificity" className="leading-normal">
           {setResponseReviewData
             ? "clarity and specificity:\n" +
               setResponseReviewData.generalEvaluation.clarityAndSpecificity
             : null}
         </div>
-        <div id="originality-and-applicability" className="mt-5">
+        <div id="originality-and-applicability" className="leading-normal">
           {setResponseReviewData
             ? "originality and applicability:\n" +
               setResponseReviewData.generalEvaluation
                 .originalityAndApplicability
             : null}
         </div>
-        <div id="diversity-and-complexity" className="mt-5">
+        <div id="diversity-and-complexity" className="leading-normal">
           {setResponseReviewData
             ? "diversity and complexity:\n" +
               setResponseReviewData.generalEvaluation.diversityAndComplexity
             : null}
         </div>
-        <div id="technical-requirements" className="mt-5">
+        <div id="technical-requirements" className="leading-normal">
           {setResponseReviewData
             ? "technical requirement:\n" +
               setResponseReviewData.generalEvaluation.technicalRequirements
             : null}
         </div>
-        <div id="evaluation-criteria" className="mt-5">
+        <div id="evaluation-criteria" className="leading-normal">
           {setResponseReviewData
             ? "evaluation criteria:\n" +
               setResponseReviewData.generalEvaluation.evaluationCriteria

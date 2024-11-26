@@ -56,7 +56,7 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
           copy
         </button>
       </div>
-      <div className="p-[15px_30px] text-[16px] leading-[1.5] tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
+      <div className="p-[15px_30px] text-[16px] leading-normal tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
         <div className="whitespace-break-spaces text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
           {parsedData ? "Description\n" + parsedData?.problemStatement : null}
         </div>
