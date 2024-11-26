@@ -63,23 +63,6 @@ export default function Sidebar({
   return (
     <aside className="flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-row">
-        {/* <Options
-          label={"select-language"}
-          data={menuData.menuLists.languages}
-          name={"language"}
-          disabled={disabled}
-          defaultSelected={"language"}
-          setSelected={setLanguage}
-        /> */}
-        {/* <Image
-          src={menuData.svgIcon.language}
-          alt=""
-          className="cursor-pointer bg-slate-700 duration-300 hover:bg-gray-400 hover:dark:bg-slate-700"
-          width={20}
-          height={20}
-        /> */}
-      </div>
-      <div className="flex flex-row">
         <Options
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
