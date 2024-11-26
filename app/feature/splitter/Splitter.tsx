@@ -127,7 +127,10 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
     >
       {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
           Split_Verticalには、問題文のデータを渡す*/}
-      <ProblemSection displayProblemData={JSON.stringify(problemData)} />
+      <ProblemSection
+        displayProblemData={JSON.stringify(problemData)}
+        getIsDisabledData={getIsDisabledData}
+      />
       <Split_Vertical
         problemData={problemData}
         displayLanguageData={displayLanguageData}
