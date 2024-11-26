@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MutableRefObject, SetStateAction } from "react";
 
 // 選択タグに対する型定義
 export interface SelectProps {
@@ -41,7 +41,14 @@ export interface MonacoEditorProps {
   selectedFontSize: number;
   selectedLanguage: string;
   selectedTheme: string;
-  onMount: (editor: any) => void;
+  onMount: (editor: MutableRefObject<string>) => void;
+}
+
+// InputSectionに対する型定義
+export interface InputSectionProps {
+  problemData: string | null;
+  setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
+  displayLanguageData: string | null;
 }
 
 // ReviewSectionに対する型定義
