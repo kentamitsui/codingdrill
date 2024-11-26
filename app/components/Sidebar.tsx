@@ -9,13 +9,14 @@ import { SidebarProps } from "../type/type";
 export default function Sidebar({
   setProblemData,
   setDisplayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
 }: SidebarProps) {
   // 各Optionコンポーネントの値を保持する
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [selectedDataType, setSelectedDataType] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
   const [languagePreference, setLanguagePreference] = useState("");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -24,7 +25,7 @@ export default function Sidebar({
       // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
       setProblemData(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setIsButtonDisabled(true);
+      setIsDisabledData(true);
 
       const response = await fetch("/api/createProblem", {
         method: "POST",
@@ -46,7 +47,7 @@ export default function Sidebar({
       const responseText = data.responseText;
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsButtonDisabled(false);
+        setIsDisabledData(false);
       }
 
       const JsonText = JSON.parse(responseText);
@@ -67,7 +68,7 @@ export default function Sidebar({
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           defaultSelected={"difficulty"}
           setSelected={setSelectedDifficulty}
         />
@@ -84,7 +85,7 @@ export default function Sidebar({
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           defaultSelected={"data type"}
           setSelected={setSelectedDataType}
         />
@@ -101,7 +102,7 @@ export default function Sidebar({
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           defaultSelected={"topic"}
           setSelected={setSelectedTopic}
         />
@@ -118,7 +119,7 @@ export default function Sidebar({
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           defaultSelected={"translate"}
           setSelected={setLanguagePreference}
         />
@@ -134,7 +135,7 @@ export default function Sidebar({
         id="create"
         type="button"
         text="Create Problem"
-        clicked={isButtonDisabled}
+        clicked={getIsDisabledData}
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
@@ -155,19 +156,19 @@ export default function Sidebar({
           id="load"
           type="button"
           text="load"
-          clicked={isButtonDisabled}
+          clicked={getIsDisabledData}
         />
         <Button
           id="delete"
           type="button"
           text="delete"
-          clicked={isButtonDisabled}
+          clicked={getIsDisabledData}
         />
         <Button
           id="delete-all"
           type="button"
           text="delete all"
-          clicked={isButtonDisabled}
+          clicked={getIsDisabledData}
         />
       </div>
     </aside>

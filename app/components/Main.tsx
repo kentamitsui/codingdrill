@@ -9,8 +9,10 @@ import { useState } from "react";
 // SiderbarからAPIリクエストを行うので、セット関数を設定
 // レスポンスがあれば、その結果を[Split_Horizontal => ProblemSection]という順番で渡す
 export default function Main() {
-  const [problemContent, setProblemContent] = useState<null | string>("");
-  const [selectedLanguage, setSelectedLanguage] = useState<null | string>("");
+  const [problemContent, setProblemContent] = useState<string | null>("");
+  const [selectedLanguage, setSelectedLanguage] = useState<string | null>("");
+  // ProblemSection及びInputSectionでのChatGPT送受信時に、ボタンのdisabled属性を切り替える為の状態関数
+  const [isDisabled, setIsDisabled] = useState<boolean>(false);
 
   return (
     <main className="my-2 flex-grow overflow-hidden">
@@ -18,10 +20,14 @@ export default function Main() {
         <Sidebar
           setProblemData={setProblemContent}
           setDisplayLanguageData={setSelectedLanguage}
+          setIsDisabledData={setIsDisabled}
+          getIsDisabledData={isDisabled}
         />
         <Split_Horizontal
           problemData={problemContent}
           displayLanguageData={selectedLanguage}
+          setIsDisabledData={setIsDisabled}
+          getIsDisabledData={isDisabled}
         />
       </div>
     </main>

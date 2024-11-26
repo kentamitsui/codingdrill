@@ -10,6 +10,8 @@ import { ReviewResponse, SplitterProps } from "@/app/type/type";
 const Split_Vertical: React.FC<SplitterProps> = ({
   problemData,
   displayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
 }) => {
   const initialSizes = [50, 50];
   const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
@@ -67,8 +69,13 @@ const Split_Vertical: React.FC<SplitterProps> = ({
         setReviewData={setReviewContent}
         problemData={JSON.stringify(formattedProblemContent)}
         displayLanguageData={displayLanguageData}
+        setIsDisabledData={setIsDisabledData}
+        getIsDisabledData={getIsDisabledData}
       />
-      <ReviewSection setResponseReviewData={reviewContent} />
+      <ReviewSection
+        setResponseReviewData={reviewContent}
+        getIsDisabledData={getIsDisabledData}
+      />
     </Split>
   );
 };
@@ -76,6 +83,8 @@ const Split_Vertical: React.FC<SplitterProps> = ({
 const Split_Horizontal: React.FC<SplitterProps> = ({
   problemData,
   displayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
 }) => {
   const initialSizes = [50, 50];
   const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
@@ -122,6 +131,8 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
       <Split_Vertical
         problemData={problemData}
         displayLanguageData={displayLanguageData}
+        setIsDisabledData={setIsDisabledData}
+        getIsDisabledData={getIsDisabledData}
       />
     </Split>
   );

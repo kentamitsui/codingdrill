@@ -2,6 +2,7 @@ import { ReviewProps } from "../type/type";
 
 export const ReviewSection: React.FC<ReviewProps> = ({
   setResponseReviewData,
+  getIsDisabledData,
 }) => {
   return (
     <div
@@ -14,7 +15,8 @@ export const ReviewSection: React.FC<ReviewProps> = ({
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className="w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+          className={`w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          disabled={getIsDisabledData}
         >
           copy
         </button>

@@ -14,11 +14,12 @@ export default function InputSection({
   problemData,
   setReviewData,
   displayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
 }: InputSectionProps) {
   const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("vs");
-  const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const editorRef = useRef<any>(null);
 
   const handleFontSizeChange = (
@@ -63,7 +64,7 @@ export default function InputSection({
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
-    setIsButtonDisabled(true);
+    setIsDisabledData(true);
     const editorContent = editorRef.current.getValue();
 
     try {
@@ -92,7 +93,7 @@ export default function InputSection({
       setReviewData(JsonText);
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsButtonDisabled(false);
+        setIsDisabledData(false);
       }
       console.log(JsonText);
     } catch (error) {
@@ -117,9 +118,9 @@ export default function InputSection({
         </div>
         <select
           id="fontsize-select"
-          className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           value={selectedFontSize}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           onChange={handleFontSizeChange}
         >
           <option value={"10"}>10</option>
@@ -136,9 +137,9 @@ export default function InputSection({
         </select>
         <select
           id="theme-select"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           value={selectedTheme}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           onChange={handleThemeChange}
         >
           <option value={"vs"}>vs</option>
@@ -148,9 +149,9 @@ export default function InputSection({
         </select>
         <select
           id="language-select"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           value={selectedLanguage}
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           onChange={handleLanguageChange}
         >
           {Object.entries(config.menuLists.languages).map(([key, label]) => (
@@ -161,17 +162,17 @@ export default function InputSection({
         </select>
         <button
           id="button-Copy-CodeInputArea"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={isButtonDisabled}
+          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          disabled={getIsDisabledData}
           onClick={copyToClipboard}
         >
           copy
         </button>
         <button
-          className={`w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           id="submit"
           type="submit"
-          disabled={isButtonDisabled}
+          disabled={getIsDisabledData}
           onClick={handleCreateReview}
         >
           submit
