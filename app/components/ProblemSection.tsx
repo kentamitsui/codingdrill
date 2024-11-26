@@ -2,13 +2,15 @@ import React from "react";
 import { DisplayProblemProps } from "../type/type";
 
 // 受け取ったJSONデータをキー毎に割り振る
-const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
-  const parsedData = JSON.parse(problemData);
-  // console.log(problemData);
+const ProblemSection: React.FC<DisplayProblemProps> = ({
+  displayProblemData,
+}) => {
+  const parsedData = JSON.parse(displayProblemData);
+  // console.log(displayProblemData);
   // クリップボードに文字列をコピーする関数
   const copyToClipboard = () => {
     const description = parsedData
-      ? `Description\n${parsedData.problem_statement}\n\n`
+      ? `Description\n${parsedData.problemStatement}\n\n`
       : "";
     const example1 = parsedData
       ? `Example 1\nInput: ${parsedData.example1.input}\nOutput: ${parsedData.example1.output}\nExplanation: ${parsedData.example1.explanation}\n\n`
@@ -20,7 +22,7 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
       ? `Example 3\nInput: ${parsedData.example3.input}\nOutput: ${parsedData.example3.output}\nExplanation: ${parsedData.example3.explanation}\n\n`
       : "";
     const notes = parsedData
-      ? `Notes\nTime Complexity: ${parsedData.notes.time_complexity}\nSpace Complexity: ${parsedData.notes.space_complexity}\nEdge Cases: ${parsedData.notes.edge_cases}\nOther Consideration: ${parsedData.notes.other_considerations}\n`
+      ? `Notes\nTime Complexity: ${parsedData.notes.timeComplexity}\nSpace Complexity: ${parsedData.notes.spaceComplexity}\nEdge Cases: ${parsedData.notes.edgeCases}\nOther Consideration: ${parsedData.notes.otherConsiderations}\n`
       : "";
 
     const fullText = description + example1 + example2 + example3 + notes;
@@ -54,7 +56,7 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
       </div>
       <div className="p-[15px_30px] text-[16px] leading-[1.5] tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
         <div className="whitespace-break-spaces text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Description\n" + parsedData?.problem_statement : null}
+          {parsedData ? "Description\n" + parsedData?.problemStatement : null}
         </div>
         <div hidden></div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
@@ -105,20 +107,20 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({ problemData }) => {
         <div className="grid gap-[10px]">
           <div className="font-light">
             {parsedData
-              ? "Time Complexity: " + parsedData?.notes.time_complexity
+              ? "Time Complexity: " + parsedData?.notes.timeComplexity
               : null}
           </div>
           <div className="font-light">
             {parsedData
-              ? "Space Complexity: " + parsedData?.notes.space_complexity
+              ? "Space Complexity: " + parsedData?.notes.spaceComplexity
               : null}
           </div>
           <div className="font-light">
-            {parsedData ? "Edge Cases: " + parsedData?.notes.edge_cases : null}
+            {parsedData ? "Edge Cases: " + parsedData?.notes.edgeCases : null}
           </div>
           <div className="font-light">
             {parsedData
-              ? "Other Consideration: " + parsedData?.notes.other_considerations
+              ? "Other Consideration: " + parsedData?.notes.otherConsiderations
               : null}
           </div>
         </div>

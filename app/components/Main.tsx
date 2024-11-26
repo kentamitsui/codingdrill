@@ -8,7 +8,7 @@ import { useState } from "react";
 // 次に、各コンポーネントへ問題文のデータを渡す
 // SiderbarからAPIリクエストを行うので、セット関数を設定
 // レスポンスがあれば、その結果を[Split_Horizontal => ProblemSection]という順番で渡す
-const Main: React.FC = () => {
+export default function Main() {
   const [problemContent, setProblemContent] = useState<null | string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<null | string>("");
 
@@ -26,6 +26,4 @@ const Main: React.FC = () => {
       </div>
     </main>
   );
-};
-
-export default Main;
+}
