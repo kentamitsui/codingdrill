@@ -23,7 +23,7 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
       ? `Example 3\nInput: ${parsedData.example3.input}\nOutput: ${parsedData.example3.output}\nExplanation: ${parsedData.example3.explanation}\n\n`
       : "";
     const notes = parsedData
-      ? `Notes\nTime Complexity: ${parsedData.notes.timeComplexity}\nSpace Complexity: ${parsedData.notes.spaceComplexity}\nEdge Cases: ${parsedData.notes.edgeCases}\nOther Consideration: ${parsedData.notes.otherConsiderations}\n`
+      ? `Notes\nTime Complexity: ${parsedData.notes.timeComplexity}\nSpace Complexity: ${parsedData.notes.spaceComplexity}\nEdge Cases: ${parsedData.notes.edgeCases}\nOther Consideration: ${parsedData.notes.otherConsiderations}`
       : "";
 
     const fullText = description + example1 + example2 + example3 + notes;
