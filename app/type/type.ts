@@ -23,6 +23,8 @@ export interface ButtonProps {
 export interface SidebarProps {
   setProblemData: Dispatch<SetStateAction<string | null>>;
   setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
+  setIsDisabledData: Dispatch<SetStateAction<boolean>>;
+  getIsDisabledData: boolean;
 }
 
 // 問題文を表示する際の型定義
@@ -34,6 +36,8 @@ export interface DisplayProblemProps {
 export interface SplitterProps {
   problemData: string | null;
   displayLanguageData: string | null;
+  setIsDisabledData: Dispatch<SetStateAction<boolean>>;
+  getIsDisabledData: boolean;
 }
 
 // Monaco Editorに対する型定義
@@ -49,6 +53,8 @@ export interface InputSectionProps {
   problemData: string | null;
   setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
   displayLanguageData: string | null;
+  setIsDisabledData: Dispatch<SetStateAction<boolean>>;
+  getIsDisabledData: boolean;
 }
 
 // ReviewSectionに対する型定義
@@ -66,4 +72,5 @@ export interface ReviewResponse {
 
 export interface ReviewProps {
   setResponseReviewData: ReviewResponse | null;
+  getIsDisabledData: boolean;
 }
