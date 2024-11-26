@@ -30,6 +30,7 @@ export interface SidebarProps {
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
   displayProblemData: string;
+  getIsDisabledData: boolean;
 }
 
 // Splitterに対する型定義
