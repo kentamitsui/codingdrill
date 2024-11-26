@@ -24,7 +24,7 @@ export default async function handler(
     modified?.replace("%language%", selectedLanguage) +
     editorContent;
 
-  console.log(problemData);
+  // console.log(problemData);
 
   if (!promptTemplate) {
     return res
@@ -40,7 +40,7 @@ export default async function handler(
       displayLanguageData,
     );
 
-  console.log(modifiedPrompt);
+  // console.log(modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
