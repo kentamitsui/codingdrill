@@ -60,7 +60,7 @@ export default function InputSection({
     const editorContent = editorRef.current.getValue();
 
     try {
-      // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
+      // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       // setDisabled(true);
       const response = await fetch("/api/createReview", {
         method: "POST",

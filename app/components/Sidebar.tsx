@@ -6,10 +6,10 @@ import { useState } from "react";
 import { SidebarProps } from "../type/type";
 // import Image from "next/image";
 
-export const Sidebar: React.FC<SidebarProps> = ({
+export default function Sidebar({
   setProblemData,
   setDisplayLanguageData,
-}) => {
+}: SidebarProps) {
   // 各Optionコンポーネントの値を保持する
   const [selectedDifficulty, setSelectedDifficulty] = useState("");
   const [selectedDataType, setSelectedDataType] = useState("");
@@ -189,6 +189,4 @@ export const Sidebar: React.FC<SidebarProps> = ({
       </div>
     </aside>
   );
-};
-
-export default Sidebar;
+}

@@ -27,13 +27,21 @@ export interface SidebarProps {
 
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
-  problemData: string;
+  displayProblemData: string;
 }
 
 // Splitterに対する型定義
 export interface SplitterProps {
   problemData: string | null;
   displayLanguageData: string | null;
+}
+
+// Monaco Editorに対する型定義
+export interface MonacoEditorProps {
+  selectedFontSize: number;
+  selectedLanguage: string;
+  selectedTheme: string;
+  onMount: (editor: any) => void;
 }
 
 // ReviewSectionに対する型定義

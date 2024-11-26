@@ -2,12 +2,7 @@
 
 import Editor from "@monaco-editor/react";
 import { useEffect, useRef, useState } from "react";
-interface MonacoEditorProps {
-  selectedFontSize: number;
-  selectedLanguage: string;
-  selectedTheme: string;
-  onMount: (editor: any) => void;
-}
+import { MonacoEditorProps } from "@/app/type/type";
 
 export default function MonacoEditor({
   selectedFontSize,
