@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Split from "react-split";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+const Split = lazy(() => import("react-split"));
 import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
@@ -115,29 +115,31 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
   }, []);
 
   return (
-    <Split
-      sizes={splitPanelSizes}
-      minSize={450}
-      expandToMin={false}
-      gutterSize={8}
-      gutterAlign="center"
-      direction="horizontal"
-      onDragEnd={handleDragEnd}
-      className="ml-2 flex flex-grow rounded-md"
-    >
-      {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
+    <Suspense>
+      <Split
+        sizes={splitPanelSizes}
+        minSize={450}
+        expandToMin={false}
+        gutterSize={8}
+        gutterAlign="center"
+        direction="horizontal"
+        onDragEnd={handleDragEnd}
+        className="ml-2 flex flex-grow rounded-md"
+      >
+        {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
           Split_Verticalには、問題文のデータを渡す*/}
-      <ProblemSection
-        displayProblemData={JSON.stringify(problemData)}
-        getIsDisabledData={getIsDisabledData}
-      />
-      <Split_Vertical
-        problemData={problemData}
-        displayLanguageData={displayLanguageData}
-        setIsDisabledData={setIsDisabledData}
-        getIsDisabledData={getIsDisabledData}
-      />
-    </Split>
+        <ProblemSection
+          displayProblemData={JSON.stringify(problemData)}
+          getIsDisabledData={getIsDisabledData}
+        />
+        <Split_Vertical
+          problemData={problemData}
+          displayLanguageData={displayLanguageData}
+          setIsDisabledData={setIsDisabledData}
+          getIsDisabledData={getIsDisabledData}
+        />
+      </Split>
+    </Suspense>
   );
 };
 

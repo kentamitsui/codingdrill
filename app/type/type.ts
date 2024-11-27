@@ -1,5 +1,5 @@
-import { Dispatch, MutableRefObject, SetStateAction } from "react";
-
+import { Dispatch, SetStateAction } from "react";
+import type * as monaco from "monaco-editor";
 // 選択タグに対する型定義
 export interface SelectProps {
   label?: string;
@@ -46,7 +46,7 @@ export interface MonacoEditorProps {
   selectedFontSize: number;
   selectedLanguage: string;
   selectedTheme: string;
-  onMount: (editor: MutableRefObject<string>) => void;
+  onMount?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
 }
 
 // InputSectionに対する型定義
