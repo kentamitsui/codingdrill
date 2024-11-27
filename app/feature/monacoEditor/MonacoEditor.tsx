@@ -1,7 +1,7 @@
 "use client";
 
-import Editor from "@monaco-editor/react";
-import { useEffect, useRef, useState } from "react";
+const Editor = lazy(() => import("@monaco-editor/react"));
+import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { MonacoEditorProps } from "@/app/type/type";
 
 export default function MonacoEditor({
@@ -51,19 +51,21 @@ export default function MonacoEditor({
     // flex-shrink: 1：親要素のサイズが縮小された際、他の要素と比率1で要素を縮小する
     // flex-basis: 0：要素の初期サイズを0に設定する
     <div ref={editorContainerRef} style={{ flex: 1, overflow: "hidden" }}>
-      <Editor
-        language={selectedLanguage}
-        theme={selectedTheme}
-        height={dimensions.height} // 計算した高さを適用
-        width={dimensions.width} // 計算した幅を適用
-        options={{ fontSize: selectedFontSize }}
-        // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
-        onMount={(editor) => {
-          if (onMount) {
-            onMount(editor);
-          }
-        }}
-      />
+      <Suspense>
+        <Editor
+          language={selectedLanguage}
+          theme={selectedTheme}
+          height={dimensions.height} // 計算した高さを適用
+          width={dimensions.width} // 計算した幅を適用
+          options={{ fontSize: selectedFontSize }}
+          // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
+          onMount={(editor) => {
+            if (onMount) {
+              onMount(editor);
+            }
+          }}
+        />
+      </Suspense>
     </div>
   );
 }
