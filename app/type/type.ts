@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-
+import type * as monaco from "monaco-editor";
 // 選択タグに対する型定義
 export interface SelectProps {
   label?: string;
@@ -22,14 +22,56 @@ export interface ButtonProps {
 // サイドバーに対する型定義
 export interface SidebarProps {
   setProblemData: Dispatch<SetStateAction<string | null>>;
-}
-
-// レスポンスされたデータ(問題文)に対する型定義
-export interface ProblemSectionProps {
-  problemData: null | string;
+  setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
+  setIsDisabledData: Dispatch<SetStateAction<boolean>>;
+  getIsDisabledData: boolean;
 }
 
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
-  problemData: string;
+  displayProblemData: string;
+  getIsDisabledData: boolean;
+}
+
+// Splitterに対する型定義
+export interface SplitterProps {
+  problemData: string | null;
+  displayLanguageData: string | null;
+  setIsDisabledData: Dispatch<SetStateAction<boolean>>;
+  getIsDisabledData: boolean;
+}
+
+// Monaco Editorに対する型定義
+export interface MonacoEditorProps {
+  selectedFontSize: number;
+  selectedLanguage: string;
+  selectedTheme: string;
+  onMount?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
+}
+
+// InputSectionに対する型定義
+export interface InputSectionProps {
+  problemData: string | null;
+  setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
+  displayLanguageData: string | null;
+  setIsDisabledData: Dispatch<SetStateAction<boolean>>;
+  getIsDisabledData: boolean;
+}
+
+// ReviewSectionに対する型定義
+export interface GeneralEvaluation {
+  clarityAndSpecificity: string;
+  originalityAndApplicability: string;
+  diversityAndComplexity: string;
+  technicalRequirements: string;
+  evaluationCriteria: string;
+}
+
+export interface ReviewResponse {
+  generalEvaluation: GeneralEvaluation;
+}
+
+export interface ReviewProps {
+  setResponseReviewData: ReviewResponse | null;
+  getIsDisabledData: boolean;
 }

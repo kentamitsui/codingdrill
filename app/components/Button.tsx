@@ -1,12 +1,12 @@
 import { ButtonProps } from "../type/type";
 
-export const Button: React.FC<ButtonProps> = ({
+export default function Button({
   id,
   type,
   text,
   clicked,
   onClick,
-}) => {
+}: ButtonProps) {
   return (
     <button
       id={id}
@@ -20,6 +20,4 @@ export const Button: React.FC<ButtonProps> = ({
       {text}
     </button>
   );
-};
-
-export default Button;
+}

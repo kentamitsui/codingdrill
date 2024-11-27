@@ -16,13 +16,15 @@ export default async function handler(
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const {
-    selectedDifficulty,
-    selectedDataType,
-    selectedTopic,
-    languagePreference,
-  } = req.body;
-  const promptTemplate = process.env.PROMPT_CREATE;
+  const { selectedLanguage, problemData, editorContent, displayLanguageData } =
+    req.body;
+  const modified = process.env.CODE;
+  const promptTemplate =
+    problemData +
+    modified?.replace("%language%", selectedLanguage) +
+    editorContent;
+
+  // console.log(problemData);
 
   if (!promptTemplate) {
     return res
@@ -30,12 +32,13 @@ export default async function handler(
       .json({ error: "PROMPT_CREATE is not defined in environment variables" });
   }
 
-  // プロンプトの%で囲まれた文字列を、req.bodyのデータで置き換える
-  const modifiedPrompt = promptTemplate
-    .replace("%difficulty%", selectedDifficulty)
-    .replace("%type%", selectedDataType)
-    .replace("%topic%", selectedTopic)
-    .replace("%display_language%", languagePreference);
+  const modifiedPrompt =
+    promptTemplate +
+    process.env.PROMPT_CHECK_1ST +
+    process.env.PROMPT_CHECK?.replace(
+      "%display_language%",
+      displayLanguageData,
+    );
 
   // console.log(modifiedPrompt);
 
@@ -51,11 +54,10 @@ export default async function handler(
         },
       ],
     });
+    // console.log(request);
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });
-
-    // console.log(responseText);
   } catch (error) {
     console.error("Error fetching data from OpenAI:", error);
     res.status(500).json({ error: "Failed to create a problem" });

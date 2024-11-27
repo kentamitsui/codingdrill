@@ -1,18 +1,44 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import Split from "react-split";
+import React, { useState, useEffect, lazy, Suspense } from "react";
+const Split = lazy(() => import("react-split"));
 import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
-import { ProblemSectionProps } from "@/app/type/type";
+import { ReviewResponse, SplitterProps } from "@/app/type/type";
 
-const Split_Vertical = () => {
+const Split_Vertical: React.FC<SplitterProps> = ({
+  problemData,
+  displayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
+}) => {
   const initialSizes = [50, 50];
-  const [sizes, setSizes] = useState(initialSizes);
+  const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
+  const [reviewContent, setReviewContent] = useState<ReviewResponse | null>(
+    null,
+  );
+  const [formattedProblemContent, setFormattedProblemContent] = useState<
+    string | null
+  >(null);
 
   const resetSizes = () => {
-    setSizes(initialSizes);
+    setSplitPanelSizes(initialSizes);
+  };
+
+  useEffect(() => {
+    if (problemData !== null && problemData !== "") {
+      setFormattedProblemContent(problemData); // 型が一致
+    }
+  }, [problemData]);
+
+  const handleDragEnd = (newSizes: number[]) => {
+    // 仕切り線をドラッグ&ドロップした時のみ、リサイズイベントが発火する
+    // 発火する度に、state(sizes)の数値(width,height)が更新される
+    if (JSON.stringify(newSizes) !== JSON.stringify(splitPanelSizes)) {
+      window.dispatchEvent(new Event("resize"));
+      setSplitPanelSizes(newSizes);
+    }
   };
 
   useEffect(() => {
@@ -31,26 +57,47 @@ const Split_Vertical = () => {
 
   return (
     <Split
-      sizes={sizes}
-      minSize={200}
+      sizes={splitPanelSizes}
+      minSize={250}
       expandToMin={false}
       gutterSize={8}
       gutterAlign="center"
       direction="vertical"
-      onDragEnd={(newSizes) => setSizes(newSizes)}
+      onDragEnd={handleDragEnd}
     >
-      <InputSection />
-      <ReviewSection />
+      <InputSection
+        setReviewData={setReviewContent}
+        problemData={JSON.stringify(formattedProblemContent)}
+        displayLanguageData={displayLanguageData}
+        setIsDisabledData={setIsDisabledData}
+        getIsDisabledData={getIsDisabledData}
+      />
+      <ReviewSection
+        setResponseReviewData={reviewContent}
+        getIsDisabledData={getIsDisabledData}
+      />
     </Split>
   );
 };
 
-const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
+const Split_Horizontal: React.FC<SplitterProps> = ({
+  problemData,
+  displayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
+}) => {
   const initialSizes = [50, 50];
-  const [sizes, setSizes] = useState(initialSizes);
+  const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
 
   const resetSizes = () => {
-    setSizes(initialSizes);
+    setSplitPanelSizes(initialSizes);
+  };
+
+  const handleDragEnd = (newSizes: number[]) => {
+    if (JSON.stringify(newSizes) !== JSON.stringify(splitPanelSizes)) {
+      window.dispatchEvent(new Event("resize"));
+      setSplitPanelSizes(newSizes);
+    }
   };
 
   useEffect(() => {
@@ -68,20 +115,31 @@ const Split_Horizontal: React.FC<ProblemSectionProps> = ({ problemData }) => {
   }, []);
 
   return (
-    <Split
-      sizes={sizes}
-      minSize={400}
-      expandToMin={false}
-      gutterSize={8}
-      gutterAlign="center"
-      direction="horizontal"
-      onDragEnd={(newSizes) => setSizes(newSizes)}
-      className="ml-2 flex flex-grow rounded-md"
-    >
-      {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す */}
-      <ProblemSection problemData={JSON.stringify(problemData)} />
-      <Split_Vertical />
-    </Split>
+    <Suspense>
+      <Split
+        sizes={splitPanelSizes}
+        minSize={450}
+        expandToMin={false}
+        gutterSize={8}
+        gutterAlign="center"
+        direction="horizontal"
+        onDragEnd={handleDragEnd}
+        className="ml-2 flex flex-grow rounded-md"
+      >
+        {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
+          Split_Verticalには、問題文のデータを渡す*/}
+        <ProblemSection
+          displayProblemData={JSON.stringify(problemData)}
+          getIsDisabledData={getIsDisabledData}
+        />
+        <Split_Vertical
+          problemData={problemData}
+          displayLanguageData={displayLanguageData}
+          setIsDisabledData={setIsDisabledData}
+          getIsDisabledData={getIsDisabledData}
+        />
+      </Split>
+    </Suspense>
   );
 };
 
