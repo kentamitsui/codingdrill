@@ -23,11 +23,7 @@ export const Options: React.FC<SelectProps> = ({
     <>
       <label htmlFor={label}></label>
       <select
-        className={`m-1 w-[142px] rounded-md p-1 duration-300 
-          ${selected !== "" ? "bg-gray-400" : "bg-gray-200"}
-          dark:${selected !== "" ? "bg-slate-700" : "bg-menu"}
-          ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}
-        hover:bg-gray-400 dark:hover:bg-slate-700`}
+        className={`m-1 w-[142px] rounded-md p-1 duration-300 ${selected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${selected !== "" ? "bg-slate-700" : "bg-menu"} ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
         disabled={disabled}
         onChange={handleChangeColor}

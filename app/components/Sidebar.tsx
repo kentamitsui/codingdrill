@@ -6,14 +6,17 @@ import { useState } from "react";
 import { SidebarProps } from "../type/type";
 // import Image from "next/image";
 
-export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
+export default function Sidebar({
+  setProblemData,
+  setDisplayLanguageData,
+  setIsDisabledData,
+  getIsDisabledData,
+}: SidebarProps) {
   // 各Optionコンポーネントの値を保持する
-  const [language, setLanguage] = useState("");
-  const [difficulty, setDifficulty] = useState("");
-  const [dataType, setDataType] = useState("");
-  const [topic, setTopic] = useState("");
-  const [displayLanguage, setDisplayLanguage] = useState("");
-  const [disabled, setDisabled] = useState(false);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("");
+  const [selectedDataType, setSelectedDataType] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState("");
+  const [languagePreference, setLanguagePreference] = useState("");
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -22,7 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
       // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
       setProblemData(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setDisabled(true);
+      setIsDisabledData(true);
 
       const response = await fetch("/api/createProblem", {
         method: "POST",
@@ -30,11 +33,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          language,
-          difficulty,
-          dataType,
-          topic,
-          displayLanguage,
+          selectedDifficulty,
+          selectedDataType,
+          selectedTopic,
+          languagePreference,
         }),
       });
 
@@ -45,12 +47,13 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
       const responseText = data.responseText;
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setDisabled(false);
+        setIsDisabledData(false);
       }
 
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
+      setDisplayLanguageData(languagePreference);
       // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
@@ -62,29 +65,12 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
     <aside className="flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-row">
         <Options
-          label={"select-language"}
-          data={menuData.menuLists.languages}
-          name={"language"}
-          disabled={disabled}
-          defaultSelected={"language"}
-          setSelected={setLanguage}
-        />
-        {/* <Image
-          src={menuData.svgIcon.language}
-          alt=""
-          className="cursor-pointer bg-slate-700 duration-300 hover:bg-gray-400 hover:dark:bg-slate-700"
-          width={20}
-          height={20}
-        /> */}
-      </div>
-      <div className="flex flex-row">
-        <Options
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          disabled={disabled}
+          disabled={getIsDisabledData}
           defaultSelected={"difficulty"}
-          setSelected={setDifficulty}
+          setSelected={setSelectedDifficulty}
         />
         {/* <Image
           src={menuData.svgIcon.difficulty}
@@ -99,9 +85,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          disabled={disabled}
+          disabled={getIsDisabledData}
           defaultSelected={"data type"}
-          setSelected={setDataType}
+          setSelected={setSelectedDataType}
         />
         {/* <Image
           src={menuData.svgIcon.data}
@@ -116,9 +102,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          disabled={disabled}
+          disabled={getIsDisabledData}
           defaultSelected={"topic"}
-          setSelected={setTopic}
+          setSelected={setSelectedTopic}
         />
         {/* <Image
           src={menuData.svgIcon.topic}
@@ -133,9 +119,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          disabled={disabled}
+          disabled={getIsDisabledData}
           defaultSelected={"translate"}
-          setSelected={setDisplayLanguage}
+          setSelected={setLanguagePreference}
         />
         {/* <Image
           src={menuData.svgIcon.translate}
@@ -149,7 +135,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
         id="create"
         type="button"
         text="Create Problem"
-        clicked={disabled}
+        clicked={getIsDisabledData}
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
@@ -166,17 +152,25 @@ export const Sidebar: React.FC<SidebarProps> = ({ setProblemData }) => {
           name="data"
           id="savedata"
         ></select>
-        <Button id="load" type="button" text="load" clicked={disabled} />
-        <Button id="delete" type="button" text="delete" clicked={disabled} />
+        <Button
+          id="load"
+          type="button"
+          text="load"
+          clicked={getIsDisabledData}
+        />
+        <Button
+          id="delete"
+          type="button"
+          text="delete"
+          clicked={getIsDisabledData}
+        />
         <Button
           id="delete-all"
           type="button"
           text="delete all"
-          clicked={disabled}
+          clicked={getIsDisabledData}
         />
       </div>
     </aside>
   );
-};
-
-export default Sidebar;
+}
