@@ -4,6 +4,7 @@ import Options from "./Options";
 import Button from "./Button";
 import { useState } from "react";
 import { SidebarProps } from "../type/type";
+import { useAppContext } from "../feature/localStorage/AppContext";
 // import Image from "next/image";
 
 export default function Sidebar({
@@ -12,11 +13,17 @@ export default function Sidebar({
   setIsDisabledData,
   getIsDisabledData,
 }: SidebarProps) {
-  // 各Optionコンポーネントの値を保持する
-  const [selectedDifficulty, setSelectedDifficulty] = useState("");
-  const [selectedDataType, setSelectedDataType] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState("");
-  const [languagePreference, setLanguagePreference] = useState("");
+  // createContextを使用して、InputSectionにデータを渡す
+  const {
+    selectedDifficulty,
+    setSelectedDifficulty,
+    selectedDataType,
+    setSelectedDataType,
+    selectedTopic,
+    setSelectedTopic,
+    selectedLanguagePreference,
+    setSelectedLanguagePreference,
+  } = useAppContext();
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -36,7 +43,7 @@ export default function Sidebar({
           selectedDifficulty,
           selectedDataType,
           selectedTopic,
-          languagePreference,
+          selectedLanguagePreference,
         }),
       });
 
@@ -53,7 +60,7 @@ export default function Sidebar({
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
-      setDisplayLanguageData(languagePreference);
+      setDisplayLanguageData(selectedLanguagePreference);
       // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
@@ -121,7 +128,7 @@ export default function Sidebar({
           name={"display-language"}
           disabled={getIsDisabledData}
           defaultSelected={"translate"}
-          setSelected={setLanguagePreference}
+          setSelected={setSelectedLanguagePreference}
         />
         {/* <Image
           src={menuData.svgIcon.translate}
@@ -151,7 +158,9 @@ export default function Sidebar({
           className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
           name="data"
           id="savedata"
-        ></select>
+        >
+          <option value="">save data</option>
+        </select>
         <Button
           id="load"
           type="button"
