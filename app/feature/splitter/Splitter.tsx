@@ -6,6 +6,7 @@ import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
 import { ReviewResponse, SplitterProps } from "@/app/type/type";
+import { usePanelContext } from "./PanelContext";
 
 const Split_Vertical: React.FC<SplitterProps> = ({
   problemData,
@@ -13,6 +14,7 @@ const Split_Vertical: React.FC<SplitterProps> = ({
   setIsDisabledData,
   getIsDisabledData,
 }) => {
+  const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
   const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
   const [reviewContent, setReviewContent] = useState<ReviewResponse | null>(
@@ -21,10 +23,6 @@ const Split_Vertical: React.FC<SplitterProps> = ({
   const [formattedProblemContent, setFormattedProblemContent] = useState<
     string | null
   >(null);
-
-  const resetSizes = () => {
-    setSplitPanelSizes(initialSizes);
-  };
 
   useEffect(() => {
     if (problemData !== null && problemData !== "") {
@@ -42,18 +40,8 @@ const Split_Vertical: React.FC<SplitterProps> = ({
   };
 
   useEffect(() => {
-    const resetButton = document.getElementById("resetLayout");
-
-    if (resetButton) {
-      resetButton.addEventListener("click", resetSizes);
-    }
-
-    return () => {
-      if (resetButton) {
-        resetButton.removeEventListener("click", resetSizes);
-      }
-    };
-  }, []);
+    setSplitPanelSizes(initialSizes);
+  }, [resetPanelSizes]);
 
   return (
     <Split
@@ -86,12 +74,9 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
   setIsDisabledData,
   getIsDisabledData,
 }) => {
+  const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
   const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
-
-  const resetSizes = () => {
-    setSplitPanelSizes(initialSizes);
-  };
 
   const handleDragEnd = (newSizes: number[]) => {
     if (JSON.stringify(newSizes) !== JSON.stringify(splitPanelSizes)) {
@@ -101,18 +86,8 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
   };
 
   useEffect(() => {
-    const resetButton = document.getElementById("resetLayout");
-
-    if (resetButton) {
-      resetButton.addEventListener("click", resetSizes);
-    }
-
-    return () => {
-      if (resetButton) {
-        resetButton.removeEventListener("click", resetSizes);
-      }
-    };
-  }, []);
+    setSplitPanelSizes(initialSizes);
+  }, [resetPanelSizes]);
 
   return (
     <Suspense>
