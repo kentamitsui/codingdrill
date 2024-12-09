@@ -27,6 +27,18 @@ export interface SidebarProps {
   getIsDisabledData: boolean;
 }
 
+// AppContextに対する型定義
+export interface AppContextProps {
+  selectedDifficulty: string;
+  setSelectedDifficulty: React.Dispatch<React.SetStateAction<string>>;
+  selectedDataType: string;
+  setSelectedDataType: React.Dispatch<React.SetStateAction<string>>;
+  selectedTopic: string;
+  setSelectedTopic: React.Dispatch<React.SetStateAction<string>>;
+  selectedLanguagePreference: string;
+  setSelectedLanguagePreference: React.Dispatch<React.SetStateAction<string>>;
+}
+
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
   displayProblemData: string;
@@ -39,6 +51,11 @@ export interface SplitterProps {
   displayLanguageData: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+}
+
+// PanelContextに対する型定義
+export interface PanelContextType {
+  resetPanelSizes: () => void;
 }
 
 // Monaco Editorに対する型定義

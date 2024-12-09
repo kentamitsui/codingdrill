@@ -2,6 +2,8 @@ import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState } from "react";
 import { InputSectionProps } from "../type/type";
+import saveToLocalStorage from "../feature/localStorage/localStorage";
+import { useAppContext } from "../feature/localStorage/AppContext";
 {
   /* InputSection.tsxでChatGPT-APIとの送受信を行う
     1.ProblemSection.tsxから問題文の文字列データを、InputSection.tsxへ渡す
@@ -17,6 +19,8 @@ export default function InputSection({
   setIsDisabledData,
   getIsDisabledData,
 }: InputSectionProps) {
+  const { selectedDifficulty, selectedDataType, selectedTopic } =
+    useAppContext();
   const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("vs");
@@ -89,8 +93,22 @@ export default function InputSection({
       const data = await response.json();
       const responseText = data.responseText;
       const JsonText = JSON.parse(responseText);
+
+      // ローカルストレージにデータ(問題文・エディタの入力内容・総評)を保存する
+      saveToLocalStorage({
+        selectedDifficulty,
+        selectedDataType,
+        selectedTopic,
+        selectedLanguage,
+        displayLanguageData,
+        problemText: problemData,
+        editorContent,
+        evaluation: JsonText.generalEvaluation,
+      });
+
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setReviewData(JsonText);
+
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
         setIsDisabledData(false);
