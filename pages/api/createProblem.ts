@@ -20,7 +20,7 @@ export default async function handler(
     selectedDifficulty,
     selectedDataType,
     selectedTopic,
-    languagePreference,
+    selectedLanguagePreference,
   } = req.body;
   const promptTemplate = process.env.PROMPT_CREATE;
 
@@ -35,9 +35,9 @@ export default async function handler(
     .replace("%difficulty%", selectedDifficulty)
     .replace("%type%", selectedDataType)
     .replace("%topic%", selectedTopic)
-    .replace("%display_language%", languagePreference);
+    .replace("%display_language%", selectedLanguagePreference);
 
-  // console.log(modifiedPrompt);
+  console.log(modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
