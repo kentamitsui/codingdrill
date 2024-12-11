@@ -26,7 +26,7 @@ export default function Sidebar({
     setSelectedLanguagePreference,
     reviewData,
   } = useAppContext();
-  const { clearLocalStorage } = useLocalStorageContext();
+  const { clearLocalStorage, handleDeleteSelected } = useLocalStorageContext();
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -158,9 +158,10 @@ export default function Sidebar({
         </div>
         <label htmlFor="savedata"></label>
         <select
-          className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
+          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${getIsDisabledData ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
+          disabled={getIsDisabledData}
         >
           <option className="text-start" value="">
             Save Data
@@ -188,6 +189,7 @@ export default function Sidebar({
           type="button"
           text="delete"
           clicked={getIsDisabledData}
+          onClick={handleDeleteSelected}
         />
         <Button
           id="delete-all"
