@@ -1,18 +1,26 @@
 const updateSelectBox = (data) => {
-  const selectElement = document.getElementById("savedata");
+  const selectElement = document.getElementById("saveData");
   if (!selectElement) return;
 
-  // Clear existing options
+  // 選択タグの表示を最初に初期化する
   selectElement.innerHTML = `
-    <option selected disabled class="text-start" value="">Save Data</option>
+    <option className="text-start" value="">Save Data</option>
   `;
 
-  data.forEach((entry) => {
-    const option = document.createElement("option");
-    option.value = entry.id;
-    option.textContent = `${entry.timestamp} - Data ${entry.id}`;
-    selectElement.appendChild(option);
-  });
+  if (data.length === 0) {
+    const emptyOption = document.createElement("option");
+    emptyOption.value = "";
+    emptyOption.innerText = "empty save data";
+    emptyOption.disabled = true;
+    selectElement.appendChild(emptyOption);
+  } else {
+    data.forEach((entry) => {
+      const option = document.createElement("option");
+      option.value = entry.id;
+      option.textContent = `${entry.timestamp} - Data ${entry.id}`;
+      selectElement.appendChild(option);
+    });
+  }
 };
 
 export default updateSelectBox;

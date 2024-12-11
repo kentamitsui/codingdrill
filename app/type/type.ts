@@ -37,6 +37,8 @@ export interface AppContextProps {
   setSelectedTopic: React.Dispatch<React.SetStateAction<string>>;
   selectedLanguagePreference: string;
   setSelectedLanguagePreference: React.Dispatch<React.SetStateAction<string>>;
+  reviewData: string[];
+  setReviewData: React.Dispatch<React.SetStateAction<never[]>>;
 }
 
 // 問題文を表示する際の型定義

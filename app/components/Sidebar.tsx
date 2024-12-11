@@ -2,7 +2,6 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import { useState } from "react";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 // import Image from "next/image";
@@ -23,6 +22,7 @@ export default function Sidebar({
     setSelectedTopic,
     selectedLanguagePreference,
     setSelectedLanguagePreference,
+    reviewData,
   } = useAppContext();
 
   // createProblem.tsに選択後の値を送信する
@@ -157,9 +157,16 @@ export default function Sidebar({
         <select
           className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
           name="data"
-          id="savedata"
+          id="saveData"
         >
-          <option value="">save data</option>
+          <option className="text-start" value="">
+            Save Data
+          </option>
+          {reviewData.map((entry, index) => (
+            <option key={`${entry.id}-${index}`} value={entry.id}>
+              {`${entry.timestamp} - Data ${entry.id}`}
+            </option>
+          ))}
         </select>
         <Button
           id="load"
