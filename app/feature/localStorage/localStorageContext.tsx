@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import updateSelectBox from "./updateSaveData";
 
 const LocalStorageContext = createContext(null);
@@ -8,9 +8,14 @@ export const useLocalStorageContext = () => {
 };
 
 export const LocalStorageProvider = ({ children }) => {
-  const [savedData, setSavedData] = useState(
-    JSON.parse(localStorage.getItem("reviewData") || "[]"),
-  );
+  const [savedData, setSavedData] = useState([]);
+
+  useEffect(() => {
+    const getLocalStorageData = JSON.parse(
+      localStorage.getItem("reviewData") || "[]",
+    );
+    setSavedData(getLocalStorageData);
+  }, []);
 
   const updateLocalStorage = (data) => {
     localStorage.setItem("reviewData", JSON.stringify(data));
