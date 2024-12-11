@@ -22,6 +22,24 @@ export const LocalStorageProvider = ({ children }) => {
     setSavedData(data);
   };
 
+  const loadSavedData = (id, setFunctions) => {
+    const savedData = JSON.parse(localStorage.getItem("reviewData") || "[]");
+    const selectedEntry = savedData.find((entry) => entry.id === id);
+
+    if (!selectedEntry) {
+      alert("Data not found.");
+      return;
+    }
+
+    // 各セクションのセット関数にデータを渡して状態を更新
+    setFunctions.selectedDifficulty(selectedEntry.selectedDifficulty);
+    setFunctions.selectedDataType(selectedEntry.selectedDataType);
+    setFunctions.selectedTopic(selectedEntry.selectedTopic);
+    setFunctions.selectedLanguagePreference(selectedEntry.selectedLanguage);
+    setFunctions.displayLanguageData(selectedEntry.displayLanguageData);
+    setFunctions.problemData(JSON.parse(selectedEntry.problemText));
+  };
+
   const handleDeleteSelected = () => {
     const selectElement = document.getElementById(
       "saveData",
@@ -57,6 +75,7 @@ export const LocalStorageProvider = ({ children }) => {
       value={{
         savedData,
         updateLocalStorage,
+        loadSavedData,
         handleDeleteSelected,
         clearLocalStorage,
       }}
