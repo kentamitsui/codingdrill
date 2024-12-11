@@ -26,7 +26,30 @@ export default function Sidebar({
     setSelectedLanguagePreference,
     reviewData,
   } = useAppContext();
-  const { clearLocalStorage, handleDeleteSelected } = useLocalStorageContext();
+  const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
+    useLocalStorageContext();
+
+  // ローカルストレージのデータを各要素に反映する
+  const handleLoadData = () => {
+    const selectElement = document.getElementById(
+      "saveData",
+    ) as HTMLSelectElement;
+    const selectedId = parseInt(selectElement.value, 10);
+
+    if (!selectedId) {
+      alert("Please select a valid option to load.");
+      return;
+    }
+
+    loadSavedData(selectedId, {
+      selectedDifficulty: setSelectedDifficulty,
+      selectedDataType: setSelectedDataType,
+      selectedTopic: setSelectedTopic,
+      selectedLanguagePreference: setSelectedLanguagePreference,
+      displayLanguageData: setDisplayLanguageData,
+      problemData: setProblemData,
+    });
+  };
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -81,6 +104,7 @@ export default function Sidebar({
           disabled={getIsDisabledData}
           defaultSelected={"difficulty"}
           setSelected={setSelectedDifficulty}
+          savedLocalStorageValue={selectedDifficulty}
         />
         {/* <Image
           src={menuData.svgIcon.difficulty}
@@ -98,6 +122,7 @@ export default function Sidebar({
           disabled={getIsDisabledData}
           defaultSelected={"data type"}
           setSelected={setSelectedDataType}
+          savedLocalStorageValue={selectedDataType}
         />
         {/* <Image
           src={menuData.svgIcon.data}
@@ -115,6 +140,7 @@ export default function Sidebar({
           disabled={getIsDisabledData}
           defaultSelected={"topic"}
           setSelected={setSelectedTopic}
+          savedLocalStorageValue={selectedTopic}
         />
         {/* <Image
           src={menuData.svgIcon.topic}
@@ -132,6 +158,7 @@ export default function Sidebar({
           disabled={getIsDisabledData}
           defaultSelected={"translate"}
           setSelected={setSelectedLanguagePreference}
+          savedLocalStorageValue={selectedLanguagePreference}
         />
         {/* <Image
           src={menuData.svgIcon.translate}
@@ -183,6 +210,7 @@ export default function Sidebar({
           type="button"
           text="load"
           clicked={getIsDisabledData}
+          onClick={handleLoadData}
         />
         <Button
           id="delete"

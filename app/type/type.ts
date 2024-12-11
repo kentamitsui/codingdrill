@@ -8,6 +8,7 @@ export interface SelectProps {
   disabled: boolean;
   defaultSelected?: string; // デフォルトのラベルを可変にするためのプロップ
   setSelected: Dispatch<SetStateAction<string>>;
+  savedLocalStorageValue: string;
 }
 
 // ボタンに対する型定義
