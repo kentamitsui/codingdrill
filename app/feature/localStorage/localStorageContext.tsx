@@ -32,11 +32,10 @@ export const LocalStorageProvider = ({ children }) => {
     }
 
     // 各セクションのセット関数にデータを渡して状態を更新
-    setFunctions.selectedDifficulty(selectedEntry.selectedDifficulty);
-    setFunctions.selectedDataType(selectedEntry.selectedDataType);
-    setFunctions.selectedTopic(selectedEntry.selectedTopic);
-    setFunctions.selectedLanguagePreference(selectedEntry.selectedLanguage);
-    setFunctions.displayLanguageData(selectedEntry.displayLanguageData);
+    setFunctions.difficulty(selectedEntry.difficulty);
+    setFunctions.dataType(selectedEntry.dataType);
+    setFunctions.topic(selectedEntry.topic);
+    setFunctions.language(selectedEntry.language);
     setFunctions.problemData(JSON.parse(selectedEntry.problemText));
   };
 

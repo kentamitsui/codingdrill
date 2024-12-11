@@ -18,12 +18,11 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
 export default function InputSection({
   problemData,
   setReviewData,
-  displayLanguageData,
+  language,
   setIsDisabledData,
   getIsDisabledData,
 }: InputSectionProps) {
-  const { selectedDifficulty, selectedDataType, selectedTopic } =
-    useAppContext();
+  const { difficulty, dataType, topic } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
   useEffect(() => {
@@ -47,25 +46,25 @@ export default function InputSection({
     };
   }, []);
 
-  const [selectedFontSize, setSelectedFontSize] = useState("14");
-  const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-  const [selectedTheme, setSelectedTheme] = useState("vs");
+  const [fontSize, setFontSize] = useState("14");
+  const [editorLanguage, setEditorLanguage] = useState("javascript");
+  const [editorTheme, setEditorTheme] = useState("vs");
   const editorRef = useRef<any>(null);
 
   const handleFontSizeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setSelectedFontSize(event.target.value);
+    setFontSize(event.target.value);
   };
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setSelectedLanguage(event.target.value);
+    setEditorLanguage(event.target.value);
   };
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTheme(event.target.value);
+    setEditorTheme(event.target.value);
   };
 
   // クリップボードにコピーする関数
@@ -89,7 +88,7 @@ export default function InputSection({
   // console.log(
   //   `problem data: ${problemData}\n\n`,
   //   `setReviewData: ${setReviewData}\n\n`,
-  //   `display language data: ${displayLanguageData}\n\n`,
+  //   `display language data: ${language}\n\n`,
   // );
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -106,10 +105,10 @@ export default function InputSection({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectedLanguage,
+          editorLanguage,
           problemData,
           editorContent,
-          displayLanguageData,
+          language,
         }),
       });
 
@@ -122,11 +121,11 @@ export default function InputSection({
 
       // ローカルストレージにデータ(問題文・エディタの入力内容・総評)を保存する
       saveToLocalStorage({
-        selectedDifficulty,
-        selectedDataType,
-        selectedTopic,
-        selectedLanguage,
-        displayLanguageData,
+        difficulty,
+        dataType,
+        topic,
+        editorLanguage,
+        language,
         problemText: problemData,
         editorContent,
         evaluation: JsonText.generalEvaluation,
@@ -164,7 +163,7 @@ export default function InputSection({
         <select
           id="fontsize-select"
           className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={selectedFontSize}
+          value={fontSize}
           disabled={getIsDisabledData}
           onChange={handleFontSizeChange}
         >
@@ -183,7 +182,7 @@ export default function InputSection({
         <select
           id="theme-select"
           className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={selectedTheme}
+          value={editorTheme}
           disabled={getIsDisabledData}
           onChange={handleThemeChange}
         >
@@ -195,7 +194,7 @@ export default function InputSection({
         <select
           id="language-select"
           className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={selectedLanguage}
+          value={editorLanguage}
           disabled={getIsDisabledData}
           onChange={handleLanguageChange}
         >
@@ -226,9 +225,9 @@ export default function InputSection({
       <div className="flex flex-1">
         <MonacoEditor
           // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
-          selectedFontSize={Number(selectedFontSize)}
-          selectedLanguage={selectedLanguage}
-          selectedTheme={selectedTheme}
+          fontSize={Number(fontSize)}
+          editorLanguage={editorLanguage}
+          editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
           onMount={(editor) => {
             editorRef.current = editor;

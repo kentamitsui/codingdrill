@@ -56,7 +56,7 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       <InputSection
         setReviewData={setReviewContent}
         problemData={JSON.stringify(formattedProblemContent)}
-        displayLanguageData={displayLanguageData}
+        language={displayLanguageData}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
       />

@@ -30,14 +30,14 @@ export interface SidebarProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
-  selectedDifficulty: string;
-  setSelectedDifficulty: React.Dispatch<React.SetStateAction<string>>;
-  selectedDataType: string;
-  setSelectedDataType: React.Dispatch<React.SetStateAction<string>>;
-  selectedTopic: string;
-  setSelectedTopic: React.Dispatch<React.SetStateAction<string>>;
-  selectedLanguagePreference: string;
-  setSelectedLanguagePreference: React.Dispatch<React.SetStateAction<string>>;
+  difficulty: string;
+  setDifficulty: React.Dispatch<React.SetStateAction<string>>;
+  dataType: string;
+  setDataType: React.Dispatch<React.SetStateAction<string>>;
+  topic: string;
+  setTopic: React.Dispatch<React.SetStateAction<string>>;
+  language: string;
+  setLanguage: React.Dispatch<React.SetStateAction<string>>;
   reviewData: string[];
   setReviewData: React.Dispatch<React.SetStateAction<never[]>>;
 }
@@ -63,9 +63,9 @@ export interface PanelContextType {
 
 // Monaco Editorに対する型定義
 export interface MonacoEditorProps {
-  selectedFontSize: number;
-  selectedLanguage: string;
-  selectedTheme: string;
+  fontSize: number;
+  editorLanguage: string;
+  editorTheme: string;
   onMount?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
 }
 
@@ -73,7 +73,7 @@ export interface MonacoEditorProps {
 export interface InputSectionProps {
   problemData: string | null;
   setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
-  displayLanguageData: string | null;
+  language: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
 }
