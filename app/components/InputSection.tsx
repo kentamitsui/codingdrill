@@ -15,12 +15,6 @@ import updateSelectBox from "../feature/localStorage/updateSaveData";
     5.データを各要素に配置する */
 }
 
-const synchronizeWithLocalStorage = () => {
-  // ローカルストレージの内容を取得
-  const savedData = JSON.parse(localStorage.getItem("reviewData")) || [];
-  updateSelectBox(savedData);
-};
-
 export default function InputSection({
   problemData,
   setReviewData,
@@ -50,11 +44,6 @@ export default function InputSection({
       window.removeEventListener("storage", handleStorageChange);
     };
   }, []);
-
-  const clearLocalStorage = () => {
-    localStorage.clear();
-    updateSelectBox([]); // 手動でUIを更新
-  };
 
   const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");

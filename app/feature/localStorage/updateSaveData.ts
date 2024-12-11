@@ -10,14 +10,14 @@ const updateSelectBox = (data) => {
   if (data.length === 0) {
     const emptyOption = document.createElement("option");
     emptyOption.value = "";
-    emptyOption.innerText = "empty save data";
+    emptyOption.innerText = "no saved data";
     emptyOption.disabled = true;
     selectElement.appendChild(emptyOption);
   } else {
     data.forEach((entry) => {
       const option = document.createElement("option");
       option.value = entry.id;
-      option.textContent = `${entry.timestamp} - Data ${entry.id}`;
+      option.textContent = `Data ${entry.id}: ${entry.timestamp}`;
       selectElement.appendChild(option);
     });
   }
