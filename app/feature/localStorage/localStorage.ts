@@ -2,19 +2,22 @@ import updateSelectBox from "./updateSaveData";
 
 const saveToLocalStorage = (data) => {
   const savedData = JSON.parse(localStorage.getItem("reviewData")) || [];
-  const timestamp = new Date().toLocaleString(); // Get the current date and time
+  const timestamp = new Date().toLocaleString();
 
   const newEntry = {
-    id: savedData.length + 1, // Assign consecutive IDs
+    id: savedData.length + 1, // idに連番を振る
     timestamp,
     ...data,
   };
 
-  // Save the updated data to local storage
+  // 100個以上のデータは、古い日付から削除する
+  if (savedData.length >= 100) savedData.shift();
+
+  // ローカルストレージにデータを保存
   savedData.push(newEntry);
   localStorage.setItem("reviewData", JSON.stringify(savedData));
 
-  // Update the select box with the new entry
+  // 選択タグを最新の状態に更新
   updateSelectBox(savedData);
 };
 

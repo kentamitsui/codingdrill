@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { AppContextProps } from "@/app/type/type";
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -11,6 +11,12 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [selectedTopic, setSelectedTopic] = useState<string>("");
   const [selectedLanguagePreference, setSelectedLanguagePreference] =
     useState<string>("");
+  const [reviewData, setReviewData] = useState([]);
+
+  useEffect(() => {
+    const savedData = JSON.parse(localStorage.getItem("reviewData")) || [];
+    setReviewData(savedData);
+  }, []);
 
   return (
     <AppContext.Provider
@@ -23,6 +29,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setSelectedTopic,
         selectedLanguagePreference,
         setSelectedLanguagePreference,
+        reviewData,
+        setReviewData,
       }}
     >
       {children}

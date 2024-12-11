@@ -1,9 +1,11 @@
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { InputSectionProps } from "../type/type";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "../feature/localStorage/AppContext";
+import updateSelectBox from "../feature/localStorage/updateSaveData";
+
 {
   /* InputSection.tsxでChatGPT-APIとの送受信を行う
     1.ProblemSection.tsxから問題文の文字列データを、InputSection.tsxへ渡す
@@ -12,6 +14,13 @@ import { useAppContext } from "../feature/localStorage/AppContext";
     4.リフトアップしたデータは、ReviewSection.tsxにリフトダウンする
     5.データを各要素に配置する */
 }
+
+const synchronizeWithLocalStorage = () => {
+  // ローカルストレージの内容を取得
+  const savedData = JSON.parse(localStorage.getItem("reviewData")) || [];
+  updateSelectBox(savedData);
+};
+
 export default function InputSection({
   problemData,
   setReviewData,
@@ -21,6 +30,32 @@ export default function InputSection({
 }: InputSectionProps) {
   const { selectedDifficulty, selectedDataType, selectedTopic } =
     useAppContext();
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === null || event.newValue === null) {
+        updateSelectBox([]);
+        return;
+      }
+
+      if (event.key === "reviewData") {
+        const savedData = JSON.parse(event.newValue || "[]");
+        updateSelectBox(savedData);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const clearLocalStorage = () => {
+    localStorage.clear();
+    updateSelectBox([]); // 手動でUIを更新
+  };
+
   const [selectedFontSize, setSelectedFontSize] = useState("14");
   const [selectedLanguage, setSelectedLanguage] = useState("javascript");
   const [selectedTheme, setSelectedTheme] = useState("vs");
@@ -60,11 +95,11 @@ export default function InputSection({
     }
   };
 
-  console.log(
-    `problem data: ${problemData}\n\n`,
-    `setReviewData: ${setReviewData}\n\n`,
-    `display language data: ${displayLanguageData}\n\n`,
-  );
+  // console.log(
+  //   `problem data: ${problemData}\n\n`,
+  //   `setReviewData: ${setReviewData}\n\n`,
+  //   `display language data: ${displayLanguageData}\n\n`,
+  // );
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
@@ -113,7 +148,8 @@ export default function InputSection({
       if (responseText) {
         setIsDisabledData(false);
       }
-      console.log(JsonText);
+
+      // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a review:", error);
       alert("Error occurred while creating the review.");
