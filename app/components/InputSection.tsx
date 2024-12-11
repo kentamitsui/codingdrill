@@ -5,7 +5,7 @@ import { InputSectionProps } from "../type/type";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
-
+import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 {
   /* InputSection.tsxでChatGPT-APIとの送受信を行う
     1.ProblemSection.tsxから問題文の文字列データを、InputSection.tsxへ渡す
@@ -24,16 +24,18 @@ export default function InputSection({
 }: InputSectionProps) {
   const { selectedDifficulty, selectedDataType, selectedTopic } =
     useAppContext();
+  const { savedData, updateLocalStorage } = useLocalStorageContext();
 
   useEffect(() => {
     const handleStorageChange = (event) => {
       if (event.key === null || event.newValue === null) {
         updateSelectBox([]);
+        updateLocalStorage();
         return;
       }
 
       if (event.key === "reviewData") {
-        const savedData = JSON.parse(event.newValue || "[]");
+        // const savedData = JSON.parse(event.newValue || "[]");
         updateSelectBox(savedData);
       }
     };

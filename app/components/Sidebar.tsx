@@ -4,6 +4,8 @@ import Options from "./Options";
 import Button from "./Button";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
+import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
+import updateSelectBox from "../feature/localStorage/updateSaveData";
 // import Image from "next/image";
 
 export default function Sidebar({
@@ -24,6 +26,7 @@ export default function Sidebar({
     setSelectedLanguagePreference,
     reviewData,
   } = useAppContext();
+  const { clearLocalStorage } = useLocalStorageContext();
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -191,6 +194,7 @@ export default function Sidebar({
           type="button"
           text="delete all"
           clicked={getIsDisabledData}
+          onClick={clearLocalStorage}
         />
       </div>
     </aside>
