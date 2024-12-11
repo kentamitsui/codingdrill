@@ -6,11 +6,10 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [selectedDifficulty, setSelectedDifficulty] = useState<string>("");
-  const [selectedDataType, setSelectedDataType] = useState<string>("");
-  const [selectedTopic, setSelectedTopic] = useState<string>("");
-  const [selectedLanguagePreference, setSelectedLanguagePreference] =
-    useState<string>("");
+  const [difficulty, setDifficulty] = useState<string>("");
+  const [dataType, setDataType] = useState<string>("");
+  const [topic, setTopic] = useState<string>("");
+  const [language, setLanguage] = useState<string>("");
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
@@ -21,14 +20,14 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AppContext.Provider
       value={{
-        selectedDifficulty,
-        setSelectedDifficulty,
-        selectedDataType,
-        setSelectedDataType,
-        selectedTopic,
-        setSelectedTopic,
-        selectedLanguagePreference,
-        setSelectedLanguagePreference,
+        difficulty,
+        setDifficulty,
+        dataType,
+        setDataType,
+        topic,
+        setTopic,
+        language,
+        setLanguage,
         reviewData,
         setReviewData,
       }}

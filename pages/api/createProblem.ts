@@ -16,12 +16,7 @@ export default async function handler(
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const {
-    selectedDifficulty,
-    selectedDataType,
-    selectedTopic,
-    selectedLanguagePreference,
-  } = req.body;
+  const { difficulty, dataType, topic, language } = req.body;
   const promptTemplate = process.env.PROMPT_CREATE;
 
   if (!promptTemplate) {
@@ -32,10 +27,10 @@ export default async function handler(
 
   // プロンプトの%で囲まれた文字列を、req.bodyのデータで置き換える
   const modifiedPrompt = promptTemplate
-    .replace("%difficulty%", selectedDifficulty)
-    .replace("%type%", selectedDataType)
-    .replace("%topic%", selectedTopic)
-    .replace("%display_language%", selectedLanguagePreference);
+    .replace("%difficulty%", difficulty)
+    .replace("%type%", dataType)
+    .replace("%topic%", topic)
+    .replace("%display_language%", language);
 
   console.log(modifiedPrompt);
 

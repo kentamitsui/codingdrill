@@ -5,7 +5,6 @@ import Button from "./Button";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import updateSelectBox from "../feature/localStorage/updateSaveData";
 // import Image from "next/image";
 
 export default function Sidebar({
@@ -16,14 +15,14 @@ export default function Sidebar({
 }: SidebarProps) {
   // createContextを使用して、InputSectionにデータを渡す
   const {
-    selectedDifficulty,
-    setSelectedDifficulty,
-    selectedDataType,
-    setSelectedDataType,
-    selectedTopic,
-    setSelectedTopic,
-    selectedLanguagePreference,
-    setSelectedLanguagePreference,
+    difficulty,
+    setDifficulty,
+    dataType,
+    setDataType,
+    topic,
+    setTopic,
+    language,
+    setLanguage,
     reviewData,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
@@ -42,11 +41,10 @@ export default function Sidebar({
     }
 
     loadSavedData(selectedId, {
-      selectedDifficulty: setSelectedDifficulty,
-      selectedDataType: setSelectedDataType,
-      selectedTopic: setSelectedTopic,
-      selectedLanguagePreference: setSelectedLanguagePreference,
-      displayLanguageData: setDisplayLanguageData,
+      difficulty: setDifficulty,
+      dataType: setDataType,
+      topic: setTopic,
+      language: setLanguage,
       problemData: setProblemData,
     });
   };
@@ -66,10 +64,10 @@ export default function Sidebar({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectedDifficulty,
-          selectedDataType,
-          selectedTopic,
-          selectedLanguagePreference,
+          difficulty,
+          dataType,
+          topic,
+          language,
         }),
       });
 
@@ -86,7 +84,7 @@ export default function Sidebar({
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
-      setDisplayLanguageData(selectedLanguagePreference);
+      setDisplayLanguageData(language);
       // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
@@ -103,8 +101,8 @@ export default function Sidebar({
           name={"difficulty"}
           disabled={getIsDisabledData}
           defaultSelected={"difficulty"}
-          setSelected={setSelectedDifficulty}
-          savedLocalStorageValue={selectedDifficulty}
+          setSelected={setDifficulty}
+          savedLocalStorageValue={difficulty}
         />
         {/* <Image
           src={menuData.svgIcon.difficulty}
@@ -121,8 +119,8 @@ export default function Sidebar({
           name={"type"}
           disabled={getIsDisabledData}
           defaultSelected={"data type"}
-          setSelected={setSelectedDataType}
-          savedLocalStorageValue={selectedDataType}
+          setSelected={setDataType}
+          savedLocalStorageValue={dataType}
         />
         {/* <Image
           src={menuData.svgIcon.data}
@@ -139,8 +137,8 @@ export default function Sidebar({
           name={"topic"}
           disabled={getIsDisabledData}
           defaultSelected={"topic"}
-          setSelected={setSelectedTopic}
-          savedLocalStorageValue={selectedTopic}
+          setSelected={setTopic}
+          savedLocalStorageValue={topic}
         />
         {/* <Image
           src={menuData.svgIcon.topic}
@@ -157,8 +155,8 @@ export default function Sidebar({
           name={"display-language"}
           disabled={getIsDisabledData}
           defaultSelected={"translate"}
-          setSelected={setSelectedLanguagePreference}
-          savedLocalStorageValue={selectedLanguagePreference}
+          setSelected={setLanguage}
+          savedLocalStorageValue={language}
         />
         {/* <Image
           src={menuData.svgIcon.translate}

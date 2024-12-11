@@ -5,9 +5,9 @@ import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { MonacoEditorProps } from "@/app/type/type";
 
 export default function MonacoEditor({
-  selectedFontSize,
-  selectedLanguage,
-  selectedTheme,
+  fontSize,
+  editorLanguage,
+  editorTheme,
   onMount,
 }: MonacoEditorProps) {
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
@@ -53,11 +53,11 @@ export default function MonacoEditor({
     <div ref={editorContainerRef} style={{ flex: 1, overflow: "hidden" }}>
       <Suspense>
         <Editor
-          language={selectedLanguage}
-          theme={selectedTheme}
+          language={editorLanguage}
+          theme={editorTheme}
           height={dimensions.height} // 計算した高さを適用
           width={dimensions.width} // 計算した幅を適用
-          options={{ fontSize: selectedFontSize }}
+          options={{ fontSize: fontSize }}
           // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
           onMount={(editor) => {
             if (onMount) {
