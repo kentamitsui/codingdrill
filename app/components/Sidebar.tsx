@@ -162,11 +162,17 @@ export default function Sidebar({
           <option className="text-start" value="">
             Save Data
           </option>
-          {reviewData.map((entry, index) => (
-            <option key={`${entry.id}-${index}`} value={entry.id}>
-              {`${entry.timestamp} - Data ${entry.id}`}
+          {reviewData.length === 0 ? (
+            <option value="" disabled={true}>
+              No saved data
             </option>
-          ))}
+          ) : (
+            reviewData.map((entry, index) => (
+              <option key={`${entry.id}-${index}`} value={entry.id}>
+                {`${entry.timestamp} - Data ${entry.id}`}
+              </option>
+            ))
+          )}
         </select>
         <Button
           id="load"
