@@ -22,6 +22,30 @@ export const LocalStorageProvider = ({ children }) => {
     setSavedData(data);
   };
 
+  const handleDeleteSelected = () => {
+    const selectElement = document.getElementById(
+      "saveData",
+    ) as HTMLSelectElement;
+    const selectedId = selectElement.value; // 選択されたオプションの ID を取得
+
+    if (!selectedId) {
+      alert("Please select a valid option to delete.");
+      return;
+    }
+
+    // ローカルストレージのデータを取得し、選択された項目を削除
+    const savedData = JSON.parse(localStorage.getItem("reviewData") || "[]");
+    const updatedData = savedData.filter(
+      (entry) => entry.id.toString() !== selectedId,
+    );
+
+    // ローカルストレージを更新
+    localStorage.setItem("reviewData", JSON.stringify(updatedData));
+
+    // 状態を更新して UI に反映
+    updateSelectBox(updatedData); // UI の選択肢を更新
+  };
+
   const clearLocalStorage = () => {
     localStorage.clear();
     setSavedData([]);
@@ -30,7 +54,12 @@ export const LocalStorageProvider = ({ children }) => {
 
   return (
     <LocalStorageContext.Provider
-      value={{ savedData, updateLocalStorage, clearLocalStorage }}
+      value={{
+        savedData,
+        updateLocalStorage,
+        handleDeleteSelected,
+        clearLocalStorage,
+      }}
     >
       {children}
     </LocalStorageContext.Provider>
