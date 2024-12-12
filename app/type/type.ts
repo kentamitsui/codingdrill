@@ -26,6 +26,7 @@ export interface SidebarProps {
   setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+  setEditorLanguage: Dispatch<SetStateAction<string>>;
   setEditorContent: Dispatch<SetStateAction<string>>;
 }
 
@@ -55,6 +56,7 @@ export interface SplitterProps {
   displayLanguageData: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+  editorLanguage: string | null;
   editorContent: string | null;
 }
 
@@ -78,6 +80,7 @@ export interface InputSectionProps {
   language: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+  localStorageEditorLanguage: string | null;
   editorContent: string | null;
 }
 

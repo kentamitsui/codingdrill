@@ -12,6 +12,7 @@ export default function Sidebar({
   setDisplayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  setEditorLanguage,
   setEditorContent,
 }: SidebarProps) {
   // createContextを使用して、InputSectionにデータを渡す
@@ -48,6 +49,7 @@ export default function Sidebar({
       topic: setTopic,
       language: setLanguage,
       problemData: setProblemData,
+      editorLanguage: setEditorLanguage,
       editorContent: setEditorContent,
     });
   };

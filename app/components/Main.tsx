@@ -13,7 +13,8 @@ export default function Main() {
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>("");
   // ProblemSection及びInputSectionでのChatGPT送受信時に、ボタンのdisabled属性を切り替える為の状態関数
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
-  // Sidebar.tsxからhandleLoadDataが実行された際、ローカルストレージに保存したeditorContentのデータを親コンポーネントであるMain.tsxにリフトアップし、useStateで管理しつつ各子コンポーネントへ渡す
+  // Sidebar.tsxからhandleLoadDataが実行された際、ローカルストレージに保存したeditorLanguage,editorContentのデータを親コンポーネントであるMain.tsxにリフトアップし、useStateで管理しつつ各子コンポーネントへ渡す
+  const [editorLanguage, setEditorLanguage] = useState("");
   const [editorContent, setEditorContent] = useState("");
 
   return (
@@ -24,6 +25,7 @@ export default function Main() {
           setDisplayLanguageData={setSelectedLanguage}
           setIsDisabledData={setIsDisabled}
           getIsDisabledData={isDisabled}
+          setEditorLanguage={setEditorLanguage}
           setEditorContent={setEditorContent}
         />
         <Split_Horizontal
@@ -31,6 +33,7 @@ export default function Main() {
           displayLanguageData={selectedLanguage}
           setIsDisabledData={setIsDisabled}
           getIsDisabledData={isDisabled}
+          editorLanguage={editorLanguage}
           editorContent={editorContent}
         />
       </div>

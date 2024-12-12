@@ -21,6 +21,7 @@ export default function InputSection({
   language,
   setIsDisabledData,
   getIsDisabledData,
+  localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
   editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
   const { difficulty, dataType, topic } = useAppContext();
@@ -67,6 +68,14 @@ export default function InputSection({
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
+
+  // Sidebar.tsxでhandleLoadDataが実行された際、
+  // editorLanguageのデータをエディタ入力部分に反映
+  useEffect(() => {
+    if (localStorageEditorLanguage) {
+      setEditorLanguage(localStorageEditorLanguage);
+    }
+  }, [localStorageEditorLanguage]);
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
