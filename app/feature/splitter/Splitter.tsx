@@ -13,6 +13,7 @@ const Split_Vertical: React.FC<SplitterProps> = ({
   displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  editorLanguage,
   editorContent,
 }) => {
   const { resetPanelSizes } = usePanelContext();
@@ -60,6 +61,7 @@ const Split_Vertical: React.FC<SplitterProps> = ({
         language={displayLanguageData}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
+        localStorageEditorLanguage={editorLanguage}
         editorContent={editorContent}
       />
       <ReviewSection
@@ -75,6 +77,7 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
   displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  editorLanguage,
   editorContent,
 }) => {
   const { resetPanelSizes } = usePanelContext();
@@ -115,6 +118,7 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
           displayLanguageData={displayLanguageData}
           setIsDisabledData={setIsDisabledData}
           getIsDisabledData={getIsDisabledData}
+          editorLanguage={editorLanguage}
           editorContent={editorContent}
         />
       </Split>
