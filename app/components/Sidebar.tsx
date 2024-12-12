@@ -14,6 +14,7 @@ export default function Sidebar({
   getIsDisabledData,
   setEditorLanguage,
   setEditorContent,
+  setEvaluation,
 }: SidebarProps) {
   // createContextを使用して、InputSectionにデータを渡す
   const {
@@ -51,6 +52,7 @@ export default function Sidebar({
       problemData: setProblemData,
       editorLanguage: setEditorLanguage,
       editorContent: setEditorContent,
+      evaluation: setEvaluation,
     });
   };
 
@@ -90,7 +92,6 @@ export default function Sidebar({
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
       setDisplayLanguageData(language);
-      // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
