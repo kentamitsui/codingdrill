@@ -21,6 +21,7 @@ export default function InputSection({
   language,
   setIsDisabledData,
   getIsDisabledData,
+  editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
   const { difficulty, dataType, topic } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
@@ -66,6 +67,14 @@ export default function InputSection({
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
+
+  // Sidebar.tsxでhandleLoadDataが実行された際、
+  // editorContentのデータをエディタ入力部分に反映
+  useEffect(() => {
+    if (editorRef.current && editorContent) {
+      editorRef.current.setValue(editorContent); // エディタを更新
+    }
+  }, [editorContent]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {

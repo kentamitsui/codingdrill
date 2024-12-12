@@ -23,13 +23,6 @@ export default async function handler(
     modified?.replace("%language%", editorLanguage) +
     editorContent;
 
-  console.log(
-    editorLanguage + "\n",
-    problemData + "\n",
-    editorContent + "\n",
-    language + "\n",
-  );
-
   if (!promptTemplate) {
     return res
       .status(400)
@@ -40,8 +33,6 @@ export default async function handler(
     promptTemplate +
     process.env.PROMPT_CHECK_1ST +
     process.env.PROMPT_CHECK?.replace("%display_language%", language);
-
-  // console.log(modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
@@ -55,7 +46,6 @@ export default async function handler(
         },
       ],
     });
-    // console.log(request);
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });
