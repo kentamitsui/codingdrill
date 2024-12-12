@@ -103,11 +103,6 @@ export default function InputSection({
     }
   };
 
-  // console.log(
-  //   `problem data: ${problemData}\n\n`,
-  //   `setReviewData: ${setReviewData}\n\n`,
-  //   `display language data: ${language}\n\n`,
-  // );
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
@@ -146,7 +141,7 @@ export default function InputSection({
         language,
         problemText: problemData,
         editorContent,
-        evaluation: JsonText.generalEvaluation,
+        evaluation: JsonText,
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
@@ -156,8 +151,6 @@ export default function InputSection({
       if (responseText) {
         setIsDisabledData(false);
       }
-
-      // console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a review:", error);
       alert("Error occurred while creating the review.");

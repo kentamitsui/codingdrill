@@ -14,8 +14,9 @@ export default function Main() {
   // ProblemSection及びInputSectionでのChatGPT送受信時に、ボタンのdisabled属性を切り替える為の状態関数
   const [isDisabled, setIsDisabled] = useState<boolean>(false);
   // Sidebar.tsxからhandleLoadDataが実行された際、ローカルストレージに保存したeditorLanguage,editorContentのデータを親コンポーネントであるMain.tsxにリフトアップし、useStateで管理しつつ各子コンポーネントへ渡す
-  const [editorLanguage, setEditorLanguage] = useState("");
-  const [editorContent, setEditorContent] = useState("");
+  const [editorLanguage, setEditorLanguage] = useState<string | null>("");
+  const [editorContent, setEditorContent] = useState<string | null>("");
+  const [evaluation, setEvaluation] = useState<string | null>("");
 
   return (
     <main className="my-2 flex-grow overflow-hidden">
@@ -27,6 +28,7 @@ export default function Main() {
           getIsDisabledData={isDisabled}
           setEditorLanguage={setEditorLanguage}
           setEditorContent={setEditorContent}
+          setEvaluation={setEvaluation}
         />
         <Split_Horizontal
           problemData={problemContent}
@@ -35,6 +37,7 @@ export default function Main() {
           getIsDisabledData={isDisabled}
           editorLanguage={editorLanguage}
           editorContent={editorContent}
+          evaluation={evaluation}
         />
       </div>
     </main>

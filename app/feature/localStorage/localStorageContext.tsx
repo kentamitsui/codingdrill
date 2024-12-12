@@ -39,6 +39,7 @@ export const LocalStorageProvider = ({ children }) => {
     setFunctions.problemData(JSON.parse(selectedEntry.problemText));
     setFunctions.editorLanguage(selectedEntry.editorLanguage);
     setFunctions.editorContent(selectedEntry.editorContent);
+    setFunctions.evaluation(selectedEntry.evaluation);
   };
 
   const handleDeleteSelected = () => {

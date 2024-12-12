@@ -26,8 +26,9 @@ export interface SidebarProps {
   setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  setEditorLanguage: Dispatch<SetStateAction<string>>;
-  setEditorContent: Dispatch<SetStateAction<string>>;
+  setEditorLanguage: Dispatch<SetStateAction<string | null>>;
+  setEditorContent: Dispatch<SetStateAction<string | null>>;
+  setEvaluation: Dispatch<SetStateAction<string | null>>;
 }
 
 // AppContextに対する型定義
@@ -46,7 +47,7 @@ export interface AppContextProps {
 
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
-  displayProblemData: string;
+  displayProblemData: string | null;
   getIsDisabledData: boolean;
 }
 
@@ -58,6 +59,7 @@ export interface SplitterProps {
   getIsDisabledData: boolean;
   editorLanguage: string | null;
   editorContent: string | null;
+  evaluation: ReviewResponse | null;
 }
 
 // PanelContextに対する型定義
