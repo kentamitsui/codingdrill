@@ -12,6 +12,7 @@ export default function Sidebar({
   setDisplayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  setEditorContent,
 }: SidebarProps) {
   // createContextを使用して、InputSectionにデータを渡す
   const {
@@ -40,12 +41,14 @@ export default function Sidebar({
       return;
     }
 
+    // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
     loadSavedData(selectedId, {
       difficulty: setDifficulty,
       dataType: setDataType,
       topic: setTopic,
       language: setLanguage,
       problemData: setProblemData,
+      editorContent: setEditorContent,
     });
   };
 

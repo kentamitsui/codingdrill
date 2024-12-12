@@ -26,6 +26,7 @@ export interface SidebarProps {
   setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+  setEditorContent: Dispatch<SetStateAction<string>>;
 }
 
 // AppContextに対する型定義
@@ -54,6 +55,7 @@ export interface SplitterProps {
   displayLanguageData: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+  editorContent: string | null;
 }
 
 // PanelContextに対する型定義
@@ -76,6 +78,7 @@ export interface InputSectionProps {
   language: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
+  editorContent: string | null;
 }
 
 // ReviewSectionに対する型定義
