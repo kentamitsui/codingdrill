@@ -5,6 +5,7 @@ import Button from "./Button";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
+import { useEffect } from "react";
 // import Image from "next/image";
 
 export default function Sidebar({
@@ -26,6 +27,7 @@ export default function Sidebar({
     selectedLanguage,
     setSelectedLanguage,
     reviewData,
+    setLoadedSelectedLanguage,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
@@ -47,7 +49,10 @@ export default function Sidebar({
       difficulty: setDifficulty,
       dataType: setDataType,
       topic: setTopic,
-      selectedLanguage: setSelectedLanguage,
+      selectedLanguage: (newLanguage: string) => {
+        setSelectedLanguage(newLanguage); // 選択された言語を設置する
+        setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
+      },
       problemContent: setProblemData,
       editorLanguage: setEditorLanguage,
       editorContent: setEditorContent,

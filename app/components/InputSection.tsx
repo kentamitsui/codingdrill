@@ -23,8 +23,16 @@ export default function InputSection({
   localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
   editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
-  const { difficulty, dataType, topic, selectedLanguage } = useAppContext();
+  const {
+    difficulty,
+    dataType,
+    topic,
+    selectedLanguage,
+    loadedSelectedLanguage,
+  } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
+
+  console.log(loadedSelectedLanguage);
 
   useEffect(() => {
     const handleStorageChange = (event) => {
