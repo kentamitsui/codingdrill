@@ -35,8 +35,8 @@ export const LocalStorageProvider = ({ children }) => {
     setFunctions.difficulty(selectedEntry.difficulty);
     setFunctions.dataType(selectedEntry.dataType);
     setFunctions.topic(selectedEntry.topic);
-    setFunctions.language(selectedEntry.language);
-    setFunctions.problemData(JSON.parse(selectedEntry.problemText));
+    setFunctions.selectedLanguage(selectedEntry.selectedLanguage);
+    setFunctions.problemContent(JSON.parse(selectedEntry.problemContent));
     setFunctions.editorLanguage(selectedEntry.editorLanguage);
     setFunctions.editorContent(selectedEntry.editorContent);
     setFunctions.evaluation(selectedEntry.evaluation);
