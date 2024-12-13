@@ -12,6 +12,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [topic, setTopic] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [reviewData, setReviewData] = useState([]);
+  const [formattedProblemContent, setFormattedProblemContent] =
+    useState<string>("");
   // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の翻訳言語)"の状態管理
   const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
     useState<string>("");
@@ -32,6 +34,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setTopic,
         selectedLanguage,
         setSelectedLanguage,
+        formattedProblemContent,
+        setFormattedProblemContent,
         reviewData,
         setReviewData,
         loadedSelectedLanguage,
