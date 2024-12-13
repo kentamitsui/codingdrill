@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DisplayProblemProps } from "../type/type";
+import { useAppContext } from "../feature/localStorage/AppContext";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC<DisplayProblemProps> = ({
   displayProblemData,
   getIsDisabledData,
 }) => {
+  const { setFormattedProblemContent } = useAppContext();
+
   // クリップボードに文字列をコピーする関数
-  const copyToClipboard = () => {
+  useEffect(() => {
     const description = displayProblemData
       ? `Description\n${displayProblemData.problemStatement}\n\n`
       : "";
@@ -26,6 +29,10 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
 
     const fullText = description + example1 + example2 + example3 + notes;
 
+    setFormattedProblemContent(fullText);
+  });
+
+  const copyToClipboard = () => {
     navigator.clipboard
       .writeText(fullText)
       .then(() => {

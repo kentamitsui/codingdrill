@@ -28,6 +28,7 @@ export default function InputSection({
     dataType,
     topic,
     selectedLanguage,
+    formattedProblemContent,
     // loadedSelectedLanguage,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
@@ -113,7 +114,6 @@ export default function InputSection({
   const handleCreateReview = async () => {
     setIsDisabledData(true);
     const editorContent = editorRef.current.getValue();
-
     try {
       // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       // setDisabled(true);
@@ -123,9 +123,10 @@ export default function InputSection({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          topic,
           selectedLanguage,
+          formattedProblemContent,
           editorLanguage,
-          problemData,
           editorContent,
         }),
       });

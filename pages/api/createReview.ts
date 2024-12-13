@@ -16,11 +16,16 @@ export default async function handler(
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const { selectedLanguage, problemData, editorLanguage, editorContent } =
-    req.body;
+  const {
+    topic,
+    selectedLanguage,
+    formattedProblemContent,
+    editorLanguage,
+    editorContent,
+  } = req.body;
   const modified = process.env.CODE;
   const promptTemplate =
-    problemData +
+    formattedProblemContent +
     modified?.replace("%language%", editorLanguage) +
     editorContent;
 
@@ -32,8 +37,13 @@ export default async function handler(
 
   const modifiedPrompt =
     promptTemplate +
-    process.env.PROMPT_CHECK_1ST +
+    process.env.PROMPT_CHECK_1ST?.replace("%language%", editorLanguage).replace(
+      "%topic%",
+      topic,
+    ) +
     process.env.PROMPT_CHECK?.replace("%display_language%", selectedLanguage);
+
+  // console.log(modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
