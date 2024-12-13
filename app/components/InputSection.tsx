@@ -28,11 +28,9 @@ export default function InputSection({
     dataType,
     topic,
     selectedLanguage,
-    loadedSelectedLanguage,
+    // loadedSelectedLanguage,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
-
-  console.log(loadedSelectedLanguage);
 
   useEffect(() => {
     const handleStorageChange = (event) => {
