@@ -9,7 +9,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
-  const [language, setLanguage] = useState<string>("");
+  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [reviewData, setReviewData] = useState([]);
 
   useEffect(() => {
@@ -26,8 +26,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setDataType,
         topic,
         setTopic,
-        language,
-        setLanguage,
+        selectedLanguage,
+        setSelectedLanguage,
         reviewData,
         setReviewData,
       }}

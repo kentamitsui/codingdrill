@@ -5,12 +5,10 @@ import Button from "./Button";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import { useEffect } from "react";
 // import Image from "next/image";
 
 export default function Sidebar({
   setProblemData,
-  setDisplayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
   setEditorLanguage,
@@ -25,8 +23,8 @@ export default function Sidebar({
     setDataType,
     topic,
     setTopic,
-    language,
-    setLanguage,
+    selectedLanguage,
+    setSelectedLanguage,
     reviewData,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
@@ -49,7 +47,7 @@ export default function Sidebar({
       difficulty: setDifficulty,
       dataType: setDataType,
       topic: setTopic,
-      selectedLanguage: setLanguage,
+      selectedLanguage: setSelectedLanguage,
       problemContent: setProblemData,
       editorLanguage: setEditorLanguage,
       editorContent: setEditorContent,
@@ -75,7 +73,7 @@ export default function Sidebar({
           difficulty,
           dataType,
           topic,
-          language,
+          selectedLanguage,
         }),
       });
 
@@ -92,7 +90,7 @@ export default function Sidebar({
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
-      setDisplayLanguageData(language);
+      setSelectedLanguage(selectedLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
@@ -162,8 +160,8 @@ export default function Sidebar({
           name={"display-language"}
           disabled={getIsDisabledData}
           defaultSelected={"translate"}
-          setSelected={setLanguage}
-          savedLocalStorageValue={language}
+          setSelected={setSelectedLanguage}
+          savedLocalStorageValue={selectedLanguage}
         />
         {/* <Image
           src={menuData.svgIcon.translate}
