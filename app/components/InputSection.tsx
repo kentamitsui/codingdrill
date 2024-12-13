@@ -18,7 +18,7 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
 export default function InputSection({
   problemData,
   setReviewData,
-  language,
+  selectedLanguage,
   setIsDisabledData,
   getIsDisabledData,
   localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
@@ -118,10 +118,10 @@ export default function InputSection({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          selectedLanguage,
           editorLanguage,
           problemData,
           editorContent,
-          language,
         }),
       });
 
@@ -137,9 +137,9 @@ export default function InputSection({
         difficulty,
         dataType,
         topic,
+        selectedLanguage,
         editorLanguage,
-        language,
-        problemText: problemData,
+        problemContent: problemData,
         editorContent,
         evaluation: JsonText,
       });
