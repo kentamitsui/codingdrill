@@ -65,7 +65,7 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       <InputSection
         setReviewData={setReviewContent}
         problemData={JSON.stringify(formattedProblemContent)}
-        language={displayLanguageData}
+        selectedLanguage={displayLanguageData}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
         localStorageEditorLanguage={editorLanguage}

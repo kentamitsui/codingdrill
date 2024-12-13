@@ -5,6 +5,7 @@ import Button from "./Button";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
+import { useEffect } from "react";
 // import Image from "next/image";
 
 export default function Sidebar({

@@ -79,7 +79,7 @@ export interface MonacoEditorProps {
 export interface InputSectionProps {
   problemData: string | null;
   setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
-  language: string | null;
+  selectedLanguage: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
   localStorageEditorLanguage: string | null;
