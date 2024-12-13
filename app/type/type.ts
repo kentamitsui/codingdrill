@@ -23,7 +23,6 @@ export interface ButtonProps {
 // サイドバーに対する型定義
 export interface SidebarProps {
   setProblemData: Dispatch<SetStateAction<string | null>>;
-  setDisplayLanguageData: Dispatch<SetStateAction<string | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
   setEditorLanguage: Dispatch<SetStateAction<string | null>>;
@@ -39,8 +38,8 @@ export interface AppContextProps {
   setDataType: React.Dispatch<React.SetStateAction<string>>;
   topic: string;
   setTopic: React.Dispatch<React.SetStateAction<string>>;
-  language: string;
-  setLanguage: React.Dispatch<React.SetStateAction<string>>;
+  selectedLanguage: string;
+  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   reviewData: string[];
   setReviewData: React.Dispatch<React.SetStateAction<never[]>>;
 }
@@ -54,7 +53,6 @@ export interface DisplayProblemProps {
 // Splitterに対する型定義
 export interface SplitterProps {
   problemData: string | null;
-  displayLanguageData: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
   editorLanguage: string | null;
@@ -79,7 +77,6 @@ export interface MonacoEditorProps {
 export interface InputSectionProps {
   problemData: string | null;
   setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
-  selectedLanguage: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
   localStorageEditorLanguage: string | null;

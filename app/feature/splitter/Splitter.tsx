@@ -10,7 +10,6 @@ import { usePanelContext } from "./PanelContext";
 
 const Split_Vertical: React.FC<SplitterProps> = ({
   problemData,
-  displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
   editorLanguage,
@@ -65,7 +64,6 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       <InputSection
         setReviewData={setReviewContent}
         problemData={JSON.stringify(formattedProblemContent)}
-        selectedLanguage={displayLanguageData}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
         localStorageEditorLanguage={editorLanguage}
@@ -81,7 +79,6 @@ const Split_Vertical: React.FC<SplitterProps> = ({
 
 const Split_Horizontal: React.FC<SplitterProps> = ({
   problemData,
-  displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
   editorLanguage,
@@ -123,7 +120,6 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
         />
         <Split_Vertical
           problemData={problemData}
-          displayLanguageData={displayLanguageData}
           setIsDisabledData={setIsDisabledData}
           getIsDisabledData={getIsDisabledData}
           editorLanguage={editorLanguage}

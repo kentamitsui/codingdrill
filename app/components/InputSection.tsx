@@ -18,13 +18,12 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
 export default function InputSection({
   problemData,
   setReviewData,
-  selectedLanguage,
   setIsDisabledData,
   getIsDisabledData,
   localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
   editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
-  const { difficulty, dataType, topic } = useAppContext();
+  const { difficulty, dataType, topic, selectedLanguage } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
   useEffect(() => {
