@@ -138,8 +138,8 @@ export default function InputSection({
         dataType,
         topic,
         selectedLanguage,
-        editorLanguage,
         problemContent: problemData,
+        editorLanguage,
         editorContent,
         evaluation: JsonText,
       });
