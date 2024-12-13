@@ -59,7 +59,7 @@ export interface SplitterProps {
   getIsDisabledData: boolean;
   editorLanguage: string | null;
   editorContent: string | null;
-  evaluation: ReviewResponse | null;
+  evaluation: string | null;
 }
 
 // PanelContextに対する型定義
