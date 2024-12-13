@@ -1,7 +1,7 @@
 import updateSelectBox from "./updateSaveData";
 
 const saveToLocalStorage = (data) => {
-  const savedData = JSON.parse(localStorage.getItem("reviewData")) || [];
+  const savedData = JSON.parse(localStorage.getItem("savedData")) || [];
   const timestamp = new Date().toLocaleString();
 
   const newEntry = {
@@ -15,7 +15,7 @@ const saveToLocalStorage = (data) => {
 
   // ローカルストレージにデータを保存
   savedData.push(newEntry);
-  localStorage.setItem("reviewData", JSON.stringify(savedData));
+  localStorage.setItem("savedData", JSON.stringify(savedData));
 
   // 選択タグを最新の状態に更新
   updateSelectBox(savedData);

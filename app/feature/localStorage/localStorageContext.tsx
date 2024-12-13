@@ -12,18 +12,18 @@ export const LocalStorageProvider = ({ children }) => {
 
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
-      localStorage.getItem("reviewData") || "[]",
+      localStorage.getItem("savedData") || "[]",
     );
     setSavedData(getLocalStorageData);
   }, []);
 
   const updateLocalStorage = (data) => {
-    localStorage.setItem("reviewData", JSON.stringify(data));
+    localStorage.setItem("savedData", JSON.stringify(data));
     setSavedData(data);
   };
 
   const loadSavedData = (id, setFunctions) => {
-    const savedData = JSON.parse(localStorage.getItem("reviewData") || "[]");
+    const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
     const selectedEntry = savedData.find((entry) => entry.id === id);
 
     if (!selectedEntry) {
@@ -54,13 +54,13 @@ export const LocalStorageProvider = ({ children }) => {
     }
 
     // ローカルストレージのデータを取得し、選択された項目を削除
-    const savedData = JSON.parse(localStorage.getItem("reviewData") || "[]");
+    const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
     const updatedData = savedData.filter(
       (entry) => entry.id.toString() !== selectedId,
     );
 
     // ローカルストレージを更新
-    localStorage.setItem("reviewData", JSON.stringify(updatedData));
+    localStorage.setItem("savedData", JSON.stringify(updatedData));
 
     // 状態を更新して UI に反映
     updateSelectBox(updatedData); // UI の選択肢を更新

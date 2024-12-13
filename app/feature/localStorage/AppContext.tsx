@@ -6,14 +6,18 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  // Sidebar.tsxで選択された値の状態管理
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
   const [reviewData, setReviewData] = useState([]);
+  // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の翻訳言語)"の状態管理
+  const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
+    useState<string>("");
 
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("reviewData")) || [];
+    const savedData = JSON.parse(localStorage.getItem("savedData")) || [];
     setReviewData(savedData);
   }, []);
 
@@ -30,6 +34,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setSelectedLanguage,
         reviewData,
         setReviewData,
+        loadedSelectedLanguage,
+        setLoadedSelectedLanguage,
       }}
     >
       {children}

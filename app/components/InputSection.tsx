@@ -34,7 +34,7 @@ export default function InputSection({
         return;
       }
 
-      if (event.key === "reviewData") {
+      if (event.key === "savedData") {
         // const savedData = JSON.parse(event.newValue || "[]");
         updateSelectBox(savedData);
       }
