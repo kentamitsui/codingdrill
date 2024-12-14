@@ -173,11 +173,14 @@ export default function InputSection({
         <div
           id="codeInputArea-title"
           className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
-          // onClick={copyToClipboard}
         >
           Code
         </div>
-        <details className="relative ml-auto rounded-tr-md">
+        <details
+          className="relative ml-auto rounded-tr-md"
+          onMouseEnter={(event) => (event.currentTarget.open = true)}
+          onMouseLeave={(event) => (event.currentTarget.open = false)}
+        >
           <summary
             className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
               getIsDisabledData
@@ -188,7 +191,7 @@ export default function InputSection({
             Options
           </summary>
           <div
-            className={`absolute right-0 z-10 mt-[2px] flex w-[150px] flex-col gap-2 bg-gray-200 p-2 shadow-lg dark:bg-[#0d1117] ${
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
               getIsDisabledData ? "pointer-events-none opacity-50" : ""
             }`}
           >
@@ -206,7 +209,6 @@ export default function InputSection({
                 </option>
               ))}
             </select>
-
             {/* Theme Select */}
             <select
               id="theme-select"
@@ -220,7 +222,6 @@ export default function InputSection({
               <option value="hc-light">hc-light</option>
               <option value="hc-black">hc-black</option>
             </select>
-
             {/* Language Select */}
             <select
               id="language-select"
@@ -237,7 +238,6 @@ export default function InputSection({
                 ),
               )}
             </select>
-
             {/* Buttons */}
             <button
               id="button-Copy-CodeInputArea"
