@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DisplayProblemProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 
@@ -8,6 +8,8 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
   getIsDisabledData,
 }) => {
   const { setFormattedProblemContent } = useAppContext();
+
+  const [problemContent, setProblemContent] = useState("");
 
   // クリップボードに文字列をコピーする関数
   useEffect(() => {
@@ -27,14 +29,16 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
       ? `Notes\nTime Complexity: ${displayProblemData.notes.timeComplexity}\nSpace Complexity: ${displayProblemData.notes.spaceComplexity}\nEdge Cases: ${displayProblemData.notes.edgeCases}\nOther Consideration: ${displayProblemData.notes.otherConsiderations}`
       : "";
 
-    const fullText = description + example1 + example2 + example3 + notes;
+    const formattedProblemContent =
+      description + example1 + example2 + example3 + notes;
 
-    setFormattedProblemContent(fullText);
+    setProblemContent(formattedProblemContent);
+    setFormattedProblemContent(formattedProblemContent);
   });
 
   const copyToClipboard = () => {
     navigator.clipboard
-      .writeText(fullText)
+      .writeText(problemContent)
       .then(() => {
         alert("Copied to clipboard!");
       })
