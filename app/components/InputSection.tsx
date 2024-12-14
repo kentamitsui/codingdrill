@@ -173,11 +173,91 @@ export default function InputSection({
         <div
           id="codeInputArea-title"
           className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
-          onClick={copyToClipboard}
+          // onClick={copyToClipboard}
         >
           Code
         </div>
-        <select
+        <details className="relative ml-auto rounded-tr-md">
+          <summary
+            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+              getIsDisabledData
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+          >
+            Options
+          </summary>
+          <div
+            className={`absolute right-0 z-10 mt-[2px] flex w-[150px] flex-col gap-2 bg-gray-200 p-2 shadow-lg dark:bg-[#0d1117] ${
+              getIsDisabledData ? "pointer-events-none opacity-50" : ""
+            }`}
+          >
+            {/* Font Size Select */}
+            <select
+              id="fontsize-select"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              value={fontSize}
+              disabled={getIsDisabledData}
+              onChange={handleFontSizeChange}
+            >
+              {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+
+            {/* Theme Select */}
+            <select
+              id="theme-select"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              value={editorTheme}
+              disabled={getIsDisabledData}
+              onChange={handleThemeChange}
+            >
+              <option value="vs">vs</option>
+              <option value="vs-dark">vs-dark</option>
+              <option value="hc-light">hc-light</option>
+              <option value="hc-black">hc-black</option>
+            </select>
+
+            {/* Language Select */}
+            <select
+              id="language-select"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              value={editorLanguage}
+              disabled={getIsDisabledData}
+              onChange={handleLanguageChange}
+            >
+              {Object.entries(config.menuLists.languages).map(
+                ([key, label]) => (
+                  <option key={key} value={key}>
+                    {label}
+                  </option>
+                ),
+              )}
+            </select>
+
+            {/* Buttons */}
+            <button
+              id="button-Copy-CodeInputArea"
+              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+              disabled={getIsDisabledData}
+              onClick={copyToClipboard}
+            >
+              Copy
+            </button>
+            <button
+              id="submit"
+              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+              disabled={getIsDisabledData}
+              onClick={handleCreateReview}
+            >
+              Submit
+            </button>
+          </div>
+        </details>
+        {/* <select
           id="fontsize-select"
           className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           value={fontSize}
@@ -237,7 +317,7 @@ export default function InputSection({
           onClick={handleCreateReview}
         >
           submit
-        </button>
+        </button> */}
       </div>
       <div className="flex flex-1">
         <MonacoEditor
