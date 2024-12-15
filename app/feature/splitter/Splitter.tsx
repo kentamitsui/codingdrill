@@ -10,9 +10,11 @@ import { usePanelContext } from "./PanelContext";
 
 const Split_Vertical: React.FC<SplitterProps> = ({
   problemData,
-  displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  editorLanguage,
+  editorContent,
+  evaluation,
 }) => {
   const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
@@ -29,6 +31,12 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       setFormattedProblemContent(problemData); // 型が一致
     }
   }, [problemData]);
+
+  useEffect(() => {
+    if (evaluation) {
+      setReviewContent(evaluation);
+    }
+  }, [evaluation]);
 
   const handleDragEnd = (newSizes: number[]) => {
     // 仕切り線をドラッグ&ドロップした時のみ、リサイズイベントが発火する
@@ -56,9 +64,10 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       <InputSection
         setReviewData={setReviewContent}
         problemData={JSON.stringify(formattedProblemContent)}
-        displayLanguageData={displayLanguageData}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
+        localStorageEditorLanguage={editorLanguage}
+        editorContent={editorContent}
       />
       <ReviewSection
         setResponseReviewData={reviewContent}
@@ -70,9 +79,11 @@ const Split_Vertical: React.FC<SplitterProps> = ({
 
 const Split_Horizontal: React.FC<SplitterProps> = ({
   problemData,
-  displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  editorLanguage,
+  editorContent,
+  evaluation,
 }) => {
   const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
@@ -104,14 +115,16 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
         {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
           Split_Verticalには、問題文のデータを渡す*/}
         <ProblemSection
-          displayProblemData={JSON.stringify(problemData)}
+          displayProblemData={problemData}
           getIsDisabledData={getIsDisabledData}
         />
         <Split_Vertical
           problemData={problemData}
-          displayLanguageData={displayLanguageData}
           setIsDisabledData={setIsDisabledData}
           getIsDisabledData={getIsDisabledData}
+          editorLanguage={editorLanguage}
+          editorContent={editorContent}
+          evaluation={evaluation}
         />
       </Split>
     </Suspense>

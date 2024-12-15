@@ -1,35 +1,44 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DisplayProblemProps } from "../type/type";
+import { useAppContext } from "../feature/localStorage/AppContext";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC<DisplayProblemProps> = ({
   displayProblemData,
   getIsDisabledData,
 }) => {
-  const parsedData = JSON.parse(displayProblemData);
-  // console.log(displayProblemData);
+  const { setFormattedProblemContent } = useAppContext();
+
+  const [problemContent, setProblemContent] = useState("");
+
   // クリップボードに文字列をコピーする関数
+  useEffect(() => {
+    const description = displayProblemData
+      ? `Description\n${displayProblemData.problemStatement}\n\n`
+      : "";
+    const example1 = displayProblemData
+      ? `Example 1\nInput: ${displayProblemData.example1.input}\nOutput: ${displayProblemData.example1.output}\nExplanation: ${displayProblemData.example1.explanation}\n\n`
+      : "";
+    const example2 = displayProblemData
+      ? `Example 2\nInput: ${displayProblemData.example2.input}\nOutput: ${displayProblemData.example2.output}\nExplanation: ${displayProblemData.example2.explanation}\n\n`
+      : "";
+    const example3 = displayProblemData
+      ? `Example 3\nInput: ${displayProblemData.example3.input}\nOutput: ${displayProblemData.example3.output}\nExplanation: ${displayProblemData.example3.explanation}\n\n`
+      : "";
+    const notes = displayProblemData
+      ? `Notes\nTime Complexity: ${displayProblemData.notes.timeComplexity}\nSpace Complexity: ${displayProblemData.notes.spaceComplexity}\nEdge Cases: ${displayProblemData.notes.edgeCases}\nOther Consideration: ${displayProblemData.notes.otherConsiderations}`
+      : "";
+
+    const formattedProblemContent =
+      description + example1 + example2 + example3 + notes;
+
+    setProblemContent(formattedProblemContent);
+    setFormattedProblemContent(formattedProblemContent);
+  });
+
   const copyToClipboard = () => {
-    const description = parsedData
-      ? `Description\n${parsedData.problemStatement}\n\n`
-      : "";
-    const example1 = parsedData
-      ? `Example 1\nInput: ${parsedData.example1.input}\nOutput: ${parsedData.example1.output}\nExplanation: ${parsedData.example1.explanation}\n\n`
-      : "";
-    const example2 = parsedData
-      ? `Example 2\nInput: ${parsedData.example2.input}\nOutput: ${parsedData.example2.output}\nExplanation: ${parsedData.example2.explanation}\n\n`
-      : "";
-    const example3 = parsedData
-      ? `Example 3\nInput: ${parsedData.example3.input}\nOutput: ${parsedData.example3.output}\nExplanation: ${parsedData.example3.explanation}\n\n`
-      : "";
-    const notes = parsedData
-      ? `Notes\nTime Complexity: ${parsedData.notes.timeComplexity}\nSpace Complexity: ${parsedData.notes.spaceComplexity}\nEdge Cases: ${parsedData.notes.edgeCases}\nOther Consideration: ${parsedData.notes.otherConsiderations}`
-      : "";
-
-    const fullText = description + example1 + example2 + example3 + notes;
-
     navigator.clipboard
-      .writeText(fullText)
+      .writeText(problemContent)
       .then(() => {
         alert("Copied to clipboard!");
       })
@@ -58,71 +67,88 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
       </div>
       <div className="p-[15px_30px] text-[16px] leading-normal tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
         <div className="whitespace-break-spaces text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Description\n" + parsedData?.problemStatement : null}
+          {displayProblemData
+            ? "Description\n" + displayProblemData?.problemStatement
+            : null}
         </div>
         <div hidden></div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Example 1" : null}
+          {displayProblemData ? "Example 1" : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Input: " + parsedData?.example1.input : null}
+          {displayProblemData
+            ? "Input: " + displayProblemData?.example1.input
+            : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Output: " + parsedData?.example1.output : null}
+          {displayProblemData
+            ? "Output: " + displayProblemData?.example1.output
+            : null}
         </div>
         <div className="font-light">
-          {parsedData
-            ? "Explanation: " + parsedData?.example1.explanation
+          {displayProblemData
+            ? "Explanation: " + displayProblemData?.example1.explanation
             : null}
         </div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Example 2" : null}
+          {displayProblemData ? "Example 2" : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Input: " + parsedData?.example2.input : null}
+          {displayProblemData
+            ? "Input: " + displayProblemData?.example2.input
+            : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Output: " + parsedData?.example2.output : null}
+          {displayProblemData
+            ? "Output: " + displayProblemData?.example2.output
+            : null}
         </div>
         <div className="font-light">
-          {parsedData
-            ? "Explanation: " + parsedData?.example2.explanation
+          {displayProblemData
+            ? "Explanation: " + displayProblemData?.example2.explanation
             : null}
         </div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Example 3" : null}
+          {displayProblemData ? "Example 3" : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Input: " + parsedData?.example3.input : null}
+          {displayProblemData
+            ? "Input: " + displayProblemData?.example3.input
+            : null}
         </div>
         <div className="font-light">
-          {parsedData ? "Output: " + parsedData?.example3.output : null}
+          {displayProblemData
+            ? "Output: " + displayProblemData?.example3.output
+            : null}
         </div>
         <div className="font-light">
-          {parsedData
-            ? "Explanation: " + parsedData?.example3.explanation
+          {displayProblemData
+            ? "Explanation: " + displayProblemData?.example3.explanation
             : null}
         </div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {parsedData ? "Notes" : null}
+          {displayProblemData ? "Notes" : null}
         </div>
         <div className="grid gap-[10px]">
           <div className="font-light">
-            {parsedData
-              ? "Time Complexity: " + parsedData?.notes.timeComplexity
+            {displayProblemData
+              ? "Time Complexity: " + displayProblemData?.notes.timeComplexity
               : null}
           </div>
           <div className="font-light">
-            {parsedData
-              ? "Space Complexity: " + parsedData?.notes.spaceComplexity
+            {displayProblemData
+              ? "Space Complexity: " + displayProblemData?.notes.spaceComplexity
               : null}
           </div>
           <div className="font-light">
-            {parsedData ? "Edge Cases: " + parsedData?.notes.edgeCases : null}
+            {displayProblemData
+              ? "Edge Cases: " + displayProblemData?.notes.edgeCases
+              : null}
           </div>
           <div className="font-light">
-            {parsedData
-              ? "Other Consideration: " + parsedData?.notes.otherConsiderations
+            {displayProblemData
+              ? "Other Consideration: " +
+                displayProblemData?.notes.otherConsiderations
               : null}
           </div>
         </div>

@@ -16,15 +16,18 @@ export default async function handler(
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const { selectedLanguage, problemData, editorContent, displayLanguageData } =
-    req.body;
+  const {
+    topic,
+    selectedLanguage,
+    formattedProblemContent,
+    editorLanguage,
+    editorContent,
+  } = req.body;
   const modified = process.env.CODE;
   const promptTemplate =
-    problemData +
-    modified?.replace("%language%", selectedLanguage) +
+    formattedProblemContent +
+    modified?.replace("%language%", editorLanguage) +
     editorContent;
-
-  // console.log(problemData);
 
   if (!promptTemplate) {
     return res
@@ -34,11 +37,11 @@ export default async function handler(
 
   const modifiedPrompt =
     promptTemplate +
-    process.env.PROMPT_CHECK_1ST +
-    process.env.PROMPT_CHECK?.replace(
-      "%display_language%",
-      displayLanguageData,
-    );
+    process.env.PROMPT_CHECK_1ST?.replace("%language%", editorLanguage).replace(
+      "%topic%",
+      topic,
+    ) +
+    process.env.PROMPT_CHECK?.replace("%display_language%", selectedLanguage);
 
   // console.log(modifiedPrompt);
 
@@ -54,7 +57,6 @@ export default async function handler(
         },
       ],
     });
-    // console.log(request);
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });

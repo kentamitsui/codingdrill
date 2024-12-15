@@ -1,7 +1,11 @@
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { InputSectionProps } from "../type/type";
+import saveToLocalStorage from "../feature/localStorage/localStorage";
+import { useAppContext } from "../feature/localStorage/AppContext";
+import updateSelectBox from "../feature/localStorage/updateSaveData";
+import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 {
   /* InputSection.tsxでChatGPT-APIとの送受信を行う
     1.ProblemSection.tsxから問題文の文字列データを、InputSection.tsxへ渡す
@@ -10,33 +14,82 @@ import { InputSectionProps } from "../type/type";
     4.リフトアップしたデータは、ReviewSection.tsxにリフトダウンする
     5.データを各要素に配置する */
 }
+
 export default function InputSection({
   problemData,
   setReviewData,
-  displayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
+  editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
-  const [selectedFontSize, setSelectedFontSize] = useState("14");
-  const [selectedLanguage, setSelectedLanguage] = useState("javascript");
-  const [selectedTheme, setSelectedTheme] = useState("vs");
+  const {
+    difficulty,
+    dataType,
+    topic,
+    selectedLanguage,
+    formattedProblemContent,
+    // loadedSelectedLanguage,
+  } = useAppContext();
+  const { savedData, updateLocalStorage } = useLocalStorageContext();
+
+  useEffect(() => {
+    const handleStorageChange = (event) => {
+      if (event.key === null || event.newValue === null) {
+        updateSelectBox([]);
+        updateLocalStorage();
+        return;
+      }
+
+      if (event.key === "savedData") {
+        // const savedData = JSON.parse(event.newValue || "[]");
+        updateSelectBox(savedData);
+      }
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, []);
+
+  const [fontSize, setFontSize] = useState("14");
+  const [editorLanguage, setEditorLanguage] = useState("javascript");
+  const [editorTheme, setEditorTheme] = useState("vs");
   const editorRef = useRef<any>(null);
 
   const handleFontSizeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setSelectedFontSize(event.target.value);
+    setFontSize(event.target.value);
   };
 
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
-    setSelectedLanguage(event.target.value);
+    setEditorLanguage(event.target.value);
   };
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedTheme(event.target.value);
+    setEditorTheme(event.target.value);
   };
+
+  // Sidebar.tsxでhandleLoadDataが実行された際、
+  // editorLanguageのデータをエディタ入力部分に反映
+  useEffect(() => {
+    if (localStorageEditorLanguage) {
+      setEditorLanguage(localStorageEditorLanguage);
+    }
+  }, [localStorageEditorLanguage]);
+
+  // Sidebar.tsxでhandleLoadDataが実行された際、
+  // editorContentのデータをエディタ入力部分に反映
+  useEffect(() => {
+    if (editorRef.current && editorContent) {
+      editorRef.current.setValue(editorContent); // エディタを更新
+    }
+  }, [editorContent]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
@@ -56,17 +109,11 @@ export default function InputSection({
     }
   };
 
-  console.log(
-    `problem data: ${problemData}\n\n`,
-    `setReviewData: ${setReviewData}\n\n`,
-    `display language data: ${displayLanguageData}\n\n`,
-  );
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
     setIsDisabledData(true);
     const editorContent = editorRef.current.getValue();
-
     try {
       // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       // setDisabled(true);
@@ -76,10 +123,11 @@ export default function InputSection({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          topic,
           selectedLanguage,
-          problemData,
+          formattedProblemContent,
+          editorLanguage,
           editorContent,
-          displayLanguageData,
         }),
       });
 
@@ -89,13 +137,26 @@ export default function InputSection({
       const data = await response.json();
       const responseText = data.responseText;
       const JsonText = JSON.parse(responseText);
+
+      // ローカルストレージにデータ(問題文・エディタの入力内容・総評)を保存する
+      saveToLocalStorage({
+        difficulty,
+        dataType,
+        topic,
+        selectedLanguage,
+        problemContent: problemData,
+        editorLanguage,
+        editorContent,
+        evaluation: JsonText,
+      });
+
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setReviewData(JsonText);
+
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
         setIsDisabledData(false);
       }
-      console.log(JsonText);
     } catch (error) {
       console.error("Error occurred while creating a review:", error);
       alert("Error occurred while creating the review.");
@@ -112,14 +173,94 @@ export default function InputSection({
         <div
           id="codeInputArea-title"
           className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
-          onClick={copyToClipboard}
         >
           Code
         </div>
-        <select
+        <details
+          className="relative ml-auto rounded-tr-md"
+          onMouseEnter={(event) => (event.currentTarget.open = true)}
+          onMouseLeave={(event) => (event.currentTarget.open = false)}
+        >
+          <summary
+            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+              getIsDisabledData
+                ? "cursor-not-allowed opacity-50"
+                : "cursor-pointer"
+            }`}
+          >
+            Options
+          </summary>
+          <div
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
+              getIsDisabledData ? "pointer-events-none opacity-50" : ""
+            }`}
+          >
+            {/* Font Size Select */}
+            <select
+              id="fontsize-select"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              value={fontSize}
+              disabled={getIsDisabledData}
+              onChange={handleFontSizeChange}
+            >
+              {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
+                <option key={size} value={size}>
+                  {size}
+                </option>
+              ))}
+            </select>
+            {/* Theme Select */}
+            <select
+              id="theme-select"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              value={editorTheme}
+              disabled={getIsDisabledData}
+              onChange={handleThemeChange}
+            >
+              <option value="vs">vs</option>
+              <option value="vs-dark">vs-dark</option>
+              <option value="hc-light">hc-light</option>
+              <option value="hc-black">hc-black</option>
+            </select>
+            {/* Language Select */}
+            <select
+              id="language-select"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              value={editorLanguage}
+              disabled={getIsDisabledData}
+              onChange={handleLanguageChange}
+            >
+              {Object.entries(config.menuLists.languages).map(
+                ([key, label]) => (
+                  <option key={key} value={key}>
+                    {label}
+                  </option>
+                ),
+              )}
+            </select>
+            {/* Buttons */}
+            <button
+              id="button-Copy-CodeInputArea"
+              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+              disabled={getIsDisabledData}
+              onClick={copyToClipboard}
+            >
+              Copy
+            </button>
+            <button
+              id="submit"
+              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
+              disabled={getIsDisabledData}
+              onClick={handleCreateReview}
+            >
+              Submit
+            </button>
+          </div>
+        </details>
+        {/* <select
           id="fontsize-select"
           className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={selectedFontSize}
+          value={fontSize}
           disabled={getIsDisabledData}
           onChange={handleFontSizeChange}
         >
@@ -138,7 +279,7 @@ export default function InputSection({
         <select
           id="theme-select"
           className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={selectedTheme}
+          value={editorTheme}
           disabled={getIsDisabledData}
           onChange={handleThemeChange}
         >
@@ -150,7 +291,7 @@ export default function InputSection({
         <select
           id="language-select"
           className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={selectedLanguage}
+          value={editorLanguage}
           disabled={getIsDisabledData}
           onChange={handleLanguageChange}
         >
@@ -176,14 +317,14 @@ export default function InputSection({
           onClick={handleCreateReview}
         >
           submit
-        </button>
+        </button> */}
       </div>
       <div className="flex flex-1">
         <MonacoEditor
           // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
-          selectedFontSize={Number(selectedFontSize)}
-          selectedLanguage={selectedLanguage}
-          selectedTheme={selectedTheme}
+          fontSize={Number(fontSize)}
+          editorLanguage={editorLanguage}
+          editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
           onMount={(editor) => {
             editorRef.current = editor;
