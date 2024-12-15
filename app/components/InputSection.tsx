@@ -27,7 +27,7 @@ export default function InputSection({
     topic,
     selectedLanguage,
     formattedProblemContent,
-    setReviewContent,
+    setJsonFormattedReviewContent,
     loadedEditorLanguage,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
@@ -149,7 +149,7 @@ export default function InputSection({
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
-      setReviewContent(JsonText);
+      setJsonFormattedReviewContent(JsonText);
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {

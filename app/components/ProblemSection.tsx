@@ -7,9 +7,10 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
   displayProblemData,
   getIsDisabledData,
 }) => {
-  const { setFormattedProblemContent } = useAppContext();
+  const { formattedProblemContent, setFormattedProblemContent } =
+    useAppContext();
 
-  const [problemContent, setProblemContent] = useState("");
+  console.log(formattedProblemContent);
 
   // クリップボードに文字列をコピーする関数
   useEffect(() => {
@@ -32,13 +33,12 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
     const formattedProblemContent =
       description + example1 + example2 + example3 + notes;
 
-    setProblemContent(formattedProblemContent);
     setFormattedProblemContent(formattedProblemContent);
   });
 
   const copyToClipboard = () => {
     navigator.clipboard
-      .writeText(problemContent)
+      .writeText(formattedProblemContent)
       .then(() => {
         alert("Copied to clipboard!");
       })
