@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AppContextProps } from "@/app/type/type";
+import { AppContextProps, ReviewResponse } from "@/app/type/type";
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
@@ -11,13 +11,18 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
-  const [reviewData, setReviewData] = useState([]);
   const [formattedProblemContent, setFormattedProblemContent] =
     useState<string>("");
+  const [reviewContent, setReviewContent] = useState<ReviewResponse | null>(
+    null,
+  );
+  const [reviewData, setReviewData] = useState([]);
   // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の翻訳言語)"の状態管理
   const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
     useState<string>("");
-
+  const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
+    string | null
+  >("");
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("savedData")) || [];
     setReviewData(savedData);
@@ -38,8 +43,12 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setFormattedProblemContent,
         reviewData,
         setReviewData,
+        reviewContent,
+        setReviewContent,
         loadedSelectedLanguage,
         setLoadedSelectedLanguage,
+        loadedEditorLanguage,
+        setLoadedEditorLanguage,
       }}
     >
       {children}
