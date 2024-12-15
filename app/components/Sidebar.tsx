@@ -2,21 +2,63 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import { useState } from "react";
 import { SidebarProps } from "../type/type";
+import { useAppContext } from "../feature/localStorage/AppContext";
+import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
+import { useEffect } from "react";
 // import Image from "next/image";
 
 export default function Sidebar({
   setProblemData,
-  setDisplayLanguageData,
   setIsDisabledData,
   getIsDisabledData,
+  setEditorLanguage,
+  setEditorContent,
+  setEvaluation,
 }: SidebarProps) {
-  // 各Optionコンポーネントの値を保持する
-  const [selectedDifficulty, setSelectedDifficulty] = useState("");
-  const [selectedDataType, setSelectedDataType] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState("");
-  const [languagePreference, setLanguagePreference] = useState("");
+  // createContextを使用して、InputSectionにデータを渡す
+  const {
+    difficulty,
+    setDifficulty,
+    dataType,
+    setDataType,
+    topic,
+    setTopic,
+    selectedLanguage,
+    setSelectedLanguage,
+    reviewData,
+    setLoadedSelectedLanguage,
+  } = useAppContext();
+  const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
+    useLocalStorageContext();
+
+  // ローカルストレージのデータを各要素に反映する
+  const handleLoadData = () => {
+    const selectElement = document.getElementById(
+      "saveData",
+    ) as HTMLSelectElement;
+    const selectedId = parseInt(selectElement.value, 10);
+
+    if (!selectedId) {
+      alert("Please select a valid option to load.");
+      return;
+    }
+
+    // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
+    loadSavedData(selectedId, {
+      difficulty: setDifficulty,
+      dataType: setDataType,
+      topic: setTopic,
+      selectedLanguage: (newLanguage: string) => {
+        setSelectedLanguage(newLanguage); // 選択された言語を設置する
+        setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
+      },
+      problemContent: setProblemData,
+      editorLanguage: setEditorLanguage,
+      editorContent: setEditorContent,
+      evaluation: setEvaluation,
+    });
+  };
 
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
@@ -33,10 +75,10 @@ export default function Sidebar({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          selectedDifficulty,
-          selectedDataType,
-          selectedTopic,
-          languagePreference,
+          difficulty,
+          dataType,
+          topic,
+          selectedLanguage,
         }),
       });
 
@@ -53,8 +95,7 @@ export default function Sidebar({
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
-      setDisplayLanguageData(languagePreference);
-      // console.log(JsonText);
+      setSelectedLanguage(selectedLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
@@ -70,7 +111,8 @@ export default function Sidebar({
           name={"difficulty"}
           disabled={getIsDisabledData}
           defaultSelected={"difficulty"}
-          setSelected={setSelectedDifficulty}
+          setSelected={setDifficulty}
+          savedLocalStorageValue={difficulty}
         />
         {/* <Image
           src={menuData.svgIcon.difficulty}
@@ -87,7 +129,8 @@ export default function Sidebar({
           name={"type"}
           disabled={getIsDisabledData}
           defaultSelected={"data type"}
-          setSelected={setSelectedDataType}
+          setSelected={setDataType}
+          savedLocalStorageValue={dataType}
         />
         {/* <Image
           src={menuData.svgIcon.data}
@@ -104,7 +147,8 @@ export default function Sidebar({
           name={"topic"}
           disabled={getIsDisabledData}
           defaultSelected={"topic"}
-          setSelected={setSelectedTopic}
+          setSelected={setTopic}
+          savedLocalStorageValue={topic}
         />
         {/* <Image
           src={menuData.svgIcon.topic}
@@ -121,7 +165,8 @@ export default function Sidebar({
           name={"display-language"}
           disabled={getIsDisabledData}
           defaultSelected={"translate"}
-          setSelected={setLanguagePreference}
+          setSelected={setSelectedLanguage}
+          savedLocalStorageValue={selectedLanguage}
         />
         {/* <Image
           src={menuData.svgIcon.translate}
@@ -148,27 +193,46 @@ export default function Sidebar({
         </div>
         <label htmlFor="savedata"></label>
         <select
-          className="m-1 cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700"
+          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${getIsDisabledData ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
-          id="savedata"
-        ></select>
+          id="saveData"
+          disabled={getIsDisabledData}
+        >
+          <option className="text-start" value="">
+            Save Data
+          </option>
+          {reviewData.length === 0 ? (
+            <option value="" disabled={true}>
+              No saved data
+            </option>
+          ) : (
+            reviewData.map((entry, index) => (
+              <option key={`${entry.id}-${index}`} value={entry.id}>
+                {`${entry.timestamp} - Data ${entry.id}`}
+              </option>
+            ))
+          )}
+        </select>
         <Button
           id="load"
           type="button"
           text="load"
           clicked={getIsDisabledData}
+          onClick={handleLoadData}
         />
         <Button
           id="delete"
           type="button"
           text="delete"
           clicked={getIsDisabledData}
+          onClick={handleDeleteSelected}
         />
         <Button
           id="delete-all"
           type="button"
           text="delete all"
           clicked={getIsDisabledData}
+          onClick={clearLocalStorage}
         />
       </div>
     </aside>

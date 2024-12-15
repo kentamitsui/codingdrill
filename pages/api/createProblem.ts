@@ -16,12 +16,7 @@ export default async function handler(
   }
 
   // Sidebar.tsxからのリクエストで送信されたOptionコンポーネントの値を展開する
-  const {
-    selectedDifficulty,
-    selectedDataType,
-    selectedTopic,
-    languagePreference,
-  } = req.body;
+  const { difficulty, dataType, topic, selectedLanguage } = req.body;
   const promptTemplate = process.env.PROMPT_CREATE;
 
   if (!promptTemplate) {
@@ -32,12 +27,10 @@ export default async function handler(
 
   // プロンプトの%で囲まれた文字列を、req.bodyのデータで置き換える
   const modifiedPrompt = promptTemplate
-    .replace("%difficulty%", selectedDifficulty)
-    .replace("%type%", selectedDataType)
-    .replace("%topic%", selectedTopic)
-    .replace("%display_language%", languagePreference);
-
-  // console.log(modifiedPrompt);
+    .replace("%difficulty%", difficulty)
+    .replace("%type%", dataType)
+    .replace("%topic%", topic)
+    .replace("%display_language%", selectedLanguage);
 
   try {
     const request = await openai.chat.completions.create({
@@ -54,8 +47,6 @@ export default async function handler(
 
     const responseText = request.choices[0].message.content;
     res.status(200).json({ responseText });
-
-    // console.log(responseText);
   } catch (error) {
     console.error("Error fetching data from OpenAI:", error);
     res.status(500).json({ error: "Failed to create a problem" });
