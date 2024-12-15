@@ -24,7 +24,7 @@ const Split_Vertical: React.FC<SplitterProps> = ({
 
   useEffect(() => {
     if (problemData !== null && problemData !== "") {
-      setFormattedProblemContent(problemData); // 型が一致
+      setFormattedProblemContent(problemData);
     }
   }, [problemData]);
 

@@ -25,6 +25,7 @@ export default function Sidebar({
     selectedLanguage,
     setSelectedLanguage,
     reviewData,
+    setJsonFormattedProblemContent,
     setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
@@ -53,7 +54,7 @@ export default function Sidebar({
         setSelectedLanguage(newLanguage); // 選択された言語を設置する
         setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
       },
-      problemContent: setProblemData,
+      problemContent: setJsonFormattedProblemContent,
       editorLanguage: setLoadedEditorLanguage,
       editorContent: setEditorContent,
       evaluation: setJsonFormattedReviewContent,
@@ -95,6 +96,7 @@ export default function Sidebar({
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
       setProblemData(JsonText);
+      setJsonFormattedProblemContent(JsonText);
       setSelectedLanguage(selectedLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
