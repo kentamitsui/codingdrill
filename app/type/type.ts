@@ -43,7 +43,7 @@ export interface AppContextProps {
   reviewData: string[];
   setReviewData: React.Dispatch<React.SetStateAction<never[]>>;
   reviewContent: ReviewResponse | null;
-  setReviewContent: React.Dispatch<React.SetStateAction<string>>;
+  setReviewContent: React.Dispatch<React.SetStateAction<ReviewResponse | null>>;
   loadedSelectedLanguage: string | null;
   setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   loadedEditorLanguage: string | null;
