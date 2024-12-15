@@ -2,28 +2,28 @@ import { useAppContext } from "../feature/localStorage/AppContext";
 import { ReviewProps } from "../type/type";
 
 export const ReviewSection: React.FC<ReviewProps> = ({ getIsDisabledData }) => {
-  const { reviewContent } = useAppContext();
+  const { jsonFormattedReviewContent } = useAppContext();
 
-  console.log(reviewContent);
+  // console.log(jsonFormattedReviewContent);
 
   const copyToClipboard = () => {
-    const explanationOfTheAlgorithm = reviewContent
-      ? `explanation of the algorithm:\n${reviewContent.generalEvaluation.explanationOfTheAlgorithm}\n\n`
+    const explanationOfTheAlgorithm = jsonFormattedReviewContent
+      ? `explanation of the algorithm:\n${jsonFormattedReviewContent.generalEvaluation.explanationOfTheAlgorithm}\n\n`
       : "";
-    const clarityAndSpecificity = reviewContent
-      ? `clarity and specificity:\n${reviewContent.generalEvaluation.clarityAndSpecificity}\n\n`
+    const clarityAndSpecificity = jsonFormattedReviewContent
+      ? `clarity and specificity:\n${jsonFormattedReviewContent.generalEvaluation.clarityAndSpecificity}\n\n`
       : "";
-    const originalityAndApplicability = reviewContent
-      ? `originality and applicability: ${reviewContent.generalEvaluation.originalityAndApplicability}\n\n`
+    const originalityAndApplicability = jsonFormattedReviewContent
+      ? `originality and applicability: ${jsonFormattedReviewContent.generalEvaluation.originalityAndApplicability}\n\n`
       : "";
-    const diversityAndComplexity = reviewContent
-      ? `diversity and complexity: ${reviewContent.generalEvaluation.diversityAndComplexity}\n\n`
+    const diversityAndComplexity = jsonFormattedReviewContent
+      ? `diversity and complexity: ${jsonFormattedReviewContent.generalEvaluation.diversityAndComplexity}\n\n`
       : "";
-    const technicalRequirements = reviewContent
-      ? `technical requirements: ${reviewContent.generalEvaluation.technicalRequirements}\n\n`
+    const technicalRequirements = jsonFormattedReviewContent
+      ? `technical requirements: ${jsonFormattedReviewContent.generalEvaluation.technicalRequirements}\n\n`
       : "";
-    const evaluationCriteria = reviewContent
-      ? `evaluation criteria: ${reviewContent.generalEvaluation.evaluationCriteria}`
+    const evaluationCriteria = jsonFormattedReviewContent
+      ? `evaluation criteria: ${jsonFormattedReviewContent.generalEvaluation.evaluationCriteria}`
       : "";
 
     const formattedReviewContent =
@@ -68,39 +68,42 @@ export const ReviewSection: React.FC<ReviewProps> = ({ getIsDisabledData }) => {
         className="flex flex-col gap-5 whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
       >
         <div id="clarity-and-specificity" className="leading-normal">
-          {reviewContent
+          {jsonFormattedReviewContent
             ? "explanation of the algorithm:\n" +
-              reviewContent.generalEvaluation.explanationOfTheAlgorithm
+              jsonFormattedReviewContent.generalEvaluation
+                .explanationOfTheAlgorithm
             : null}
         </div>
         <div id="clarity-and-specificity" className="leading-normal">
-          {reviewContent
+          {jsonFormattedReviewContent
             ? "clarity and specificity:\n" +
-              reviewContent.generalEvaluation.clarityAndSpecificity
+              jsonFormattedReviewContent.generalEvaluation.clarityAndSpecificity
             : null}
         </div>
         <div id="originality-and-applicability" className="leading-normal">
-          {reviewContent
+          {jsonFormattedReviewContent
             ? "originality and applicability:\n" +
-              reviewContent.generalEvaluation.originalityAndApplicability
+              jsonFormattedReviewContent.generalEvaluation
+                .originalityAndApplicability
             : null}
         </div>
         <div id="diversity-and-complexity" className="leading-normal">
-          {reviewContent
+          {jsonFormattedReviewContent
             ? "diversity and complexity:\n" +
-              reviewContent.generalEvaluation.diversityAndComplexity
+              jsonFormattedReviewContent.generalEvaluation
+                .diversityAndComplexity
             : null}
         </div>
         <div id="technical-requirements" className="leading-normal">
-          {reviewContent
+          {jsonFormattedReviewContent
             ? "technical requirement:\n" +
-              reviewContent.generalEvaluation.technicalRequirements
+              jsonFormattedReviewContent.generalEvaluation.technicalRequirements
             : null}
         </div>
         <div id="evaluation-criteria" className="leading-normal">
-          {reviewContent
+          {jsonFormattedReviewContent
             ? "evaluation criteria:\n" +
-              reviewContent.generalEvaluation.evaluationCriteria
+              jsonFormattedReviewContent.generalEvaluation.evaluationCriteria
             : null}
         </div>
       </div>

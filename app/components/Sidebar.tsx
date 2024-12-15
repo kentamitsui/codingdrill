@@ -25,7 +25,7 @@ export default function Sidebar({
     selectedLanguage,
     setSelectedLanguage,
     reviewData,
-    setReviewContent,
+    setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
   } = useAppContext();
@@ -56,7 +56,7 @@ export default function Sidebar({
       problemContent: setProblemData,
       editorLanguage: setLoadedEditorLanguage,
       editorContent: setEditorContent,
-      evaluation: setReviewContent,
+      evaluation: setJsonFormattedReviewContent,
     });
   };
 
