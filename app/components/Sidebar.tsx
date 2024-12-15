@@ -12,9 +12,7 @@ export default function Sidebar({
   setProblemData,
   setIsDisabledData,
   getIsDisabledData,
-  setEditorLanguage,
   setEditorContent,
-  setEvaluation,
 }: SidebarProps) {
   // createContextを使用して、InputSectionにデータを渡す
   const {
@@ -27,7 +25,9 @@ export default function Sidebar({
     selectedLanguage,
     setSelectedLanguage,
     reviewData,
+    setReviewContent,
     setLoadedSelectedLanguage,
+    setLoadedEditorLanguage,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
@@ -54,9 +54,9 @@ export default function Sidebar({
         setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
       },
       problemContent: setProblemData,
-      editorLanguage: setEditorLanguage,
+      editorLanguage: setLoadedEditorLanguage,
       editorContent: setEditorContent,
-      evaluation: setEvaluation,
+      evaluation: setReviewContent,
     });
   };
 

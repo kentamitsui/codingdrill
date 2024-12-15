@@ -17,10 +17,8 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
 
 export default function InputSection({
   problemData,
-  setReviewData,
   setIsDisabledData,
   getIsDisabledData,
-  localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
   editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
   const {
@@ -29,7 +27,8 @@ export default function InputSection({
     topic,
     selectedLanguage,
     formattedProblemContent,
-    // loadedSelectedLanguage,
+    setReviewContent,
+    loadedEditorLanguage,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
@@ -42,7 +41,6 @@ export default function InputSection({
       }
 
       if (event.key === "savedData") {
-        // const savedData = JSON.parse(event.newValue || "[]");
         updateSelectBox(savedData);
       }
     };
@@ -78,10 +76,10 @@ export default function InputSection({
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorLanguageのデータをエディタ入力部分に反映
   useEffect(() => {
-    if (localStorageEditorLanguage) {
-      setEditorLanguage(localStorageEditorLanguage);
+    if (loadedEditorLanguage) {
+      setEditorLanguage(loadedEditorLanguage);
     }
-  }, [localStorageEditorLanguage]);
+  }, [loadedEditorLanguage]);
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
@@ -151,7 +149,7 @@ export default function InputSection({
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
-      setReviewData(JsonText);
+      setReviewContent(JsonText);
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {

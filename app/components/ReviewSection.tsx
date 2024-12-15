@@ -1,27 +1,33 @@
+import { useAppContext } from "../feature/localStorage/AppContext";
 import { ReviewProps } from "../type/type";
 
-export const ReviewSection: React.FC<ReviewProps> = ({
-  setResponseReviewData,
-  getIsDisabledData,
-}) => {
+export const ReviewSection: React.FC<ReviewProps> = ({ getIsDisabledData }) => {
+  const { reviewContent } = useAppContext();
+
+  console.log(reviewContent);
+
   const copyToClipboard = () => {
-    const clarityAndSpecificity = setResponseReviewData
-      ? `clarity and specificity:\n${setResponseReviewData.generalEvaluation.clarityAndSpecificity}\n\n`
+    const explanationOfTheAlgorithm = reviewContent
+      ? `explanation of the algorithm:\n${reviewContent.generalEvaluation.explanationOfTheAlgorithm}\n\n`
       : "";
-    const originalityAndApplicability = setResponseReviewData
-      ? `originality and applicability: ${setResponseReviewData.generalEvaluation.originalityAndApplicability}\n\n`
+    const clarityAndSpecificity = reviewContent
+      ? `clarity and specificity:\n${reviewContent.generalEvaluation.clarityAndSpecificity}\n\n`
       : "";
-    const diversityAndComplexity = setResponseReviewData
-      ? `diversity and complexity: ${setResponseReviewData.generalEvaluation.diversityAndComplexity}\n\n`
+    const originalityAndApplicability = reviewContent
+      ? `originality and applicability: ${reviewContent.generalEvaluation.originalityAndApplicability}\n\n`
       : "";
-    const technicalRequirements = setResponseReviewData
-      ? `technical requirements: ${setResponseReviewData.generalEvaluation.technicalRequirements}\n\n`
+    const diversityAndComplexity = reviewContent
+      ? `diversity and complexity: ${reviewContent.generalEvaluation.diversityAndComplexity}\n\n`
       : "";
-    const evaluationCriteria = setResponseReviewData
-      ? `evaluation criteria: ${setResponseReviewData.generalEvaluation.evaluationCriteria}`
+    const technicalRequirements = reviewContent
+      ? `technical requirements: ${reviewContent.generalEvaluation.technicalRequirements}\n\n`
+      : "";
+    const evaluationCriteria = reviewContent
+      ? `evaluation criteria: ${reviewContent.generalEvaluation.evaluationCriteria}`
       : "";
 
-    const fullText =
+    const formattedReviewContent =
+      explanationOfTheAlgorithm +
       clarityAndSpecificity +
       originalityAndApplicability +
       diversityAndComplexity +
@@ -29,7 +35,7 @@ export const ReviewSection: React.FC<ReviewProps> = ({
       evaluationCriteria;
 
     navigator.clipboard
-      .writeText(fullText)
+      .writeText(formattedReviewContent)
       .then(() => {
         alert("Copied to clipboard!");
       })
@@ -62,34 +68,39 @@ export const ReviewSection: React.FC<ReviewProps> = ({
         className="flex flex-col gap-5 whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
       >
         <div id="clarity-and-specificity" className="leading-normal">
-          {setResponseReviewData
+          {reviewContent
+            ? "explanation of the algorithm:\n" +
+              reviewContent.generalEvaluation.explanationOfTheAlgorithm
+            : null}
+        </div>
+        <div id="clarity-and-specificity" className="leading-normal">
+          {reviewContent
             ? "clarity and specificity:\n" +
-              setResponseReviewData.generalEvaluation.clarityAndSpecificity
+              reviewContent.generalEvaluation.clarityAndSpecificity
             : null}
         </div>
         <div id="originality-and-applicability" className="leading-normal">
-          {setResponseReviewData
+          {reviewContent
             ? "originality and applicability:\n" +
-              setResponseReviewData.generalEvaluation
-                .originalityAndApplicability
+              reviewContent.generalEvaluation.originalityAndApplicability
             : null}
         </div>
         <div id="diversity-and-complexity" className="leading-normal">
-          {setResponseReviewData
+          {reviewContent
             ? "diversity and complexity:\n" +
-              setResponseReviewData.generalEvaluation.diversityAndComplexity
+              reviewContent.generalEvaluation.diversityAndComplexity
             : null}
         </div>
         <div id="technical-requirements" className="leading-normal">
-          {setResponseReviewData
+          {reviewContent
             ? "technical requirement:\n" +
-              setResponseReviewData.generalEvaluation.technicalRequirements
+              reviewContent.generalEvaluation.technicalRequirements
             : null}
         </div>
         <div id="evaluation-criteria" className="leading-normal">
-          {setResponseReviewData
+          {reviewContent
             ? "evaluation criteria:\n" +
-              setResponseReviewData.generalEvaluation.evaluationCriteria
+              reviewContent.generalEvaluation.evaluationCriteria
             : null}
         </div>
       </div>

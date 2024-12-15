@@ -25,9 +25,7 @@ export interface SidebarProps {
   setProblemData: Dispatch<SetStateAction<string | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  setEditorLanguage: Dispatch<SetStateAction<string | null>>;
   setEditorContent: Dispatch<SetStateAction<string | null>>;
-  setEvaluation: Dispatch<SetStateAction<string | null>>;
 }
 
 // AppContextに対する型定義
@@ -44,8 +42,12 @@ export interface AppContextProps {
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
   reviewData: string[];
   setReviewData: React.Dispatch<React.SetStateAction<never[]>>;
-  loadedSelectedLanguage: string;
+  reviewContent: ReviewResponse | null;
+  setReviewContent: React.Dispatch<React.SetStateAction<string>>;
+  loadedSelectedLanguage: string | null;
   setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
+  loadedEditorLanguage: string | null;
+  setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 // 問題文を表示する際の型定義
@@ -59,9 +61,7 @@ export interface SplitterProps {
   problemData: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  editorLanguage: string | null;
   editorContent: string | null;
-  evaluation: string | null;
 }
 
 // PanelContextに対する型定義
@@ -83,12 +83,12 @@ export interface InputSectionProps {
   setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  localStorageEditorLanguage: string | null;
   editorContent: string | null;
 }
 
 // ReviewSectionに対する型定義
 export interface GeneralEvaluation {
+  explanationOfTheAlgorithm: string;
   clarityAndSpecificity: string;
   originalityAndApplicability: string;
   diversityAndComplexity: string;
@@ -101,6 +101,5 @@ export interface ReviewResponse {
 }
 
 export interface ReviewProps {
-  setResponseReviewData: ReviewResponse | null;
   getIsDisabledData: boolean;
 }
