@@ -38,7 +38,7 @@ export const LocalStorageProvider = ({ children }) => {
     setFunctions.dataType(selectedEntry.dataType);
     setFunctions.topic(selectedEntry.topic);
     setFunctions.selectedLanguage(selectedEntry.selectedLanguage);
-    setFunctions.problemContent(JSON.parse(selectedEntry.problemContent));
+    setFunctions.problemContent(selectedEntry.problemContent);
     setFunctions.editorLanguage(selectedEntry.editorLanguage);
     setFunctions.editorContent(selectedEntry.editorContent);
     setFunctions.evaluation(selectedEntry.evaluation);

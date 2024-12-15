@@ -16,7 +16,6 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
 }
 
 export default function InputSection({
-  problemData,
   setIsDisabledData,
   getIsDisabledData,
   editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
@@ -27,6 +26,7 @@ export default function InputSection({
     topic,
     selectedLanguage,
     formattedProblemContent,
+    jsonFormattedProblemContent,
     setJsonFormattedReviewContent,
     loadedEditorLanguage,
   } = useAppContext();
@@ -123,6 +123,7 @@ export default function InputSection({
         body: JSON.stringify({
           topic,
           selectedLanguage,
+          // JSON形式から整形された問題文を渡す
           formattedProblemContent,
           editorLanguage,
           editorContent,
@@ -142,7 +143,7 @@ export default function InputSection({
         dataType,
         topic,
         selectedLanguage,
-        problemContent: problemData,
+        problemContent: jsonFormattedProblemContent,
         editorLanguage,
         editorContent,
         evaluation: JsonText,
@@ -255,67 +256,6 @@ export default function InputSection({
             </button>
           </div>
         </details>
-        {/* <select
-          id="fontsize-select"
-          className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={fontSize}
-          disabled={getIsDisabledData}
-          onChange={handleFontSizeChange}
-        >
-          <option value={"10"}>10</option>
-          <option value={"11"}>11</option>
-          <option value={"12"}>12</option>
-          <option value={"13"}>13</option>
-          <option value={"14"}>14</option>
-          <option value={"15"}>15</option>
-          <option value={"16"}>16</option>
-          <option value={"17"}>17</option>
-          <option value={"18"}>18</option>
-          <option value={"19"}>19</option>
-          <option value={"20"}>20</option>
-        </select>
-        <select
-          id="theme-select"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={editorTheme}
-          disabled={getIsDisabledData}
-          onChange={handleThemeChange}
-        >
-          <option value={"vs"}>vs</option>
-          <option value={"vs-dark"}>vs-dark</option>
-          <option value={"hc-light"}>hc-light</option>
-          <option value={"hc-black"}>hc-black</option>
-        </select>
-        <select
-          id="language-select"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={editorLanguage}
-          disabled={getIsDisabledData}
-          onChange={handleLanguageChange}
-        >
-          {Object.entries(config.menuLists.languages).map(([key, label]) => (
-            <option key={key} value={key}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <button
-          id="button-Copy-CodeInputArea"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={getIsDisabledData}
-          onClick={copyToClipboard}
-        >
-          copy
-        </button>
-        <button
-          className={`w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          id="submit"
-          type="submit"
-          disabled={getIsDisabledData}
-          onClick={handleCreateReview}
-        >
-          submit
-        </button> */}
       </div>
       <div className="flex flex-1">
         <MonacoEditor

@@ -24,7 +24,6 @@ export default function Main() {
           setEditorContent={setEditorContent}
         />
         <Split_Horizontal
-          problemData={problemContent}
           setIsDisabledData={setIsDisabled}
           getIsDisabledData={isDisabled}
           editorContent={editorContent}

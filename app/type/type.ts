@@ -56,13 +56,11 @@ export interface AppContextProps {
 
 // 問題文を表示する際の型定義
 export interface DisplayProblemProps {
-  displayProblemData: string | null;
   getIsDisabledData: boolean;
 }
 
 // Splitterに対する型定義
 export interface SplitterProps {
-  problemData: string | null;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
   editorContent: string | null;
