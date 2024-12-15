@@ -7,27 +7,30 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
   displayProblemData,
   getIsDisabledData,
 }) => {
-  const { formattedProblemContent, setFormattedProblemContent } =
-    useAppContext();
+  const {
+    jsonFormattedProblemContent,
+    formattedProblemContent,
+    setFormattedProblemContent,
+  } = useAppContext();
 
-  console.log(formattedProblemContent);
+  console.log(jsonFormattedProblemContent.problemStatement);
 
   // クリップボードに文字列をコピーする関数
   useEffect(() => {
-    const description = displayProblemData
-      ? `Description\n${displayProblemData.problemStatement}\n\n`
+    const description = jsonFormattedProblemContent
+      ? `Description\n${jsonFormattedProblemContent.problemStatement}\n\n`
       : "";
-    const example1 = displayProblemData
-      ? `Example 1\nInput: ${displayProblemData.example1.input}\nOutput: ${displayProblemData.example1.output}\nExplanation: ${displayProblemData.example1.explanation}\n\n`
+    const example1 = jsonFormattedProblemContent
+      ? `Example 1\nInput: ${jsonFormattedProblemContent.example1.input}\nOutput: ${jsonFormattedProblemContent.example1.output}\nExplanation: ${jsonFormattedProblemContent.example1.explanation}\n\n`
       : "";
-    const example2 = displayProblemData
-      ? `Example 2\nInput: ${displayProblemData.example2.input}\nOutput: ${displayProblemData.example2.output}\nExplanation: ${displayProblemData.example2.explanation}\n\n`
+    const example2 = jsonFormattedProblemContent
+      ? `Example 2\nInput: ${jsonFormattedProblemContent.example2.input}\nOutput: ${jsonFormattedProblemContent.example2.output}\nExplanation: ${jsonFormattedProblemContent.example2.explanation}\n\n`
       : "";
-    const example3 = displayProblemData
-      ? `Example 3\nInput: ${displayProblemData.example3.input}\nOutput: ${displayProblemData.example3.output}\nExplanation: ${displayProblemData.example3.explanation}\n\n`
+    const example3 = jsonFormattedProblemContent
+      ? `Example 3\nInput: ${jsonFormattedProblemContent.example3.input}\nOutput: ${jsonFormattedProblemContent.example3.output}\nExplanation: ${jsonFormattedProblemContent.example3.explanation}\n\n`
       : "";
-    const notes = displayProblemData
-      ? `Notes\nTime Complexity: ${displayProblemData.notes.timeComplexity}\nSpace Complexity: ${displayProblemData.notes.spaceComplexity}\nEdge Cases: ${displayProblemData.notes.edgeCases}\nOther Consideration: ${displayProblemData.notes.otherConsiderations}`
+    const notes = jsonFormattedProblemContent
+      ? `Notes\nTime Complexity: ${jsonFormattedProblemContent.notes.timeComplexity}\nSpace Complexity: ${jsonFormattedProblemContent.notes.spaceComplexity}\nEdge Cases: ${jsonFormattedProblemContent.notes.edgeCases}\nOther Consideration: ${jsonFormattedProblemContent.notes.otherConsiderations}`
       : "";
 
     const formattedProblemContent =
@@ -67,88 +70,93 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
       </div>
       <div className="p-[15px_30px] text-[16px] leading-normal tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
         <div className="whitespace-break-spaces text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {displayProblemData
-            ? "Description\n" + displayProblemData?.problemStatement
+          {jsonFormattedProblemContent
+            ? "Description\n" + jsonFormattedProblemContent?.problemStatement
             : null}
         </div>
         <div hidden></div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {displayProblemData ? "Example 1" : null}
+          {jsonFormattedProblemContent ? "Example 1" : null}
         </div>
         <div className="font-light">
-          {displayProblemData
-            ? "Input: " + displayProblemData?.example1.input
+          {jsonFormattedProblemContent
+            ? "Input: " + jsonFormattedProblemContent?.example1.input
             : null}
         </div>
         <div className="font-light">
-          {displayProblemData
-            ? "Output: " + displayProblemData?.example1.output
+          {jsonFormattedProblemContent
+            ? "Output: " + jsonFormattedProblemContent?.example1.output
             : null}
         </div>
         <div className="font-light">
-          {displayProblemData
-            ? "Explanation: " + displayProblemData?.example1.explanation
-            : null}
-        </div>
-        <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {displayProblemData ? "Example 2" : null}
-        </div>
-        <div className="font-light">
-          {displayProblemData
-            ? "Input: " + displayProblemData?.example2.input
-            : null}
-        </div>
-        <div className="font-light">
-          {displayProblemData
-            ? "Output: " + displayProblemData?.example2.output
-            : null}
-        </div>
-        <div className="font-light">
-          {displayProblemData
-            ? "Explanation: " + displayProblemData?.example2.explanation
+          {jsonFormattedProblemContent
+            ? "Explanation: " +
+              jsonFormattedProblemContent?.example1.explanation
             : null}
         </div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {displayProblemData ? "Example 3" : null}
+          {jsonFormattedProblemContent ? "Example 2" : null}
         </div>
         <div className="font-light">
-          {displayProblemData
-            ? "Input: " + displayProblemData?.example3.input
+          {jsonFormattedProblemContent
+            ? "Input: " + jsonFormattedProblemContent?.example2.input
             : null}
         </div>
         <div className="font-light">
-          {displayProblemData
-            ? "Output: " + displayProblemData?.example3.output
+          {jsonFormattedProblemContent
+            ? "Output: " + jsonFormattedProblemContent?.example2.output
             : null}
         </div>
         <div className="font-light">
-          {displayProblemData
-            ? "Explanation: " + displayProblemData?.example3.explanation
+          {jsonFormattedProblemContent
+            ? "Explanation: " +
+              jsonFormattedProblemContent?.example2.explanation
             : null}
         </div>
         <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {displayProblemData ? "Notes" : null}
+          {jsonFormattedProblemContent ? "Example 3" : null}
+        </div>
+        <div className="font-light">
+          {jsonFormattedProblemContent
+            ? "Input: " + jsonFormattedProblemContent?.example3.input
+            : null}
+        </div>
+        <div className="font-light">
+          {jsonFormattedProblemContent
+            ? "Output: " + jsonFormattedProblemContent?.example3.output
+            : null}
+        </div>
+        <div className="font-light">
+          {jsonFormattedProblemContent
+            ? "Explanation: " +
+              jsonFormattedProblemContent?.example3.explanation
+            : null}
+        </div>
+        <div className="mt-[30px] text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
+          {jsonFormattedProblemContent ? "Notes" : null}
         </div>
         <div className="grid gap-[10px]">
           <div className="font-light">
-            {displayProblemData
-              ? "Time Complexity: " + displayProblemData?.notes.timeComplexity
+            {jsonFormattedProblemContent
+              ? "Time Complexity: " +
+                jsonFormattedProblemContent?.notes.timeComplexity
               : null}
           </div>
           <div className="font-light">
-            {displayProblemData
-              ? "Space Complexity: " + displayProblemData?.notes.spaceComplexity
+            {jsonFormattedProblemContent
+              ? "Space Complexity: " +
+                jsonFormattedProblemContent?.notes.spaceComplexity
               : null}
           </div>
           <div className="font-light">
-            {displayProblemData
-              ? "Edge Cases: " + displayProblemData?.notes.edgeCases
+            {jsonFormattedProblemContent
+              ? "Edge Cases: " + jsonFormattedProblemContent?.notes.edgeCases
               : null}
           </div>
           <div className="font-light">
-            {displayProblemData
+            {jsonFormattedProblemContent
               ? "Other Consideration: " +
-                displayProblemData?.notes.otherConsiderations
+                jsonFormattedProblemContent?.notes.otherConsiderations
               : null}
           </div>
         </div>
