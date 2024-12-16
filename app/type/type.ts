@@ -2,10 +2,10 @@ import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
 // 選択タグに対する型定義
 export interface SelectProps {
-  label?: string;
+  label: string;
   data: { [key: string]: { [key: string]: string } | string }; // `optgroup`内に`option`を持つ可能性があるため修正
   name: string; // セレクトボックスのname属性
-  disabled: boolean;
+  isDisabled: boolean;
   defaultSelected?: string; // デフォルトのラベルを可変にするためのプロップ
   setSelected: Dispatch<SetStateAction<string>>;
   savedLocalStorageValue: string;
@@ -13,11 +13,11 @@ export interface SelectProps {
 
 // ボタンに対する型定義
 export interface ButtonProps {
-  id?: string;
-  type?: "submit" | "reset" | "button" | undefined;
-  text?: string;
-  clicked?: boolean;
-  onClick?: () => void | Promise<void>;
+  id: string;
+  type: "submit" | "reset" | "button" | undefined;
+  text: string;
+  isDisabled: boolean;
+  onClick: () => void | Promise<void>;
 }
 
 // サイドバーに対する型定義
@@ -28,6 +28,8 @@ export interface SidebarProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
+  isDisabled: boolean | null;
+  setIsDisabled: React.Dispatch<React.SetStateAction<boolean>> | null;
   difficulty: string;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   dataType: string;

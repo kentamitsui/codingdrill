@@ -1,30 +1,32 @@
 import { useEffect, useState } from "react";
 import { SelectProps } from "../type/type";
+import { useAppContext } from "../feature/localStorage/AppContext";
 
 export const Options: React.FC<SelectProps> = ({
   label,
   data,
   name,
-  disabled,
+  isDisabled,
   defaultSelected,
   setSelected,
   savedLocalStorageValue,
 }) => {
+  // const { isDisabled, setIsDisabled } = useAppContext();
   const [selected, setLocalSelected] = useState("");
 
   useEffect(() => {
     // 更新関数を用いて、loadボタンが押された時にローカルストレージのデータを呼び出し、optionタグの文字列を動的に変更する
-    if (savedLocalStorageValue !== undefined) {
+    if (savedLocalStorageValue !== null) {
       setLocalSelected(savedLocalStorageValue);
     }
   }, [savedLocalStorageValue]);
 
   const handleChangeColor = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setLocalSelected(value);
+    const currentValue = event.target.value;
+    setLocalSelected(currentValue);
 
     if (setSelected) {
-      setSelected(value);
+      setSelected(currentValue);
     }
   };
 
@@ -32,10 +34,10 @@ export const Options: React.FC<SelectProps> = ({
     <>
       <label htmlFor={label}></label>
       <select
-        className={`m-1 w-[142px] rounded-md p-1 duration-300 ${selected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${selected !== "" ? "bg-slate-700" : "bg-menu"} ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
+        className={`m-1 w-[142px] rounded-md p-1 duration-300 ${selected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${selected !== "" ? "bg-slate-700" : "bg-menu"} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
-        disabled={disabled}
-        value={selected} // 状態関数と表示内容を同期させるために設定
+        disabled={isDisabled}
+        value={selected}
         onChange={handleChangeColor}
       >
         <option
