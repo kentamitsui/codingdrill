@@ -67,6 +67,7 @@ export default function Sidebar({
       // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
       setJsonFormattedProblemContent(null);
       setLoadedEditorContent(null);
+      setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsDisabledData(true);
 
