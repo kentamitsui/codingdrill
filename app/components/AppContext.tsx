@@ -43,6 +43,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const savedData = JSON.parse(localStorage.getItem("savedData")) || [];
+    if (savedData === undefined) return;
     setReviewData(savedData);
   }, []);
 
