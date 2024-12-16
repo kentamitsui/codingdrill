@@ -4,7 +4,6 @@ import { useAppContext } from "../feature/localStorage/AppContext";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC<DisplayProblemProps> = ({
-  displayProblemData,
   getIsDisabledData,
 }) => {
   const {
@@ -12,8 +11,6 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
     formattedProblemContent,
     setFormattedProblemContent,
   } = useAppContext();
-
-  console.log(jsonFormattedProblemContent.problemStatement);
 
   // クリップボードに文字列をコピーする関数
   useEffect(() => {

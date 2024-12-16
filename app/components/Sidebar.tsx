@@ -9,10 +9,8 @@ import { useEffect } from "react";
 // import Image from "next/image";
 
 export default function Sidebar({
-  setProblemData,
   setIsDisabledData,
   getIsDisabledData,
-  setEditorContent,
 }: SidebarProps) {
   // createContextを使用して、InputSectionにデータを渡す
   const {
@@ -29,6 +27,7 @@ export default function Sidebar({
     setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
+    setLoadedEditorContent,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
@@ -56,7 +55,7 @@ export default function Sidebar({
       },
       problemContent: setJsonFormattedProblemContent,
       editorLanguage: setLoadedEditorLanguage,
-      editorContent: setEditorContent,
+      editorContent: setLoadedEditorContent,
       evaluation: setJsonFormattedReviewContent,
     });
   };
@@ -66,7 +65,7 @@ export default function Sidebar({
   const handleCreateProblem = async () => {
     try {
       // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
-      setProblemData(null);
+      setJsonFormattedProblemContent("");
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsDisabledData(true);
 
@@ -95,7 +94,6 @@ export default function Sidebar({
 
       const JsonText = JSON.parse(responseText);
       // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
-      setProblemData(JsonText);
       setJsonFormattedProblemContent(JsonText);
       setSelectedLanguage(selectedLanguage);
     } catch (error) {
