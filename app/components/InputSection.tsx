@@ -5,14 +5,6 @@ import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-{
-  /* InputSection.tsxでChatGPT-APIとの送受信を行う
-    1.ProblemSection.tsxから問題文の文字列データを、InputSection.tsxへ渡す
-    2.ProblemSection.tsxからリフトダウンされた問題文のデータと、エディタの入力内容・選択言語の値をChatGPT-APIに送信する
-    3.送信が完了し、その後受信するデータをSplitter.tsxにリフトアップする
-    4.リフトアップしたデータは、ReviewSection.tsxにリフトダウンする
-    5.データを各要素に配置する */
-}
 
 export default function InputSection() {
   const {

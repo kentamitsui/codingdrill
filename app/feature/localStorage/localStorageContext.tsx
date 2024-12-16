@@ -12,7 +12,7 @@ export const LocalStorageProvider = ({ children }) => {
 
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
-      localStorage.getItem("savedData") || "[]",
+      localStorage.getItem("savedData") || "[]" || "undefined",
     );
     setSavedData(getLocalStorageData);
   }, []);
