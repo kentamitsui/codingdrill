@@ -195,7 +195,7 @@ export default function InputSection({
             Options
           </summary>
           <div
-            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-b-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
               getIsDisabledData ? "pointer-events-none opacity-50" : ""
             }`}
           >
