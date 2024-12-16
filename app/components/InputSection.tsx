@@ -1,7 +1,6 @@
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
-import { InputSectionProps } from "../type/type";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
@@ -15,11 +14,10 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
     5.データを各要素に配置する */
 }
 
-export default function InputSection({
-  setIsDisabledData,
-  getIsDisabledData,
-}: InputSectionProps) {
+export default function InputSection() {
   const {
+    isDisabled,
+    setIsDisabled,
     difficulty,
     dataType,
     topic,
@@ -115,7 +113,8 @@ export default function InputSection({
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
     // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-    setIsDisabledData(true);
+    setIsDisabled(true);
+    setJsonFormattedReviewContent(null);
 
     const currentEditorValue = editorRef.current.getValue();
 
@@ -159,7 +158,7 @@ export default function InputSection({
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsDisabledData(false);
+        setIsDisabled(false);
       }
     } catch (error) {
       console.error("Error occurred while creating a review:", error);
@@ -187,16 +186,14 @@ export default function InputSection({
         >
           <summary
             className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              getIsDisabledData
-                ? "cursor-not-allowed opacity-50"
-                : "cursor-pointer"
+              isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
             }`}
           >
             Options
           </summary>
           <div
             className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-b-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
-              getIsDisabledData ? "pointer-events-none opacity-50" : ""
+              isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
             {/* Font Size Select */}
@@ -204,7 +201,7 @@ export default function InputSection({
               id="fontsize-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={fontSize}
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onChange={handleFontSizeChange}
             >
               {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
@@ -218,7 +215,7 @@ export default function InputSection({
               id="theme-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onChange={handleThemeChange}
             >
               <option value="vs">vs</option>
@@ -231,7 +228,7 @@ export default function InputSection({
               id="language-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorLanguage}
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onChange={handleLanguageChange}
             >
               {Object.entries(config.menuLists.languages).map(
@@ -246,7 +243,7 @@ export default function InputSection({
             <button
               id="button-Copy-CodeInputArea"
               className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onClick={copyToClipboard}
             >
               Copy
@@ -254,7 +251,7 @@ export default function InputSection({
             <button
               id="submit"
               className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onClick={handleCreateReview}
             >
               Submit

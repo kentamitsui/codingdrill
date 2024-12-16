@@ -6,8 +6,8 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // 選択タグやボタンのdisabled属性の管理
-  const [isDisabled, setIsDisabled] = useState<boolean>(false);
+  // 選択タグやボタンのdisabled属性の管理(問題文・総評文の作成=>出力時にボタンを押せないようにする)
+  const [isDisabled, setIsDisabled] = useState<boolean | undefined>(false);
 
   // Sidebar.tsxで選択された値のデータ管理
   const [difficulty, setDifficulty] = useState<string>("");

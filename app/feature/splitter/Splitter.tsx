@@ -5,20 +5,12 @@ const Split = lazy(() => import("react-split"));
 import ProblemSection from "../../components/ProblemSection";
 import InputSection from "../../components/InputSection";
 import ReviewSection from "../../components/ReviewSection";
-import { ReviewResponse, SplitterProps } from "@/app/type/type";
 import { usePanelContext } from "./PanelContext";
 
-const Split_Vertical: React.FC<SplitterProps> = ({
-  setIsDisabledData,
-  getIsDisabledData,
-}) => {
+const Split_Vertical: React.FC = () => {
   const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
   const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
-  const [_, setReviewContent] = useState<ReviewResponse | null>(null);
-  const [formattedProblemContent, setFormattedProblemContent] = useState<
-    string | null
-  >(null);
 
   const handleDragEnd = (newSizes: number[]) => {
     // 仕切り線をドラッグ&ドロップした時のみ、リサイズイベントが発火する
@@ -43,19 +35,13 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       direction="vertical"
       onDragEnd={handleDragEnd}
     >
-      <InputSection
-        setIsDisabledData={setIsDisabledData}
-        getIsDisabledData={getIsDisabledData}
-      />
-      <ReviewSection getIsDisabledData={getIsDisabledData} />
+      <InputSection />
+      <ReviewSection />
     </Split>
   );
 };
 
-const Split_Horizontal: React.FC<SplitterProps> = ({
-  setIsDisabledData,
-  getIsDisabledData,
-}) => {
+const Split_Horizontal: React.FC = () => {
   const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
   const [splitPanelSizes, setSplitPanelSizes] = useState(initialSizes);
@@ -83,13 +69,8 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
         onDragEnd={handleDragEnd}
         className="ml-2 flex flex-grow rounded-md"
       >
-        {/* ProblemSectionコンポーネントに、親コンポーネントMainから受け取ったJSONデータを渡す
-          Split_Verticalには、問題文のデータを渡す*/}
-        <ProblemSection getIsDisabledData={getIsDisabledData} />
-        <Split_Vertical
-          setIsDisabledData={setIsDisabledData}
-          getIsDisabledData={getIsDisabledData}
-        />
+        <ProblemSection />
+        <Split_Vertical />
       </Split>
     </Suspense>
   );

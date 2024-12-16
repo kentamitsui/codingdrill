@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { DisplayProblemProps } from "../type/type";
+import React, { useEffect } from "react";
 import { useAppContext } from "../feature/localStorage/AppContext";
 
 // 受け取ったJSONデータをキー毎に割り振る
-const ProblemSection: React.FC<DisplayProblemProps> = ({
-  getIsDisabledData,
-}) => {
+const ProblemSection: React.FC = () => {
   const {
+    isDisabled,
     jsonFormattedProblemContent,
     formattedProblemContent,
     setFormattedProblemContent,
@@ -58,9 +56,9 @@ const ProblemSection: React.FC<DisplayProblemProps> = ({
           Description
         </div>
         <button
-          className={`w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`w-[120px] bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isDisabled === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           onClick={copyToClipboard}
-          disabled={getIsDisabledData}
+          disabled={isDisabled}
         >
           copy
         </button>
