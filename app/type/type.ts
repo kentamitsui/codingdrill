@@ -82,8 +82,6 @@ export interface MonacoEditorProps {
 
 // InputSectionに対する型定義
 export interface InputSectionProps {
-  problemData: string | null;
-  setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
 }
