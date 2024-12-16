@@ -2,17 +2,15 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 // import Image from "next/image";
 
-export default function Sidebar({
-  setIsDisabledData,
-  getIsDisabledData,
-}: SidebarProps) {
+export default function Sidebar() {
   // createContextを使用して、InputSectionにデータを渡す
   const {
+    isDisabled,
+    setIsDisabled,
     difficulty,
     setDifficulty,
     dataType,
@@ -68,7 +66,7 @@ export default function Sidebar({
       setLoadedEditorContent(null);
       setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setIsDisabledData(true);
+      setIsDisabled(true);
 
       const response = await fetch("/api/createProblem", {
         method: "POST",
@@ -90,7 +88,7 @@ export default function Sidebar({
       const responseText = data.responseText;
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsDisabledData(false);
+        setIsDisabled(false);
       }
 
       const JsonText = JSON.parse(responseText);
@@ -110,7 +108,6 @@ export default function Sidebar({
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          isDisabled={getIsDisabledData}
           defaultSelected={"difficulty"}
           setSelected={setDifficulty}
           savedLocalStorageValue={difficulty}
@@ -128,7 +125,6 @@ export default function Sidebar({
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          isDisabled={getIsDisabledData}
           defaultSelected={"data type"}
           setSelected={setDataType}
           savedLocalStorageValue={dataType}
@@ -146,7 +142,6 @@ export default function Sidebar({
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          isDisabled={getIsDisabledData}
           defaultSelected={"topic"}
           setSelected={setTopic}
           savedLocalStorageValue={topic}
@@ -164,7 +159,6 @@ export default function Sidebar({
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          isDisabled={getIsDisabledData}
           defaultSelected={"translate"}
           setSelected={setSelectedLanguage}
           savedLocalStorageValue={selectedLanguage}
@@ -181,7 +175,6 @@ export default function Sidebar({
         id="create"
         type="button"
         text="Create Problem"
-        isDisabled={getIsDisabledData}
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
@@ -194,10 +187,10 @@ export default function Sidebar({
         </div>
         <label htmlFor="savedata"></label>
         <select
-          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${getIsDisabledData ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
-          disabled={getIsDisabledData}
+          disabled={isDisabled}
         >
           <option className="text-start" value="">
             Save Data
@@ -214,25 +207,17 @@ export default function Sidebar({
             ))
           )}
         </select>
-        <Button
-          id="load"
-          type="button"
-          text="load"
-          isDisabled={getIsDisabledData}
-          onClick={handleLoadData}
-        />
+        <Button id="load" type="button" text="load" onClick={handleLoadData} />
         <Button
           id="delete"
           type="button"
           text="delete"
-          isDisabled={getIsDisabledData}
           onClick={handleDeleteSelected}
         />
         <Button
           id="delete-all"
           type="button"
           text="delete all"
-          isDisabled={getIsDisabledData}
           onClick={clearLocalStorage}
         />
       </div>

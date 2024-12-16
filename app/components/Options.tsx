@@ -6,12 +6,11 @@ export const Options: React.FC<SelectProps> = ({
   label,
   data,
   name,
-  isDisabled,
   defaultSelected,
   setSelected,
   savedLocalStorageValue,
 }) => {
-  // const { isDisabled, setIsDisabled } = useAppContext();
+  const { isDisabled } = useAppContext();
   const [selected, setLocalSelected] = useState("");
 
   useEffect(() => {
