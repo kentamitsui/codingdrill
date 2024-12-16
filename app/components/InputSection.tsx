@@ -2,7 +2,7 @@ import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
-import { useAppContext } from "../feature/localStorage/AppContext";
+import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 {
@@ -51,8 +51,8 @@ export default function InputSection() {
   }, []);
 
   const [fontSize, setFontSize] = useState("14");
-  const [editorLanguage, setEditorLanguage] = useState("javascript");
-  const [editorTheme, setEditorTheme] = useState("vs");
+  const [editorLanguage, setEditorLanguage] = useState("python");
+  const [editorTheme, setEditorTheme] = useState("vs-dark");
   const editorRef = useRef<any>(null);
 
   // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得

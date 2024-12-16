@@ -2,7 +2,7 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import { useAppContext } from "../feature/localStorage/AppContext";
+import { useAppContext } from "./AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 // import Image from "next/image";
 

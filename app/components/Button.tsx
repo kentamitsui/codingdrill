@@ -1,4 +1,4 @@
-import { useAppContext } from "../feature/localStorage/AppContext";
+import { useAppContext } from "./AppContext";
 import { ButtonProps } from "../type/type";
 
 export default function Button({ id, type, text, onClick }: ButtonProps) {
