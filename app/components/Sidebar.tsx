@@ -5,7 +5,6 @@ import Button from "./Button";
 import { SidebarProps } from "../type/type";
 import { useAppContext } from "../feature/localStorage/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import { useEffect } from "react";
 // import Image from "next/image";
 
 export default function Sidebar({
@@ -111,7 +110,7 @@ export default function Sidebar({
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          disabled={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           defaultSelected={"difficulty"}
           setSelected={setDifficulty}
           savedLocalStorageValue={difficulty}
@@ -129,7 +128,7 @@ export default function Sidebar({
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          disabled={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           defaultSelected={"data type"}
           setSelected={setDataType}
           savedLocalStorageValue={dataType}
@@ -147,7 +146,7 @@ export default function Sidebar({
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          disabled={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           defaultSelected={"topic"}
           setSelected={setTopic}
           savedLocalStorageValue={topic}
@@ -165,7 +164,7 @@ export default function Sidebar({
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          disabled={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           defaultSelected={"translate"}
           setSelected={setSelectedLanguage}
           savedLocalStorageValue={selectedLanguage}
@@ -182,7 +181,7 @@ export default function Sidebar({
         id="create"
         type="button"
         text="Create Problem"
-        clicked={getIsDisabledData}
+        isDisabled={getIsDisabledData}
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
@@ -219,21 +218,21 @@ export default function Sidebar({
           id="load"
           type="button"
           text="load"
-          clicked={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           onClick={handleLoadData}
         />
         <Button
           id="delete"
           type="button"
           text="delete"
-          clicked={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           onClick={handleDeleteSelected}
         />
         <Button
           id="delete-all"
           type="button"
           text="delete all"
-          clicked={getIsDisabledData}
+          isDisabled={getIsDisabledData}
           onClick={clearLocalStorage}
         />
       </div>
