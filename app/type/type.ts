@@ -22,10 +22,8 @@ export interface ButtonProps {
 
 // サイドバーに対する型定義
 export interface SidebarProps {
-  setProblemData: Dispatch<SetStateAction<string | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  setEditorContent: Dispatch<SetStateAction<string | null>>;
 }
 
 // AppContextに対する型定義
@@ -52,6 +50,8 @@ export interface AppContextProps {
   setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   loadedEditorLanguage: string | null;
   setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
+  loadedEditorContent: string | null;
+  setLoadedEditorContent: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 // 問題文を表示する際の型定義
@@ -63,7 +63,6 @@ export interface DisplayProblemProps {
 export interface SplitterProps {
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  editorContent: string | null;
 }
 
 // PanelContextに対する型定義
@@ -85,7 +84,6 @@ export interface InputSectionProps {
   setReviewData: Dispatch<SetStateAction<ReviewResponse | null>>;
   setIsDisabledData: Dispatch<SetStateAction<boolean>>;
   getIsDisabledData: boolean;
-  editorContent: string | null;
 }
 
 // ReviewSectionに対する型定義

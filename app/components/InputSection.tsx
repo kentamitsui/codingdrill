@@ -18,7 +18,6 @@ import { useLocalStorageContext } from "../feature/localStorage/localStorageCont
 export default function InputSection({
   setIsDisabledData,
   getIsDisabledData,
-  editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
 }: InputSectionProps) {
   const {
     difficulty,
@@ -29,6 +28,7 @@ export default function InputSection({
     jsonFormattedProblemContent,
     setJsonFormattedReviewContent,
     loadedEditorLanguage,
+    loadedEditorContent,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
@@ -57,18 +57,17 @@ export default function InputSection({
   const [editorTheme, setEditorTheme] = useState("vs");
   const editorRef = useRef<any>(null);
 
+  // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setFontSize(event.target.value);
   };
-
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setEditorLanguage(event.target.value);
   };
-
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
@@ -84,17 +83,18 @@ export default function InputSection({
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
   useEffect(() => {
-    if (editorRef.current && editorContent) {
-      editorRef.current.setValue(editorContent); // エディタを更新
+    if (loadedEditorContent) {
+      editorRef.current.setValue(loadedEditorContent); // エディタを更新
     }
-  }, [editorContent]);
+  }, [loadedEditorContent]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
     if (editorRef.current) {
-      const editorContent = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
+      const copyEditorvalue = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
+
       navigator.clipboard
-        .writeText(editorContent)
+        .writeText(copyEditorvalue)
         .then(() => {
           alert("Copied to clipboard!");
         })
@@ -110,11 +110,10 @@ export default function InputSection({
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
+    // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
     setIsDisabledData(true);
-    const editorContent = editorRef.current.getValue();
+    const currentEditorValue = editorRef.current.getValue();
     try {
-      // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      // setDisabled(true);
       const response = await fetch("/api/createReview", {
         method: "POST",
         headers: {
@@ -126,7 +125,7 @@ export default function InputSection({
           // JSON形式から整形された問題文を渡す
           formattedProblemContent,
           editorLanguage,
-          editorContent,
+          currentEditorValue,
         }),
       });
 
@@ -145,7 +144,7 @@ export default function InputSection({
         selectedLanguage,
         problemContent: jsonFormattedProblemContent,
         editorLanguage,
-        editorContent,
+        editorContent: currentEditorValue,
         evaluation: JsonText,
       });
 

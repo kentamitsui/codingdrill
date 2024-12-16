@@ -11,7 +11,6 @@ import { usePanelContext } from "./PanelContext";
 const Split_Vertical: React.FC<SplitterProps> = ({
   setIsDisabledData,
   getIsDisabledData,
-  editorContent,
 }) => {
   const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
@@ -49,8 +48,6 @@ const Split_Vertical: React.FC<SplitterProps> = ({
         problemData={JSON.stringify(formattedProblemContent)}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
-        // localStorageEditorLanguage={editorLanguage}
-        editorContent={editorContent}
       />
       <ReviewSection getIsDisabledData={getIsDisabledData} />
     </Split>
@@ -60,7 +57,6 @@ const Split_Vertical: React.FC<SplitterProps> = ({
 const Split_Horizontal: React.FC<SplitterProps> = ({
   setIsDisabledData,
   getIsDisabledData,
-  editorContent,
 }) => {
   const { resetPanelSizes } = usePanelContext();
   const initialSizes = [50, 50];
@@ -95,7 +91,6 @@ const Split_Horizontal: React.FC<SplitterProps> = ({
         <Split_Vertical
           setIsDisabledData={setIsDisabledData}
           getIsDisabledData={getIsDisabledData}
-          editorContent={editorContent}
         />
       </Split>
     </Suspense>
