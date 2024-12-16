@@ -40,8 +40,10 @@ export interface AppContextProps {
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
   reviewData: string[];
   setReviewData: React.Dispatch<React.SetStateAction<never[]>>;
-  jsonFormattedProblemContent: string;
-  setJsonFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
+  jsonFormattedProblemContent: string | null;
+  setJsonFormattedProblemContent: React.Dispatch<
+    React.SetStateAction<string | null>
+  >;
   jsonFormattedReviewContent: ReviewResponse | null;
   setJsonFormattedReviewContent: React.Dispatch<
     React.SetStateAction<ReviewResponse | null>

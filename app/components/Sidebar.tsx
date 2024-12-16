@@ -65,7 +65,7 @@ export default function Sidebar({
   const handleCreateProblem = async () => {
     try {
       // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
-      setJsonFormattedProblemContent("");
+      setJsonFormattedProblemContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsDisabledData(true);
 

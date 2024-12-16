@@ -112,7 +112,9 @@ export default function InputSection({
   const handleCreateReview = async () => {
     // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
     setIsDisabledData(true);
+
     const currentEditorValue = editorRef.current.getValue();
+
     try {
       const response = await fetch("/api/createReview", {
         method: "POST",
