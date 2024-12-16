@@ -82,9 +82,13 @@ export default function InputSection({
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
+  // また、Sidebar.tsxでhandleCreateProblem()が実行された際は、
+  // エディタを空にする
   useEffect(() => {
     if (loadedEditorContent) {
       editorRef.current.setValue(loadedEditorContent); // エディタを更新
+    } else if (loadedEditorContent === null && editorRef.current) {
+      editorRef.current.setValue("");
     }
   }, [loadedEditorContent]);
 

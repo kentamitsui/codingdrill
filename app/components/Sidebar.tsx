@@ -64,8 +64,9 @@ export default function Sidebar({
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
-      // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
+      // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
       setJsonFormattedProblemContent(null);
+      setLoadedEditorContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsDisabledData(true);
 

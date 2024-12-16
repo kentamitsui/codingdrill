@@ -44,8 +44,6 @@ const Split_Vertical: React.FC<SplitterProps> = ({
       onDragEnd={handleDragEnd}
     >
       <InputSection
-        setReviewData={setReviewContent}
-        problemData={JSON.stringify(formattedProblemContent)}
         setIsDisabledData={setIsDisabledData}
         getIsDisabledData={getIsDisabledData}
       />
