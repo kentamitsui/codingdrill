@@ -32,7 +32,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // APIから出力されたJSON形式のデータ管理
   const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
     useState<ReviewResponse | null>(null);
-  const [reviewData, setReviewData] = useState([]);
+  // ローカルストレージから取得した
+  const [saveData, setSaveData] = useState([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
   const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
@@ -42,10 +43,12 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     null,
   );
 
+  // ローカルストレージに
   useEffect(() => {
-    const savedData = JSON.parse(localStorage.getItem("savedData")) || [];
-    if (savedData === undefined) return;
-    setReviewData(savedData);
+    const savedLocalStorageData =
+      JSON.parse(localStorage.getItem("savedData")) || [];
+    if (savedLocalStorageData === undefined) return;
+    setSaveData(savedLocalStorageData);
   }, []);
 
   return (
@@ -65,8 +68,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setJsonFormattedProblemContent,
         formattedProblemContent,
         setFormattedProblemContent,
-        reviewData,
-        setReviewData,
+        saveData,
+        setSaveData,
         jsonFormattedReviewContent,
         setJsonFormattedReviewContent,
         loadedSelectedLanguage,
