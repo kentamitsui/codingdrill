@@ -17,7 +17,7 @@ const updateSelectBox = (data) => {
     data.forEach((entry) => {
       const option = document.createElement("option");
       option.value = entry.id;
-      option.textContent = `Data ${entry.id}: ${entry.timestamp}`;
+      option.textContent = `Data ${entry.id}: ${entry.timestamp} - difficulty: ${entry.difficulty} / data type: ${entry.dataType} / topic: ${entry.topic} / translate: ${entry.selectedLanguage}`;
       selectElement.appendChild(option);
     });
   }

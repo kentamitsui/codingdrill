@@ -202,7 +202,7 @@ export default function Sidebar() {
           ) : (
             saveData.map((entry, index) => (
               <option key={`${entry.id}-${index}`} value={entry.id}>
-                {`Data ${entry.id}:  ${entry.timestamp}`}
+                {`Data ${entry.id}: ${entry.timestamp} - difficulty: ${entry.difficulty} / data type: ${entry.dataType} / topic: ${entry.topic} / translate: ${entry.selectedLanguage}`}
               </option>
             ))
           )}
