@@ -192,7 +192,7 @@ export default function Sidebar() {
       <div className="mt-auto flex flex-col gap-1">
         <label htmlFor="savedata"></label>
         <select
-          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
           value={currentSelectedSavedData}
