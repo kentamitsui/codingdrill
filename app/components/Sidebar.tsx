@@ -117,85 +117,88 @@ export default function Sidebar() {
   };
 
   return (
-    <aside className="flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
-      <div className="flex flex-row">
-        <Options
-          label={"select-difficulty"}
-          data={menuData.menuLists.difficulty}
-          name={"difficulty"}
-          defaultSelected={"difficulty"}
-          setSelected={setDifficulty}
-          savedLocalStorageValue={difficulty}
-        />
-        {/* <Image
+    <aside className="flex max-h-[300px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
+      <div className="grid gap-2">
+        <div className="flex flex-row">
+          <Options
+            label={"select-difficulty"}
+            data={menuData.menuLists.difficulty}
+            name={"difficulty"}
+            defaultSelected={"difficulty"}
+            setSelected={setDifficulty}
+            savedLocalStorageValue={difficulty}
+          />
+          {/* <Image
           src={menuData.svgIcon.difficulty}
           alt=""
           className="relative -ml-10"
           width={20}
           height={20}
         /> */}
-      </div>
-      <div className="flex flex-row">
-        <Options
-          label={"select-type"}
-          data={menuData.menuLists.dataType}
-          name={"type"}
-          defaultSelected={"data type"}
-          setSelected={setDataType}
-          savedLocalStorageValue={dataType}
-        />
-        {/* <Image
+        </div>
+        <div className="flex flex-row">
+          <Options
+            label={"select-type"}
+            data={menuData.menuLists.dataType}
+            name={"type"}
+            defaultSelected={"data type"}
+            setSelected={setDataType}
+            savedLocalStorageValue={dataType}
+          />
+          {/* <Image
           src={menuData.svgIcon.data}
           alt=""
           className="relative -ml-10"
           width={20}
           height={20}
         /> */}
-      </div>
-      <div className="flex flex-row">
-        <Options
-          label={"select-topic"}
-          data={menuData.menuLists.topics}
-          name={"topic"}
-          defaultSelected={"topic"}
-          setSelected={setTopic}
-          savedLocalStorageValue={topic}
-        />
-        {/* <Image
+        </div>
+        <div className="flex flex-row">
+          <Options
+            label={"select-topic"}
+            data={menuData.menuLists.topics}
+            name={"topic"}
+            defaultSelected={"topic"}
+            setSelected={setTopic}
+            savedLocalStorageValue={topic}
+          />
+          {/* <Image
           src={menuData.svgIcon.topic}
           alt=""
           className="relative -ml-10"
           width={20}
           height={20}
         /> */}
-      </div>
-      <div className="flex flex-row">
-        <Options
-          label={"select-display-language"}
-          data={menuData.menuLists.displayLanguages}
-          name={"display-language"}
-          defaultSelected={"translate"}
-          setSelected={setSelectedLanguage}
-          savedLocalStorageValue={selectedLanguage}
-        />
-        {/* <Image
+        </div>
+        <div className="flex flex-row">
+          <Options
+            label={"select-display-language"}
+            data={menuData.menuLists.displayLanguages}
+            name={"display-language"}
+            defaultSelected={"translate"}
+            setSelected={setSelectedLanguage}
+            savedLocalStorageValue={selectedLanguage}
+          />
+          {/* <Image
           src={menuData.svgIcon.translate}
           alt=""
           className="relative -ml-10"
           width={20}
           height={20}
         /> */}
+        </div>
+        <Button
+          id="create"
+          type="button"
+          text="Create Problem"
+          onClick={handleCreateProblem}
+        />
       </div>
-      <Button
-        id="create"
-        type="button"
-        text="Create Problem"
-        onClick={handleCreateProblem}
-      />
-      <div className="mt-auto flex flex-col gap-1">
+
+      <div className="mt-auto flex flex-col gap-2">
         <label htmlFor="savedata"></label>
         <select
-          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`mx-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
           value={currentSelectedSavedData}
@@ -217,19 +220,43 @@ export default function Sidebar() {
             ))
           )}
         </select>
-        <Button id="load" type="button" text="load" onClick={handleLoadData} />
-        <Button
-          id="delete"
-          type="button"
-          text="delete"
-          onClick={handleDeleteSelected}
-        />
-        <Button
-          id="delete-all"
-          type="button"
-          text="delete all"
-          onClick={clearLocalStorage}
-        />
+        <details
+          className="relative mx-1 mb-2 mt-auto flex w-[142px] flex-col"
+          onMouseEnter={(event) => (event.currentTarget.open = true)}
+          onMouseLeave={(event) => (event.currentTarget.open = false)}
+        >
+          <summary
+            className={`w-[142px] rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+              isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+            }`}
+          >
+            Options
+          </summary>
+          <div
+            className={`absolute -right-[2px] z-10 flex w-[150px] flex-col gap-2 rounded-b-md bg-gray-200 p-2 shadow-lg dark:bg-[#0d1117] ${
+              isDisabled ? "pointer-events-none opacity-50" : ""
+            }`}
+          >
+            <Button
+              id="load"
+              type="button"
+              text="load"
+              onClick={handleLoadData}
+            />
+            <Button
+              id="delete"
+              type="button"
+              text="delete"
+              onClick={handleDeleteSelected}
+            />
+            <Button
+              id="delete-all"
+              type="button"
+              text="delete all"
+              onClick={clearLocalStorage}
+            />
+          </div>
+        </details>
       </div>
     </aside>
   );
