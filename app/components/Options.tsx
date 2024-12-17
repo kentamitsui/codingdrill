@@ -11,36 +11,34 @@ export const Options: React.FC<SelectProps> = ({
   savedLocalStorageValue,
 }) => {
   const { isDisabled } = useAppContext();
-  const [selected, setLocalSelected] = useState("");
+  const [currentSelected, setCurrentSelected] = useState("");
 
   useEffect(() => {
-    // 更新関数を用いて、loadボタンが押された時にローカルストレージのデータを呼び出し、optionタグの文字列を動的に変更する
+    // 更新関数を用いて、loadボタンが押された時にローカルストレージのデータを呼び出し、optionタグを動的に変更する
     if (savedLocalStorageValue !== null) {
-      setLocalSelected(savedLocalStorageValue);
+      setCurrentSelected(savedLocalStorageValue);
     }
   }, [savedLocalStorageValue]);
 
+  // 選択が変更される度に、useStateで値を管理・変更する
   const handleChangeColor = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const currentValue = event.target.value;
-    setLocalSelected(currentValue);
-
-    if (setSelected) {
-      setSelected(currentValue);
-    }
+    setCurrentSelected(currentValue);
+    setSelected(currentValue);
   };
 
   return (
     <>
       <label htmlFor={label}></label>
       <select
-        className={`m-1 w-[142px] rounded-md p-1 duration-300 ${selected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${selected !== "" ? "bg-slate-700" : "bg-menu"} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
+        className={`m-1 w-[142px] rounded-md p-1 duration-300 ${currentSelected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelected !== "" ? "bg-slate-700" : "bg-menu"} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
         disabled={isDisabled}
-        value={selected}
+        value={currentSelected}
         onChange={handleChangeColor}
       >
         <option
-          disabled={selected !== "" ? true : false}
+          disabled={currentSelected !== "" ? true : false}
           className="text-start"
         >
           {defaultSelected}
