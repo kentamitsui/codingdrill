@@ -25,6 +25,7 @@ export default function Sidebar() {
     setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
+    loadedEditorContent,
     setLoadedEditorContent,
   } = useAppContext();
   // セーブデータの選択時に背景色の状態管理に使用
@@ -72,10 +73,12 @@ export default function Sidebar() {
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
+    console.log(loadedEditorContent);
+
     try {
       // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
       setJsonFormattedProblemContent(null);
-      setLoadedEditorContent(null);
+      setLoadedEditorContent("");
       setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsDisabled(true);
