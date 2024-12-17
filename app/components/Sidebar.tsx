@@ -202,7 +202,7 @@ export default function Sidebar() {
           ) : (
             reviewData.map((entry, index) => (
               <option key={`${entry.id}-${index}`} value={entry.id}>
-                {`${entry.timestamp} - Data ${entry.id}`}
+                {`Data ${entry.id}:  ${entry.timestamp}`}
               </option>
             ))
           )}
