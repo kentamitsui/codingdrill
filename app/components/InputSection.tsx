@@ -1,3 +1,4 @@
+import * as monaco from "monaco-editor";
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
@@ -46,7 +47,12 @@ export default function InputSection() {
   const [fontSize, setFontSize] = useState("14");
   const [editorLanguage, setEditorLanguage] = useState("python");
   const [editorTheme, setEditorTheme] = useState("vs-dark");
-  const editorRef = useRef<string>("");
+  // refにMonaco Editorインスタンスを保持
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  // onMountでMonaco Editorインスタンスをrefに格納
+  const handleEditorMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
+    editorRef.current = editor;
+  };
 
   // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
@@ -76,12 +82,12 @@ export default function InputSection() {
   // また、Sidebar.tsxでhandleCreateProblem()が実行された際は、
   // エディタを空にする
   useEffect(() => {
-    if (loadedEditorContent !== "") {
-      editorRef.current.setValue(loadedEditorContent); // エディタを更新
-    } else if (editorRef.current !== "") {
-      editorRef.current.setValue("");
-    } else if (editorRef.current !== "" && loadedEditorContent === "") {
-      editorRef.current.setValue("");
+    if (editorRef.current) {
+      if (loadedEditorContent !== null) {
+        editorRef.current.setValue(loadedEditorContent);
+      } else {
+        editorRef.current.setValue(""); // 正常にsetValueが呼び出される
+      }
     }
   }, [loadedEditorContent]);
 
@@ -266,9 +272,7 @@ export default function InputSection() {
           editorLanguage={editorLanguage}
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
-          onMount={(editor) => {
-            editorRef.current = editor;
-          }}
+          onMount={handleEditorMount}
         />
       </div>
     </section>
