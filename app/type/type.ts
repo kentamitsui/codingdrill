@@ -46,8 +46,8 @@ export interface AppContextProps {
   setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   loadedEditorLanguage: string | null;
   setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
-  loadedEditorContent: string;
-  setLoadedEditorContent: React.Dispatch<React.SetStateAction<string>>;
+  loadedEditorContent: string | null;
+  setLoadedEditorContent: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 // PanelContextに対する型定義

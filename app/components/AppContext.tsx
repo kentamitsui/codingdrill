@@ -38,7 +38,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
     string | null
   >("");
-  const [loadedEditorContent, setLoadedEditorContent] = useState<string>("");
+  const [loadedEditorContent, setLoadedEditorContent] = useState<string | null>(
+    null,
+  );
 
   // ローカルストレージに
   useEffect(() => {
