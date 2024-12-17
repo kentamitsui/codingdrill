@@ -19,6 +19,7 @@ export default function InputSection() {
     setJsonFormattedReviewContent,
     loadedEditorLanguage,
     loadedEditorContent,
+    setLoadedEditorContent,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
@@ -45,7 +46,7 @@ export default function InputSection() {
   const [fontSize, setFontSize] = useState("14");
   const [editorLanguage, setEditorLanguage] = useState("python");
   const [editorTheme, setEditorTheme] = useState("vs-dark");
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<string>("");
 
   // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
@@ -75,9 +76,11 @@ export default function InputSection() {
   // また、Sidebar.tsxでhandleCreateProblem()が実行された際は、
   // エディタを空にする
   useEffect(() => {
-    if (loadedEditorContent) {
+    if (loadedEditorContent !== "") {
       editorRef.current.setValue(loadedEditorContent); // エディタを更新
-    } else if (loadedEditorContent === null && editorRef.current) {
+    } else if (editorRef.current !== "") {
+      editorRef.current.setValue("");
+    } else if (editorRef.current !== "" && loadedEditorContent === "") {
       editorRef.current.setValue("");
     }
   }, [loadedEditorContent]);
@@ -105,10 +108,10 @@ export default function InputSection() {
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
     // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
+    const currentEditorValue = editorRef.current.getValue();
+
     setIsDisabled(true);
     setJsonFormattedReviewContent(null);
-
-    const currentEditorValue = editorRef.current.getValue();
 
     try {
       const response = await fetch("/api/createReview", {
@@ -147,6 +150,11 @@ export default function InputSection() {
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setJsonFormattedReviewContent(JsonText);
+
+      // setLoadedEditorContentに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
+      // ロード直後にもう一度問題作成を行った場合にエディタの中を空になる処理が実行される
+      // このセット関数を実行しないと、ロード直後に問題文を作成した場合にエディタの中が空にならないバグが発生する
+      setLoadedEditorContent(currentEditorValue);
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {

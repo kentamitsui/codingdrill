@@ -32,8 +32,8 @@ export interface AppContextProps {
   setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   formattedProblemContent: string;
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
-  saveData: string;
-  setSaveData: React.Dispatch<React.SetStateAction<string>>;
+  saveData: string[];
+  setSaveData: React.Dispatch<React.SetStateAction<string[]>>;
   jsonFormattedProblemContent: string | null;
   setJsonFormattedProblemContent: React.Dispatch<
     React.SetStateAction<string | null>
@@ -46,8 +46,8 @@ export interface AppContextProps {
   setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   loadedEditorLanguage: string | null;
   setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
-  loadedEditorContent: string | null;
-  setLoadedEditorContent: React.Dispatch<React.SetStateAction<string | null>>;
+  loadedEditorContent: string;
+  setLoadedEditorContent: React.Dispatch<React.SetStateAction<string>>;
 }
 
 // PanelContextに対する型定義

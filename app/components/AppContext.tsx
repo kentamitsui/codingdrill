@@ -25,23 +25,20 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
   // *** テキスト形式なので、ProblemSection.tsxで整形して表示は出来ない ***
-  const [formattedProblemContent, setFormattedProblemContent] = useState<
-    string | null
-  >(null);
+  const [formattedProblemContent, setFormattedProblemContent] =
+    useState<string>("");
 
   // APIから出力されたJSON形式のデータ管理
   const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
     useState<ReviewResponse | null>(null);
   // ローカルストレージから取得した
-  const [saveData, setSaveData] = useState([]);
+  const [saveData, setSaveData] = useState<string[]>([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
   const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
     string | null
   >("");
-  const [loadedEditorContent, setLoadedEditorContent] = useState<string | null>(
-    null,
-  );
+  const [loadedEditorContent, setLoadedEditorContent] = useState<string>("");
 
   // ローカルストレージに
   useEffect(() => {

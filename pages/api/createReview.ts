@@ -21,13 +21,13 @@ export default async function handler(
     selectedLanguage,
     formattedProblemContent,
     editorLanguage,
-    editorContent,
+    currentEditorValue,
   } = req.body;
   const modified = process.env.CODE;
   const promptTemplate =
     formattedProblemContent +
     modified?.replace("%language%", editorLanguage) +
-    editorContent;
+    currentEditorValue;
 
   if (!promptTemplate) {
     return res
