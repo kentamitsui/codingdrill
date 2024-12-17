@@ -19,7 +19,7 @@ export default function Sidebar() {
     setTopic,
     selectedLanguage,
     setSelectedLanguage,
-    reviewData,
+    saveData,
     setJsonFormattedProblemContent,
     setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
@@ -195,12 +195,12 @@ export default function Sidebar() {
           <option className="text-start" value="">
             Save Data
           </option>
-          {reviewData.length === 0 ? (
+          {saveData.length === 0 ? (
             <option value="" disabled={true}>
               No saved data
             </option>
           ) : (
-            reviewData.map((entry, index) => (
+            saveData.map((entry, index) => (
               <option key={`${entry.id}-${index}`} value={entry.id}>
                 {`Data ${entry.id}:  ${entry.timestamp}`}
               </option>
