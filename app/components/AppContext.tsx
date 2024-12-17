@@ -25,8 +25,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
   // *** テキスト形式なので、ProblemSection.tsxで整形して表示は出来ない ***
-  const [formattedProblemContent, setFormattedProblemContent] =
-    useState<string>("");
+  const [formattedProblemContent, setFormattedProblemContent] = useState<
+    string | null
+  >(null);
 
   // APIから出力されたJSON形式のデータ管理
   const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =

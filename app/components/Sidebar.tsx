@@ -92,7 +92,7 @@ export default function Sidebar() {
       }
 
       const JsonText = JSON.parse(responseText);
-      // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
+      // AppContextのセット関数にデータを設置する
       setJsonFormattedProblemContent(JsonText);
       setSelectedLanguage(selectedLanguage);
     } catch (error) {
