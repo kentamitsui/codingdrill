@@ -4,6 +4,7 @@ import Options from "./Options";
 import Button from "./Button";
 import { useAppContext } from "./AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
+import { useState } from "react";
 // import Image from "next/image";
 
 export default function Sidebar() {
@@ -26,8 +27,19 @@ export default function Sidebar() {
     setLoadedEditorLanguage,
     setLoadedEditorContent,
   } = useAppContext();
+  // セーブデータの選択時に背景色の状態管理に使用
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState("");
+
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
+
+  // セーブデータの値を動的に変更する
+  const handleChangeSavedData = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const currentValue = event.target.value;
+    setCurrentSelectedSavedData(currentValue);
+  };
 
   // ローカルストレージのデータを各要素に反映する
   const handleLoadData = () => {
@@ -178,26 +190,21 @@ export default function Sidebar() {
         onClick={handleCreateProblem}
       />
       <div className="mt-auto flex flex-col gap-1">
-        <div
-          hidden
-          id="speech-bubble"
-          className="rounded-[15px] bg-slate-500 p-1 text-center shadow-md"
-        >
-          success save!
-        </div>
         <label htmlFor="savedata"></label>
         <select
-          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
+          value={currentSelectedSavedData}
           disabled={isDisabled}
+          onChange={handleChangeSavedData}
         >
           <option className="text-start" value="">
             Save Data
           </option>
           {saveData.length === 0 ? (
             <option value="" disabled={true}>
-              No saved data
+              no saved data
             </option>
           ) : (
             saveData.map((entry, index) => (
