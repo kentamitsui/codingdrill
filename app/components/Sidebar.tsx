@@ -25,7 +25,6 @@ export default function Sidebar() {
     setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
-    loadedEditorContent,
     setLoadedEditorContent,
   } = useAppContext();
   // セーブデータの選択時に背景色の状態管理に使用
@@ -213,10 +212,10 @@ export default function Sidebar() {
         <details
           className="relative mt-auto flex w-[142px] flex-col"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
-          // onMouseLeave={(event) => (event.currentTarget.open = false)}
+          onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
-            className={`w-full rounded-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+            className={`w-full rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
               isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
             }`}
           >
