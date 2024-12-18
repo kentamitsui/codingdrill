@@ -187,7 +187,7 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className="relative ml-auto rounded-tr-md text-sm"
+          className="relative ml-auto rounded-tr-md"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
@@ -199,7 +199,7 @@ export default function InputSection() {
             Options
           </summary>
           <div
-            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 bg-opacity-0 p-[8px_4px_4px_4px] ${
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-sm ${
               isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
