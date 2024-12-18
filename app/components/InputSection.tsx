@@ -204,6 +204,9 @@ export default function InputSection() {
             }`}
           >
             {/* Font Size Select */}
+            <label htmlFor="fontsize-select" className="sr-only">
+              fontsize select
+            </label>
             <select
               id="fontsize-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
@@ -218,6 +221,9 @@ export default function InputSection() {
               ))}
             </select>
             {/* Theme Select */}
+            <label htmlFor="theme-select" className="sr-only">
+              theme select
+            </label>
             <select
               id="theme-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
@@ -231,6 +237,9 @@ export default function InputSection() {
               <option value="hc-black">hc-black</option>
             </select>
             {/* Language Select */}
+            <label htmlFor="language-select" className="sr-only">
+              language select
+            </label>
             <select
               id="language-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
