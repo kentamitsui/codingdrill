@@ -6,6 +6,7 @@ import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
+import Button from "./Button";
 
 export default function InputSection() {
   const {
@@ -188,7 +189,7 @@ export default function InputSection() {
         <details
           className="relative ml-auto rounded-tr-md"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
-          onMouseLeave={(event) => (event.currentTarget.open = false)}
+          // onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
@@ -198,7 +199,7 @@ export default function InputSection() {
             Options
           </summary>
           <div
-            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-b-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 bg-opacity-0 p-[8px_4px_4px_4px] ${
               isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
@@ -219,7 +220,7 @@ export default function InputSection() {
             {/* Theme Select */}
             <select
               id="theme-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 pt-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
               disabled={isDisabled}
               onChange={handleThemeChange}
@@ -246,22 +247,18 @@ export default function InputSection() {
               )}
             </select>
             {/* Buttons */}
-            <button
+            <Button
               id="button-Copy-CodeInputArea"
-              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-              disabled={isDisabled}
+              type="button"
+              text="copy"
               onClick={copyToClipboard}
-            >
-              Copy
-            </button>
-            <button
+            />
+            <Button
               id="submit"
-              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-              disabled={isDisabled}
+              type="button"
+              text="submit"
               onClick={handleCreateReview}
-            >
-              Submit
-            </button>
+            />
           </div>
         </details>
       </div>
