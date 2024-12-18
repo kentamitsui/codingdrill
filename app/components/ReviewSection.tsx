@@ -3,8 +3,6 @@ import { useAppContext } from "./AppContext";
 export const ReviewSection: React.FC = () => {
   const { isDisabled, jsonFormattedReviewContent } = useAppContext();
 
-  // console.log(jsonFormattedReviewContent);
-
   const copyToClipboard = () => {
     const explanationOfTheAlgorithm = jsonFormattedReviewContent
       ? `explanation of the algorithm:\n${jsonFormattedReviewContent.generalEvaluation.explanationOfTheAlgorithm}\n\n`

@@ -10,6 +10,7 @@ export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
+    setTheme("dark");
     setMounted(true);
 
     return () => {
