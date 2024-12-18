@@ -38,10 +38,15 @@ export const Options: React.FC<SelectProps> = ({
         disabled={isDisabled}
         value={currentSelected}
         onChange={handleChangeColor}
+        // onMouseEnter={(event) => (event.currentTarget.open = true)}
+        // onMouseLeave={(event) => (event.currentTarget.open = false)}
       >
         <option
-          disabled={currentSelected !== "" ? true : false}
+          disabled={
+            currentSelected === "" || currentSelected !== "" ? true : false
+          }
           className="text-start"
+          value={""}
         >
           {defaultSelected}
         </option>
