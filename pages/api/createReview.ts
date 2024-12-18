@@ -43,8 +43,6 @@ export default async function handler(
     ) +
     process.env.PROMPT_CHECK?.replace("%display_language%", selectedLanguage);
 
-  // console.log(modifiedPrompt);
-
   try {
     const request = await openai.chat.completions.create({
       model: "gpt-4o-mini",

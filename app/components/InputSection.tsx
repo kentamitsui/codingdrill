@@ -179,20 +179,20 @@ export default function InputSection() {
       className="flex flex-grow flex-col overflow-hidden"
       style={{ height: "100%" }} // 親要素が高さを管理
     >
-      <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
+      <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] dark:border-[#1e1e1e] dark:bg-[#0d1117]">
         <div
           id="codeInputArea-title"
-          className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
+          className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem] font-bold"
         >
           Code
         </div>
         <details
-          className="relative ml-auto rounded-tr-md"
+          className="relative ml-auto rounded-tr-md text-sm"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
-            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
               isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
             }`}
           >
@@ -209,7 +209,7 @@ export default function InputSection() {
             </label>
             <select
               id="fontsize-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={fontSize}
               disabled={isDisabled}
               onChange={handleFontSizeChange}
@@ -226,7 +226,7 @@ export default function InputSection() {
             </label>
             <select
               id="theme-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
               disabled={isDisabled}
               onChange={handleThemeChange}
@@ -242,7 +242,7 @@ export default function InputSection() {
             </label>
             <select
               id="language-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorLanguage}
               disabled={isDisabled}
               onChange={handleLanguageChange}
