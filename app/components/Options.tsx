@@ -29,7 +29,9 @@ export const Options: React.FC<SelectProps> = ({
 
   return (
     <>
-      {/* <label htmlFor={label}></label> */}
+      <label htmlFor={label} className="sr-only">
+        {label}
+      </label>
       <select
         className={`w-full rounded-md p-1 duration-300 ${currentSelected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelected !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelected !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
