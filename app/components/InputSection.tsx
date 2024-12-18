@@ -206,7 +206,7 @@ export default function InputSection() {
             {/* Font Size Select */}
             <select
               id="fontsize-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={fontSize}
               disabled={isDisabled}
               onChange={handleFontSizeChange}
@@ -220,7 +220,7 @@ export default function InputSection() {
             {/* Theme Select */}
             <select
               id="theme-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 pt-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
               disabled={isDisabled}
               onChange={handleThemeChange}
@@ -233,7 +233,7 @@ export default function InputSection() {
             {/* Language Select */}
             <select
               id="language-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-sm duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorLanguage}
               disabled={isDisabled}
               onChange={handleLanguageChange}
