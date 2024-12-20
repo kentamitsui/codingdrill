@@ -52,12 +52,6 @@ const ProblemSection: React.FC = () => {
     const functionSignature = jsonFormattedProblemContent
       ? `function Signature\n${jsonFormattedProblemContent.functionSignature}\n\n`
       : "";
-    const inputFormat = jsonFormattedProblemContent
-      ? `inputFormat\n${jsonFormattedProblemContent.inputFormat}\n\n`
-      : "";
-    const outputFormat = jsonFormattedProblemContent
-      ? `outputFormat\n${jsonFormattedProblemContent.outputFormat}\n\n`
-      : "";
     const size = jsonFormattedProblemContent
       ? `size\n${jsonFormattedProblemContent.constraints.size}\n\n`
       : "";
@@ -83,13 +77,8 @@ const ProblemSection: React.FC = () => {
     const edgeCase2 = jsonFormattedProblemContent
       ? `edgeCase 2\nInput: ${jsonFormattedProblemContent.edgeCase2.input}\nOutput: ${jsonFormattedProblemContent.edgeCase2.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase2.explanation}\n\n`
       : "";
-    // 誤った例題について
-    const negativeExamples = jsonFormattedProblemContent
-      ? `Negative examples\nInvalid case\nTitle: ${jsonFormattedProblemContent.negativeExamples[0].invalid.title}\nInput: ${jsonFormattedProblemContent.negativeExamples[0].invalid.input}\nOutput: ${jsonFormattedProblemContent.negativeExamples[0].invalid.output}\nExpected error output: ${jsonFormattedProblemContent.negativeExamples[0].invalid.expectedErrorOutput}\nExplanation: ${jsonFormattedProblemContent.negativeExamples[0].invalid.explanation}\n\nOut of range\nTitle: ${jsonFormattedProblemContent.negativeExamples[1].outOfRange.title}\nInput: ${jsonFormattedProblemContent.negativeExamples[1].outOfRange.input}\nOutput: ${jsonFormattedProblemContent.negativeExamples[1].outOfRange.output}\nExpected error output: ${jsonFormattedProblemContent.negativeExamples[1].outOfRange.expectedErrorOutput}\nExplanation: ${jsonFormattedProblemContent.negativeExamples[1].outOfRange.explanation}\n\n`
-      : "";
-    // 正誤例について
-    const comparativeAnalysis = jsonFormattedProblemContent
-      ? `Comparative analysis\ndifference: ${jsonFormattedProblemContent.comparativeAnalysis.differences}\nGuidelines for improvement: ${jsonFormattedProblemContent.comparativeAnalysis.guidelinesForImprovement}\n\n`
+    const edgeCase3 = jsonFormattedProblemContent
+      ? `edgeCase 2\nInput: ${jsonFormattedProblemContent.edgeCase3.input}\nOutput: ${jsonFormattedProblemContent.edgeCase3.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase3.explanation}\n\n`
       : "";
     // 要件等について
     const analysis = jsonFormattedProblemContent
@@ -103,8 +92,6 @@ const ProblemSection: React.FC = () => {
     const formattedProblemContent =
       description +
       functionSignature +
-      inputFormat +
-      outputFormat +
       size +
       valueRange +
       kRange +
@@ -113,8 +100,7 @@ const ProblemSection: React.FC = () => {
       example3 +
       edgeCase1 +
       edgeCase2 +
-      negativeExamples +
-      comparativeAnalysis +
+      edgeCase3 +
       analysis +
       hints;
 
@@ -165,16 +151,6 @@ const ProblemSection: React.FC = () => {
           />
           <ReusableParagraph
             content={jsonFormattedProblemContent}
-            titleText="Input Format"
-            paragraphContent={jsonFormattedProblemContent?.inputFormat}
-          />
-          <ReusableParagraph
-            content={jsonFormattedProblemContent}
-            titleText="Output Format"
-            paragraphContent={jsonFormattedProblemContent?.outputFormat}
-          />
-          <ReusableParagraph
-            content={jsonFormattedProblemContent}
             titleText="Constraints"
             paragraphContent={`Size: ${jsonFormattedProblemContent?.constraints.size}\nValue Range: ${jsonFormattedProblemContent?.constraints.valueRange}\nK Range: ${jsonFormattedProblemContent?.constraints.kRange}`}
           />
@@ -206,32 +182,11 @@ const ProblemSection: React.FC = () => {
             titleText="Edge Case 2"
             paragraphContent={`Input: ${jsonFormattedProblemContent?.edgeCase2.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase2.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase2.explanation}`}
           />
-          {/* negative example */}
-          <div className="mt-8 grid gap-3">
-            <ReusableParagraph
-              content={jsonFormattedProblemContent}
-              titleText="Negative examples"
-              paragraphContent={`Invalid case: ${jsonFormattedProblemContent?.negativeExamples[0].invalid.title}\nInput: ${jsonFormattedProblemContent?.negativeExamples[0].invalid.input}\nError output: ${jsonFormattedProblemContent?.negativeExamples[0].invalid.expectedErrorOutput}\nExplanation: ${jsonFormattedProblemContent?.negativeExamples[0].invalid.explanation}`}
-            />
-            <ReusableParagraph
-              content={jsonFormattedProblemContent}
-              titleText=""
-              paragraphContent={`Out of range case: ${jsonFormattedProblemContent?.negativeExamples[1].outOfRange.title}\nInput: ${jsonFormattedProblemContent?.negativeExamples[1].outOfRange.input}\nError output: ${jsonFormattedProblemContent?.negativeExamples[1].outOfRange.expectedErrorOutput}\nExplanation: ${jsonFormattedProblemContent?.negativeExamples[1].outOfRange.explanation}`}
-            />
-          </div>
-          {/* comparative analysis */}
-          <div className="mt-8 grid gap-3">
-            <ReusableParagraph
-              content={jsonFormattedProblemContent}
-              titleText="Comparative analysis"
-              paragraphContent={`Differences: ${jsonFormattedProblemContent?.comparativeAnalysis.differences}`}
-            />
-            <ReusableParagraph
-              content={jsonFormattedProblemContent}
-              titleText=""
-              paragraphContent={`Guidelines for improvement: ${jsonFormattedProblemContent?.comparativeAnalysis.guidelinesForImprovement}`}
-            />
-          </div>
+          <ReusableParagraph
+            content={jsonFormattedProblemContent}
+            titleText="Edge Case 3"
+            paragraphContent={`Input: ${jsonFormattedProblemContent?.edgeCase3.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase3.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase3.explanation}`}
+          />
           {/* analysis */}
           <div className="mt-8">
             <ReusableParagraph
