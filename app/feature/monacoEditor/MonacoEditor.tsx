@@ -9,6 +9,7 @@ export default function MonacoEditor({
   editorLanguage,
   editorTheme,
   onMount,
+  onChange,
 }: MonacoEditorProps) {
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
@@ -62,6 +63,12 @@ export default function MonacoEditor({
           onMount={(editor) => {
             if (onMount) {
               onMount(editor);
+            }
+          }}
+          // InputSection.tsxから渡されたプロパティをonChangeメソッドで実行する
+          onChange={(value) => {
+            if (onChange) {
+              onChange(value);
             }
           }}
         />

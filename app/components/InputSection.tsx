@@ -1,13 +1,12 @@
 import * as monaco from "monaco-editor";
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, use } from "react";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import Button from "./Button";
-
+import InputAreaButton from "./InputAreaButton";
 export default function InputSection() {
   const {
     isDisabled,
@@ -23,6 +22,7 @@ export default function InputSection() {
     loadedEditorLanguage,
     loadedEditorContent,
     setLoadedEditorContent,
+    setCheckEditorInputed,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
@@ -46,15 +46,24 @@ export default function InputSection() {
     };
   }, []);
 
-  const [fontSize, setFontSize] = useState("14");
-  const [editorLanguage, setEditorLanguage] = useState("python");
-  const [editorTheme, setEditorTheme] = useState("vs-dark");
   // refにMonaco Editorインスタンスを保持
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
   // onMountでMonaco Editorインスタンスをrefに格納
   const handleEditorMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
   };
+
+  const handleEditorChange = (value: string | undefined) => {
+    setIsEditorInputed(value || "");
+    setCheckEditorInputed(value || "");
+  };
+
+  const [fontSize, setFontSize] = useState("14");
+  const [editorLanguage, setEditorLanguage] = useState("python");
+  const [editorTheme, setEditorTheme] = useState("vs-dark");
+  const [isEditorInputed, setIsEditorInputed] = useState(
+    editorRef.current?.getValue(),
+  );
 
   // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
@@ -92,6 +101,14 @@ export default function InputSection() {
       }
     }
   }, [loadedEditorContent]);
+
+  // エディタに入力された内容を取得
+  useEffect(() => {
+    if (editorRef.current) {
+      setIsEditorInputed(editorRef.current?.getValue());
+      setCheckEditorInputed(isEditorInputed);
+    }
+  }, [editorRef.current?.getValue()]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
@@ -263,13 +280,13 @@ export default function InputSection() {
               )}
             </select>
             {/* Buttons */}
-            <Button
+            <InputAreaButton
               id="button-Copy-CodeInputArea"
               type="button"
               text="copy"
               onClick={copyToClipboard}
             />
-            <Button
+            <InputAreaButton
               id="submit"
               type="button"
               text="submit"
@@ -286,6 +303,8 @@ export default function InputSection() {
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
           onMount={handleEditorMount}
+          // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
+          onChange={handleEditorChange}
         />
       </div>
     </section>
