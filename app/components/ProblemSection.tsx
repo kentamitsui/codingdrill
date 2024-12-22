@@ -5,6 +5,7 @@ import { useAppContext } from "./AppContext";
 const ProblemSection: React.FC = () => {
   const {
     isDisabled,
+    isCreateProblem,
     jsonFormattedProblemContent,
     formattedProblemContent,
     setFormattedProblemContent,
@@ -53,13 +54,13 @@ const ProblemSection: React.FC = () => {
       ? `function Signature\n${jsonFormattedProblemContent.functionSignature}\n\n`
       : "";
     const size = jsonFormattedProblemContent
-      ? `size\n${jsonFormattedProblemContent.constraints.size}\n\n`
+      ? `size: ${jsonFormattedProblemContent.constraints.size}\n\n`
       : "";
     const valueRange = jsonFormattedProblemContent
-      ? `valueRange\n${jsonFormattedProblemContent.constraints.valueRange}\n\n`
+      ? `valueRange: ${jsonFormattedProblemContent.constraints.valueRange}\n\n`
       : "";
     const kRange = jsonFormattedProblemContent
-      ? `kRange\n${jsonFormattedProblemContent.constraints.kRange}\n\n`
+      ? `kRange: ${jsonFormattedProblemContent.constraints.kRange}\n\n`
       : "";
     // 例題やエッジケース等について
     const example1 = jsonFormattedProblemContent
@@ -119,6 +120,35 @@ const ProblemSection: React.FC = () => {
       });
   };
 
+  // 問題文作成中のアニメーション
+  const loadingAnimation =
+    isCreateProblem === true ? (
+      <div
+        className="flex flex-row items-baseline justify-center"
+        aria-label="now creating problem"
+      >
+        <p className="mr-3 flex animate-pulse justify-end text-2xl">
+          Now creating
+        </p>
+        <div className="flex flex-row items-center justify-center gap-3">
+          <div
+            className="h-2 w-2 animate-ping rounded-full bg-blue-600"
+            style={{ animationDelay: "0.1s" }}
+          ></div>
+          <div
+            className="h-2 w-2 animate-ping rounded-full bg-blue-600"
+            style={{ animationDelay: "0.125s" }}
+          ></div>
+          <div
+            className="h-2 w-2 animate-ping rounded-full bg-blue-600"
+            style={{ animationDelay: "0.15s" }}
+          ></div>
+        </div>
+      </div>
+    ) : (
+      ""
+    );
+
   return (
     <section
       id="split-horizontal-left"
@@ -137,6 +167,7 @@ const ProblemSection: React.FC = () => {
         </button>
       </div>
       <div className="p-[15px_30px] text-[16px] leading-normal tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
+        {loadingAnimation}
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
           <ReusableParagraph

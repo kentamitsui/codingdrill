@@ -12,6 +12,7 @@ export default function InputSection() {
   const {
     isDisabled,
     setIsDisabled,
+    setIsCreateReview,
     difficulty,
     dataType,
     topic,
@@ -114,10 +115,15 @@ export default function InputSection() {
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
-    // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-    const currentEditorValue = editorRef.current.getValue();
+    const currentEditorValue = editorRef.current
+      ? editorRef.current.getValue()
+      : "";
 
+    // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
     setIsDisabled(true);
+    // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
+    setIsCreateReview(true);
+    // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
     setJsonFormattedReviewContent(null);
 
     try {
@@ -166,6 +172,7 @@ export default function InputSection() {
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
         setIsDisabled(false);
+        setIsCreateReview(false);
       }
     } catch (error) {
       console.error("Error occurred while creating a review:", error);

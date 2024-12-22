@@ -22,6 +22,10 @@ export interface ButtonProps {
 export interface AppContextProps {
   isDisabled: boolean | undefined;
   setIsDisabled: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isCreateProblem: boolean | undefined;
+  setIsCreateProblem: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isCreateReview: boolean | undefined;
+  setIsCreateReview: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   difficulty: string;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   dataType: string;
