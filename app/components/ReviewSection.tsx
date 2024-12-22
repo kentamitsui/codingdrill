@@ -3,6 +3,38 @@ import { useAppContext } from "./AppContext";
 export const ReviewSection: React.FC = () => {
   const { isDisabled, isCreateReview, jsonFormattedReviewContent } =
     useAppContext();
+  interface ReusableParagraphProps {
+    content: string | null;
+    titleText: string;
+    paragraphContent: string | null;
+  }
+
+  const ReusableParagraph: React.FC<ReusableParagraphProps> = ({
+    content,
+    titleText,
+    paragraphContent,
+  }) => {
+    // 複数行対応のために改行文字で分割
+    const splitLines = (text: string | null) => {
+      return text ? text.split("\n") : [];
+    };
+
+    return (
+      <div>
+        {/* タイトル */}
+        <p className="text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
+          {content ? titleText : null}
+        </p>
+        {/* 複数行対応の本文 */}
+        <div className="ml-4 font-normal width_1440px:ml-5 width_1680px:ml-[22px]">
+          {content &&
+            splitLines(paragraphContent || "").map((line, index) => (
+              <p key={index}>{line}</p>
+            ))}
+        </div>
+      </div>
+    );
+  };
 
   const copyToClipboard = () => {
     const algorithmExplanation = jsonFormattedReviewContent
@@ -95,41 +127,49 @@ export const ReviewSection: React.FC = () => {
         className="flex flex-col gap-5 whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
       >
         {loadingAnimation}
-        <div id="clarity-and-specificity" className="leading-normal">
-          {jsonFormattedReviewContent
-            ? "Explanation of the algorithm:\n" +
-              jsonFormattedReviewContent.evaluation.algorithmExplanation
-            : null}
-        </div>
-        <div id="clarity-and-specificity" className="leading-normal">
-          {jsonFormattedReviewContent
-            ? "Clarity and specificity:\n" +
-              jsonFormattedReviewContent.evaluation.clarity
-            : null}
-        </div>
-        <div id="originality-and-applicability" className="leading-normal">
-          {jsonFormattedReviewContent
-            ? "Efficiency:\n" + jsonFormattedReviewContent.evaluation.efficiency
-            : null}
-        </div>
-        <div id="diversity-and-complexity" className="leading-normal">
-          {jsonFormattedReviewContent
-            ? "Test coverage:\n" +
-              jsonFormattedReviewContent.evaluation.testCoverage
-            : null}
-        </div>
-        <div id="technical-requirements" className="leading-normal">
-          {jsonFormattedReviewContent
-            ? "Technical accuracy:\n" +
-              jsonFormattedReviewContent.evaluation.technicalAccuracy
-            : null}
-        </div>
-        <div id="evaluation-criteria" className="leading-normal">
-          {jsonFormattedReviewContent
-            ? "Improvement suggestions:\n" +
-              jsonFormattedReviewContent.evaluation.improvementSuggestions
-            : null}
-        </div>
+        <ReusableParagraph
+          content={
+            jsonFormattedReviewContent?.evaluation.algorithmExplanation || null
+          }
+          titleText="Explanation of the algorithm:"
+          paragraphContent={
+            jsonFormattedReviewContent?.evaluation.algorithmExplanation
+          }
+        />
+        <ReusableParagraph
+          content={jsonFormattedReviewContent?.evaluation.clarity || null}
+          titleText="Clarity and specificity:"
+          paragraphContent={jsonFormattedReviewContent?.evaluation.clarity}
+        />
+        <ReusableParagraph
+          content={jsonFormattedReviewContent?.evaluation.efficiency || null}
+          titleText="Efficiency:"
+          paragraphContent={jsonFormattedReviewContent?.evaluation.efficiency}
+        />
+        <ReusableParagraph
+          content={jsonFormattedReviewContent?.evaluation.testCoverage || null}
+          titleText="Test coverage:"
+          paragraphContent={jsonFormattedReviewContent?.evaluation.testCoverage}
+        />
+        <ReusableParagraph
+          content={
+            jsonFormattedReviewContent?.evaluation.technicalAccuracy || null
+          }
+          titleText="Technical accuracy:"
+          paragraphContent={
+            jsonFormattedReviewContent?.evaluation.technicalAccuracy
+          }
+        />
+        <ReusableParagraph
+          content={
+            jsonFormattedReviewContent?.evaluation.improvementSuggestions ||
+            null
+          }
+          titleText="Improvement suggestions:"
+          paragraphContent={
+            jsonFormattedReviewContent?.evaluation.improvementSuggestions
+          }
+        />
       </div>
     </div>
   );
