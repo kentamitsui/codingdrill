@@ -12,6 +12,7 @@ export default function Sidebar() {
   const {
     isDisabled,
     setIsDisabled,
+    setIsCreateProblem,
     difficulty,
     setDifficulty,
     dataType,
@@ -79,6 +80,8 @@ export default function Sidebar() {
       setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsDisabled(true);
+      // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
+      setIsCreateProblem(true);
 
       const response = await fetch("/api/createProblem", {
         method: "POST",
@@ -99,8 +102,10 @@ export default function Sidebar() {
       const data = await response.json();
       const responseText = data.responseText;
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
+      // また、アニメーションを非表示にする
       if (responseText) {
         setIsDisabled(false);
+        setIsCreateProblem(false);
       }
 
       const JsonText = JSON.parse(responseText);

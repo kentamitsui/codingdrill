@@ -8,7 +8,12 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   // 選択タグやボタンのdisabled属性の管理(問題文・総評文の作成=>出力時にボタンを押せないようにする)
   const [isDisabled, setIsDisabled] = useState<boolean | undefined>(false);
-
+  const [isCreateProblem, setIsCreateProblem] = useState<boolean | undefined>(
+    false,
+  );
+  const [isCreateReview, setIsCreateReview] = useState<boolean | undefined>(
+    false,
+  );
   // Sidebar.tsxで選択された値のデータ管理
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
@@ -45,7 +50,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // ローカルストレージに
   useEffect(() => {
     const savedLocalStorageData =
-      JSON.parse(localStorage.getItem("savedData")) || [];
+      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
+
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
   }, []);
@@ -55,6 +61,10 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         isDisabled,
         setIsDisabled,
+        isCreateProblem,
+        setIsCreateProblem,
+        isCreateReview,
+        setIsCreateReview,
         difficulty,
         setDifficulty,
         dataType,

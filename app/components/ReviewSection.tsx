@@ -1,7 +1,8 @@
 import { useAppContext } from "./AppContext";
 
 export const ReviewSection: React.FC = () => {
-  const { isDisabled, jsonFormattedReviewContent } = useAppContext();
+  const { isDisabled, isCreateReview, jsonFormattedReviewContent } =
+    useAppContext();
 
   const copyToClipboard = () => {
     const explanationOfTheAlgorithm = jsonFormattedReviewContent
@@ -42,6 +43,35 @@ export const ReviewSection: React.FC = () => {
       });
   };
 
+  // レビュー作成中のローディングアニメーション
+  const loadingAnimation =
+    isCreateReview === true ? (
+      <div
+        className="flex flex-row items-baseline justify-center"
+        aria-label="now creating problem"
+      >
+        <p className="mr-3 flex animate-pulse justify-end text-2xl">
+          Now creating
+        </p>
+        <div className="flex flex-row items-center justify-center gap-3">
+          <div
+            className="h-2 w-2 animate-ping rounded-full bg-blue-600"
+            style={{ animationDelay: "0.1s" }}
+          ></div>
+          <div
+            className="h-2 w-2 animate-ping rounded-full bg-blue-600"
+            style={{ animationDelay: "0.125s" }}
+          ></div>
+          <div
+            className="h-2 w-2 animate-ping rounded-full bg-blue-600"
+            style={{ animationDelay: "0.15s" }}
+          ></div>
+        </div>
+      </div>
+    ) : (
+      ""
+    );
+
   return (
     <div
       id="split-vertical-right"
@@ -64,6 +94,7 @@ export const ReviewSection: React.FC = () => {
         id="result_scoring"
         className="flex flex-col gap-5 whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
       >
+        {loadingAnimation}
         <div id="clarity-and-specificity" className="leading-normal">
           {jsonFormattedReviewContent
             ? "explanation of the algorithm:\n" +
