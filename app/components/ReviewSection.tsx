@@ -5,32 +5,32 @@ export const ReviewSection: React.FC = () => {
     useAppContext();
 
   const copyToClipboard = () => {
-    const explanationOfTheAlgorithm = jsonFormattedReviewContent
-      ? `explanation of the algorithm:\n${jsonFormattedReviewContent.generalEvaluation.explanationOfTheAlgorithm}\n\n`
+    const algorithmExplanation = jsonFormattedReviewContent
+      ? `Explanation of the algorithm:\n${jsonFormattedReviewContent.evaluation.algorithmExplanation}\n\n`
       : "";
-    const clarityAndSpecificity = jsonFormattedReviewContent
-      ? `clarity and specificity:\n${jsonFormattedReviewContent.generalEvaluation.clarityAndSpecificity}\n\n`
+    const clarity = jsonFormattedReviewContent
+      ? `Clarity and specificity:\n${jsonFormattedReviewContent.evaluation.clarity}\n\n`
       : "";
-    const originalityAndApplicability = jsonFormattedReviewContent
-      ? `originality and applicability: ${jsonFormattedReviewContent.generalEvaluation.originalityAndApplicability}\n\n`
+    const efficiency = jsonFormattedReviewContent
+      ? `Efficiency: ${jsonFormattedReviewContent.evaluation.efficiency}\n\n`
       : "";
-    const diversityAndComplexity = jsonFormattedReviewContent
-      ? `diversity and complexity: ${jsonFormattedReviewContent.generalEvaluation.diversityAndComplexity}\n\n`
+    const testCoverage = jsonFormattedReviewContent
+      ? `Test coverage: ${jsonFormattedReviewContent.evaluation.testCoverage}\n\n`
       : "";
-    const technicalRequirements = jsonFormattedReviewContent
-      ? `technical requirements: ${jsonFormattedReviewContent.generalEvaluation.technicalRequirements}\n\n`
+    const technicalAccuracy = jsonFormattedReviewContent
+      ? `Technical accuracy: ${jsonFormattedReviewContent.evaluation.technicalAccuracy}\n\n`
       : "";
-    const evaluationCriteria = jsonFormattedReviewContent
-      ? `evaluation criteria: ${jsonFormattedReviewContent.generalEvaluation.evaluationCriteria}`
+    const improvementSuggestions = jsonFormattedReviewContent
+      ? `Improvement suggestions: ${jsonFormattedReviewContent.evaluation.improvementSuggestions}`
       : "";
 
     const formattedReviewContent =
-      explanationOfTheAlgorithm +
-      clarityAndSpecificity +
-      originalityAndApplicability +
-      diversityAndComplexity +
-      technicalRequirements +
-      evaluationCriteria;
+      algorithmExplanation +
+      clarity +
+      efficiency +
+      testCoverage +
+      technicalAccuracy +
+      improvementSuggestions;
 
     navigator.clipboard
       .writeText(formattedReviewContent)
@@ -97,41 +97,37 @@ export const ReviewSection: React.FC = () => {
         {loadingAnimation}
         <div id="clarity-and-specificity" className="leading-normal">
           {jsonFormattedReviewContent
-            ? "explanation of the algorithm:\n" +
-              jsonFormattedReviewContent.generalEvaluation
-                .explanationOfTheAlgorithm
+            ? "Explanation of the algorithm:\n" +
+              jsonFormattedReviewContent.evaluation.algorithmExplanation
             : null}
         </div>
         <div id="clarity-and-specificity" className="leading-normal">
           {jsonFormattedReviewContent
-            ? "clarity and specificity:\n" +
-              jsonFormattedReviewContent.generalEvaluation.clarityAndSpecificity
+            ? "Clarity and specificity:\n" +
+              jsonFormattedReviewContent.evaluation.clarity
             : null}
         </div>
         <div id="originality-and-applicability" className="leading-normal">
           {jsonFormattedReviewContent
-            ? "originality and applicability:\n" +
-              jsonFormattedReviewContent.generalEvaluation
-                .originalityAndApplicability
+            ? "Efficiency:\n" + jsonFormattedReviewContent.evaluation.efficiency
             : null}
         </div>
         <div id="diversity-and-complexity" className="leading-normal">
           {jsonFormattedReviewContent
-            ? "diversity and complexity:\n" +
-              jsonFormattedReviewContent.generalEvaluation
-                .diversityAndComplexity
+            ? "Test coverage:\n" +
+              jsonFormattedReviewContent.evaluation.testCoverage
             : null}
         </div>
         <div id="technical-requirements" className="leading-normal">
           {jsonFormattedReviewContent
-            ? "technical requirement:\n" +
-              jsonFormattedReviewContent.generalEvaluation.technicalRequirements
+            ? "Technical accuracy:\n" +
+              jsonFormattedReviewContent.evaluation.technicalAccuracy
             : null}
         </div>
         <div id="evaluation-criteria" className="leading-normal">
           {jsonFormattedReviewContent
-            ? "evaluation criteria:\n" +
-              jsonFormattedReviewContent.generalEvaluation.evaluationCriteria
+            ? "Improvement suggestions:\n" +
+              jsonFormattedReviewContent.evaluation.improvementSuggestions
             : null}
         </div>
       </div>
