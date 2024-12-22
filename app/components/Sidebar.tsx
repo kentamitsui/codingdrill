@@ -2,6 +2,7 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
+import LoadAreaButton from "./LoadAreaButton";
 import { useAppContext } from "./AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import { useState } from "react";
@@ -232,19 +233,19 @@ export default function Sidebar() {
               isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
-            <Button
+            <LoadAreaButton
               id="load"
               type="button"
               text="load"
               onClick={handleLoadData}
             />
-            <Button
+            <LoadAreaButton
               id="delete"
               type="button"
               text="delete"
               onClick={handleDeleteSelected}
             />
-            <Button
+            <LoadAreaButton
               id="delete-all"
               type="button"
               text="delete all"
