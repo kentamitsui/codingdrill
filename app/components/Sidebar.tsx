@@ -28,11 +28,10 @@ export default function Sidebar() {
     setLoadedEditorLanguage,
     setLoadedEditorContent,
   } = useAppContext();
-  // セーブデータの選択時に背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState("");
-
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
+  // セーブデータの選択時に背景色の状態管理に使用
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState("");
 
   // セーブデータの値を動的に変更する
   const handleChangeSavedData = (
