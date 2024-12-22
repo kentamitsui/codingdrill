@@ -34,7 +34,7 @@ const ProblemSection: React.FC = () => {
           {content ? titleText : null}
         </p>
         {/* 複数行対応の本文 */}
-        <div className="ml-4 font-normal">
+        <div className="ml-4 font-normal width_1440px:ml-5 width_1680px:ml-[22px]">
           {content &&
             splitLines(paragraphContent || "").map((line, index) => (
               <p key={index}>{line}</p>
