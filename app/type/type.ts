@@ -52,6 +52,10 @@ export interface AppContextProps {
   setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
   loadedEditorContent: string | null;
   setLoadedEditorContent: React.Dispatch<React.SetStateAction<string | null>>;
+  checkEditorInputed: string | undefined;
+  setCheckEditorInputed: React.Dispatch<
+    React.SetStateAction<string | undefined>
+  >;
 }
 
 // PanelContextに対する型定義
@@ -65,6 +69,7 @@ export interface MonacoEditorProps {
   editorLanguage: string;
   editorTheme: string;
   onMount?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
+  onChange?: (value: string | undefined) => void;
 }
 
 // ReviewSectionに対する型定義

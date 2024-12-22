@@ -47,7 +47,12 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     null,
   );
 
-  // ローカルストレージに
+  // エディタに入力された内容をチェックするための状態管理
+  const [checkEditorInputed, setCheckEditorInputed] = useState<
+    string | undefined
+  >("");
+
+  // ローカルストレージからデータを取得
   useEffect(() => {
     const savedLocalStorageData =
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
@@ -87,6 +92,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setLoadedEditorLanguage,
         loadedEditorContent,
         setLoadedEditorContent,
+        checkEditorInputed,
+        setCheckEditorInputed,
       }}
     >
       {children}
