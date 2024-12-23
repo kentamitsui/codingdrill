@@ -1,12 +1,12 @@
 import { useAppContext } from "./AppContext";
 import React from "react";
-import { ReusableParagraphProps } from "../type/type";
+import { ReusableReviewContentsProps } from "../type/type";
 
 export const ReviewSection: React.FC = () => {
   const { isDisabled, isCreateReview, jsonFormattedReviewContent } =
     useAppContext();
 
-  const ReusableParagraph: React.FC<ReusableParagraphProps> = ({
+  const ReusableParagraph: React.FC<ReusableReviewContentsProps> = ({
     content,
     titleText,
     paragraphContent,
@@ -129,52 +129,43 @@ export const ReviewSection: React.FC = () => {
       >
         {loadingAnimation}
         <ReusableParagraph
-          content={
-            jsonFormattedReviewContent?.evaluation.algorithmExplanation || null
-          }
+          content={jsonFormattedReviewContent}
           titleText="Explanation of the algorithm:"
           paragraphContent={
             jsonFormattedReviewContent?.evaluation.algorithmExplanation
           }
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent?.evaluation.clarity || null}
+          content={jsonFormattedReviewContent}
           titleText="Clarity and specificity:"
           paragraphContent={jsonFormattedReviewContent?.evaluation.clarity}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent?.evaluation.efficiency || null}
+          content={jsonFormattedReviewContent}
           titleText="Efficiency:"
           paragraphContent={jsonFormattedReviewContent?.evaluation.efficiency}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent?.evaluation.testCoverage || null}
+          content={jsonFormattedReviewContent}
           titleText="Test coverage:"
           paragraphContent={jsonFormattedReviewContent?.evaluation.testCoverage}
         />
         <ReusableParagraph
-          content={
-            jsonFormattedReviewContent?.evaluation.technicalAccuracy || null
-          }
+          content={jsonFormattedReviewContent}
           titleText="Technical accuracy:"
           paragraphContent={
             jsonFormattedReviewContent?.evaluation.technicalAccuracy
           }
         />
         <ReusableParagraph
-          content={
-            jsonFormattedReviewContent?.evaluation.improvementSuggestions ||
-            null
-          }
+          content={jsonFormattedReviewContent}
           titleText="Improvement suggestions:"
           paragraphContent={
             jsonFormattedReviewContent?.evaluation.improvementSuggestions
           }
         />
         <ReusableParagraph
-          content={
-            jsonFormattedReviewContent?.evaluation.exampleImprovement || null
-          }
+          content={jsonFormattedReviewContent}
           titleText="Example improvement:"
           paragraphContent={
             jsonFormattedReviewContent?.evaluation.exampleImprovement
