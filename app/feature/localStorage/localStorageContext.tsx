@@ -37,7 +37,9 @@ export const LocalStorageProvider = ({ children }) => {
       return;
     }
 
-    confirm("Is it correct to load this data?");
+    if (!confirm("Is it correct to load this data?")) {
+      return;
+    }
 
     // 各セクションのセット関数にデータを渡して状態を更新
     setFunctions.difficulty(selectedEntry.difficulty);
@@ -61,7 +63,9 @@ export const LocalStorageProvider = ({ children }) => {
       return;
     }
 
-    confirm("Is it correct to delete this data?");
+    if (!confirm("Is it correct to delete this data?")) {
+      return;
+    }
 
     // ローカルストレージのデータを取得し、選択された項目を削除
     const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
@@ -77,8 +81,12 @@ export const LocalStorageProvider = ({ children }) => {
   };
 
   const clearLocalStorage = () => {
-    confirm("Is this correct want to delete all data?");
-    confirm(`Is this correct?`);
+    if (!confirm("Is this correct want to delete all data?")) {
+      return;
+    }
+    if (!confirm("Is this correct?")) {
+      return;
+    }
     localStorage.clear();
     setSavedData([]);
     updateSelectBox([]);
