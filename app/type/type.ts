@@ -72,16 +72,22 @@ export interface MonacoEditorProps {
   onChange?: (value: string | undefined) => void;
 }
 
-// ReviewSectionに対する型定義
-export interface GeneralEvaluation {
-  explanationOfTheAlgorithm: string;
-  clarityAndSpecificity: string;
-  originalityAndApplicability: string;
-  diversityAndComplexity: string;
-  technicalRequirements: string;
-  evaluationCriteria: string;
+// ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
+export interface ReusableParagraphProps {
+  content: string | null;
+  titleText: string;
+  paragraphContent: string | null | undefined;
 }
 
+// ReviewSectionに対する型定義
 export interface ReviewResponse {
-  generalEvaluation: GeneralEvaluation;
+  evaluation: {
+    algorithmExplanation: string;
+    clarity: string;
+    efficiency: string;
+    testCoverage: string;
+    technicalAccuracy: string;
+    improvementSuggestions: string;
+    exampleImprovement: string;
+  };
 }

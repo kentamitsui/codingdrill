@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "./AppContext";
+import { ReusableParagraphProps } from "../type/type";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC = () => {
@@ -10,12 +11,6 @@ const ProblemSection: React.FC = () => {
     formattedProblemContent,
     setFormattedProblemContent,
   } = useAppContext();
-
-  interface ReusableParagraphProps {
-    content: string | null;
-    titleText: string;
-    paragraphContent: string | null;
-  }
 
   const ReusableParagraph: React.FC<ReusableParagraphProps> = ({
     content,
@@ -28,13 +23,13 @@ const ProblemSection: React.FC = () => {
     };
 
     return (
-      <div>
+      <div className="whitespace-break-spaces">
         {/* タイトル */}
         <p className="text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
           {content ? titleText : null}
         </p>
         {/* 複数行対応の本文 */}
-        <div className="ml-4 font-normal width_1440px:ml-5 width_1680px:ml-[22px]">
+        <div className="ml-4 text-[16px] font-normal width_1440px:ml-5 width_1440px:text-[18px] width_1680px:ml-[22px] width_1680px:text-[20px]">
           {content &&
             splitLines(paragraphContent || "").map((line, index) => (
               <p key={index}>{line}</p>
@@ -48,7 +43,7 @@ const ProblemSection: React.FC = () => {
   useEffect(() => {
     // 問題文やフォーマットについて
     const description = jsonFormattedProblemContent
-      ? `Description\n${jsonFormattedProblemContent.problemStatement}\n\n`
+      ? `Description\n${jsonFormattedProblemContent?.problemStatement}\n\n`
       : "";
     const functionSignature = jsonFormattedProblemContent
       ? `function Signature\n${jsonFormattedProblemContent.functionSignature}\n\n`
@@ -64,22 +59,22 @@ const ProblemSection: React.FC = () => {
       : "";
     // 例題やエッジケース等について
     const example1 = jsonFormattedProblemContent
-      ? `Example 1\nInput: ${jsonFormattedProblemContent.example1.input}\nOutput: ${jsonFormattedProblemContent.example1.output}\nExplanation: ${jsonFormattedProblemContent.example1.explanation}\n\n`
+      ? `Example 1\nInput:\n${jsonFormattedProblemContent.example1.input}\nOutput: ${jsonFormattedProblemContent.example1.output}\nExplanation: ${jsonFormattedProblemContent.example1.explanation}\n\n`
       : "";
     const example2 = jsonFormattedProblemContent
-      ? `Example 2\nInput: ${jsonFormattedProblemContent.example2.input}\nOutput: ${jsonFormattedProblemContent.example2.output}\nExplanation: ${jsonFormattedProblemContent.example2.explanation}\n\n`
+      ? `Example 2\nInput:\n${jsonFormattedProblemContent.example2.input}\nOutput: ${jsonFormattedProblemContent.example2.output}\nExplanation: ${jsonFormattedProblemContent.example2.explanation}\n\n`
       : "";
     const example3 = jsonFormattedProblemContent
-      ? `Example 3\nInput: ${jsonFormattedProblemContent.example3.input}\nOutput: ${jsonFormattedProblemContent.example3.output}\nExplanation: ${jsonFormattedProblemContent.example3.explanation}\n\n`
+      ? `Example 3\nInput:\n${jsonFormattedProblemContent.example3.input}\nOutput: ${jsonFormattedProblemContent.example3.output}\nExplanation: ${jsonFormattedProblemContent.example3.explanation}\n\n`
       : "";
     const edgeCase1 = jsonFormattedProblemContent
-      ? `edgeCase 1\nInput: ${jsonFormattedProblemContent.edgeCase1.input}\nOutput: ${jsonFormattedProblemContent.edgeCase1.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase1.explanation}\n\n`
+      ? `edgeCase 1\nInput:\n${jsonFormattedProblemContent.edgeCase1.input}\nOutput: ${jsonFormattedProblemContent.edgeCase1.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase1.explanation}\n\n`
       : "";
     const edgeCase2 = jsonFormattedProblemContent
-      ? `edgeCase 2\nInput: ${jsonFormattedProblemContent.edgeCase2.input}\nOutput: ${jsonFormattedProblemContent.edgeCase2.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase2.explanation}\n\n`
+      ? `edgeCase 2\nInput:\n${jsonFormattedProblemContent.edgeCase2.input}\nOutput: ${jsonFormattedProblemContent.edgeCase2.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase2.explanation}\n\n`
       : "";
     const edgeCase3 = jsonFormattedProblemContent
-      ? `edgeCase 2\nInput: ${jsonFormattedProblemContent.edgeCase3.input}\nOutput: ${jsonFormattedProblemContent.edgeCase3.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase3.explanation}\n\n`
+      ? `edgeCase 3\nInput:\n${jsonFormattedProblemContent.edgeCase3.input}\nOutput: ${jsonFormattedProblemContent.edgeCase3.output}\nExplanation: ${jsonFormattedProblemContent.edgeCase3.explanation}\n\n`
       : "";
     // 要件等について
     const analysis = jsonFormattedProblemContent
@@ -166,7 +161,7 @@ const ProblemSection: React.FC = () => {
           copy
         </button>
       </div>
-      <div className="p-[15px_30px] text-[16px] leading-normal tracking-wider width_1440px:text-[18px] width_1680px:text-[20px]">
+      <div className="p-[15px_30px] leading-normal tracking-wider">
         {loadingAnimation}
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
@@ -190,33 +185,33 @@ const ProblemSection: React.FC = () => {
             <ReusableParagraph
               content={jsonFormattedProblemContent}
               titleText="Example 1"
-              paragraphContent={`Input: ${jsonFormattedProblemContent?.example1.input}\nOutput: ${jsonFormattedProblemContent?.example1.output}\nExplanation: ${jsonFormattedProblemContent?.example1.explanation}`}
+              paragraphContent={`Input:\n${jsonFormattedProblemContent?.example1.input}\nOutput: ${jsonFormattedProblemContent?.example1.output}\nExplanation: ${jsonFormattedProblemContent?.example1.explanation}`}
             />
           </div>
           <ReusableParagraph
             content={jsonFormattedProblemContent}
             titleText="Example 2"
-            paragraphContent={`Input: ${jsonFormattedProblemContent?.example2.input}\nOutput: ${jsonFormattedProblemContent?.example2.output}\nExplanation: ${jsonFormattedProblemContent?.example2.explanation}`}
+            paragraphContent={`Input:\n${jsonFormattedProblemContent?.example2.input}\nOutput: ${jsonFormattedProblemContent?.example2.output}\nExplanation: ${jsonFormattedProblemContent?.example2.explanation}`}
           />
           <ReusableParagraph
             content={jsonFormattedProblemContent}
             titleText="Example 3"
-            paragraphContent={`Input: ${jsonFormattedProblemContent?.example3.input}\nOutput: ${jsonFormattedProblemContent?.example3.output}\nExplanation: ${jsonFormattedProblemContent?.example3.explanation}`}
+            paragraphContent={`Input:\n${jsonFormattedProblemContent?.example3.input}\nOutput: ${jsonFormattedProblemContent?.example3.output}\nExplanation: ${jsonFormattedProblemContent?.example3.explanation}`}
           />
           <ReusableParagraph
             content={jsonFormattedProblemContent}
             titleText="Edge Case 1"
-            paragraphContent={`Input: ${jsonFormattedProblemContent?.edgeCase1.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase1.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase1.explanation}`}
+            paragraphContent={`Input:\n${jsonFormattedProblemContent?.edgeCase1.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase1.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase1.explanation}`}
           />
           <ReusableParagraph
             content={jsonFormattedProblemContent}
             titleText="Edge Case 2"
-            paragraphContent={`Input: ${jsonFormattedProblemContent?.edgeCase2.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase2.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase2.explanation}`}
+            paragraphContent={`Input:\n${jsonFormattedProblemContent?.edgeCase2.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase2.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase2.explanation}`}
           />
           <ReusableParagraph
             content={jsonFormattedProblemContent}
             titleText="Edge Case 3"
-            paragraphContent={`Input: ${jsonFormattedProblemContent?.edgeCase3.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase3.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase3.explanation}`}
+            paragraphContent={`Input:\n${jsonFormattedProblemContent?.edgeCase3.input}\nOutput: ${jsonFormattedProblemContent?.edgeCase3.output}\nExplanation: ${jsonFormattedProblemContent?.edgeCase3.explanation}`}
           />
           {/* analysis */}
           <div className="mt-8">

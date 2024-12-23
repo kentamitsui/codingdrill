@@ -27,10 +27,12 @@ export default async function handler(
 
   // プロンプトの%で囲まれた文字列を、req.bodyのデータで置き換える
   const modifiedPrompt = promptTemplate
-    .replace("%difficulty%", difficulty)
-    .replace("%type%", dataType)
-    .replace("%topic%", topic)
-    .replace("%display_language%", selectedLanguage);
+    .replaceAll("%difficulty%", difficulty)
+    .replaceAll("%type%", dataType)
+    .replaceAll("%topic%", topic)
+    .replaceAll("%display_language%", selectedLanguage);
+
+  console.log("OpenAI response:\n\n", modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({

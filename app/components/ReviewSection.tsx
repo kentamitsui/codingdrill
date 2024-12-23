@@ -1,13 +1,10 @@
 import { useAppContext } from "./AppContext";
+import React from "react";
+import { ReusableParagraphProps } from "../type/type";
 
 export const ReviewSection: React.FC = () => {
   const { isDisabled, isCreateReview, jsonFormattedReviewContent } =
     useAppContext();
-  interface ReusableParagraphProps {
-    content: string | null;
-    titleText: string;
-    paragraphContent: string | null;
-  }
 
   const ReusableParagraph: React.FC<ReusableParagraphProps> = ({
     content,
@@ -26,7 +23,7 @@ export const ReviewSection: React.FC = () => {
           {content ? titleText : null}
         </p>
         {/* 複数行対応の本文 */}
-        <div className="ml-4 font-normal width_1440px:ml-5 width_1680px:ml-[22px]">
+        <div className="ml-4 whitespace-break-spaces text-[16px] font-normal width_1440px:ml-5 width_1440px:text-[18px] width_1680px:ml-[22px] width_1680px:text-[20px]">
           {content &&
             splitLines(paragraphContent || "").map((line, index) => (
               <p key={index}>{line}</p>
@@ -53,7 +50,10 @@ export const ReviewSection: React.FC = () => {
       ? `Technical accuracy: ${jsonFormattedReviewContent.evaluation.technicalAccuracy}\n\n`
       : "";
     const improvementSuggestions = jsonFormattedReviewContent
-      ? `Improvement suggestions: ${jsonFormattedReviewContent.evaluation.improvementSuggestions}`
+      ? `Improvement suggestions: ${jsonFormattedReviewContent.evaluation.improvementSuggestions}\n\n`
+      : "";
+    const exampleImprovement = jsonFormattedReviewContent
+      ? `Example improvement: ${jsonFormattedReviewContent.evaluation.exampleImprovement}`
       : "";
 
     const formattedReviewContent =
@@ -62,7 +62,8 @@ export const ReviewSection: React.FC = () => {
       efficiency +
       testCoverage +
       technicalAccuracy +
-      improvementSuggestions;
+      improvementSuggestions +
+      exampleImprovement;
 
     navigator.clipboard
       .writeText(formattedReviewContent)
@@ -124,7 +125,7 @@ export const ReviewSection: React.FC = () => {
       </div>
       <div
         id="result_scoring"
-        className="flex flex-col gap-5 whitespace-break-spaces p-[15px_30px] text-[18px] font-medium width_1440px:text-[19px] width_1680px:text-[20px]"
+        className="flex flex-col gap-5 p-[15px_30px] leading-normal tracking-wider"
       >
         {loadingAnimation}
         <ReusableParagraph
@@ -168,6 +169,15 @@ export const ReviewSection: React.FC = () => {
           titleText="Improvement suggestions:"
           paragraphContent={
             jsonFormattedReviewContent?.evaluation.improvementSuggestions
+          }
+        />
+        <ReusableParagraph
+          content={
+            jsonFormattedReviewContent?.evaluation.exampleImprovement || null
+          }
+          titleText="Example improvement:"
+          paragraphContent={
+            jsonFormattedReviewContent?.evaluation.exampleImprovement
           }
         />
       </div>
