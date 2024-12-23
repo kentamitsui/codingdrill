@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "./AppContext";
-import { ReusableParagraphProps } from "../type/type";
+import { ReusableProblemContentProps } from "../type/type";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC = () => {
@@ -12,7 +12,7 @@ const ProblemSection: React.FC = () => {
     setFormattedProblemContent,
   } = useAppContext();
 
-  const ReusableParagraph: React.FC<ReusableParagraphProps> = ({
+  const ReusableParagraph: React.FC<ReusableProblemContentProps> = ({
     content,
     titleText,
     paragraphContent,
@@ -43,7 +43,7 @@ const ProblemSection: React.FC = () => {
   useEffect(() => {
     // 問題文やフォーマットについて
     const description = jsonFormattedProblemContent
-      ? `Description\n${jsonFormattedProblemContent?.problemStatement}\n\n`
+      ? `Description\n${jsonFormattedProblemContent.problemStatement}\n\n`
       : "";
     const functionSignature = jsonFormattedProblemContent
       ? `function Signature\n${jsonFormattedProblemContent.functionSignature}\n\n`
