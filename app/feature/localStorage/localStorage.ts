@@ -1,17 +1,29 @@
 import updateSelectBox from "./updateSaveData";
+import { SaveToLocalStorageProps } from "../../type/type";
 
-const saveToLocalStorage = (data) => {
-  const savedData = JSON.parse(localStorage.getItem("savedData")) || [];
+const saveToLocalStorage = (data: SaveToLocalStorageProps) => {
+  // ローカルストレージからデータを取得
+  const savedData = JSON.parse(localStorage.getItem("savedData") || "[]") || [];
+
+  // セーブデータの最大IDを検索
+  interface SavedDataEntry {
+    id: number;
+    timestamp: string;
+    [key: string]: any;
+  }
+
+  const maxId = savedData.reduce(
+    (max: number, entry: SavedDataEntry) => (entry.id > max ? entry.id : max),
+    0,
+  );
+
   const timestamp = new Date().toLocaleString();
 
   const newEntry = {
-    id: savedData.length + 1, // idに連番を振る
+    id: maxId + 1, // idに連番を振る
     timestamp,
     ...data,
   };
-
-  // 100個以上のデータは、古い日付から削除する
-  if (savedData.length >= 100) savedData.shift();
 
   // ローカルストレージにデータを保存
   savedData.push(newEntry);

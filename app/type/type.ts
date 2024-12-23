@@ -82,6 +82,18 @@ export interface LocalStorageContextTypeProps {
   clearLocalStorage: () => void;
 }
 
+// SaveToLocalStorageに対する型定義
+export interface SaveToLocalStorageProps {
+  difficulty: string;
+  dataType: string;
+  topic: string;
+  selectedLanguage: string;
+  problemContent: ProblemContent | null;
+  editorLanguage: string;
+  editorContent: string;
+  evaluation: string;
+}
+
 // SavedDataEntryに対する型定義
 export interface SavedDataEntryProps {
   id: string;
