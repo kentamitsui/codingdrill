@@ -37,10 +37,9 @@ export default async function handler(
 
   const modifiedPrompt =
     promptTemplate +
-    process.env.PROMPT_CHECK?.replace("%language%", editorLanguage)
-      .replace("%topic%", topic)
-      .replace("%language%", editorLanguage)
-      .replace("%display_language%", selectedLanguage);
+    process.env.PROMPT_CHECK?.replaceAll("%language%", editorLanguage)
+      .replaceAll("%topic%", topic)
+      .replaceAll("%display_language%", selectedLanguage);
 
   console.log("modifiedPrompt\n\n", modifiedPrompt);
 
