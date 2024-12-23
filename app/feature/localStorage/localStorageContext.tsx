@@ -91,7 +91,11 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("savedData", JSON.stringify(updatedData));
 
     // 状態を更新して UI に反映
-    updateSelectBox(updatedData); // UI の選択肢を更新
+    const updatedDataWithTimestamp = updatedData.map((entry) => ({
+      ...entry,
+      timestamp: new Date().toISOString(),
+    }));
+    updateSelectBox(updatedDataWithTimestamp); // UI の選択肢を更新
   };
 
   // ローカルストレージのデータを全て削除する関数

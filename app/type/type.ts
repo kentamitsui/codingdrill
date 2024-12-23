@@ -107,6 +107,16 @@ export interface SetFunctionsProps {
   evaluation: (value: string) => void;
 }
 
+// UpdateSaveDataEntryに対する型定義
+export interface UpdateSaveDataEntryProps {
+  id: string;
+  timestamp: string;
+  difficulty: string;
+  dataType: string;
+  topic: string;
+  selectedLanguage: string;
+}
+
 // ProblemContentに対する型定義
 interface ProblemContent {
   problemStatement: string;
