@@ -73,6 +73,40 @@ export interface MonacoEditorProps {
   onChange?: (value: string | undefined) => void;
 }
 
+// LocalStorageContextに対する型定義
+export interface LocalStorageContextTypeProps {
+  savedData: SavedDataEntryProps[];
+  updateLocalStorage: (data: SavedDataEntryProps[]) => void;
+  loadSavedData: (id: string, setFunctions: SetFunctionsProps) => void;
+  handleDeleteSelected: () => void;
+  clearLocalStorage: () => void;
+}
+
+// SavedDataEntryに対する型定義
+export interface SavedDataEntryProps {
+  id: string;
+  difficulty: string;
+  dataType: string;
+  topic: string;
+  selectedLanguage: string;
+  problemContent: string;
+  editorLanguage: string;
+  editorContent: string;
+  evaluation: string;
+}
+
+// SetFunctionsに対する型定義
+export interface SetFunctionsProps {
+  difficulty: (value: string) => void;
+  dataType: (value: string) => void;
+  topic: (value: string) => void;
+  selectedLanguage: (value: string) => void;
+  problemContent: (value: string) => void;
+  editorLanguage: (value: string) => void;
+  editorContent: (value: string) => void;
+  evaluation: (value: string) => void;
+}
+
 // ProblemContentに対する型定義
 interface ProblemContent {
   problemStatement: string;
