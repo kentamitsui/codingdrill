@@ -1,20 +1,29 @@
 import {
   createContext,
-  SetStateAction,
+  ReactNode,
   useContext,
   useEffect,
   useState,
 } from "react";
 import updateSelectBox from "./updateSaveData";
+import {
+  LocalStorageContextTypeProps,
+  SavedDataEntryProps,
+  SetFunctionsProps,
+} from "../../type/type";
 
-const LocalStorageContext = createContext(null);
+const LocalStorageContext = createContext<
+  LocalStorageContextTypeProps | undefined
+>(undefined);
 
+// ローカルストレージに関するコンテキストを提供する
 export const useLocalStorageContext = () => {
   return useContext(LocalStorageContext);
 };
 
-export const LocalStorageProvider = ({ children }) => {
-  const [savedData, setSavedData] = useState([]);
+// 各ファイルで、ローカルストレージに関するコンテキストを使用出来るようにするプロバイダー
+export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
+  const [savedData, setSavedData] = useState<SavedDataEntryProps[]>([]);
 
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
@@ -23,14 +32,18 @@ export const LocalStorageProvider = ({ children }) => {
     setSavedData(getLocalStorageData);
   }, []);
 
-  const updateLocalStorage = (data) => {
+  // ローカルストレージを更新する関数
+  const updateLocalStorage = (data: SavedDataEntryProps[]) => {
     localStorage.setItem("savedData", JSON.stringify(data));
     setSavedData(data);
   };
 
-  const loadSavedData = (id, setFunctions) => {
+  // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
+  const loadSavedData = (id: string, setFunctions: SetFunctionsProps) => {
     const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    const selectedEntry = savedData.find((entry) => entry.id === id);
+    const selectedEntry: SavedDataEntryProps | undefined = savedData.find(
+      (entry: SavedDataEntryProps) => entry.id === id,
+    );
 
     if (!selectedEntry) {
       alert("Data not found.");
@@ -52,6 +65,7 @@ export const LocalStorageProvider = ({ children }) => {
     setFunctions.evaluation(selectedEntry.evaluation);
   };
 
+  // 選択されたデータを削除する関数
   const handleDeleteSelected = () => {
     const selectElement = document.getElementById(
       "saveData",
@@ -69,8 +83,8 @@ export const LocalStorageProvider = ({ children }) => {
 
     // ローカルストレージのデータを取得し、選択された項目を削除
     const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    const updatedData = savedData.filter(
-      (entry) => entry.id.toString() !== selectedId,
+    const updatedData: SavedDataEntryProps[] = savedData.filter(
+      (entry: SavedDataEntryProps) => entry.id.toString() !== selectedId,
     );
 
     // ローカルストレージを更新
@@ -80,6 +94,7 @@ export const LocalStorageProvider = ({ children }) => {
     updateSelectBox(updatedData); // UI の選択肢を更新
   };
 
+  // ローカルストレージのデータを全て削除する関数
   const clearLocalStorage = () => {
     if (!confirm("Is this correct want to delete all data?")) {
       return;
