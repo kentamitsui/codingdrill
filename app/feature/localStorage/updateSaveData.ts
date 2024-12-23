@@ -1,4 +1,6 @@
-const updateSelectBox = (data) => {
+import { UpdateSaveDataEntryProps } from "../../type/type";
+
+const updateSelectBox = (data: UpdateSaveDataEntryProps[]): void => {
   const selectElement = document.getElementById("saveData");
   if (!selectElement) return;
 
