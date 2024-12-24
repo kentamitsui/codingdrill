@@ -55,6 +55,7 @@ export default function Sidebar() {
     }
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
+    // selectedIdについては、後で型を確認する
     loadSavedData(selectedId, {
       difficulty: setDifficulty,
       dataType: setDataType,
