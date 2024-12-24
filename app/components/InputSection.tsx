@@ -27,10 +27,16 @@ export default function InputSection() {
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
   useEffect(() => {
-    const handleStorageChange = (event) => {
+    interface StorageEvent {
+      key: string | null;
+      newValue: string | null;
+    }
+
+    // ローカルストレージのデータが変更された際に、セレクトボックスを更新する
+    const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
         updateSelectBox([]);
-        updateLocalStorage();
+        updateLocalStorage(savedData);
         return;
       }
 
