@@ -46,7 +46,7 @@ export default function InputAreaButton({
     } else {
       setIsEditorInputedState(true);
     }
-  }, [checkEditorInputed]);
+  }, [isAllSelected, jsonFormattedProblemContent, checkEditorInputed]);
 
   const isButtonDisabled = isDisabled || isEditorInputedState;
 
