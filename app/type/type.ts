@@ -105,7 +105,7 @@ export interface SavedDataEntryProps {
   editorLanguage: string;
   editorContent: string;
   evaluation: string;
-  timestamp: string;
+  // timestamp: string;
 }
 
 // SetFunctionsに対する型定義
