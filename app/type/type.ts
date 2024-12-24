@@ -114,10 +114,10 @@ export interface SetFunctionsProps {
   dataType: (value: string) => void;
   topic: (value: string) => void;
   selectedLanguage: (value: string) => void;
-  problemContent: (value: string) => void;
+  problemContent: (value: ProblemContent) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
-  evaluation: (value: string) => void;
+  evaluation: (value: ReviewResponse) => void;
 }
 
 // UpdateSaveDataEntryに対する型定義

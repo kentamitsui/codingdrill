@@ -47,7 +47,7 @@ export default function Sidebar() {
     const selectElement = document.getElementById(
       "saveData",
     ) as HTMLSelectElement;
-    const selectedId = parseInt(selectElement.value, 10);
+    const selectedId = parseInt(selectElement.value, 10).toString();
 
     if (!selectedId) {
       alert("Please select a valid option to load.");
