@@ -10,17 +10,19 @@ export default function ThemeSwitch() {
   const { setTheme, resolvedTheme } = useTheme();
 
   useEffect(() => {
-    setTheme("dark");
     setMounted(true);
-
     return () => {
       setMounted(false);
     };
-  }, [setTheme]);
+  }, []);
 
   if (!mounted) {
     return null;
-  } else if (mounted && resolvedTheme === "dark") {
-    return <Icon_LightMode toggle={() => setTheme("light")} />;
-  } else return <Icon_DarkMode toggle={() => setTheme("dark")} />;
+  }
+
+  return resolvedTheme === "dark" ? (
+    <Icon_LightMode toggle={() => setTheme("light")} />
+  ) : (
+    <Icon_DarkMode toggle={() => setTheme("dark")} />
+  );
 }
