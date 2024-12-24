@@ -1,7 +1,7 @@
 import * as monaco from "monaco-editor";
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
-import { useRef, useState, useEffect, use } from "react";
+import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
@@ -27,12 +27,6 @@ export default function InputSection() {
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
   useEffect(() => {
-    interface StorageEvent {
-      key: string | null;
-      newValue: string | null;
-    }
-
-    // ローカルストレージのデータが変更された際に、セレクトボックスを更新する
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
         updateSelectBox([]);
@@ -50,7 +44,7 @@ export default function InputSection() {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [savedData, updateLocalStorage]);
 
   // refにMonaco Editorインスタンスを保持
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
@@ -114,7 +108,7 @@ export default function InputSection() {
       setIsEditorInputed(editorRef.current?.getValue());
       setCheckEditorInputed(isEditorInputed);
     }
-  }, [editorRef.current?.getValue()]);
+  }, [editorRef.current]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {

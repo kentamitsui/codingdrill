@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 // 選択タグに対する型定義
 export interface SelectProps {
@@ -61,7 +62,16 @@ export interface AppContextProps {
 
 // PanelContextに対する型定義
 export interface PanelContextType {
-  resetPanelSizes: () => void;
+  initialHorizontalSizes: number[];
+  initialVerticalSizes: number[];
+  horizontalPanelSizes: number[];
+  verticalPanelSizes: number[];
+  setHorizontalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>;
+  setVerticalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>;
+  resetHorizontalPanelSizes: () => void;
+  resetVerticalPanelSizes: () => void;
+  handleHorizontalDragEnd: (newSizes: number[]) => void;
+  handleVerticalDragEnd: (newSizes: number[]) => void;
 }
 
 // Monaco Editorに対する型定義
