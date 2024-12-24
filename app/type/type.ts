@@ -101,11 +101,11 @@ export interface SavedDataEntryProps {
   dataType: string;
   topic: string;
   selectedLanguage: string;
-  problemContent: string;
+  problemContent: ProblemContent;
   editorLanguage: string;
   editorContent: string;
-  evaluation: string;
-  // timestamp: string;
+  evaluation: ReviewResponse;
+  timestamp: string;
 }
 
 // SetFunctionsに対する型定義
