@@ -45,7 +45,10 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
-  const loadSavedData = (id: string, setFunctions: SetFunctionsProps) => {
+  const loadSavedData = (
+    id: string | number,
+    setFunctions: SetFunctionsProps,
+  ) => {
     const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
     const selectedEntry: SavedDataEntryProps | undefined = savedData.find(
       (entry: SavedDataEntryProps) => entry.id === id,
