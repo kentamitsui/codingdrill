@@ -37,8 +37,8 @@ export interface AppContextProps {
   setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
   formattedProblemContent: string;
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
-  saveData: string[];
-  setSaveData: React.Dispatch<React.SetStateAction<string[]>>;
+  saveData: UpdateSaveDataEntryProps[];
+  setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
   jsonFormattedProblemContent: ProblemContent | null;
   setJsonFormattedProblemContent: React.Dispatch<
     React.SetStateAction<ProblemContent | null>
