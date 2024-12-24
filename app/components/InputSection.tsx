@@ -104,11 +104,12 @@ export default function InputSection() {
 
   // エディタに入力された内容を取得
   useEffect(() => {
-    if (editorRef.current) {
-      setIsEditorInputed(editorRef.current?.getValue());
-      setCheckEditorInputed(isEditorInputed);
+    const editorValue = editorRef.current?.getValue();
+    if (editorValue !== undefined) {
+      setIsEditorInputed(editorValue);
+      setCheckEditorInputed(editorValue);
     }
-  }, [editorRef.current]);
+  }, [setCheckEditorInputed]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {

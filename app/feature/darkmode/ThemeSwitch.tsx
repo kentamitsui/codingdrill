@@ -16,7 +16,7 @@ export default function ThemeSwitch() {
     return () => {
       setMounted(false);
     };
-  }, []);
+  }, [setTheme]);
 
   if (!mounted) {
     return null;

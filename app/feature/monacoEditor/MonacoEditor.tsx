@@ -33,15 +33,17 @@ export default function MonacoEditor({
       updateDimensions();
     });
 
+    const currentRef = editorContainerRef.current;
+
     // 仕切り線のドラッグでサイズが変わる度に、updateDimensions()を呼び出す
-    if (editorContainerRef.current) {
-      observer.observe(editorContainerRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     // 要素のサイズ変更が完了（仕切り線のドラッグが終わった）した時点で監視を終了する
     return () => {
-      if (editorContainerRef.current) {
-        observer.unobserve(editorContainerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
