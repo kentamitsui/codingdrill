@@ -1,5 +1,9 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { AppContextProps, ReviewResponse } from "@/app/type/type";
+import {
+  AppContextProps,
+  ReviewResponse,
+  ProblemContent,
+} from "@/app/type/type";
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
 
@@ -26,7 +30,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   const [jsonFormattedProblemContent, setJsonFormattedProblemContent] =
-    useState<string | null>(null);
+    useState<ProblemContent | null>(null);
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
   // *** テキスト形式なので、ProblemSection.tsxで整形して表示は出来ない ***

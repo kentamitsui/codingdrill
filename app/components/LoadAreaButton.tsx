@@ -1,6 +1,5 @@
 import { useAppContext } from "./AppContext";
 import { ButtonProps } from "../type/type";
-import { useEffect, useState } from "react";
 
 export default function LoadAreaButton({
   id,

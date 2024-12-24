@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
-import { strict } from "assert";
+
 // 選択タグに対する型定義
 export interface SelectProps {
   label: string;
@@ -105,6 +105,7 @@ export interface SavedDataEntryProps {
   editorLanguage: string;
   editorContent: string;
   evaluation: string;
+  timestamp: string;
 }
 
 // SetFunctionsに対する型定義
@@ -130,7 +131,7 @@ export interface UpdateSaveDataEntryProps {
 }
 
 // ProblemContentに対する型定義
-interface ProblemContent {
+export interface ProblemContent {
   problemStatement: string;
   functionSignature: string;
   constraints: {
@@ -185,7 +186,7 @@ export interface ReusableProblemContentProps {
 }
 
 // ReviewSectionに対する型定義
-interface ReviewResponse {
+export interface ReviewResponse {
   evaluation: {
     algorithmExplanation: string | null;
     clarity: string | null;

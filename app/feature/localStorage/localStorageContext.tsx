@@ -17,8 +17,14 @@ const LocalStorageContext = createContext<
 >(undefined);
 
 // ローカルストレージに関するコンテキストを提供する
-export const useLocalStorageContext = () => {
-  return useContext(LocalStorageContext);
+export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
+  const context = useContext(LocalStorageContext);
+  if (!context) {
+    throw new Error(
+      "useLocalStorageContext must be used within a LocalStorageProvider",
+    );
+  }
+  return context;
 };
 
 // 各ファイルで、ローカルストレージに関するコンテキストを使用出来るようにするプロバイダー
