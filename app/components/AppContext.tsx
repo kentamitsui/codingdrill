@@ -3,6 +3,7 @@ import {
   AppContextProps,
   ReviewResponse,
   ProblemContent,
+  UpdateSaveDataEntryProps,
 } from "@/app/type/type";
 
 const AppContext = createContext<AppContextProps | undefined>(undefined);
@@ -41,7 +42,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
     useState<ReviewResponse | null>(null);
   // ローカルストレージから取得した
-  const [saveData, setSaveData] = useState<string[]>([]);
+  const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
   const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
