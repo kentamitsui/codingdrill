@@ -1,46 +1,52 @@
 import { useEffect, useState } from "react";
 import { SelectProps } from "../type/type";
+import { useAppContext } from "./AppContext";
 
 export const Options: React.FC<SelectProps> = ({
   label,
   data,
   name,
-  disabled,
   defaultSelected,
   setSelected,
   savedLocalStorageValue,
 }) => {
-  const [selected, setLocalSelected] = useState("");
+  const { isDisabled } = useAppContext();
+  const [currentSelected, setCurrentSelected] = useState("");
 
   useEffect(() => {
-    // 更新関数を用いて、loadボタンが押された時にローカルストレージのデータを呼び出し、optionタグの文字列を動的に変更する
-    if (savedLocalStorageValue !== undefined) {
-      setLocalSelected(savedLocalStorageValue);
+    // 更新関数を用いて、loadボタンが押された時にローカルストレージのデータを呼び出し、optionタグを動的に変更する
+    if (savedLocalStorageValue !== null) {
+      setCurrentSelected(savedLocalStorageValue);
     }
   }, [savedLocalStorageValue]);
 
+  // 選択が変更される度に、useStateで値を管理・変更する
   const handleChangeColor = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value;
-    setLocalSelected(value);
-
-    if (setSelected) {
-      setSelected(value);
-    }
+    const currentValue = event.target.value;
+    setCurrentSelected(currentValue);
+    setSelected(currentValue);
   };
 
   return (
     <>
-      <label htmlFor={label}></label>
+      <label htmlFor={label} className="sr-only">
+        {label}
+      </label>
       <select
-        className={`m-1 w-[142px] rounded-md p-1 duration-300 ${selected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${selected !== "" ? "bg-slate-700" : "bg-menu"} ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
+        className={`w-full rounded-md p-1 duration-300 ${currentSelected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelected !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelected !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
-        disabled={disabled}
-        value={selected} // 状態関数と表示内容を同期させるために設定
+        disabled={isDisabled}
+        value={currentSelected}
         onChange={handleChangeColor}
+        // onMouseEnter={(event) => (event.currentTarget.open = true)}
+        // onMouseLeave={(event) => (event.currentTarget.open = false)}
       >
         <option
-          disabled={selected !== "" ? true : false}
+          disabled={
+            currentSelected === "" || currentSelected !== "" ? true : false
+          }
           className="text-start"
+          value={""}
         >
           {defaultSelected}
         </option>

@@ -1,48 +1,40 @@
+import * as monaco from "monaco-editor";
 import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
-import { InputSectionProps } from "../type/type";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
-import { useAppContext } from "../feature/localStorage/AppContext";
+import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-{
-  /* InputSection.tsxでChatGPT-APIとの送受信を行う
-    1.ProblemSection.tsxから問題文の文字列データを、InputSection.tsxへ渡す
-    2.ProblemSection.tsxからリフトダウンされた問題文のデータと、エディタの入力内容・選択言語の値をChatGPT-APIに送信する
-    3.送信が完了し、その後受信するデータをSplitter.tsxにリフトアップする
-    4.リフトアップしたデータは、ReviewSection.tsxにリフトダウンする
-    5.データを各要素に配置する */
-}
-
-export default function InputSection({
-  problemData,
-  setReviewData,
-  setIsDisabledData,
-  getIsDisabledData,
-  localStorageEditorLanguage, // ローカルストレージのeditorLanguageプロパティをリフトアップによって取得 ＊下記のuseStateと命名の重複を避ける為、若干の変更を加えた
-  editorContent, // ローカルストレージのeditorContentプロパティをリフトアップによって取得
-}: InputSectionProps) {
+import InputAreaButton from "./InputAreaButton";
+export default function InputSection() {
   const {
+    isDisabled,
+    setIsDisabled,
+    setIsCreateReview,
     difficulty,
     dataType,
     topic,
     selectedLanguage,
     formattedProblemContent,
-    // loadedSelectedLanguage,
+    jsonFormattedProblemContent,
+    setJsonFormattedReviewContent,
+    loadedEditorLanguage,
+    loadedEditorContent,
+    setLoadedEditorContent,
+    setCheckEditorInputed,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
 
   useEffect(() => {
-    const handleStorageChange = (event) => {
+    const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
         updateSelectBox([]);
-        updateLocalStorage();
+        updateLocalStorage(savedData);
         return;
       }
 
       if (event.key === "savedData") {
-        // const savedData = JSON.parse(event.newValue || "[]");
         updateSelectBox(savedData);
       }
     };
@@ -52,25 +44,38 @@ export default function InputSection({
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, []);
+  }, [savedData, updateLocalStorage]);
+
+  // refにMonaco Editorインスタンスを保持
+  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
+  // onMountでMonaco Editorインスタンスをrefに格納
+  const handleEditorMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
+    editorRef.current = editor;
+  };
+
+  const handleEditorChange = (value: string | undefined) => {
+    setIsEditorInputed(value || "");
+    setCheckEditorInputed(value || "");
+  };
 
   const [fontSize, setFontSize] = useState("14");
-  const [editorLanguage, setEditorLanguage] = useState("javascript");
-  const [editorTheme, setEditorTheme] = useState("vs");
-  const editorRef = useRef<any>(null);
+  const [editorLanguage, setEditorLanguage] = useState("python");
+  const [editorTheme, setEditorTheme] = useState("vs-dark");
+  const [isEditorInputed, setIsEditorInputed] = useState(
+    editorRef.current?.getValue(),
+  );
 
+  // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setFontSize(event.target.value);
   };
-
   const handleLanguageChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setEditorLanguage(event.target.value);
   };
-
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
@@ -78,25 +83,41 @@ export default function InputSection({
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorLanguageのデータをエディタ入力部分に反映
   useEffect(() => {
-    if (localStorageEditorLanguage) {
-      setEditorLanguage(localStorageEditorLanguage);
+    if (loadedEditorLanguage) {
+      setEditorLanguage(loadedEditorLanguage);
     }
-  }, [localStorageEditorLanguage]);
+  }, [loadedEditorLanguage]);
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
+  // また、Sidebar.tsxでhandleCreateProblem()が実行された際は、
+  // エディタを空にする
   useEffect(() => {
-    if (editorRef.current && editorContent) {
-      editorRef.current.setValue(editorContent); // エディタを更新
+    if (editorRef.current) {
+      if (loadedEditorContent !== null) {
+        editorRef.current.setValue(loadedEditorContent);
+      } else {
+        editorRef.current.setValue(""); // 正常にsetValueが呼び出される
+      }
     }
-  }, [editorContent]);
+  }, [loadedEditorContent]);
+
+  // エディタに入力された内容を取得
+  useEffect(() => {
+    const editorValue = editorRef.current?.getValue();
+    if (editorValue !== undefined) {
+      setIsEditorInputed(editorValue);
+      setCheckEditorInputed(editorValue);
+    }
+  }, [setCheckEditorInputed]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
     if (editorRef.current) {
-      const editorContent = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
+      const copyEditorvalue = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
+
       navigator.clipboard
-        .writeText(editorContent)
+        .writeText(copyEditorvalue)
         .then(() => {
           alert("Copied to clipboard!");
         })
@@ -112,11 +133,18 @@ export default function InputSection({
   // createProblem.tsに選択後の値を送信する
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateReview = async () => {
-    setIsDisabledData(true);
-    const editorContent = editorRef.current.getValue();
+    const currentEditorValue = editorRef.current
+      ? editorRef.current.getValue()
+      : "";
+
+    // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
+    setIsDisabled(true);
+    // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
+    setIsCreateReview(true);
+    // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
+    setJsonFormattedReviewContent(null);
+
     try {
-      // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      // setDisabled(true);
       const response = await fetch("/api/createReview", {
         method: "POST",
         headers: {
@@ -125,9 +153,10 @@ export default function InputSection({
         body: JSON.stringify({
           topic,
           selectedLanguage,
+          // JSON形式から整形された問題文を渡す
           formattedProblemContent,
           editorLanguage,
-          editorContent,
+          currentEditorValue,
         }),
       });
 
@@ -144,18 +173,24 @@ export default function InputSection({
         dataType,
         topic,
         selectedLanguage,
-        problemContent: problemData,
+        problemContent: jsonFormattedProblemContent,
         editorLanguage,
-        editorContent,
+        editorContent: currentEditorValue,
         evaluation: JsonText,
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
-      setReviewData(JsonText);
+      setJsonFormattedReviewContent(JsonText);
+
+      // setLoadedEditorContentに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
+      // ロード直後にもう一度問題作成を行った場合にエディタの中を空になる処理が実行される
+      // このセット関数を実行しないと、ロード直後に問題文を作成した場合にエディタの中が空にならないバグが発生する
+      setLoadedEditorContent(currentEditorValue);
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsDisabledData(false);
+        setIsDisabled(false);
+        setIsCreateReview(false);
       }
     } catch (error) {
       console.error("Error occurred while creating a review:", error);
@@ -169,10 +204,10 @@ export default function InputSection({
       className="flex flex-grow flex-col overflow-hidden"
       style={{ height: "100%" }} // 親要素が高さを管理
     >
-      <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] font-bold dark:border-[#1e1e1e] dark:bg-[#0d1117]">
+      <div className="flex flex-row justify-between rounded-t-md border-b-2 border-gray-50 bg-gray-200 text-[1rem] dark:border-[#1e1e1e] dark:bg-[#0d1117]">
         <div
           id="codeInputArea-title"
-          className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem]"
+          className="rounded-tl-md p-[4px_4px_4px_30px] text-[1rem] font-bold"
         >
           Code
         </div>
@@ -182,25 +217,26 @@ export default function InputSection({
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
-            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              getIsDisabledData
-                ? "cursor-not-allowed opacity-50"
-                : "cursor-pointer"
+            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+              isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
             }`}
           >
             Options
           </summary>
           <div
-            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 rounded-md border-t-2 border-t-gray-50 bg-gray-200 p-2 shadow-lg dark:border-t-[#1e1e1e] dark:bg-[#0d1117] ${
-              getIsDisabledData ? "pointer-events-none opacity-50" : ""
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-sm ${
+              isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
             {/* Font Size Select */}
+            <label htmlFor="fontsize-select" className="sr-only">
+              fontsize select
+            </label>
             <select
               id="fontsize-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={fontSize}
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onChange={handleFontSizeChange}
             >
               {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
@@ -210,11 +246,14 @@ export default function InputSection({
               ))}
             </select>
             {/* Theme Select */}
+            <label htmlFor="theme-select" className="sr-only">
+              theme select
+            </label>
             <select
               id="theme-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onChange={handleThemeChange}
             >
               <option value="vs">vs</option>
@@ -223,11 +262,14 @@ export default function InputSection({
               <option value="hc-black">hc-black</option>
             </select>
             {/* Language Select */}
+            <label htmlFor="language-select" className="sr-only">
+              language select
+            </label>
             <select
               id="language-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 text-[12px] duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
+              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorLanguage}
-              disabled={getIsDisabledData}
+              disabled={isDisabled}
               onChange={handleLanguageChange}
             >
               {Object.entries(config.menuLists.languages).map(
@@ -239,85 +281,20 @@ export default function InputSection({
               )}
             </select>
             {/* Buttons */}
-            <button
+            <InputAreaButton
               id="button-Copy-CodeInputArea"
-              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-              disabled={getIsDisabledData}
+              type="button"
+              text="copy"
               onClick={copyToClipboard}
-            >
-              Copy
-            </button>
-            <button
+            />
+            <InputAreaButton
               id="submit"
-              className="w-full rounded-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500"
-              disabled={getIsDisabledData}
+              type="button"
+              text="submit"
               onClick={handleCreateReview}
-            >
-              Submit
-            </button>
+            />
           </div>
         </details>
-        {/* <select
-          id="fontsize-select"
-          className={`ml-auto mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={fontSize}
-          disabled={getIsDisabledData}
-          onChange={handleFontSizeChange}
-        >
-          <option value={"10"}>10</option>
-          <option value={"11"}>11</option>
-          <option value={"12"}>12</option>
-          <option value={"13"}>13</option>
-          <option value={"14"}>14</option>
-          <option value={"15"}>15</option>
-          <option value={"16"}>16</option>
-          <option value={"17"}>17</option>
-          <option value={"18"}>18</option>
-          <option value={"19"}>19</option>
-          <option value={"20"}>20</option>
-        </select>
-        <select
-          id="theme-select"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={editorTheme}
-          disabled={getIsDisabledData}
-          onChange={handleThemeChange}
-        >
-          <option value={"vs"}>vs</option>
-          <option value={"vs-dark"}>vs-dark</option>
-          <option value={"hc-light"}>hc-light</option>
-          <option value={"hc-black"}>hc-black</option>
-        </select>
-        <select
-          id="language-select"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          value={editorLanguage}
-          disabled={getIsDisabledData}
-          onChange={handleLanguageChange}
-        >
-          {Object.entries(config.menuLists.languages).map(([key, label]) => (
-            <option key={key} value={key}>
-              {label}
-            </option>
-          ))}
-        </select>
-        <button
-          id="button-Copy-CodeInputArea"
-          className={`mr-[2px] w-[100px] border-gray-50 bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          disabled={getIsDisabledData}
-          onClick={copyToClipboard}
-        >
-          copy
-        </button>
-        <button
-          className={`w-[100px] rounded-tr-md bg-gray-400 p-1 text-center text-[12px] duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${getIsDisabledData === true ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          id="submit"
-          type="submit"
-          disabled={getIsDisabledData}
-          onClick={handleCreateReview}
-        >
-          submit
-        </button> */}
       </div>
       <div className="flex flex-1">
         <MonacoEditor
@@ -326,9 +303,9 @@ export default function InputSection({
           editorLanguage={editorLanguage}
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
-          onMount={(editor) => {
-            editorRef.current = editor;
-          }}
+          onMount={handleEditorMount}
+          // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
+          onChange={handleEditorChange}
         />
       </div>
     </section>

@@ -21,13 +21,14 @@ export default async function handler(
     selectedLanguage,
     formattedProblemContent,
     editorLanguage,
-    editorContent,
+    currentEditorValue,
   } = req.body;
   const modified = process.env.CODE;
   const promptTemplate =
     formattedProblemContent +
     modified?.replace("%language%", editorLanguage) +
-    editorContent;
+    currentEditorValue +
+    "\n\n";
 
   if (!promptTemplate) {
     return res
@@ -37,13 +38,11 @@ export default async function handler(
 
   const modifiedPrompt =
     promptTemplate +
-    process.env.PROMPT_CHECK_1ST?.replace("%language%", editorLanguage).replace(
-      "%topic%",
-      topic,
-    ) +
-    process.env.PROMPT_CHECK?.replace("%display_language%", selectedLanguage);
+    process.env.PROMPT_CHECK?.replaceAll("%language%", editorLanguage)
+      .replaceAll("%topic%", topic)
+      .replaceAll("%display_language%", selectedLanguage);
 
-  // console.log(modifiedPrompt);
+  console.log("OpenAI request:\n\n", modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
