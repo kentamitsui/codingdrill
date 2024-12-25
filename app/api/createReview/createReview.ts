@@ -41,8 +41,6 @@ export default async function handler(
       .replaceAll("%topic%", topic)
       .replaceAll("%display_language%", selectedLanguage);
 
-  console.log("modifiedPrompt\n\n", modifiedPrompt);
-
   try {
     const request = await openai.chat.completions.create({
       model: "gpt-4o-mini",
