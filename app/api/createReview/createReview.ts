@@ -27,7 +27,8 @@ export default async function handler(
   const promptTemplate =
     formattedProblemContent +
     modified?.replace("%language%", editorLanguage) +
-    currentEditorValue;
+    currentEditorValue +
+    "\n\n";
 
   if (!promptTemplate) {
     return res
@@ -40,6 +41,8 @@ export default async function handler(
     process.env.PROMPT_CHECK?.replaceAll("%language%", editorLanguage)
       .replaceAll("%topic%", topic)
       .replaceAll("%display_language%", selectedLanguage);
+
+  console.log("OpenAI request:\n\n", modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
