@@ -22,28 +22,6 @@
   }
 }
 
-@layer utilities {
-  .animation-delay-100 {
-    animation-delay: 0.1s;
-  }
-
-  .animation-delay-120 {
-    animation-delay: 0.12s;
-  }
-
-  .animation-delay-140 {
-    animation-delay: 0.14s;
-  }
-
-  .animation-delay-160 {
-    animation-delay: 0.16s;
-  }
-
-  .animation-delay-180 {
-    animation-delay: 0.18s;
-  }
-}
-
 :root {
   --gutter-bg: #6b7280;
   --gutter-bg-border: #f9fafb;

@@ -2,22 +2,18 @@
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
-import { SidebarProps } from "../type/type";
-import { useAppContext } from "../feature/localStorage/AppContext";
+import LoadAreaButton from "./LoadAreaButton";
+import { useAppContext } from "./AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import { useEffect } from "react";
+import { useState } from "react";
 // import Image from "next/image";
 
-export default function Sidebar({
-  setProblemData,
-  setIsDisabledData,
-  getIsDisabledData,
-  setEditorLanguage,
-  setEditorContent,
-  setEvaluation,
-}: SidebarProps) {
+export default function Sidebar() {
   // createContextを使用して、InputSectionにデータを渡す
   const {
+    isDisabled,
+    setIsDisabled,
+    setIsCreateProblem,
     difficulty,
     setDifficulty,
     dataType,
@@ -26,11 +22,25 @@ export default function Sidebar({
     setTopic,
     selectedLanguage,
     setSelectedLanguage,
-    reviewData,
+    saveData,
+    setJsonFormattedProblemContent,
+    setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
+    setLoadedEditorLanguage,
+    setLoadedEditorContent,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
+  // セーブデータの選択時に背景色の状態管理に使用
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState("");
+
+  // セーブデータの値を動的に変更する
+  const handleChangeSavedData = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const currentValue = event.target.value;
+    setCurrentSelectedSavedData(currentValue);
+  };
 
   // ローカルストレージのデータを各要素に反映する
   const handleLoadData = () => {
@@ -45,6 +55,7 @@ export default function Sidebar({
     }
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
+    // selectedIdについては、後で型を確認する
     loadSavedData(selectedId, {
       difficulty: setDifficulty,
       dataType: setDataType,
@@ -53,10 +64,10 @@ export default function Sidebar({
         setSelectedLanguage(newLanguage); // 選択された言語を設置する
         setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
       },
-      problemContent: setProblemData,
-      editorLanguage: setEditorLanguage,
-      editorContent: setEditorContent,
-      evaluation: setEvaluation,
+      problemContent: setJsonFormattedProblemContent,
+      editorLanguage: setLoadedEditorLanguage,
+      editorContent: setLoadedEditorContent,
+      evaluation: setJsonFormattedReviewContent,
     });
   };
 
@@ -64,10 +75,14 @@ export default function Sidebar({
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
-      // ボタンが押されたら、ProblemSection.tsxに表示されている文字列をclearする
-      setProblemData(null);
+      // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
+      setJsonFormattedProblemContent(null);
+      setLoadedEditorContent("");
+      setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setIsDisabledData(true);
+      setIsDisabled(true);
+      // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
+      setIsCreateProblem(true);
 
       const response = await fetch("/api/createProblem", {
         method: "POST",
@@ -88,13 +103,15 @@ export default function Sidebar({
       const data = await response.json();
       const responseText = data.responseText;
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
+      // また、アニメーションを非表示にする
       if (responseText) {
-        setIsDisabledData(false);
+        setIsDisabled(false);
+        setIsCreateProblem(false);
       }
 
       const JsonText = JSON.parse(responseText);
-      // 親コンポーネント(Main)のセット関数にJSONオブジェクトを設置する
-      setProblemData(JsonText);
+      // AppContextのセット関数にデータを設置する
+      setJsonFormattedProblemContent(JsonText);
       setSelectedLanguage(selectedLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
@@ -103,13 +120,12 @@ export default function Sidebar({
   };
 
   return (
-    <aside className="flex h-[500px] w-[150px] flex-col rounded-md bg-gray-200 text-sm dark:bg-[#0d1117]">
-      <div className="flex flex-row">
+    <aside className="flex max-h-[300px] w-[150px] flex-col rounded-md bg-gray-200 p-1 text-sm dark:bg-[#0d1117]">
+      <div className="flex flex-col gap-2">
         <Options
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          disabled={getIsDisabledData}
           defaultSelected={"difficulty"}
           setSelected={setDifficulty}
           savedLocalStorageValue={difficulty}
@@ -121,13 +137,11 @@ export default function Sidebar({
           width={20}
           height={20}
         /> */}
-      </div>
-      <div className="flex flex-row">
+
         <Options
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          disabled={getIsDisabledData}
           defaultSelected={"data type"}
           setSelected={setDataType}
           savedLocalStorageValue={dataType}
@@ -139,13 +153,10 @@ export default function Sidebar({
           width={20}
           height={20}
         /> */}
-      </div>
-      <div className="flex flex-row">
         <Options
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          disabled={getIsDisabledData}
           defaultSelected={"topic"}
           setSelected={setTopic}
           savedLocalStorageValue={topic}
@@ -157,13 +168,10 @@ export default function Sidebar({
           width={20}
           height={20}
         /> */}
-      </div>
-      <div className="flex flex-row">
         <Options
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          disabled={getIsDisabledData}
           defaultSelected={"translate"}
           setSelected={setSelectedLanguage}
           savedLocalStorageValue={selectedLanguage}
@@ -175,65 +183,77 @@ export default function Sidebar({
           width={20}
           height={20}
         /> */}
+        <Button
+          id="create"
+          type="button"
+          text="Create Problem"
+          onClick={handleCreateProblem}
+        />
       </div>
-      <Button
-        id="create"
-        type="button"
-        text="Create Problem"
-        clicked={getIsDisabledData}
-        onClick={handleCreateProblem}
-      />
-      <div className="mt-auto flex flex-col gap-1">
-        <div
-          hidden
-          id="speech-bubble"
-          className="rounded-[15px] bg-slate-500 p-1 text-center shadow-md"
-        >
-          success save!
-        </div>
-        <label htmlFor="savedata"></label>
+      <div className="mt-auto flex flex-col gap-2">
+        <label htmlFor="savedata" className="sr-only">
+          save data
+        </label>
         <select
-          className={`m-1 rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${getIsDisabledData ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
+          className={`rounded-md p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
-          disabled={getIsDisabledData}
+          value={currentSelectedSavedData}
+          disabled={isDisabled}
+          onChange={handleChangeSavedData}
         >
           <option className="text-start" value="">
             Save Data
           </option>
-          {reviewData.length === 0 ? (
+          {saveData.length === 0 ? (
             <option value="" disabled={true}>
-              No saved data
+              no saved data
             </option>
           ) : (
-            reviewData.map((entry, index) => (
+            saveData.map((entry, index) => (
               <option key={`${entry.id}-${index}`} value={entry.id}>
-                {`${entry.timestamp} - Data ${entry.id}`}
+                {`Data ${entry.id}: ${entry.timestamp} - difficulty: ${entry.difficulty} / data type: ${entry.dataType} / topic: ${entry.topic} / translate: ${entry.selectedLanguage}`}
               </option>
             ))
           )}
         </select>
-        <Button
-          id="load"
-          type="button"
-          text="load"
-          clicked={getIsDisabledData}
-          onClick={handleLoadData}
-        />
-        <Button
-          id="delete"
-          type="button"
-          text="delete"
-          clicked={getIsDisabledData}
-          onClick={handleDeleteSelected}
-        />
-        <Button
-          id="delete-all"
-          type="button"
-          text="delete all"
-          clicked={getIsDisabledData}
-          onClick={clearLocalStorage}
-        />
+        <details
+          className="relative mt-auto flex w-[142px] flex-col"
+          onMouseEnter={(event) => (event.currentTarget.open = true)}
+          onMouseLeave={(event) => (event.currentTarget.open = false)}
+        >
+          <summary
+            className={`w-full rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+              isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+            }`}
+          >
+            Options
+          </summary>
+          <div
+            className={`absolute -right-[4px] z-10 flex w-[150px] flex-col gap-2 rounded-b-md bg-opacity-0 p-[8px_4px_4px_4px] ${
+              isDisabled ? "pointer-events-none opacity-50" : ""
+            }`}
+          >
+            <LoadAreaButton
+              id="load"
+              type="button"
+              text="load"
+              onClick={handleLoadData}
+            />
+            <LoadAreaButton
+              id="delete"
+              type="button"
+              text="delete"
+              onClick={handleDeleteSelected}
+            />
+            <LoadAreaButton
+              id="delete-all"
+              type="button"
+              text="delete all"
+              onClick={clearLocalStorage}
+            />
+          </div>
+        </details>
       </div>
     </aside>
   );

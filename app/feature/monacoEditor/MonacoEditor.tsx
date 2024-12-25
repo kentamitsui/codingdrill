@@ -9,6 +9,7 @@ export default function MonacoEditor({
   editorLanguage,
   editorTheme,
   onMount,
+  onChange,
 }: MonacoEditorProps) {
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
@@ -32,15 +33,17 @@ export default function MonacoEditor({
       updateDimensions();
     });
 
+    const currentRef = editorContainerRef.current;
+
     // 仕切り線のドラッグでサイズが変わる度に、updateDimensions()を呼び出す
-    if (editorContainerRef.current) {
-      observer.observe(editorContainerRef.current);
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     // 要素のサイズ変更が完了（仕切り線のドラッグが終わった）した時点で監視を終了する
     return () => {
-      if (editorContainerRef.current) {
-        observer.unobserve(editorContainerRef.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
   }, []);
@@ -62,6 +65,12 @@ export default function MonacoEditor({
           onMount={(editor) => {
             if (onMount) {
               onMount(editor);
+            }
+          }}
+          // InputSection.tsxから渡されたプロパティをonChangeメソッドで実行する
+          onChange={(value) => {
+            if (onChange) {
+              onChange(value);
             }
           }}
         />
