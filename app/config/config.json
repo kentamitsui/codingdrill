@@ -118,7 +118,8 @@
         "shell": "Shell Commands",
         "simulation": "Simulation",
         "systemDesign": "System Design"
-      }
+      },
+      "Randomize": { "Randomize": "Randomize" }
     },
     "displayLanguages": {
       "british English": "British English",
