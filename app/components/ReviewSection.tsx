@@ -35,25 +35,25 @@ export const ReviewSection: React.FC = () => {
 
   const copyToClipboard = () => {
     const algorithmExplanation = jsonFormattedReviewContent
-      ? `Explanation of the algorithm:\n${jsonFormattedReviewContent.evaluation.algorithmExplanation}\n\n`
+      ? `Explanation of the algorithm:\n${jsonFormattedReviewContent.algorithmExplanation}\n\n`
       : "";
     const clarity = jsonFormattedReviewContent
-      ? `Clarity and specificity:\n${jsonFormattedReviewContent.evaluation.clarity}\n\n`
+      ? `Clarity and specificity:\n${jsonFormattedReviewContent.clarity}\n\n`
       : "";
     const efficiency = jsonFormattedReviewContent
-      ? `Efficiency: ${jsonFormattedReviewContent.evaluation.efficiency}\n\n`
+      ? `Efficiency: ${jsonFormattedReviewContent.efficiency}\n\n`
       : "";
     const testCoverage = jsonFormattedReviewContent
-      ? `Test coverage: ${jsonFormattedReviewContent.evaluation.testCoverage}\n\n`
+      ? `Test coverage: ${jsonFormattedReviewContent.testCoverage}\n\n`
       : "";
     const technicalAccuracy = jsonFormattedReviewContent
-      ? `Technical accuracy: ${jsonFormattedReviewContent.evaluation.technicalAccuracy}\n\n`
+      ? `Technical accuracy: ${jsonFormattedReviewContent.technicalAccuracy}\n\n`
       : "";
     const improvementSuggestions = jsonFormattedReviewContent
-      ? `Improvement suggestions: ${jsonFormattedReviewContent.evaluation.improvementSuggestions}\n\n`
+      ? `Improvement suggestions: ${jsonFormattedReviewContent.improvementSuggestions}\n\n`
       : "";
     const exampleImprovement = jsonFormattedReviewContent
-      ? `Example improvement: ${jsonFormattedReviewContent.evaluation.exampleImprovement}`
+      ? `Example improvement: ${jsonFormattedReviewContent.exampleImprovement}`
       : "";
 
     const formattedReviewContent =
@@ -131,45 +131,37 @@ export const ReviewSection: React.FC = () => {
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Explanation of the algorithm:"
-          paragraphContent={
-            jsonFormattedReviewContent?.evaluation.algorithmExplanation
-          }
+          paragraphContent={jsonFormattedReviewContent?.algorithmExplanation}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Clarity and specificity:"
-          paragraphContent={jsonFormattedReviewContent?.evaluation.clarity}
+          paragraphContent={jsonFormattedReviewContent?.clarity}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Efficiency:"
-          paragraphContent={jsonFormattedReviewContent?.evaluation.efficiency}
+          paragraphContent={jsonFormattedReviewContent?.efficiency}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Test coverage:"
-          paragraphContent={jsonFormattedReviewContent?.evaluation.testCoverage}
+          paragraphContent={jsonFormattedReviewContent?.testCoverage}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Technical accuracy:"
-          paragraphContent={
-            jsonFormattedReviewContent?.evaluation.technicalAccuracy
-          }
+          paragraphContent={jsonFormattedReviewContent?.technicalAccuracy}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Improvement suggestions:"
-          paragraphContent={
-            jsonFormattedReviewContent?.evaluation.improvementSuggestions
-          }
+          paragraphContent={jsonFormattedReviewContent?.improvementSuggestions}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Example improvement:"
-          paragraphContent={
-            jsonFormattedReviewContent?.evaluation.exampleImprovement
-          }
+          paragraphContent={jsonFormattedReviewContent?.exampleImprovement}
         />
       </div>
     </div>

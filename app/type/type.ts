@@ -197,15 +197,13 @@ export interface ReusableProblemContentProps {
 
 // ReviewSectionに対する型定義
 export interface ReviewResponse {
-  evaluation: {
-    algorithmExplanation: string | null;
-    clarity: string | null;
-    efficiency: string | null;
-    testCoverage: string | null;
-    technicalAccuracy: string | null;
-    improvementSuggestions: string | null;
-    exampleImprovement: string | null;
-  };
+  algorithmExplanation: string | null;
+  clarity: string | null;
+  efficiency: string | null;
+  testCoverage: string | null;
+  technicalAccuracy: string | null;
+  improvementSuggestions: string | null;
+  exampleImprovement: string | null;
 }
 
 // ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
