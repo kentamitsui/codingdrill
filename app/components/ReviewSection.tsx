@@ -34,27 +34,18 @@ export const ReviewSection: React.FC = () => {
   };
 
   const copyToClipboard = () => {
-    const algorithmExplanation = jsonFormattedReviewContent
-      ? `Explanation of the algorithm:\n${jsonFormattedReviewContent.algorithmExplanation}\n\n`
-      : "";
-    const clarity = jsonFormattedReviewContent
-      ? `Clarity and specificity:\n${jsonFormattedReviewContent.clarity}\n\n`
-      : "";
-    const efficiency = jsonFormattedReviewContent
-      ? `Efficiency: ${jsonFormattedReviewContent.efficiency}\n\n`
-      : "";
-    const testCoverage = jsonFormattedReviewContent
-      ? `Test coverage: ${jsonFormattedReviewContent.testCoverage}\n\n`
-      : "";
-    const technicalAccuracy = jsonFormattedReviewContent
-      ? `Technical accuracy: ${jsonFormattedReviewContent.technicalAccuracy}\n\n`
-      : "";
-    const improvementSuggestions = jsonFormattedReviewContent
-      ? `Improvement suggestions: ${jsonFormattedReviewContent.improvementSuggestions}\n\n`
-      : "";
-    const exampleImprovement = jsonFormattedReviewContent
-      ? `Example improvement: ${jsonFormattedReviewContent.exampleImprovement}`
-      : "";
+    if (!jsonFormattedReviewContent) {
+      alert("No review content to copy.");
+      return;
+    }
+
+    const algorithmExplanation = `Explanation of the algorithm:\n${jsonFormattedReviewContent.algorithmExplanation}\n\n`;
+    const clarity = `Clarity and specificity:\n${jsonFormattedReviewContent.clarity}\n\n`;
+    const efficiency = `Efficiency: ${jsonFormattedReviewContent.efficiency}\n\n`;
+    const testCoverage = `Test coverage: ${jsonFormattedReviewContent.testCoverage}\n\n`;
+    const technicalAccuracy = `Technical accuracy: ${jsonFormattedReviewContent.technicalAccuracy}\n\n`;
+    const suggestionsImprovement = `Improvement suggestions: ${jsonFormattedReviewContent.suggestionsImprovement}\n\n`;
+    const improvementExample = `Example improvement: ${jsonFormattedReviewContent.improvementExample}`;
 
     const formattedReviewContent =
       algorithmExplanation +
@@ -62,8 +53,8 @@ export const ReviewSection: React.FC = () => {
       efficiency +
       testCoverage +
       technicalAccuracy +
-      improvementSuggestions +
-      exampleImprovement;
+      suggestionsImprovement +
+      improvementExample;
 
     navigator.clipboard
       .writeText(formattedReviewContent)
@@ -156,12 +147,12 @@ export const ReviewSection: React.FC = () => {
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Improvement suggestions:"
-          paragraphContent={jsonFormattedReviewContent?.improvementSuggestions}
+          paragraphContent={jsonFormattedReviewContent?.suggestionsImprovement}
         />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Example improvement:"
-          paragraphContent={jsonFormattedReviewContent?.exampleImprovement}
+          paragraphContent={jsonFormattedReviewContent?.improvementExample}
         />
       </div>
     </div>

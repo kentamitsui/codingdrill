@@ -229,7 +229,7 @@ export default function InputSection() {
         <details
           className="relative ml-auto rounded-tr-md"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
-          // onMouseLeave={(event) => (event.currentTarget.open = false)}
+          onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
