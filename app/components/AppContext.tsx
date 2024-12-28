@@ -64,7 +64,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
-  }, []);
+  }, [setSaveData]);
 
   return (
     <AppContext.Provider

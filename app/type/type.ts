@@ -122,10 +122,10 @@ export interface SetFunctionsProps {
   dataType: (value: string) => void;
   topic: (value: string) => void;
   selectedLanguage: (value: string) => void;
-  problemContent: (value: ProblemContent) => void;
+  problemContent: (value: ProblemContent | null) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
-  evaluation: (value: ReviewResponse) => void;
+  evaluation: (value: ReviewResponse | null) => void;
 }
 
 // UpdateSaveDataEntryに対する型定義
@@ -143,47 +143,47 @@ export interface ProblemContent {
   problemStatement: string;
   functionSignature: string;
   constraints: {
-    size: string;
-    valueRange: string;
-    kRange: string;
+    size?: string;
+    valueRange?: string;
+    kRange?: string;
   };
-  example1: {
+  example1?: {
     input: string;
     output: string;
     explanation: string;
   };
-  example2: {
+  example2?: {
     input: string;
     output: string;
     explanation: string;
   };
-  example3: {
+  example3?: {
     input: string;
     output: string;
     explanation: string;
   };
-  edgeCase1: {
+  edgeCase1?: {
     input: string;
     output: string;
     explanation: string;
   };
-  edgeCase2: {
+  edgeCase2?: {
     input: string;
     output: string;
     explanation: string;
   };
-  edgeCase3: {
+  edgeCase3?: {
     input: string;
     output: string;
     explanation: string;
   };
-  analysis: {
+  analysis?: {
     timeComplexity: string;
     spaceComplexity: string;
     edgeCases: string;
     otherConsiderations: string;
   };
-  hints: string;
+  hints?: string;
 }
 
 // ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
@@ -200,8 +200,8 @@ export interface ReviewResponse {
   efficiency: string | null;
   testCoverage: string | null;
   technicalAccuracy: string | null;
-  improvementSuggestions: string | null;
-  exampleImprovement: string | null;
+  suggestionsImprovement: string | null;
+  improvementExample: string | null;
 }
 
 // ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
