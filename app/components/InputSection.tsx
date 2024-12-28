@@ -23,6 +23,7 @@ export default function InputSection() {
     loadedEditorLanguage,
     loadedEditorContent,
     setLoadedEditorContent,
+    checkEditorInputed,
     setCheckEditorInputed,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
@@ -63,15 +64,13 @@ export default function InputSection() {
     // 文字数チェックとアラート表示
     if (value) {
       // 状態関数の非同期性や再レンダリングを避けるため、valueを使用
-      if (!isAlert && value.length >= 2000) {
-        alert("Too many input. The limit is 2000 characters.");
+      if (!isAlert && value.length >= 2501) {
+        alert("Too many input. The limit is 2500 characters.");
         setIsAlert(true); // フラグを切り替え、再度条件が満たされるまでアラートを非表示
-      } else if (isAlert && value.length <= 1999) {
-        setIsAlert(false); // 文字数が1999時以下になったらフラグをfalseに戻す
+      } else if (isAlert && value.length <= 2500) {
+        setIsAlert(false); // 文字数が2500字以下になったらフラグをfalseに戻す
       }
     }
-
-    console.log(value?.length);
   };
 
   const [fontSize, setFontSize] = useState("14");
@@ -230,7 +229,7 @@ export default function InputSection() {
         <details
           className="relative ml-auto rounded-tr-md"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
-          onMouseLeave={(event) => (event.currentTarget.open = false)}
+          // onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
@@ -277,6 +276,7 @@ export default function InputSection() {
               <option value="hc-light">hc-light</option>
               <option value="hc-black">hc-black</option>
             </select>
+
             {/* Language Select */}
             <label htmlFor="language-select" className="sr-only">
               language select
@@ -296,6 +296,10 @@ export default function InputSection() {
                 ),
               )}
             </select>
+            {/* 文字数カウント */}
+            <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
+              <p>input: {checkEditorInputed?.length}</p>
+            </div>
             {/* Buttons */}
             <InputAreaButton
               id="button-Copy-CodeInputArea"

@@ -43,10 +43,10 @@ export default function InputAreaButton({
       jsonFormattedProblemContent !== null &&
       checkEditorInputed &&
       checkEditorInputed?.length >= 1 &&
-      checkEditorInputed?.length <= 1999
+      checkEditorInputed?.length <= 2500
     ) {
       setIsEditorInputedState(false);
-    } else if (checkEditorInputed && checkEditorInputed?.length >= 2000) {
+    } else if (checkEditorInputed && checkEditorInputed?.length >= 2501) {
       setIsEditorInputedState(true);
     } else {
       setIsEditorInputedState(true);
