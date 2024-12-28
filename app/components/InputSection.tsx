@@ -181,7 +181,7 @@ export default function InputSection() {
         evaluation: JsonText,
       });
 
-      consoleOutput();
+      // consoleOutput();
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setJsonFormattedReviewContent(JsonText);
