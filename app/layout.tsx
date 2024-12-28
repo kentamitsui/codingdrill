@@ -3,8 +3,8 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
-  title: "Create Next App",
-  description: "create a coding test problem",
+  title: "Coding Drill",
+  description: "coding test practice app",
 };
 
 export default function RootLayout({
