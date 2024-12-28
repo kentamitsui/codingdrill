@@ -7,7 +7,6 @@ import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import InputAreaButton from "./InputAreaButton";
-import { consoleOutput } from "@/fineTuning/data";
 
 export default function InputSection() {
   const {
@@ -58,14 +57,17 @@ export default function InputSection() {
   const handleEditorChange = (value: string | undefined) => {
     setIsEditorInputed(value || "");
     setCheckEditorInputed(value || "");
+
+    // 文字数チェックとアラート表示
+    if (value && value.length >= 2000) {
+      alert("Too many input. The limit is 2000 characters.");
+    }
   };
 
   const [fontSize, setFontSize] = useState("14");
   const [editorLanguage, setEditorLanguage] = useState("python");
   const [editorTheme, setEditorTheme] = useState("vs-dark");
-  const [isEditorInputed, setIsEditorInputed] = useState(
-    editorRef.current?.getValue(),
-  );
+  const [_, setIsEditorInputed] = useState(editorRef.current?.getValue());
 
   // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
@@ -111,7 +113,7 @@ export default function InputSection() {
       setIsEditorInputed(editorValue);
       setCheckEditorInputed(editorValue);
     }
-  }, [setCheckEditorInputed]);
+  }, [setIsEditorInputed, setCheckEditorInputed]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {

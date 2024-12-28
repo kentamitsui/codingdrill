@@ -53,9 +53,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   // エディタに入力された内容をチェックするための状態管理
-  const [checkEditorInputed, setCheckEditorInputed] = useState<
-    string | undefined
-  >("");
+  const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
+    "",
+  );
 
   // ローカルストレージからデータを取得
   useEffect(() => {
