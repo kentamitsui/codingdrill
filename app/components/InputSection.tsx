@@ -26,6 +26,8 @@ export default function InputSection() {
     setCheckEditorInputed,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
+  // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
+  const [isAlert, setIsAlert] = useState(false);
 
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
@@ -59,9 +61,17 @@ export default function InputSection() {
     setCheckEditorInputed(value || "");
 
     // 文字数チェックとアラート表示
-    if (value && value.length >= 2000) {
-      alert("Too many input. The limit is 2000 characters.");
+    if (value) {
+      // 状態関数の非同期性や再レンダリングを避けるため、valueを使用
+      if (!isAlert && value.length >= 2000) {
+        alert("Too many input. The limit is 2000 characters.");
+        setIsAlert(true); // フラグを切り替え、再度条件が満たされるまでアラートを非表示
+      } else if (isAlert && value.length <= 1999) {
+        setIsAlert(false); // 文字数が1999時以下になったらフラグをfalseに戻す
+      }
     }
+
+    console.log(value?.length);
   };
 
   const [fontSize, setFontSize] = useState("14");
