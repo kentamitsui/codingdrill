@@ -42,7 +42,7 @@ export default async function handler(
       .replaceAll("%topic%", topic)
       .replaceAll("%display_language%", selectedLanguage);
 
-  console.log("OpenAI request:\n\n", modifiedPrompt);
+  // console.log("OpenAI request:\n\n", modifiedPrompt);
 
   try {
     const request = await openai.chat.completions.create({
