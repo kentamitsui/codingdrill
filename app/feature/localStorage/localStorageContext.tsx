@@ -112,7 +112,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     if (!confirm("Is this correct want to delete all data?")) {
       return;
     }
-    if (!confirm("Is this correct?")) {
+    if (!confirm("Are you sure you want to delete all data?")) {
       return;
     }
     localStorage.clear();
