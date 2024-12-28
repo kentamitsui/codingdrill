@@ -7,6 +7,8 @@ import { useAppContext } from "./AppContext";
 import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import InputAreaButton from "./InputAreaButton";
+import { consoleOutput } from "@/fineTuning/data";
+
 export default function InputSection() {
   const {
     isDisabled,
@@ -178,6 +180,8 @@ export default function InputSection() {
         editorContent: currentEditorValue,
         evaluation: JsonText,
       });
+
+      consoleOutput();
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setJsonFormattedReviewContent(JsonText);

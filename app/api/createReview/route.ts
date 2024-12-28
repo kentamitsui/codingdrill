@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
       .replaceAll("%topic%", topic)
       .replaceAll("%display_language%", selectedLanguage);
 
-  console.log("modifiedPrompt\n\n", modifiedPrompt);
+  // console.log("modifiedPrompt\n\n", modifiedPrompt);
 
   try {
     const responseText = await createOpenAIRequest(modifiedPrompt);
