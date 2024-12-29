@@ -9,10 +9,6 @@
     {
       "src": "/api/.*",
       "dest": "/api"
-    },
-    {
-      "src": "/app/.*",
-      "dest": "/app"
     }
   ]
 }
