@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "api/*.ts": {
+      "maxDuration": 90
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/.*",
+      "dest": "/api"
+    }
+  ]
+}
