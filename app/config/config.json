@@ -105,7 +105,6 @@
       "Miscellaneous": {
         "brainteaser": "Brainteasers",
         "dataStream": "Data Streams",
-        "databaseDesign": "Database Design",
         "debugging": "Debugging Techniques",
         "eulerianCircuit": "Eulerian Circuit",
         "heapPriorityQueue": "Heap (Priority Queue)",
@@ -114,12 +113,9 @@
         "lineSweep": "Line Sweep",
         "randomizedAlgorithms": "Randomized Algorithms",
         "rejectionSampling": "Rejection Sampling",
-        "reservoirSampling": "Reservoir Sampling",
-        "shell": "Shell Commands",
-        "simulation": "Simulation",
-        "systemDesign": "System Design"
+        "reservoirSampling": "Reservoir Sampling"
       },
-      "Randomize": { "Randomize": "Randomize" }
+      "Randomize": { "randomize": "Randomize" }
     },
     "displayLanguages": {
       "british English": "British English",
