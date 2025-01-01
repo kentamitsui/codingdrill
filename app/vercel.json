@@ -4,5 +4,11 @@
     "app/api/*.ts": {
       "maxDuration": 60
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/.*",
+      "dest": "/api"
+    }
+  ]
 }
