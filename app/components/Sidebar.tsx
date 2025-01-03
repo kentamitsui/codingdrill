@@ -6,6 +6,7 @@ import LoadAreaButton from "./LoadAreaButton";
 import { useAppContext } from "./AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import { useState } from "react";
+import ReactSelect from "./react-select/ReactSelect";
 // import Image from "next/image";
 
 export default function Sidebar() {
@@ -31,28 +32,36 @@ export default function Sidebar() {
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
+
   // セーブデータの選択時に背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState("");
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] =
+    useState<string>("");
 
   // セーブデータの値を動的に変更する
-  const handleChangeSavedData = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const currentValue = event.target.value;
-    setCurrentSelectedSavedData(currentValue);
+  // 修正後のhandleChangeSavedData関数
+  const handleChangeSavedData = (selectedOption: { value: string } | null) => {
+    if (selectedOption) {
+      setCurrentSelectedSavedData(selectedOption.value); // 選択された値を保存
+    } else {
+      setCurrentSelectedSavedData(""); // 未選択時は空文字列を設定
+    }
   };
 
   // ローカルストレージのデータを各要素に反映する
   const handleLoadData = () => {
-    const selectElement = document.getElementById(
-      "saveData",
-    ) as HTMLSelectElement;
-    const selectedId: number = parseInt(selectElement.value, 10);
+    // const selectElement = document.getElementById(
+    //   "saveData",
+    // ) as HTMLSelectElement;
+    // const selectedId: number = parseInt(selectElement.value, 10);
 
-    if (!selectedId) {
+    // セーブデータが選択されていない状態でロードボタンを押した場合、アラートを表示する
+    if (!currentSelectedSavedData) {
       alert("Please select a valid option to load.");
       return;
     }
+
+    // 選択されたセーブデータのIDを取得
+    const selectedId: string = currentSelectedSavedData;
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
     // selectedIdについては、後で型を確認する
@@ -194,7 +203,8 @@ export default function Sidebar() {
         <label htmlFor="savedata" className="sr-only">
           save data
         </label>
-        <select
+        {/* react-selectを使用しない場合 */}
+        {/* <select
           className={`rounded-md p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
           name="data"
           id="saveData"
@@ -216,7 +226,13 @@ export default function Sidebar() {
               </option>
             ))
           )}
-        </select>
+        </select> */}
+        <ReactSelect
+          currentSelectedSavedData={currentSelectedSavedData}
+          isDisabled={isDisabled}
+          handleChangeSavedData={handleChangeSavedData}
+          saveData={saveData}
+        />
         <details
           className="relative mt-auto flex w-[142px] flex-col"
           onMouseEnter={(event) => (event.currentTarget.open = true)}
