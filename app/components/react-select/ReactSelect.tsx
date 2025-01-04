@@ -1,4 +1,4 @@
-import { SavedDataEntryProps, UpdateSaveDataEntryProps } from "@/app/type/type";
+import { UpdateSaveDataEntryProps } from "@/app/type/type";
 import React from "react";
 import Select from "react-select";
 
