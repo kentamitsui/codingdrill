@@ -33,6 +33,7 @@ export default function Sidebar() {
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
     setLoadedEditorContent,
+    currentTheme,
   } = useAppContext();
   const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
     useLocalStorageContext();
@@ -236,6 +237,7 @@ export default function Sidebar() {
           isDisabled={isDisabled}
           handleChangeSavedData={handleChangeSavedData}
           saveData={saveData}
+          currentTheme={currentTheme}
         />
         <details
           className="relative mt-auto flex w-[142px] flex-col"
