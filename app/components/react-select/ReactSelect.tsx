@@ -7,6 +7,7 @@ interface ReactSelectProps {
   isDisabled: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
+  currentTheme: string | undefined;
 }
 
 const ReactSelect = ({
@@ -14,13 +15,21 @@ const ReactSelect = ({
   isDisabled,
   handleChangeSavedData,
   saveData,
+  currentTheme,
 }: ReactSelectProps) => {
   // オプションのデータをreact-select用に変換
   const options =
     saveData &&
     saveData?.map((entry) => ({
       value: entry.id,
-      label: `Data ${entry.id}: ${entry.timestamp} - difficulty: ${entry.difficulty} / data type: ${entry.dataType} / topic: ${entry.topic} / translate: ${entry.selectedLanguage}`,
+      label:
+        `Data ${entry.id}` +
+        "\n" +
+        `Time: ${entry.timestamp}` +
+        "\n" +
+        `Difficulty: ${entry.difficulty} | Data type: ${entry.dataType}` +
+        "\n" +
+        `Topic: ${entry.topic} | Translate: ${entry.selectedLanguage}`,
     }));
 
   // プレースホルダーオプション
@@ -35,6 +44,9 @@ const ReactSelect = ({
   interface CustomStyles {
     control: (provided: any) => any;
     singleValue: (provided: any) => any;
+    placeholder: (provided: any) => any;
+    menu: (provided: any) => any;
+    menuList: (provided: any) => any;
   }
 
   const customStyles: CustomStyles = {
@@ -43,8 +55,14 @@ const ReactSelect = ({
       borderRadius: "0.375rem", // rounded-md
       padding: "0.25rem", // p-1
       transition: "background-color 300ms", // duration-300
-      backgroundColor: currentSelectedSavedData !== "" ? "#9CA3AF" : "#E5E7EB", // bg-gray-400 or bg-gray-200
-      cursor: isDisabled ? "not-allowed" : "pointer",
+      backgroundColor:
+        currentSelectedSavedData !== ""
+          ? currentTheme === "dark"
+            ? "#374151" // ダークモード時の背景色 (bg-gray-700 相当)
+            : "#9CA3AF" // ライトモード時の背景色 (bg-gray-400 相当)
+          : currentTheme === "dark"
+            ? "#1F2937" // ダークモード時の背景色 (bg-gray-800 相当)
+            : "#E5E7EB", // ライトモード時の背景色 (bg-gray-200 相当)      cursor: isDisabled ? "not-allowed" : "pointer",
       opacity: isDisabled ? 0.5 : 1,
       "&:hover": {
         backgroundColor: "#9CA3AF", // hover:bg-gray-400
@@ -55,12 +73,26 @@ const ReactSelect = ({
       ...provided,
       textAlign: "start",
     }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "#6B7280", // text-gray-500
+    }),
+    menu: (provided) => ({
+      ...provided,
+      width: "350px", // ドロップダウンメニュー全体の幅を指定
+    }),
+    menuList: (provided) => ({
+      ...provided,
+      width: "100%", // メニュー内のリストの幅を親要素(menu)に合わせる
+      textAlign: "left", // 必要に応じてカスタマイズ
+    }),
   };
 
   return (
     <Select
       name="data"
       id="saveData"
+      className="whitespace-break-spaces"
       value={selectedOption}
       onChange={handleChangeSavedData}
       options={options && options.length > 0 ? options : [placeholderOption]}

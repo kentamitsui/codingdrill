@@ -57,6 +57,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     "",
   );
 
+  const [currentTheme, setCurrentTheme] = useState<string | undefined>("");
+
   // ローカルストレージからデータを取得
   useEffect(() => {
     const savedLocalStorageData =
@@ -99,6 +101,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setLoadedEditorContent,
         checkEditorInputed,
         setCheckEditorInputed,
+        currentTheme,
+        setCurrentTheme,
       }}
     >
       {children}

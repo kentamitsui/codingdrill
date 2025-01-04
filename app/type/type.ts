@@ -56,6 +56,8 @@ export interface AppContextProps {
   setLoadedEditorContent: React.Dispatch<React.SetStateAction<string | null>>;
   checkEditorInputed: string | null;
   setCheckEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  currentTheme: string | undefined;
+  setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 // PanelContextに対する型定義
