@@ -1,4 +1,5 @@
 "use client";
+
 import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
@@ -6,7 +7,10 @@ import LoadAreaButton from "./LoadAreaButton";
 import { useAppContext } from "./AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import { useState } from "react";
-import ReactSelect from "./react-select/ReactSelect";
+import dynamic from "next/dynamic";
+const ReactSelect = dynamic(() => import("./react-select/ReactSelect"), {
+  ssr: false,
+});
 // import Image from "next/image";
 
 export default function Sidebar() {
