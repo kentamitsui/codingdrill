@@ -6,6 +6,8 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --gutter-bg: #6b7280;
+  --gutter-bg-border: #f9fafb;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,11 +22,6 @@
   .text-balance {
     text-wrap: balance;
   }
-}
-
-:root {
-  --gutter-bg: #6b7280;
-  --gutter-bg-border: #f9fafb;
 }
 
 .dark {
