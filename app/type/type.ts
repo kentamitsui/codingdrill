@@ -217,3 +217,12 @@ export interface ReusableReviewContentsProps {
 export interface LoadingAnimationProps {
   isCreating: boolean | undefined;
 }
+
+// ReactSelectに対する型定義
+export interface ReactSelectProps {
+  currentSelectedSavedData: string;
+  isDisabled: boolean | undefined;
+  handleChangeSavedData: (event: any) => void;
+  saveData: UpdateSaveDataEntryProps[];
+  currentTheme: string | undefined;
+}
