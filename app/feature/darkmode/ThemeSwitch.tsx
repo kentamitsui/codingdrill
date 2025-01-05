@@ -11,7 +11,7 @@ export default function ThemeSwitch() {
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
 
-  // コンポーネントのマウント後に現在のテーマを AppContext に反映
+  // コンポーネントのマウント後に現在のテーマを AppContextに反映
   useEffect(() => {
     if (resolvedTheme) {
       setCurrentTheme(resolvedTheme); // 状態を安全に更新

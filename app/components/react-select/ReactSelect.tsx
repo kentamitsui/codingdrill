@@ -1,22 +1,15 @@
-import { UpdateSaveDataEntryProps } from "@/app/type/type";
 import React from "react";
 import Select from "react-select";
+import { ReactSelectProps } from "@/app/type/type";
+import "../../globals.css";
 
-interface ReactSelectProps {
-  currentSelectedSavedData: string;
-  isDisabled: boolean | undefined;
-  handleChangeSavedData: (event: any) => void;
-  saveData: UpdateSaveDataEntryProps[];
-  currentTheme: string | undefined;
-}
-
-const ReactSelect = ({
+export default function ReactSelect({
   currentSelectedSavedData,
   isDisabled,
   handleChangeSavedData,
   saveData,
   currentTheme,
-}: ReactSelectProps) => {
+}: ReactSelectProps) {
   // オプションのデータをreact-select用に変換
   const options =
     saveData &&
@@ -54,18 +47,21 @@ const ReactSelect = ({
       ...provided,
       borderRadius: "0.375rem", // rounded-md
       padding: "0.25rem", // p-1
-      transition: "background-color 300ms", // duration-300
+      transition: "background-color 300ms",
       backgroundColor:
-        currentSelectedSavedData !== ""
-          ? currentTheme === "dark"
-            ? "#374151" // ダークモード時の背景色 (bg-gray-700 相当)
-            : "#9CA3AF" // ライトモード時の背景色 (bg-gray-400 相当)
-          : currentTheme === "dark"
-            ? "#1F2937" // ダークモード時の背景色 (bg-gray-800 相当)
-            : "#E5E7EB", // ライトモード時の背景色 (bg-gray-200 相当)      cursor: isDisabled ? "not-allowed" : "pointer",
+        currentSelectedSavedData === "" && currentTheme === "dark"
+          ? "#0D1117"
+          : currentSelectedSavedData === "" && currentTheme === "light"
+            ? "#e5e7eb"
+            : currentSelectedSavedData !== "" && currentTheme === "dark"
+              ? "#334155"
+              : currentSelectedSavedData !== "" && currentTheme === "light"
+                ? "#9ca3af"
+                : "",
+      cursor: isDisabled ? "not-allowed" : "pointer",
       opacity: isDisabled ? 0.5 : 1,
       "&:hover": {
-        backgroundColor: "#9CA3AF", // hover:bg-gray-400
+        backgroundColor: currentTheme === "dark" ? "#334155" : "#9CA3AF",
         opacity: currentSelectedSavedData !== "" ? 0.5 : 1,
       },
     }),
@@ -93,6 +89,7 @@ const ReactSelect = ({
       name="data"
       id="saveData"
       className="whitespace-break-spaces"
+      classNamePrefix="react-select"
       value={selectedOption}
       onChange={handleChangeSavedData}
       options={options && options.length > 0 ? options : [placeholderOption]}
@@ -102,6 +99,4 @@ const ReactSelect = ({
       isClearable
     />
   );
-};
-
-export default ReactSelect;
+}
