@@ -1,5 +1,5 @@
 {
-  "stylelint.validate": ["css", "scss", "postcss"],
+  "stylelint.validate": ["css"],
   "editor.codeActionsOnSave": {
     "source.fixAll.stylelint": "explicit"
   },
@@ -8,5 +8,6 @@
   },
   "editor.quickSuggestions": {
     "strings": "on"
-  }
+  },
+  "tailwindCSS.lint.invalidTailwindDirective": "ignore"
 }
