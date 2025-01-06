@@ -85,8 +85,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       (entry: SavedDataEntryProps) => entry.id !== id,
     );
 
-    console.log("Updated data after deletion:", deleteData);
-
     if (!filterData) {
       alert("Please select a valid option to delete.");
       return;
@@ -99,16 +97,11 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     // フィルタリングされたデータを設置する事で、データを削除することと同等の機能を実装
     localStorage.setItem("savedData", JSON.stringify(filterData));
 
-    // 状態を更新して UI に反映
+    // 状態を更新してUIに反映
     const savedLocalStorageData =
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
-    // const updatedDataWithTimestamp = updatedData.map((entry) => ({
-    //   ...entry,
-    //   timestamp: new Date().toISOString(),
-    // }));
-    // updateSelectBox(updatedDataWithTimestamp); // UI の選択肢を更新
   };
 
   // ローカルストレージのデータを全て削除する関数
@@ -121,7 +114,12 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
     localStorage.clear();
     setSavedData([]);
-    // updateSelectBox([]);
+
+    // 状態を更新してUIに反映
+    const savedLocalStorageData =
+      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
+    if (savedLocalStorageData === undefined) return;
+    setSaveData(savedLocalStorageData);
   };
 
   return (
