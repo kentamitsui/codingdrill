@@ -56,10 +56,10 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
     "",
   );
-
+  // 現在選択されているカラーテーマ
   const [currentTheme, setCurrentTheme] = useState<string | undefined>("");
 
-  // ローカルストレージからデータを取得
+  // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新する
   useEffect(() => {
     const savedLocalStorageData =
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
@@ -67,7 +67,6 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
   }, [setSaveData]);
-
   return (
     <AppContext.Provider
       value={{
