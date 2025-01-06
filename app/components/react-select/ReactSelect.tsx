@@ -92,6 +92,7 @@ export default function ReactSelect({
       classNamePrefix="react-select"
       value={selectedOption}
       onChange={handleChangeSavedData}
+      // openMenuOnClick={""}
       options={options && options.length > 0 ? options : [placeholderOption]}
       isDisabled={isDisabled}
       placeholder="Select Save Data"

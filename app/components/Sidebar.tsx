@@ -39,8 +39,9 @@ export default function Sidebar() {
     useLocalStorageContext();
 
   // セーブデータの選択時に背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] =
-    useState<string>("");
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
+    string | number
+  >("");
 
   // セーブデータの値を動的に変更する
   // 修正後のhandleChangeSavedData関数
@@ -66,7 +67,9 @@ export default function Sidebar() {
     }
 
     // 選択されたセーブデータのIDを取得
-    const selectedId: string = currentSelectedSavedData;
+    const selectedId: string | number = currentSelectedSavedData;
+
+    console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
     // selectedIdについては、後で型を確認する
@@ -266,7 +269,7 @@ export default function Sidebar() {
               id="delete"
               type="button"
               text="delete"
-              onClick={handleDeleteSelected}
+              onClick={() => handleDeleteSelected(currentSelectedSavedData)}
             />
             <LoadAreaButton
               id="delete-all"

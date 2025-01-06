@@ -88,7 +88,7 @@ export interface LocalStorageContextTypeProps {
   savedData: SavedDataEntryProps[];
   updateLocalStorage: (data: SavedDataEntryProps[]) => void;
   loadSavedData: (id: string | number, setFunctions: SetFunctionsProps) => void;
-  handleDeleteSelected: () => void;
+  handleDeleteSelected: (id: string | number) => void;
   clearLocalStorage: () => void;
 }
 
@@ -220,7 +220,7 @@ export interface LoadingAnimationProps {
 
 // ReactSelectに対する型定義
 export interface ReactSelectProps {
-  currentSelectedSavedData: string;
+  currentSelectedSavedData: string | number;
   isDisabled: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
