@@ -7,12 +7,12 @@ import { LocalStorageProvider } from "./feature/localStorage/localStorageContext
 
 export default function Page() {
   return (
-    <LocalStorageProvider>
-      <SelectedDataProvider>
+    <SelectedDataProvider>
+      <LocalStorageProvider>
         <PanelProvider>
           <Body />
         </PanelProvider>
-      </SelectedDataProvider>
-    </LocalStorageProvider>
+      </LocalStorageProvider>
+    </SelectedDataProvider>
   );
 }

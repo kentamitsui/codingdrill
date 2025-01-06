@@ -11,13 +11,14 @@ import {
   SavedDataEntryProps,
   SetFunctionsProps,
 } from "../../type/type";
-
+import { useAppContext } from "@/app/components/AppContext";
 const LocalStorageContext = createContext<
   LocalStorageContextTypeProps | undefined
 >(undefined);
 
 // ローカルストレージに関するコンテキストを提供する
 export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
+  // ローカルストレージに関するコンテキストを提供する
   const context = useContext(LocalStorageContext);
   if (!context) {
     throw new Error(
@@ -29,6 +30,7 @@ export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
 
 // 各ファイルで、ローカルストレージに関するコンテキストを使用出来るようにするプロバイダー
 export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
+  const { setSaveData } = useAppContext();
   const [savedData, setSavedData] = useState<SavedDataEntryProps[]>([]);
 
   useEffect(() => {
@@ -49,12 +51,12 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     id: string | number,
     setFunctions: SetFunctionsProps,
   ) => {
-    const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    const selectedEntry: SavedDataEntryProps | undefined = savedData.find(
+    const loadData = JSON.parse(localStorage.getItem("savedData") || "[]");
+    const selectedLoadData: SavedDataEntryProps = loadData.find(
       (entry: SavedDataEntryProps) => entry.id === id,
     );
 
-    if (!selectedEntry) {
+    if (!selectedLoadData) {
       alert("Data not found.");
       return;
     }
@@ -64,24 +66,28 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // 各セクションのセット関数にデータを渡して状態を更新
-    setFunctions.difficulty(selectedEntry.difficulty);
-    setFunctions.dataType(selectedEntry.dataType);
-    setFunctions.topic(selectedEntry.topic);
-    setFunctions.selectedLanguage(selectedEntry.selectedLanguage);
-    setFunctions.problemContent(selectedEntry.problemContent);
-    setFunctions.editorLanguage(selectedEntry.editorLanguage);
-    setFunctions.editorContent(selectedEntry.editorContent);
-    setFunctions.evaluation(selectedEntry.evaluation);
+    setFunctions.difficulty(selectedLoadData.difficulty);
+    setFunctions.dataType(selectedLoadData.dataType);
+    setFunctions.topic(selectedLoadData.topic);
+    setFunctions.selectedLanguage(selectedLoadData.selectedLanguage);
+    setFunctions.problemContent(selectedLoadData.problemContent);
+    setFunctions.editorLanguage(selectedLoadData.editorLanguage);
+    setFunctions.editorContent(selectedLoadData.editorContent);
+    setFunctions.evaluation(selectedLoadData.evaluation);
   };
 
   // 選択されたデータを削除する関数
-  const handleDeleteSelected = () => {
-    const selectElement = document.getElementById(
-      "saveData",
-    ) as HTMLSelectElement;
-    const selectedId = selectElement.value; // 選択されたオプションの ID を取得
+  const handleDeleteSelected = (id: string | number) => {
+    // ローカルストレージのデータを取得
+    const deleteData = JSON.parse(localStorage.getItem("savedData") || "[]");
+    // 選択されたデータ以外を全てフィルタリングする
+    const filterData = deleteData.filter(
+      (entry: SavedDataEntryProps) => entry.id !== id,
+    );
 
-    if (!selectedId) {
+    console.log("Updated data after deletion:", deleteData);
+
+    if (!filterData) {
       alert("Please select a valid option to delete.");
       return;
     }
@@ -90,20 +96,18 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    // ローカルストレージのデータを取得し、選択された項目を削除
-    const savedData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    const updatedData: SavedDataEntryProps[] = savedData.filter(
-      (entry: SavedDataEntryProps) => entry.id.toString() !== selectedId,
-    );
-
-    // ローカルストレージを更新
-    localStorage.setItem("savedData", JSON.stringify(updatedData));
+    // フィルタリングされたデータを設置する事で、データを削除することと同等の機能を実装
+    localStorage.setItem("savedData", JSON.stringify(filterData));
 
     // 状態を更新して UI に反映
-    const updatedDataWithTimestamp = updatedData.map((entry) => ({
-      ...entry,
-      timestamp: new Date().toISOString(),
-    }));
+    const savedLocalStorageData =
+      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
+    if (savedLocalStorageData === undefined) return;
+    setSaveData(savedLocalStorageData);
+    // const updatedDataWithTimestamp = updatedData.map((entry) => ({
+    //   ...entry,
+    //   timestamp: new Date().toISOString(),
+    // }));
     // updateSelectBox(updatedDataWithTimestamp); // UI の選択肢を更新
   };
 

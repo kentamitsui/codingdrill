@@ -41,7 +41,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // APIから出力されたJSON形式のデータ管理
   const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
     useState<ReviewResponse | null>(null);
-  // ローカルストレージから取得した
+  // ローカルストレージから取得したデータを管理
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
@@ -56,10 +56,10 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
     "",
   );
-  // 現在選択されているカラーテーマ
+  // 現在選択されているカラーテーマを管理
   const [currentTheme, setCurrentTheme] = useState<string | undefined>("");
 
-  // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新する
+  // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新
   useEffect(() => {
     const savedLocalStorageData =
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
