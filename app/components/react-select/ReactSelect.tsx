@@ -26,7 +26,7 @@ export default function ReactSelect({
     }));
 
   // プレースホルダーオプション
-  const placeholderOption = { value: "", label: "Save Data" };
+  const placeholderOption = { value: "", label: "None" };
 
   // 選択されたオプションを取得
   const selectedOption =
@@ -94,7 +94,7 @@ export default function ReactSelect({
       onChange={handleChangeSavedData}
       options={options && options.length > 0 ? options : [placeholderOption]}
       isDisabled={isDisabled}
-      placeholder="Save Data"
+      placeholder="Select Save Data"
       styles={customStyles}
       isClearable
     />

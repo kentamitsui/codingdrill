@@ -1,4 +1,4 @@
-import updateSelectBox from "./updateSaveData";
+// import updateSelectBox from "./updateSaveData";
 import { SaveToLocalStorageProps } from "../../type/type";
 
 const saveToLocalStorage = (data: SaveToLocalStorageProps) => {
@@ -30,7 +30,7 @@ const saveToLocalStorage = (data: SaveToLocalStorageProps) => {
   localStorage.setItem("savedData", JSON.stringify(savedData));
 
   // 選択タグを最新の状態に更新
-  updateSelectBox(savedData);
+  // updateSelectBox(savedData);
 };
 
 export default saveToLocalStorage;

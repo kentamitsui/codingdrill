@@ -4,7 +4,7 @@ import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "./AppContext";
-import updateSelectBox from "../feature/localStorage/updateSaveData";
+// import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import InputAreaButton from "./InputAreaButton";
 
@@ -25,6 +25,7 @@ export default function InputSection() {
     setLoadedEditorContent,
     checkEditorInputed,
     setCheckEditorInputed,
+    setSaveData,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
   // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
@@ -33,13 +34,13 @@ export default function InputSection() {
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
-        updateSelectBox([]);
+        // updateSelectBox([]);
         updateLocalStorage(savedData);
         return;
       }
 
       if (event.key === "savedData") {
-        updateSelectBox(savedData);
+        // updateSelectBox(savedData);
       }
     };
 
@@ -207,6 +208,12 @@ export default function InputSection() {
         setIsDisabled(false);
         setIsCreateReview(false);
       }
+
+      // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新する
+      const savedLocalStorageData =
+        JSON.parse(localStorage.getItem("savedData") || "[]") || [];
+      if (savedLocalStorageData === undefined) return;
+      setSaveData(savedLocalStorageData);
     } catch (error) {
       console.error("Error occurred while creating a review:", error);
       alert("Error occurred while creating the review.");

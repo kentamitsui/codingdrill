@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import updateSelectBox from "./updateSaveData";
+// import updateSelectBox from "./updateSaveData";
 import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
@@ -104,7 +104,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       ...entry,
       timestamp: new Date().toISOString(),
     }));
-    updateSelectBox(updatedDataWithTimestamp); // UI の選択肢を更新
+    // updateSelectBox(updatedDataWithTimestamp); // UI の選択肢を更新
   };
 
   // ローカルストレージのデータを全て削除する関数
@@ -117,7 +117,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
     localStorage.clear();
     setSavedData([]);
-    updateSelectBox([]);
+    // updateSelectBox([]);
   };
 
   return (
