@@ -237,8 +237,8 @@ export default function Sidebar() {
         </select> */}
         <ReactSelect
           currentSelectedSavedData={currentSelectedSavedData}
-          isDisabled={isDisabled}
           handleChangeSavedData={handleChangeSavedData}
+          isDisabled={isDisabled}
           saveData={saveData}
           currentTheme={currentTheme}
         />

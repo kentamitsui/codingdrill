@@ -246,7 +246,7 @@ export default function InputSection() {
             Options
           </summary>
           <div
-            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-sm ${
+            className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 border-t-2 border-t-white bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-[2px] dark:border-t-[#1e1e1e] ${
               isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
