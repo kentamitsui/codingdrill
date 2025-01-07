@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   AppContextProps,
-  ReviewResponse,
-  ProblemContent,
+  ReviewResponseProps,
+  ProblemContentProps,
   UpdateSaveDataEntryProps,
 } from "@/app/type/type";
 
@@ -11,7 +11,7 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // 選択タグやボタンのdisabled属性の管理(問題文・総評文の作成=>出力時にボタンを押せないようにする)
+  // 選択タグやボタンに使用するdisabled属性の状態管理
   const [isDisabled, setIsDisabled] = useState<boolean | undefined>(false);
   const [isCreateProblem, setIsCreateProblem] = useState<boolean | undefined>(
     false,
@@ -19,6 +19,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isCreateReview, setIsCreateReview] = useState<boolean | undefined>(
     false,
   );
+
   // Sidebar.tsxで選択された値のデータ管理
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
@@ -31,7 +32,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   const [jsonFormattedProblemContent, setJsonFormattedProblemContent] =
-    useState<ProblemContent | null>(null);
+    useState<ProblemContentProps | null>(null);
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
   // *** テキスト形式なので、ProblemSection.tsxで整形して表示は出来ない ***
@@ -40,7 +41,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 
   // APIから出力されたJSON形式のデータ管理
   const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
-    useState<ReviewResponse | null>(null);
+    useState<ReviewResponseProps | null>(null);
   // ローカルストレージから取得したデータを管理
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
@@ -52,11 +53,11 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     null,
   );
 
-  // エディタに入力された内容をチェックするための状態管理
+  // エディタの入力内容をチェックするための状態管理
   const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
     "",
   );
-  // 現在選択されているカラーテーマを管理
+  // カラーテーマを管理
   const [currentTheme, setCurrentTheme] = useState<string | undefined>("");
 
   // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新
