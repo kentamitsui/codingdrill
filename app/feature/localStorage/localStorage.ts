@@ -28,9 +28,6 @@ const saveToLocalStorage = (data: SaveToLocalStorageProps) => {
   // ローカルストレージにデータを保存
   savedData.push(newEntry);
   localStorage.setItem("savedData", JSON.stringify(savedData));
-
-  // 選択タグを最新の状態に更新
-  // updateSelectBox(savedData);
 };
 
 export default saveToLocalStorage;

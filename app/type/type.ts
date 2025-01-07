@@ -1,21 +1,20 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
-import { init } from "next/dist/compiled/webpack/webpack";
 
 // 選択タグに対する型定義
 export interface SelectProps {
-  label: string;
-  data: { [key: string]: { [key: string]: string } | string }; // `optgroup`内に`option`を持つ可能性があるため修正
+  label: string; // セレクトボックスのラベル
+  data: { [key: string]: { [key: string]: string } | string }; // optionやoptgroupのデータ構造
   name: string; // セレクトボックスのname属性
-  defaultSelected?: string; // デフォルトのラベルを可変にするためのプロップ
-  setSelected: Dispatch<SetStateAction<string>>;
+  defaultSelected?: string; // 初期表示時の値
+  setSelected: Dispatch<SetStateAction<string>>; // 更新関数
   savedLocalStorageValue: string;
 }
 
 // ボタンに対する型定義
 export interface ButtonProps {
   id: string;
-  type: "submit" | "reset" | "button" | undefined;
+  type: "submit" | "reset" | "button";
   text: string;
   onClick: () => void | Promise<void>;
 }
@@ -40,13 +39,13 @@ export interface AppContextProps {
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
   saveData: UpdateSaveDataEntryProps[];
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
-  jsonFormattedProblemContent: ProblemContent | null;
+  jsonFormattedProblemContent: ProblemContentProps | null;
   setJsonFormattedProblemContent: React.Dispatch<
-    React.SetStateAction<ProblemContent | null>
+    React.SetStateAction<ProblemContentProps | null>
   >;
-  jsonFormattedReviewContent: ReviewResponse | null;
+  jsonFormattedReviewContent: ReviewResponseProps | null;
   setJsonFormattedReviewContent: React.Dispatch<
-    React.SetStateAction<ReviewResponse | null>
+    React.SetStateAction<ReviewResponseProps | null>
   >;
   loadedSelectedLanguage: string | null;
   setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
@@ -98,7 +97,7 @@ export interface SaveToLocalStorageProps {
   dataType: string;
   topic: string;
   selectedLanguage: string;
-  problemContent: ProblemContent | null;
+  problemContent: ProblemContentProps | null;
   editorLanguage: string;
   editorContent: string;
   evaluation: string;
@@ -111,10 +110,10 @@ export interface SavedDataEntryProps {
   dataType: string;
   topic: string;
   selectedLanguage: string;
-  problemContent: ProblemContent;
+  problemContent: ProblemContentProps;
   editorLanguage: string;
   editorContent: string;
-  evaluation: ReviewResponse;
+  evaluation: ReviewResponseProps;
   timestamp: string;
 }
 
@@ -124,10 +123,10 @@ export interface SetFunctionsProps {
   dataType: (value: string) => void;
   topic: (value: string) => void;
   selectedLanguage: (value: string) => void;
-  problemContent: (value: ProblemContent | null) => void;
+  problemContent: (value: ProblemContentProps | null) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
-  evaluation: (value: ReviewResponse | null) => void;
+  evaluation: (value: ReviewResponseProps | null) => void;
 }
 
 // UpdateSaveDataEntryに対する型定義
@@ -140,8 +139,8 @@ export interface UpdateSaveDataEntryProps {
   selectedLanguage: string;
 }
 
-// ProblemContentに対する型定義
-export interface ProblemContent {
+// ProblemContentのベースとなる型定義
+interface ProblemContentBase {
   problemStatement: string;
   functionSignature: string;
   constraints: {
@@ -149,54 +148,44 @@ export interface ProblemContent {
     valueRange?: string;
     kRange?: string;
   };
-  example1?: {
-    input: string;
-    output: string;
-    explanation: string;
-  };
-  example2?: {
-    input: string;
-    output: string;
-    explanation: string;
-  };
-  example3?: {
-    input: string;
-    output: string;
-    explanation: string;
-  };
-  edgeCase1?: {
-    input: string;
-    output: string;
-    explanation: string;
-  };
-  edgeCase2?: {
-    input: string;
-    output: string;
-    explanation: string;
-  };
-  edgeCase3?: {
-    input: string;
-    output: string;
-    explanation: string;
-  };
-  analysis?: {
-    timeComplexity: string;
-    spaceComplexity: string;
-    edgeCases: string;
-    otherConsiderations: string;
-  };
+}
+
+// Exampleの型定義
+interface ExampleProps {
+  input: string;
+  output: string;
+  explanation: string;
+}
+
+// Analysisの型定義
+interface AnalysisProps {
+  timeComplexity: string;
+  spaceComplexity: string;
+  edgeCases: string;
+  otherConsiderations: string;
+}
+
+// 各Propsを継承し型定義を行う
+export interface ProblemContentProps extends ProblemContentBase {
+  example1?: ExampleProps;
+  example2?: ExampleProps;
+  example3?: ExampleProps;
+  edgeCase1?: ExampleProps;
+  edgeCase2?: ExampleProps;
+  edgeCase3?: ExampleProps;
+  analysis?: AnalysisProps;
   hints?: string;
 }
 
 // ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
 export interface ReusableProblemContentProps {
-  content: ProblemContent | null;
+  content: ProblemContentProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
 }
 
 // ReviewSectionに対する型定義
-export interface ReviewResponse {
+export interface ReviewResponseProps {
   algorithmExplanation: string | null;
   clarity: string | null;
   efficiency: string | null;
@@ -208,7 +197,7 @@ export interface ReviewResponse {
 
 // ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
 export interface ReusableReviewContentsProps {
-  content: ReviewResponse | null;
+  content: ReviewResponseProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
 }
