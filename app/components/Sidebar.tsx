@@ -244,12 +244,14 @@ export default function Sidebar() {
         />
         <details
           className="relative mt-auto flex w-[142px] flex-col"
-          onMouseEnter={(event) => (event.currentTarget.open = true)}
+          onMouseEnter={(event) =>
+            (event.currentTarget.open = isDisabled ? false : true)
+          }
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`w-full rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+              isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             Options

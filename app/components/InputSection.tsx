@@ -235,12 +235,14 @@ export default function InputSection() {
         </div>
         <details
           className="relative ml-auto rounded-tr-md"
-          onMouseEnter={(event) => (event.currentTarget.open = true)}
+          onMouseEnter={(event) =>
+            (event.currentTarget.open = isDisabled ? false : true)
+          }
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+              isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             Options
