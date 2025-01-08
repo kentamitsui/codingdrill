@@ -12,11 +12,6 @@ export const ReviewSection: React.FC = () => {
     titleText,
     paragraphContent,
   }) => {
-    // 複数行対応のために改行文字で分割
-    const splitLines = (text: string | null) => {
-      return text ? text.split("\n") : [];
-    };
-
     return (
       <div>
         {/* タイトル */}
@@ -26,9 +21,7 @@ export const ReviewSection: React.FC = () => {
         {/* 複数行対応の本文 */}
         <div className="ml-4 whitespace-break-spaces text-[16px] font-normal width_1440px:ml-5 width_1440px:text-[18px] width_1680px:ml-[22px] width_1680px:text-[20px]">
           {content &&
-            splitLines(paragraphContent || "").map((line, index) => (
-              <p key={index}>{line}</p>
-            ))}
+            [paragraphContent].map((line, index) => <p key={index}>{line}</p>)}
         </div>
       </div>
     );
