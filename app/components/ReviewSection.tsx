@@ -72,7 +72,7 @@ export const ReviewSection: React.FC = () => {
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className={`w-[120px] bg-gray-400 p-1 duration-300 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:bg-slate-700 dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
+          className={`w-[120px] bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
           disabled={isDisabled}
           onClick={copyToClipboard}
         >

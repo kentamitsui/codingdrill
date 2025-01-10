@@ -28,9 +28,9 @@ export default function Button({ id, type, text, onClick }: ButtonProps) {
     <button
       id={id}
       type={type}
-      className={`w-full rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 ${
+      className={`w-full rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 dark:bg-slate-700 ${
         isButtonDisabled ? "cursor-not-allowed opacity-50" : "hover:bg-gray-600"
-      } dark:bg-slate-700 dark:${isButtonDisabled ? "" : "hover:bg-slate-500"}`}
+      } dark:${isButtonDisabled ? "" : "hover:bg-slate-500"}`}
       onClick={onClick}
       disabled={isButtonDisabled}
     >
