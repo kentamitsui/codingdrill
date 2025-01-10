@@ -57,8 +57,17 @@ export default function ReactSelect({
       borderRadius: "6px", // rounded-md
       padding: "4px",
       transition: "300ms",
-      backgroundColor:
-        currentSelectedSavedData === "" && currentTheme === "dark"
+      backgroundColor: state.isDisabled
+        ? currentSelectedSavedData === "" && currentTheme === "dark"
+          ? "#0D1117"
+          : currentSelectedSavedData === "" && currentTheme === "light"
+            ? "#e5e7eb"
+            : currentSelectedSavedData !== "" && currentTheme === "dark"
+              ? "#334155"
+              : currentSelectedSavedData !== "" && currentTheme === "light"
+                ? "#9ca3af"
+                : "#e5e7eb"
+        : currentSelectedSavedData === "" && currentTheme === "dark"
           ? "#0D1117"
           : currentSelectedSavedData === "" && currentTheme === "light"
             ? "#e5e7eb"
@@ -72,7 +81,11 @@ export default function ReactSelect({
       opacity: state.isDisabled ? 0.5 : 1,
       cursor: state.isDisabled ? "not-allowed" : "pointer",
       "&:hover": {
-        backgroundColor: currentTheme === "dark" ? "#334155" : "#9CA3AF",
+        backgroundColor: state.isDisabled
+          ? undefined // 無効化時はマウスオーバーで背景色を変更しない
+          : currentTheme === "dark"
+            ? "#334155"
+            : "#9CA3AF",
         opacity: isDisabled || currentSelectedSavedData !== "" ? 0.5 : 1,
       },
     }),
