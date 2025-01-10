@@ -1,27 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import { createOpenAIRequest } from "../utils/openaiRequestHelper";
+import {
+  generatePrompt,
+  sendOpenAIRequest,
+  validateEnvironmentVariables,
+} from "../utils/openaiRequestHelper";
 
 export async function POST(req: NextRequest) {
-  const { difficulty, dataType, topic, selectedLanguage } = await req.json();
-  const promptTemplate = process.env.PROMPT_CREATE;
-
-  if (!promptTemplate) {
-    return NextResponse.json(
-      { error: "PROMPT_CREATE is not defined in environment variables" },
-      { status: 400 },
-    );
-  }
-
-  const modifiedPrompt = promptTemplate
-    .replaceAll("%difficulty%", difficulty)
-    .replaceAll("%type%", dataType)
-    .replaceAll("%topic%", topic)
-    .replaceAll("%display_language%", selectedLanguage);
-
-  // console.log("OpenAI response:\n\n", modifiedPrompt);
-
   try {
-    const responseText = await createOpenAIRequest(modifiedPrompt);
+    validateEnvironmentVariables(["PROMPT_CREATE"]);
+
+    const { difficulty, dataType, topic, selectedLanguage } = await req.json();
+    const promptTemplate = process.env.PROMPT_CREATE!;
+    const prompt = generatePrompt(promptTemplate, {
+      difficulty,
+      type: dataType,
+      topic,
+      display_language: selectedLanguage,
+    });
+
+    const responseText = await sendOpenAIRequest(prompt!);
     return NextResponse.json({ responseText });
   } catch (error) {
     return NextResponse.json(

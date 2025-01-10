@@ -65,11 +65,11 @@ export default function InputSection() {
     // 文字数チェックとアラート表示
     if (value) {
       // 状態関数の非同期性や再レンダリングを避けるため、valueを使用
-      if (!isAlert && value.length >= 2501) {
-        alert("Too many input. The limit is 2500 characters.");
+      if (!isAlert && value.length >= 5001) {
+        alert("Too many input. The limit is 5000 characters.");
         setIsAlert(true); // フラグを切り替え、再度条件が満たされるまでアラートを非表示
-      } else if (isAlert && value.length <= 2500) {
-        setIsAlert(false); // 文字数が2500字以下になったらフラグをfalseに戻す
+      } else if (isAlert && value.length <= 5000) {
+        setIsAlert(false); // 文字数が5000字以下になったらフラグをfalseに戻す
       }
     }
   };
@@ -232,7 +232,7 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className="relative ml-auto rounded-tr-md"
+          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
           onMouseEnter={(event) =>
             (event.currentTarget.open = isDisabled ? false : true)
           }
@@ -247,7 +247,7 @@ export default function InputSection() {
           </summary>
           <div
             className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 border-t-2 border-t-white bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-[2px] dark:border-t-[#1e1e1e] ${
-              isDisabled ? "pointer-events-none opacity-50" : ""
+              isDisabled ? "pointer-events-none" : ""
             }`}
           >
             {/* Font Size Select */}
