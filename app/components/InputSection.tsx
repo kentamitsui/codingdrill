@@ -7,6 +7,7 @@ import { useAppContext } from "./AppContext";
 // import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import InputAreaButton from "./InputAreaButton";
+import { createJsonLinedData } from "@/fineTuning/data";
 
 export default function InputSection() {
   const {
@@ -65,11 +66,11 @@ export default function InputSection() {
     // 文字数チェックとアラート表示
     if (value) {
       // 状態関数の非同期性や再レンダリングを避けるため、valueを使用
-      if (!isAlert && value.length >= 2501) {
-        alert("Too many input. The limit is 2500 characters.");
+      if (!isAlert && value.length >= 5001) {
+        alert("Too many input. The limit is 5000 characters.");
         setIsAlert(true); // フラグを切り替え、再度条件が満たされるまでアラートを非表示
-      } else if (isAlert && value.length <= 2500) {
-        setIsAlert(false); // 文字数が2500字以下になったらフラグをfalseに戻す
+      } else if (isAlert && value.length <= 5000) {
+        setIsAlert(false); // 文字数が5000字以下になったらフラグをfalseに戻す
       }
     }
   };
@@ -192,6 +193,8 @@ export default function InputSection() {
         editorContent: currentEditorValue,
         evaluation: JsonText,
       });
+
+      createJsonLinedData();
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setJsonFormattedReviewContent(JsonText);

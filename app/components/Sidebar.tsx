@@ -119,6 +119,7 @@ export default function Sidebar() {
       }
       const data = await response.json();
       const responseText = data.responseText;
+
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       // また、アニメーションを非表示にする
       if (responseText) {
