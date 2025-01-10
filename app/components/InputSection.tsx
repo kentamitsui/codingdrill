@@ -7,7 +7,6 @@ import { useAppContext } from "./AppContext";
 // import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import InputAreaButton from "./InputAreaButton";
-import { createJsonLinedData } from "@/fineTuning/data";
 
 export default function InputSection() {
   const {
@@ -235,7 +234,7 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className="relative ml-auto rounded-tr-md"
+          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
           onMouseEnter={(event) =>
             (event.currentTarget.open = isDisabled ? false : true)
           }
@@ -250,7 +249,7 @@ export default function InputSection() {
           </summary>
           <div
             className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 border-t-2 border-t-white bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-[2px] dark:border-t-[#1e1e1e] ${
-              isDisabled ? "pointer-events-none opacity-50" : ""
+              isDisabled ? "pointer-events-none" : ""
             }`}
           >
             {/* Font Size Select */}

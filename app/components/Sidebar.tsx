@@ -244,7 +244,9 @@ export default function Sidebar() {
           currentTheme={currentTheme}
         />
         <details
-          className="relative mt-auto flex w-[142px] flex-col"
+          className={`relative mt-auto flex w-[142px] flex-col ${
+            isDisabled ? "cursor-not-allowed" : "cursor-pointer"
+          }`}
           onMouseEnter={(event) =>
             (event.currentTarget.open = isDisabled ? false : true)
           }
