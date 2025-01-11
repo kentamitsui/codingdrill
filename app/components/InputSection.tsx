@@ -4,9 +4,8 @@ import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
 import { useAppContext } from "../context/AppContext";
-// import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import InputAreaButton from "./InputAreaButton";
+import InputAreaButton from "./ui/button/InputAreaButton";
 
 export default function InputSection() {
   const {
@@ -34,13 +33,8 @@ export default function InputSection() {
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
-        // updateSelectBox([]);
         updateLocalStorage(savedData);
         return;
-      }
-
-      if (event.key === "savedData") {
-        // updateSelectBox(savedData);
       }
     };
 
