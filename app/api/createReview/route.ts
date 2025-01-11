@@ -3,7 +3,7 @@ import {
   generatePrompt,
   sendOpenAIRequest,
   validateEnvironmentVariables,
-} from "../utils/openaiRequestHelper";
+} from "@/app/api/utils/openaiRequestHelper";
 
 export async function POST(req: NextRequest) {
   try {
