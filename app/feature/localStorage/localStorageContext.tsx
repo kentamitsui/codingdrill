@@ -88,8 +88,12 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     const filterData = deleteData.filter(
       (entry: SavedDataEntryProps) => entry.id !== id,
     );
+    // 選択されたデータのIDを取得
+    const selectedDeleteData: SavedDataEntryProps = deleteData.find(
+      (entry: SavedDataEntryProps) => entry.id === id,
+    );
 
-    if (!filterData) {
+    if (!selectedDeleteData) {
       alert("Please select a valid option to delete.");
       return;
     }
