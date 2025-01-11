@@ -1,12 +1,11 @@
 "use client";
 
 import menuData from "../config/config.json";
-import Options from "./Options";
+import Options from "./ui/select/Options";
 import Button from "./Button";
 import LoadAreaButton from "./LoadAreaButton";
-import { useAppContext } from "../state/AppContext";
+import { useAppContext } from "../context/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import { useState } from "react";
 import dynamic from "next/dynamic";
 const ReactSelect = dynamic(
   () => import("./ui/select/react-select/ReactSelect"),

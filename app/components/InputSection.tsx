@@ -3,7 +3,7 @@ import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
 import config from "../config/config.json";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "../feature/localStorage/localStorage";
-import { useAppContext } from "../state/AppContext";
+import { useAppContext } from "../context/AppContext";
 // import updateSelectBox from "../feature/localStorage/updateSaveData";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import InputAreaButton from "./InputAreaButton";

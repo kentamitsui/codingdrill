@@ -1,4 +1,4 @@
-import { useAppContext } from "../state/AppContext";
+import { useAppContext } from "../context/AppContext";
 import React from "react";
 import { ReusableReviewContentsProps } from "../type/type";
 import { LoadingAnimation } from "./LoadingAnimation";
