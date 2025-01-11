@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "../context/AppContext";
 import { ReusableProblemContentProps } from "../type/type";
-import { LoadingAnimation } from "./LoadingAnimation";
+import { LoadingAnimation } from "../components/ui/loadingAnimation/LoadingAnimation";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC = () => {

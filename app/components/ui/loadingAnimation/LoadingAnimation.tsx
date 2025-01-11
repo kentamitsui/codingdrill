@@ -1,4 +1,4 @@
-import { LoadingAnimationProps } from "../type/type";
+import { LoadingAnimationProps } from "../../../type/type";
 
 export const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
   isCreating,
