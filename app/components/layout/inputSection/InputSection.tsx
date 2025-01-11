@@ -1,11 +1,11 @@
 import * as monaco from "monaco-editor";
-import MonacoEditor from "../../../feature/monacoEditor/MonacoEditor";
-import config from "../../../config/config.json";
+import MonacoEditor from "@/app/feature/monacoEditor/MonacoEditor";
+import config from "@/app/config/config.json";
 import { useRef, useState, useEffect } from "react";
-import saveToLocalStorage from "../../../feature/localStorage/localStorage";
-import { useAppContext } from "../../../context/AppContext";
-import { useLocalStorageContext } from "../../../feature/localStorage/localStorageContext";
-import InputAreaButton from "../../ui/button/InputAreaButton";
+import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
+import { useAppContext } from "@/app/context/AppContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/localStorageContext";
+import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 
 export default function InputSection() {
   const {
