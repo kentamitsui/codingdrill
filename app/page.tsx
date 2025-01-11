@@ -4,7 +4,7 @@ import { PanelProvider } from "./feature/splitter/PanelContext";
 import { SelectedDataProvider } from "./context/AppContext";
 import { LocalStorageProvider } from "./feature/localStorage/localStorageContext";
 import Header from "./components/ui/header/Header";
-import Main from "./components/Main";
+import Main from "./components/ui/main/Main";
 
 export default function Page() {
   return (
