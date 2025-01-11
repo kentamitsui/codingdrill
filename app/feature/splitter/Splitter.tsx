@@ -3,7 +3,7 @@
 import React, { lazy, Suspense } from "react";
 const Split = lazy(() => import("react-split"));
 import ProblemSection from "../../components/ProblemSection";
-import InputSection from "../../components/InputSection";
+import InputSection from "../../components/ui/inputSection/InputSection";
 import ReviewSection from "../../components/ReviewSection";
 import { usePanelContext } from "./PanelContext";
 
