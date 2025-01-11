@@ -1,7 +1,7 @@
-import { useAppContext } from "../context/AppContext";
-import { ButtonProps } from "../type/type";
+import { useAppContext } from "../../../context/AppContext";
+import { ButtonProps } from "../../../type/type";
 
-export default function LoadAreaButton({
+export default function SaveDataOptionButton({
   id,
   type,
   text,

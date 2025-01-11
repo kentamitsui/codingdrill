@@ -3,7 +3,7 @@
 import menuData from "../config/config.json";
 import Options from "./ui/select/Options";
 import Button from "../components/ui/button/Button";
-import LoadAreaButton from "./LoadAreaButton";
+import SaveDataOptionButton from "../components/ui/button/SaveDataOptionButton";
 import { useAppContext } from "../context/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import dynamic from "next/dynamic";
@@ -266,19 +266,19 @@ export default function Sidebar() {
               isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
-            <LoadAreaButton
+            <SaveDataOptionButton
               id="load"
               type="button"
               text="load"
               onClick={handleLoadData}
             />
-            <LoadAreaButton
+            <SaveDataOptionButton
               id="delete"
               type="button"
               text="delete"
               onClick={() => handleDeleteSelected(currentSelectedSavedData)}
             />
-            <LoadAreaButton
+            <SaveDataOptionButton
               id="delete-all"
               type="button"
               text="delete all"
