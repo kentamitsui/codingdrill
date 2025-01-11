@@ -32,6 +32,10 @@ export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
 export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   const { setSaveData } = useAppContext();
   const [savedData, setSavedData] = useState<SavedDataEntryProps[]>([]);
+  // セーブデータの選択に伴う背景色の状態管理に使用
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
+    number | string
+  >("");
 
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
@@ -102,6 +106,11 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
+
+    // currentSelectedSavedData をリセットする
+    if (id === currentSelectedSavedData) {
+      setCurrentSelectedSavedData(""); // リセッ
+    }
   };
 
   // ローカルストレージのデータを全て削除する関数
@@ -120,12 +129,15 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
+    setCurrentSelectedSavedData("");
   };
 
   return (
     <LocalStorageContext.Provider
       value={{
         savedData,
+        currentSelectedSavedData,
+        setCurrentSelectedSavedData,
         updateLocalStorage,
         loadSavedData,
         handleDeleteSelected,
