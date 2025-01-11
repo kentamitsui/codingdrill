@@ -1,7 +1,7 @@
 import React from "react";
 import Select from "react-select";
 import { ReactSelectProps } from "@/app/type/type";
-import "../../globals.css";
+import "../../styles/globals.css";
 import { useAppContext } from "../AppContext";
 
 export default function ReactSelect({
