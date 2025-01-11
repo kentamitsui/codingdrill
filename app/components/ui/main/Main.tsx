@@ -1,6 +1,6 @@
-import Sidebar from "./ui/sidebar/Sidebar";
-import "../styles/globals.css";
-import Split_Horizontal from "../feature/splitter/Splitter";
+import Sidebar from "../sidebar/Sidebar";
+import "../../../styles/globals.css";
+import Split_Horizontal from "../../../feature/splitter/Splitter";
 
 export default function Main() {
   return (
