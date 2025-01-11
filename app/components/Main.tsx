@@ -1,4 +1,4 @@
-import Sidebar from "./Sidebar";
+import Sidebar from "./ui/sidebar/Sidebar";
 import "../styles/globals.css";
 import Split_Horizontal from "../feature/splitter/Splitter";
 
