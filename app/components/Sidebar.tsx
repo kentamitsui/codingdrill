@@ -4,7 +4,7 @@ import menuData from "../config/config.json";
 import Options from "./Options";
 import Button from "./Button";
 import LoadAreaButton from "./LoadAreaButton";
-import { useAppContext } from "./AppContext";
+import { useAppContext } from "../state/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import { useState } from "react";
 import dynamic from "next/dynamic";

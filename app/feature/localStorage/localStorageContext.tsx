@@ -11,7 +11,7 @@ import {
   SavedDataEntryProps,
   SetFunctionsProps,
 } from "../../type/type";
-import { useAppContext } from "@/app/components/AppContext";
+import { useAppContext } from "@/app/state/AppContext";
 const LocalStorageContext = createContext<
   LocalStorageContextTypeProps | undefined
 >(undefined);
