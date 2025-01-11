@@ -1,4 +1,4 @@
-import { useAppContext } from "../state/AppContext";
+import { useAppContext } from "../context/AppContext";
 import { ButtonProps } from "../type/type";
 
 export default function LoadAreaButton({
