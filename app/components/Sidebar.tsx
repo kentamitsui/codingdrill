@@ -8,9 +8,12 @@ import { useAppContext } from "../state/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
 import { useState } from "react";
 import dynamic from "next/dynamic";
-const ReactSelect = dynamic(() => import("./react-select/ReactSelect"), {
-  ssr: false,
-});
+const ReactSelect = dynamic(
+  () => import("./ui/select/react-select/ReactSelect"),
+  {
+    ssr: false,
+  },
+);
 // import Image from "next/image";
 
 export default function Sidebar() {
@@ -35,13 +38,13 @@ export default function Sidebar() {
     setLoadedEditorContent,
     currentTheme,
   } = useAppContext();
-  const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
-    useLocalStorageContext();
-
-  // セーブデータの選択時に背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
-    string | number
-  >("");
+  const {
+    currentSelectedSavedData,
+    setCurrentSelectedSavedData,
+    loadSavedData,
+    handleDeleteSelected,
+    clearLocalStorage,
+  } = useLocalStorageContext();
 
   // セーブデータの値を動的に変更する
   // 修正後のhandleChangeSavedData関数
@@ -69,7 +72,7 @@ export default function Sidebar() {
     // 選択されたセーブデータのIDを取得
     const selectedId: string | number = currentSelectedSavedData;
 
-    console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
+    // console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
     // selectedIdについては、後で型を確認する
@@ -237,7 +240,7 @@ export default function Sidebar() {
           )}
         </select> */}
         <ReactSelect
-          currentSelectedSavedData={currentSelectedSavedData}
+          selectedSaveData={currentSelectedSavedData}
           handleChangeSavedData={handleChangeSavedData}
           isDisabled={isDisabled}
           saveData={saveData}

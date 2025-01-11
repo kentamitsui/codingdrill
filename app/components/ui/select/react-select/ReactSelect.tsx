@@ -1,16 +1,18 @@
 import React from "react";
 import Select from "react-select";
 import { ReactSelectProps } from "@/app/type/type";
-import "../../styles/globals.css";
-import { useAppContext } from "../../state/AppContext";
+import "../../../../styles/globals.css";
+import { useAppContext } from "@/app/state/AppContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/localStorageContext";
 
 export default function ReactSelect({
-  currentSelectedSavedData,
   handleChangeSavedData,
   saveData,
   currentTheme,
 }: ReactSelectProps) {
   const { isDisabled } = useAppContext();
+  const { currentSelectedSavedData } = useLocalStorageContext();
+
   // オプションのデータをreact-select用に変換
   const options =
     saveData &&
@@ -66,7 +68,7 @@ export default function ReactSelect({
               ? "#334155"
               : currentSelectedSavedData !== "" && currentTheme === "light"
                 ? "#9ca3af"
-                : "#e5e7eb"
+                : ""
         : currentSelectedSavedData === "" && currentTheme === "dark"
           ? "#0D1117"
           : currentSelectedSavedData === "" && currentTheme === "light"
