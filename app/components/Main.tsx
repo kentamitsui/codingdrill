@@ -1,4 +1,3 @@
-"use client";
 import Sidebar from "./Sidebar";
 import "../styles/globals.css";
 import Split_Horizontal from "../feature/splitter/Splitter";

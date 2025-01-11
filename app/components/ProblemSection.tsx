@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useAppContext } from "./AppContext";
+import { useAppContext } from "../state/AppContext";
 import { ReusableProblemContentProps } from "../type/type";
 import { LoadingAnimation } from "./LoadingAnimation";
 
