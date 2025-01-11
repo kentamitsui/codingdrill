@@ -1,6 +1,6 @@
 "use client";
 import Sidebar from "./Sidebar";
-import "../../app/globals.css";
+import "../styles/globals.css";
 import Split_Horizontal from "../feature/splitter/Splitter";
 
 export default function Main() {
