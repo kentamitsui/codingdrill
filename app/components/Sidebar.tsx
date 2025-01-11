@@ -2,7 +2,7 @@
 
 import menuData from "../config/config.json";
 import Options from "./ui/select/Options";
-import Button from "./Button";
+import Button from "../components/ui/button/Button";
 import LoadAreaButton from "./LoadAreaButton";
 import { useAppContext } from "../context/AppContext";
 import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
