@@ -1,7 +1,7 @@
-import { useAppContext } from "../context/AppContext";
+import { useAppContext } from "../../../context/AppContext";
 import React from "react";
-import { ReusableReviewContentsProps } from "../type/type";
-import { LoadingAnimation } from "../components/ui/loadingAnimation/LoadingAnimation";
+import { ReusableReviewContentsProps } from "../../../type/type";
+import { LoadingAnimation } from "../../ui/loadingAnimation/LoadingAnimation";
 
 export const ReviewSection: React.FC = () => {
   const { isDisabled, isCreateReview, jsonFormattedReviewContent } =

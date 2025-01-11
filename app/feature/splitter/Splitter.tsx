@@ -2,9 +2,9 @@
 
 import React, { lazy, Suspense } from "react";
 const Split = lazy(() => import("react-split"));
-import ProblemSection from "../../components/ProblemSection";
+import ProblemSection from "../../components/layout/problemSection/ProblemSection";
 import InputSection from "../../components/layout/inputSection/InputSection";
-import ReviewSection from "../../components/ReviewSection";
+import ReviewSection from "../../components/layout/reviewSection/ReviewSection";
 import { usePanelContext } from "./PanelContext";
 
 const Split_Vertical: React.FC = () => {
