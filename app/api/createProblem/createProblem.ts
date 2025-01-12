@@ -4,7 +4,7 @@ import {
   sendOpenAIRequest,
   generatePrompt,
   validateEnvironmentVariables,
-} from "../utils/openaiRequestHelper";
+} from "@/app/api/utils/openaiRequestHelper";
 dotenv.config({ path: ".env.local" });
 
 export default async function handler(

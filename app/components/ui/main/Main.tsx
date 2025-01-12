@@ -1,7 +1,6 @@
-"use client";
-import Sidebar from "./Sidebar";
-import "../styles/globals.css";
-import Split_Horizontal from "../feature/splitter/Splitter";
+import Sidebar from "@/app/components/layout/sidebar/Sidebar";
+import "@/app/styles/globals.css";
+import Split_Horizontal from "@/app/feature/splitter/Splitter";
 
 export default function Main() {
   return (

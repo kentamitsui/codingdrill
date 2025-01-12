@@ -5,13 +5,12 @@ import {
   useEffect,
   useState,
 } from "react";
-// import updateSelectBox from "./updateSaveData";
 import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
   SetFunctionsProps,
-} from "../../type/type";
-import { useAppContext } from "@/app/components/AppContext";
+} from "@/app/type/type";
+import { useAppContext } from "@/app/context/AppContext";
 const LocalStorageContext = createContext<
   LocalStorageContextTypeProps | undefined
 >(undefined);
@@ -32,6 +31,10 @@ export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
 export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   const { setSaveData } = useAppContext();
   const [savedData, setSavedData] = useState<SavedDataEntryProps[]>([]);
+  // セーブデータの選択に伴う背景色の状態管理に使用
+  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
+    number | string
+  >("");
 
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
@@ -84,8 +87,12 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     const filterData = deleteData.filter(
       (entry: SavedDataEntryProps) => entry.id !== id,
     );
+    // 選択されたデータのIDを取得
+    const selectedDeleteData: SavedDataEntryProps = deleteData.find(
+      (entry: SavedDataEntryProps) => entry.id === id,
+    );
 
-    if (!filterData) {
+    if (!selectedDeleteData) {
       alert("Please select a valid option to delete.");
       return;
     }
@@ -102,6 +109,11 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
+
+    // currentSelectedSavedData をリセットする
+    if (id === currentSelectedSavedData) {
+      setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
+    }
   };
 
   // ローカルストレージのデータを全て削除する関数
@@ -120,12 +132,15 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
+    setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
   };
 
   return (
     <LocalStorageContext.Provider
       value={{
         savedData,
+        currentSelectedSavedData,
+        setCurrentSelectedSavedData,
         updateLocalStorage,
         loadSavedData,
         handleDeleteSelected,
