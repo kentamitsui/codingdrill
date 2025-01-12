@@ -11,7 +11,7 @@ export default function Header() {
         <ResetButton
           lightSvgSrc={menuData.svgIcon.resetLight}
           darkSvgSrc={menuData.svgIcon.resetDark}
-          altText="reset layout button"
+          altText="restore layout"
         />
       </div>
     </header>

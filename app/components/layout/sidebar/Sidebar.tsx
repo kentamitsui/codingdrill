@@ -137,16 +137,18 @@ export default function Sidebar() {
   return (
     <aside className="flex max-h-[300px] w-[150px] flex-col rounded-md bg-gray-200 p-1 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-col gap-2">
-        <div className="flex flex-row">
-          <Options
-            label={"select-difficulty"}
-            data={menuData.menuLists.difficulty}
-            name={"difficulty"}
-            defaultSelected={"difficulty"}
-            setSelected={setDifficulty}
-            savedLocalStorageValue={difficulty}
-          />
-          <Image
+        {/* <div className="flex flex-row"> */}
+        <Options
+          label={"select-difficulty"}
+          data={menuData.menuLists.difficulty}
+          name={"difficulty"}
+          defaultSelected={"difficulty"}
+          setSelected={setDifficulty}
+          savedLocalStorageValue={difficulty}
+          iconDark={menuData.svgIcon.difficultyDark}
+          iconLight={menuData.svgIcon.difficultyLight}
+        />
+        {/* <Image
             src={
               currentTheme === "dark"
                 ? menuData.svgIcon.difficultyLight
@@ -156,71 +158,38 @@ export default function Sidebar() {
             className="pointer-events-none relative -ml-10"
             width={20}
             height={20}
-          />
-        </div>
-        <div className="flex flex-row">
-          <Options
-            label={"select-type"}
-            data={menuData.menuLists.dataType}
-            name={"type"}
-            defaultSelected={"data type"}
-            setSelected={setDataType}
-            savedLocalStorageValue={dataType}
-          />
-          <Image
-            src={
-              currentTheme === "dark"
-                ? menuData.svgIcon.dataLight
-                : menuData.svgIcon.dataDark
-            }
-            alt=""
-            className="pointer-events-none relative -ml-10"
-            width={20}
-            height={20}
-          />
-        </div>
-        <div className="flex flex-row">
-          <Options
-            label={"select-topic"}
-            data={menuData.menuLists.topics}
-            name={"topic"}
-            defaultSelected={"topic"}
-            setSelected={setTopic}
-            savedLocalStorageValue={topic}
-          />
-          <Image
-            src={
-              currentTheme === "dark"
-                ? menuData.svgIcon.topicLight
-                : menuData.svgIcon.topicDark
-            }
-            alt=""
-            className="pointer-events-none relative -ml-10"
-            width={20}
-            height={20}
-          />
-        </div>
-        <div className="flex flex-row">
-          <Options
-            label={"select-display-language"}
-            data={menuData.menuLists.displayLanguages}
-            name={"display-language"}
-            defaultSelected={"translate"}
-            setSelected={setSelectedLanguage}
-            savedLocalStorageValue={selectedLanguage}
-          />
-          <Image
-            src={
-              currentTheme === "dark"
-                ? menuData.svgIcon.translateLight
-                : menuData.svgIcon.translateDark
-            }
-            alt=""
-            className="pointer-events-none relative -ml-10"
-            width={20}
-            height={20}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
+        <Options
+          label={"select-type"}
+          data={menuData.menuLists.dataType}
+          name={"type"}
+          defaultSelected={"data type"}
+          setSelected={setDataType}
+          savedLocalStorageValue={dataType}
+          iconDark={menuData.svgIcon.dataDark}
+          iconLight={menuData.svgIcon.dataLight}
+        />
+        <Options
+          label={"select-topic"}
+          data={menuData.menuLists.topics}
+          name={"topic"}
+          defaultSelected={"topic"}
+          setSelected={setTopic}
+          savedLocalStorageValue={topic}
+          iconLight={menuData.svgIcon.topicLight}
+          iconDark={menuData.svgIcon.topicDark}
+        />
+        <Options
+          label={"select-display-language"}
+          data={menuData.menuLists.displayLanguages}
+          name={"display-language"}
+          defaultSelected={"translate"}
+          setSelected={setSelectedLanguage}
+          savedLocalStorageValue={selectedLanguage}
+          iconLight={menuData.svgIcon.translateLight}
+          iconDark={menuData.svgIcon.translateDark}
+        />
         <Button
           id="create"
           type="button"
@@ -232,30 +201,6 @@ export default function Sidebar() {
         <label htmlFor="savedata" className="sr-only">
           save data
         </label>
-        {/* react-selectを使用しない場合 */}
-        {/* <select
-          className={`rounded-md p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          name="data"
-          id="saveData"
-          value={currentSelectedSavedData}
-          disabled={isDisabled}
-          onChange={handleChangeSavedData}
-        >
-          <option className="text-start" value="">
-            Save Data
-          </option>
-          {saveData.length === 0 ? (
-            <option value="" disabled={true}>
-              no saved data
-            </option>
-          ) : (
-            saveData.map((entry, index) => (
-              <option key={`${entry.id}-${index}`} value={entry.id}>
-                {`Data ${entry.id}: ${entry.timestamp} - difficulty: ${entry.difficulty} / data type: ${entry.dataType} / topic: ${entry.topic} / translate: ${entry.selectedLanguage}`}
-              </option>
-            ))
-          )}
-        </select> */}
         <ReactSelect
           selectedSaveData={currentSelectedSavedData}
           handleChangeSavedData={handleChangeSavedData}
@@ -273,11 +218,21 @@ export default function Sidebar() {
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
-            className={`w-full rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+            className={`flex w-full justify-between rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
               isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             Options
+            <Image
+              src={
+                currentTheme === "dark"
+                  ? menuData.svgIcon.listLight
+                  : menuData.svgIcon.listDark
+              }
+              alt=""
+              width={20}
+              height={20}
+            />
           </summary>
           <div
             className={`absolute -right-[4px] z-10 flex w-[150px] flex-col gap-2 rounded-b-md bg-opacity-0 p-[8px_4px_4px_4px] ${
