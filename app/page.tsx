@@ -1,6 +1,6 @@
 "use client";
 
-import { PanelProvider } from "@/app/feature/splitter/PanelContext";
+import { PanelProvider } from "@/app/feature/splitter/context/PanelContext";
 import { SelectedDataProvider } from "@/app/context/AppContext";
 import { LocalStorageProvider } from "@/app/feature/localStorage/context/localStorageContext";
 import Header from "@/app/components/ui/header/Header";

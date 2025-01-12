@@ -1,5 +1,5 @@
 import ThemeSwitch from "@/app/feature/darkmode/ThemeSwitch";
-import ResetButton from "@/app/feature/splitter/ResetButton";
+import ResetButton from "@/app/feature/splitter/components/ui/ResetButton";
 
 export default function Header() {
   return (
