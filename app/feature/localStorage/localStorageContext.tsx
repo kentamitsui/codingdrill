@@ -5,12 +5,11 @@ import {
   useEffect,
   useState,
 } from "react";
-// import updateSelectBox from "./updateSaveData";
 import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
   SetFunctionsProps,
-} from "../../type/type";
+} from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
 const LocalStorageContext = createContext<
   LocalStorageContextTypeProps | undefined
@@ -113,7 +112,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
 
     // currentSelectedSavedData をリセットする
     if (id === currentSelectedSavedData) {
-      setCurrentSelectedSavedData(""); // リセッ
+      setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
     }
   };
 
@@ -133,7 +132,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
-    setCurrentSelectedSavedData("");
+    setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
   };
 
   return (
