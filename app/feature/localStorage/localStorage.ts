@@ -1,5 +1,4 @@
-// import updateSelectBox from "./updateSaveData";
-import { SaveToLocalStorageProps } from "../../type/type";
+import { SaveToLocalStorageProps } from "@/app/type/type";
 
 const saveToLocalStorage = (data: SaveToLocalStorageProps) => {
   // ローカルストレージからデータを取得
