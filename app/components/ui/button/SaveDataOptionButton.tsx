@@ -1,5 +1,5 @@
-import { useAppContext } from "../../../context/AppContext";
-import { ButtonProps } from "../../../type/type";
+import { useAppContext } from "@/app/context/AppContext";
+import { ButtonProps } from "@/app/type/type";
 
 export default function SaveDataOptionButton({
   id,
