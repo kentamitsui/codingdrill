@@ -13,7 +13,7 @@ const ReactSelect = dynamic(
     ssr: false,
   },
 );
-// import Image from "next/image";
+import Image from "next/image";
 
 export default function Sidebar() {
   // createContextを使用して、InputSectionにデータを渡す
@@ -57,11 +57,6 @@ export default function Sidebar() {
 
   // ローカルストレージのデータを各要素に反映する
   const handleLoadData = () => {
-    // const selectElement = document.getElementById(
-    //   "saveData",
-    // ) as HTMLSelectElement;
-    // const selectedId: number = parseInt(selectElement.value, 10);
-
     // セーブデータが選択されていない状態でロードボタンを押した場合、アラートを表示する
     if (!currentSelectedSavedData) {
       alert("Please select a valid option to load.");
@@ -142,67 +137,90 @@ export default function Sidebar() {
   return (
     <aside className="flex max-h-[300px] w-[150px] flex-col rounded-md bg-gray-200 p-1 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-col gap-2">
-        <Options
-          label={"select-difficulty"}
-          data={menuData.menuLists.difficulty}
-          name={"difficulty"}
-          defaultSelected={"difficulty"}
-          setSelected={setDifficulty}
-          savedLocalStorageValue={difficulty}
-        />
-        {/* <Image
-          src={menuData.svgIcon.difficulty}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
-
-        <Options
-          label={"select-type"}
-          data={menuData.menuLists.dataType}
-          name={"type"}
-          defaultSelected={"data type"}
-          setSelected={setDataType}
-          savedLocalStorageValue={dataType}
-        />
-        {/* <Image
-          src={menuData.svgIcon.data}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
-        <Options
-          label={"select-topic"}
-          data={menuData.menuLists.topics}
-          name={"topic"}
-          defaultSelected={"topic"}
-          setSelected={setTopic}
-          savedLocalStorageValue={topic}
-        />
-        {/* <Image
-          src={menuData.svgIcon.topic}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
-        <Options
-          label={"select-display-language"}
-          data={menuData.menuLists.displayLanguages}
-          name={"display-language"}
-          defaultSelected={"translate"}
-          setSelected={setSelectedLanguage}
-          savedLocalStorageValue={selectedLanguage}
-        />
-        {/* <Image
-          src={menuData.svgIcon.translate}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
+        <div className="flex flex-row">
+          <Options
+            label={"select-difficulty"}
+            data={menuData.menuLists.difficulty}
+            name={"difficulty"}
+            defaultSelected={"difficulty"}
+            setSelected={setDifficulty}
+            savedLocalStorageValue={difficulty}
+          />
+          <Image
+            src={
+              currentTheme === "dark"
+                ? menuData.svgIcon.difficultyLight
+                : menuData.svgIcon.difficultyDark
+            }
+            alt="Difficulty Icon"
+            className="pointer-events-none relative -ml-10"
+            width={20}
+            height={20}
+          />
+        </div>
+        <div className="flex flex-row">
+          <Options
+            label={"select-type"}
+            data={menuData.menuLists.dataType}
+            name={"type"}
+            defaultSelected={"data type"}
+            setSelected={setDataType}
+            savedLocalStorageValue={dataType}
+          />
+          <Image
+            src={
+              currentTheme === "dark"
+                ? menuData.svgIcon.dataLight
+                : menuData.svgIcon.dataDark
+            }
+            alt=""
+            className="pointer-events-none relative -ml-10"
+            width={20}
+            height={20}
+          />
+        </div>
+        <div className="flex flex-row">
+          <Options
+            label={"select-topic"}
+            data={menuData.menuLists.topics}
+            name={"topic"}
+            defaultSelected={"topic"}
+            setSelected={setTopic}
+            savedLocalStorageValue={topic}
+          />
+          <Image
+            src={
+              currentTheme === "dark"
+                ? menuData.svgIcon.topicLight
+                : menuData.svgIcon.topicDark
+            }
+            alt=""
+            className="pointer-events-none relative -ml-10"
+            width={20}
+            height={20}
+          />
+        </div>
+        <div className="flex flex-row">
+          <Options
+            label={"select-display-language"}
+            data={menuData.menuLists.displayLanguages}
+            name={"display-language"}
+            defaultSelected={"translate"}
+            setSelected={setSelectedLanguage}
+            savedLocalStorageValue={selectedLanguage}
+          />
+          <Image
+            src={
+              currentTheme === "dark"
+                ? menuData.svgIcon.translateLight
+                : menuData.svgIcon.translateDark
+            }
+            alt=""
+            className="pointer-events-none relative -ml-10"
+            width={20}
+            height={20}
+          />
+        </div>
         <Button
           id="create"
           type="button"
