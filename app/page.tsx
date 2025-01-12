@@ -2,7 +2,7 @@
 
 import { PanelProvider } from "@/app/feature/splitter/PanelContext";
 import { SelectedDataProvider } from "@/app/context/AppContext";
-import { LocalStorageProvider } from "@/app/feature/localStorage/localStorageContext";
+import { LocalStorageProvider } from "@/app/feature/localStorage/context/localStorageContext";
 import Header from "@/app/components/ui/header/Header";
 import Main from "@/app/components/ui/main/Main";
 

@@ -4,7 +4,7 @@ import config from "@/app/config/config.json";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/localStorageContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 
 export default function InputSection() {
