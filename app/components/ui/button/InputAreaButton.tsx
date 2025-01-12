@@ -1,6 +1,8 @@
 import { useAppContext } from "@/app/context/AppContext";
 import { ButtonProps } from "@/app/type/type";
 import { useEffect, useState } from "react";
+import Image from "next/image";
+import menuData from "@/app/config/config.json";
 
 export default function InputAreaButton({
   id,
@@ -16,6 +18,7 @@ export default function InputAreaButton({
     selectedLanguage,
     jsonFormattedProblemContent,
     checkEditorInputed,
+    currentTheme,
   } = useAppContext();
   // 選択肢が全て選択されたかどうかの状態管理に使用
   const [isAllSelected, setIsAllSelected] = useState(false);
@@ -59,13 +62,27 @@ export default function InputAreaButton({
     <button
       id={id}
       type={type}
-      className={`w-full rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${
+      className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${
         isButtonDisabled ? "cursor-not-allowed opacity-50" : ""
       }`}
       onClick={onClick}
       disabled={isButtonDisabled}
     >
-      {text}
+      <span className="flex-1 text-center">{text}</span>
+      <Image
+        src={
+          text === "copy"
+            ? currentTheme === "dark"
+              ? menuData.svgIcon.copyLight
+              : menuData.svgIcon.copyDark
+            : currentTheme === "dark"
+              ? menuData.svgIcon.submitLight
+              : menuData.svgIcon.submitDark
+        }
+        alt=""
+        width={20}
+        height={20}
+      />
     </button>
   );
 }
