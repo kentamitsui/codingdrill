@@ -1,10 +1,10 @@
 "use client";
 
-import { PanelProvider } from "./feature/splitter/PanelContext";
-import { SelectedDataProvider } from "./context/AppContext";
-import { LocalStorageProvider } from "./feature/localStorage/localStorageContext";
-import Header from "./components/ui/header/Header";
-import Main from "./components/ui/main/Main";
+import { PanelProvider } from "@/app/feature/splitter/PanelContext";
+import { SelectedDataProvider } from "@/app/context/AppContext";
+import { LocalStorageProvider } from "@/app/feature/localStorage/localStorageContext";
+import Header from "@/app/components/ui/header/Header";
+import Main from "@/app/components/ui/main/Main";
 
 export default function Page() {
   return (
