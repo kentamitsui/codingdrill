@@ -131,12 +131,14 @@
       "spanish": "Spanish"
     }
   },
-
   "svgIcon": {
-    "language": "/language.svg",
-    "difficulty": "/difficulty.svg",
-    "data": "/data.svg",
-    "topic": "/topic.svg",
-    "translate": "/translate.svg"
+    "difficultyLight": "/images/difficultyLight.svg",
+    "difficultyDark": "/images/difficultyDark.svg",
+    "dataLight": "/images/dataLight.svg",
+    "dataDark": "/images/dataDark.svg",
+    "topicLight": "/images/topicLight.svg",
+    "topicDark": "/images/topicDark.svg",
+    "translateLight": "/images/translateLight.svg",
+    "translateDark": "/images/translateDark.svg"
   }
 }
