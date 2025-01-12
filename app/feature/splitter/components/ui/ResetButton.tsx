@@ -1,4 +1,4 @@
-import { usePanelContext } from "@/app/feature/splitter/PanelContext";
+import { usePanelContext } from "@/app/feature/splitter/context/PanelContext";
 
 // パネルサイズをリセットするボタン
 export default function ResetButton() {
