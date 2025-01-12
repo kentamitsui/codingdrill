@@ -5,7 +5,7 @@ import Options from "@/app/components/ui/select/Options";
 import Button from "@/app/components/ui/button/Button";
 import SaveDataOptionButton from "@/app/components/ui/button/SaveDataOptionButton";
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/localStorageContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import dynamic from "next/dynamic";
 const ReactSelect = dynamic(
   () => import("@/app/components/ui/select/react-select/ReactSelect"),

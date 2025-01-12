@@ -3,7 +3,7 @@ import Select from "react-select";
 import { ReactSelectProps } from "@/app/type/type";
 import "@/app/styles/globals.css";
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/localStorageContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 
 export default function ReactSelect({
   handleChangeSavedData,
