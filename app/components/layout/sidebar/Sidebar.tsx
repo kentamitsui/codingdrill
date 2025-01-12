@@ -1,14 +1,14 @@
 "use client";
 
-import menuData from "../../../config/config.json";
-import Options from "../../ui/select/Options";
-import Button from "../../ui/button/Button";
-import SaveDataOptionButton from "../../ui/button/SaveDataOptionButton";
-import { useAppContext } from "../../../context/AppContext";
-import { useLocalStorageContext } from "../../../feature/localStorage/localStorageContext";
+import menuData from "@/app/config/config.json";
+import Options from "@/app/components/ui/select/Options";
+import Button from "@/app/components/ui/button/Button";
+import SaveDataOptionButton from "@/app/components/ui/button/SaveDataOptionButton";
+import { useAppContext } from "@/app/context/AppContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/localStorageContext";
 import dynamic from "next/dynamic";
 const ReactSelect = dynamic(
-  () => import("../../ui/select/react-select/ReactSelect"),
+  () => import("@/app/components/ui/select/react-select/ReactSelect"),
   {
     ssr: false,
   },
