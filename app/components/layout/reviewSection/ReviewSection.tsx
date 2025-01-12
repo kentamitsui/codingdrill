@@ -2,10 +2,16 @@ import { useAppContext } from "@/app/context/AppContext";
 import React from "react";
 import { ReusableReviewContentsProps } from "@/app/type/type";
 import { LoadingAnimation } from "@/app/components/ui/loadingAnimation/LoadingAnimation";
+import Image from "next/image";
+import menuData from "@/app/config/config.json";
 
 export const ReviewSection: React.FC = () => {
-  const { isDisabled, isCreateReview, jsonFormattedReviewContent } =
-    useAppContext();
+  const {
+    isDisabled,
+    isCreateReview,
+    jsonFormattedReviewContent,
+    currentTheme,
+  } = useAppContext();
 
   const ReusableParagraph: React.FC<ReusableReviewContentsProps> = ({
     content,
@@ -72,11 +78,21 @@ export const ReviewSection: React.FC = () => {
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className={`w-[120px] bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
           disabled={isDisabled}
           onClick={copyToClipboard}
         >
-          copy
+          <span className="flex-1 text-center">copy</span>
+          <Image
+            src={
+              currentTheme === "dark"
+                ? menuData.svgIcon.copyLight
+                : menuData.svgIcon.copyDark
+            }
+            alt=""
+            width={20}
+            height={20}
+          />
         </button>
       </div>
       <div
