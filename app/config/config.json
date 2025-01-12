@@ -132,6 +132,8 @@
     }
   },
   "svgIcon": {
+    "resetLight": "/images/resetLight.svg",
+    "resetDark": "/images/resetDark.svg",
     "difficultyLight": "/images/difficultyLight.svg",
     "difficultyDark": "/images/difficultyDark.svg",
     "dataLight": "/images/dataLight.svg",
