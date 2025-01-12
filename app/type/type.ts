@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 // 選択タグに対する型定義
 export interface SelectProps {
@@ -9,6 +10,8 @@ export interface SelectProps {
   defaultSelected?: string; // 初期表示時の値
   setSelected: Dispatch<SetStateAction<string>>; // 更新関数
   savedLocalStorageValue: string;
+  iconLight: StaticImport | string;
+  iconDark: StaticImport | string;
 }
 
 // ボタンに対する型定義

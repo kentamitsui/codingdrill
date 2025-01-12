@@ -136,6 +136,8 @@
     "resetDark": "/images/resetDark.svg",
     "difficultyLight": "/images/difficultyLight.svg",
     "difficultyDark": "/images/difficultyDark.svg",
+    "listLight": "/images/listLight.svg",
+    "listDark": "/images/listDark.svg",
     "dataLight": "/images/dataLight.svg",
     "dataDark": "/images/dataDark.svg",
     "topicLight": "/images/topicLight.svg",
