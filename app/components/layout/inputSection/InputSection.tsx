@@ -1,12 +1,11 @@
 import * as monaco from "monaco-editor";
-import MonacoEditor from "../feature/monacoEditor/MonacoEditor";
-import config from "../config/config.json";
+import MonacoEditor from "@/app/feature/monacoEditor/MonacoEditor";
+import config from "@/app/config/config.json";
 import { useRef, useState, useEffect } from "react";
-import saveToLocalStorage from "../feature/localStorage/localStorage";
-import { useAppContext } from "./AppContext";
-// import updateSelectBox from "../feature/localStorage/updateSaveData";
-import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import InputAreaButton from "./InputAreaButton";
+import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
+import { useAppContext } from "@/app/context/AppContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
+import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 
 export default function InputSection() {
   const {
@@ -34,13 +33,8 @@ export default function InputSection() {
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
-        // updateSelectBox([]);
         updateLocalStorage(savedData);
         return;
-      }
-
-      if (event.key === "savedData") {
-        // updateSelectBox(savedData);
       }
     };
 

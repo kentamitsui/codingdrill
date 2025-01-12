@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { SelectProps } from "../type/type";
-import { useAppContext } from "./AppContext";
+import { SelectProps } from "@/app/type/type";
+import { useAppContext } from "@/app/context/AppContext";
 
 export const Options: React.FC<SelectProps> = ({
   label,

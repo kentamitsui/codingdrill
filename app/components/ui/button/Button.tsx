@@ -1,5 +1,5 @@
-import { useAppContext } from "./AppContext";
-import { ButtonProps } from "../type/type";
+import { useAppContext } from "@/app/context/AppContext";
+import { ButtonProps } from "@/app/type/type";
 import { useEffect, useState } from "react";
 
 export default function Button({ id, type, text, onClick }: ButtonProps) {

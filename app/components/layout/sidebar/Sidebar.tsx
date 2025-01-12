@@ -1,16 +1,18 @@
 "use client";
 
-import menuData from "../config/config.json";
-import Options from "./Options";
-import Button from "./Button";
-import LoadAreaButton from "./LoadAreaButton";
-import { useAppContext } from "./AppContext";
-import { useLocalStorageContext } from "../feature/localStorage/localStorageContext";
-import { useState } from "react";
+import menuData from "@/app/config/config.json";
+import Options from "@/app/components/ui/select/Options";
+import Button from "@/app/components/ui/button/Button";
+import SaveDataOptionButton from "@/app/components/ui/button/SaveDataOptionButton";
+import { useAppContext } from "@/app/context/AppContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import dynamic from "next/dynamic";
-const ReactSelect = dynamic(() => import("./react-select/ReactSelect"), {
-  ssr: false,
-});
+const ReactSelect = dynamic(
+  () => import("@/app/components/ui/select/react-select/ReactSelect"),
+  {
+    ssr: false,
+  },
+);
 // import Image from "next/image";
 
 export default function Sidebar() {
@@ -35,13 +37,13 @@ export default function Sidebar() {
     setLoadedEditorContent,
     currentTheme,
   } = useAppContext();
-  const { loadSavedData, handleDeleteSelected, clearLocalStorage } =
-    useLocalStorageContext();
-
-  // セーブデータの選択時に背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
-    string | number
-  >("");
+  const {
+    currentSelectedSavedData,
+    setCurrentSelectedSavedData,
+    loadSavedData,
+    handleDeleteSelected,
+    clearLocalStorage,
+  } = useLocalStorageContext();
 
   // セーブデータの値を動的に変更する
   // 修正後のhandleChangeSavedData関数
@@ -69,7 +71,7 @@ export default function Sidebar() {
     // 選択されたセーブデータのIDを取得
     const selectedId: string | number = currentSelectedSavedData;
 
-    console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
+    // console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
     // selectedIdについては、後で型を確認する
@@ -237,7 +239,7 @@ export default function Sidebar() {
           )}
         </select> */}
         <ReactSelect
-          currentSelectedSavedData={currentSelectedSavedData}
+          selectedSaveData={currentSelectedSavedData}
           handleChangeSavedData={handleChangeSavedData}
           isDisabled={isDisabled}
           saveData={saveData}
@@ -264,19 +266,19 @@ export default function Sidebar() {
               isDisabled ? "pointer-events-none opacity-50" : ""
             }`}
           >
-            <LoadAreaButton
+            <SaveDataOptionButton
               id="load"
               type="button"
               text="load"
               onClick={handleLoadData}
             />
-            <LoadAreaButton
+            <SaveDataOptionButton
               id="delete"
               type="button"
               text="delete"
               onClick={() => handleDeleteSelected(currentSelectedSavedData)}
             />
-            <LoadAreaButton
+            <SaveDataOptionButton
               id="delete-all"
               type="button"
               text="delete all"

@@ -2,10 +2,10 @@
 
 import React, { lazy, Suspense } from "react";
 const Split = lazy(() => import("react-split"));
-import ProblemSection from "../../components/ProblemSection";
-import InputSection from "../../components/InputSection";
-import ReviewSection from "../../components/ReviewSection";
-import { usePanelContext } from "./PanelContext";
+import ProblemSection from "@/app/components/layout/problemSection/ProblemSection";
+import InputSection from "@/app/components/layout/inputSection/InputSection";
+import ReviewSection from "@/app/components/layout/reviewSection/ReviewSection";
+import { usePanelContext } from "@/app/feature/splitter/PanelContext";
 
 const Split_Vertical: React.FC = () => {
   // PanelContextから垂直方向のパネルサイズ管理に必要な関数を取得

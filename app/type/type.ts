@@ -85,6 +85,8 @@ export interface MonacoEditorProps {
 // LocalStorageContextに対する型定義
 export interface LocalStorageContextTypeProps {
   savedData: SavedDataEntryProps[];
+  currentSelectedSavedData: number | string;
+  setCurrentSelectedSavedData: (id: number | string) => void;
   updateLocalStorage: (data: SavedDataEntryProps[]) => void;
   loadSavedData: (id: string | number, setFunctions: SetFunctionsProps) => void;
   handleDeleteSelected: (id: string | number) => void;
@@ -209,7 +211,7 @@ export interface LoadingAnimationProps {
 
 // ReactSelectに対する型定義
 export interface ReactSelectProps {
-  currentSelectedSavedData: string | number;
+  selectedSaveData: string | number;
   isDisabled: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
