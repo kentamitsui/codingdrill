@@ -1,5 +1,5 @@
 import React from "react";
-import Select from "react-select";
+import Select, { components } from "react-select";
 import { ReactSelectProps } from "@/app/type/type";
 import "@/app/styles/globals.css";
 import { useAppContext } from "@/app/context/AppContext";
@@ -13,7 +13,7 @@ export default function ReactSelect({
   const { isDisabled } = useAppContext();
   const { currentSelectedSavedData } = useLocalStorageContext();
 
-  // オプションのデータをreact-select用に変換
+  // ローカルストレージの保存データをreact-select用に変換して表示
   const options =
     saveData &&
     saveData?.map((entry) => ({
@@ -27,6 +27,60 @@ export default function ReactSelect({
         "\n" +
         `Topic: ${entry.topic} | Translate: ${entry.selectedLanguage}`,
     }));
+
+  // カスタムのDropdownIndicatorを作成
+  const DropdownIndicator = (props: any) => {
+    return (
+      <components.DropdownIndicator {...props}>
+        {/* SVG画像 */}
+        <img
+          src={
+            currentTheme === "dark"
+              ? "/images/saveLight.svg"
+              : "/images/saveDark.svg"
+          }
+          alt=""
+          className="mr-1 h-5 w-5"
+        />
+        {/* デフォルトの下矢印 open時は向きが逆になる */}
+        {props.selectProps.menuIsOpen ? (
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={currentTheme === "dark" ? "#ffffff" : "#000000"} // 矢印の色を切り替え
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-chevron-up"
+            style={{
+              margin: "auto",
+            }}
+          >
+            <polyline points="18 15 12 9 6 15"></polyline>
+          </svg>
+        ) : (
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={currentTheme === "dark" ? "#ffffff" : "#000000"} // 矢印の色を切り替え
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="feather feather-chevron-down"
+            style={{
+              margin: "auto",
+            }}
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        )}
+      </components.DropdownIndicator>
+    );
+  };
 
   // プレースホルダーオプション
   const placeholderOption = { value: "", label: "None" };
@@ -114,8 +168,7 @@ export default function ReactSelect({
     dropdownIndicator: (provided) => ({
       ...provided,
       height: "20px",
-      paddingTop: "0px",
-      paddingBottom: "0px",
+      padding: "0px",
     }),
     singleValue: (provided) => ({
       ...provided,
@@ -179,7 +232,9 @@ export default function ReactSelect({
       placeholder="Save Data"
       styles={customStyles}
       isDisabled={isDisabled} // 無効化を適用
+      components={{ DropdownIndicator }}
       isClearable
+      isSearchable
     />
   );
 }
