@@ -42,9 +42,9 @@ export default function Button({
     <button
       id={id}
       type={type}
-      className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 dark:bg-slate-700 ${
-        isButtonDisabled ? "cursor-not-allowed opacity-50" : "hover:bg-gray-600"
-      } dark:${isButtonDisabled ? "" : "hover:bg-slate-500"}`}
+      className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${
+        isButtonDisabled ? "cursor-not-allowed opacity-50" : ""
+      } `}
       onClick={onClick}
       disabled={isButtonDisabled}
     >
