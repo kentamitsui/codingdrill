@@ -132,6 +132,8 @@
     }
   },
   "svgIcon": {
+    "codeDark": "/images/codeDark.svg",
+    "codeLight": "/images/codeLight.svg",
     "copyDark": "/images/copyDark.svg",
     "copyLight": "/images/copyLight.svg",
     "dataDark": "/images/dataDark.svg",
@@ -142,6 +144,8 @@
     "deteleLight": "/images/deleteLight.svg",
     "difficultyDark": "/images/difficultyDark.svg",
     "difficultyLight": "/images/difficultyLight.svg",
+    "editorColorDark": "/images/editorColorDark.svg",
+    "editorColorLight": "/images/editorColorLight.svg",
     "listDark": "/images/listDark.svg",
     "listLight": "/images/listLight.svg",
     "loadDark": "/images/loadDark.svg",
@@ -152,6 +156,8 @@
     "saveLight": "/images/saveLight.svg",
     "submitDark": "/images/submitDark.svg",
     "submitLight": "/images/submitLight.svg",
+    "textSizeDark": "/images/textSizeDark.svg",
+    "textSizeLight": "/images/textSizeLight.svg",
     "topicDark": "/images/topicDark.svg",
     "topicLight": "/images/topicLight.svg",
     "translateDark": "/images/translateDark.svg",

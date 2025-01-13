@@ -14,8 +14,16 @@ export interface SelectProps {
   iconDark: StaticImport | string;
 }
 
+// inputareaに対する型定義
+export interface InputAreaButtonProps {
+  id: string;
+  type: "submit" | "reset" | "button";
+  text: string;
+  onClick: () => void | Promise<void>;
+}
+
 // ボタンに対する型定義
-export interface ButtonProps {
+export interface ButtonProps extends InputAreaButtonProps {
   id: string;
   type: "submit" | "reset" | "button";
   text: string;
