@@ -35,7 +35,6 @@ export const ReviewSection: React.FC = () => {
 
   const copyToClipboard = () => {
     if (!jsonFormattedReviewContent) {
-      alert("Review content is empty.");
       return;
     }
 
@@ -78,7 +77,7 @@ export const ReviewSection: React.FC = () => {
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isDisabled || jsonFormattedReviewContent === null ? "cursor-not-allowed opacity-50" : ""} `}
           disabled={isDisabled}
           onClick={copyToClipboard}
         >

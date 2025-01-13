@@ -127,6 +127,10 @@ export default function InputSection() {
     if (editorRef.current) {
       const copyEditorvalue = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
 
+      if (copyEditorvalue.length === 0) {
+        return;
+      }
+
       navigator.clipboard
         .writeText(copyEditorvalue)
         .then(() => {
