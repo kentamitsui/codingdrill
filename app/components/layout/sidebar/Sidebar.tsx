@@ -137,7 +137,6 @@ export default function Sidebar() {
   return (
     <aside className="flex max-h-[300px] w-[150px] flex-col rounded-md bg-gray-200 p-1 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-col gap-2">
-        {/* <div className="flex flex-row"> */}
         <Options
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
@@ -148,18 +147,6 @@ export default function Sidebar() {
           iconDark={menuData.svgIcon.difficultyDark}
           iconLight={menuData.svgIcon.difficultyLight}
         />
-        {/* <Image
-            src={
-              currentTheme === "dark"
-                ? menuData.svgIcon.difficultyLight
-                : menuData.svgIcon.difficultyDark
-            }
-            alt="Difficulty Icon"
-            className="pointer-events-none relative -ml-10"
-            width={20}
-            height={20}
-          /> */}
-        {/* </div> */}
         <Options
           label={"select-type"}
           data={menuData.menuLists.dataType}
@@ -193,7 +180,9 @@ export default function Sidebar() {
         <Button
           id="create"
           type="button"
-          text="Create Problem"
+          text="Generate"
+          iconLight={menuData.svgIcon.submitLight}
+          iconDark={menuData.svgIcon.submitDark}
           onClick={handleCreateProblem}
         />
       </div>
@@ -243,18 +232,24 @@ export default function Sidebar() {
               id="load"
               type="button"
               text="load"
+              iconLight={menuData.svgIcon.loadLight}
+              iconDark={menuData.svgIcon.loadDark}
               onClick={handleLoadData}
             />
             <SaveDataOptionButton
               id="delete"
               type="button"
               text="delete"
+              iconLight={menuData.svgIcon.deteleLight}
+              iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected(currentSelectedSavedData)}
             />
             <SaveDataOptionButton
               id="delete-all"
               type="button"
               text="delete all"
+              iconLight={menuData.svgIcon.deteleAllLight}
+              iconDark={menuData.svgIcon.deteleAllDark}
               onClick={clearLocalStorage}
             />
           </div>
