@@ -1,5 +1,5 @@
 import { useAppContext } from "@/app/context/AppContext";
-import { ButtonProps } from "@/app/type/type";
+import { InputAreaButtonProps } from "@/app/type/type";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
@@ -9,7 +9,7 @@ export default function InputAreaButton({
   type,
   text,
   onClick,
-}: ButtonProps) {
+}: InputAreaButtonProps) {
   const {
     isDisabled,
     difficulty,

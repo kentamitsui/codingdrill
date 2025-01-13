@@ -267,6 +267,16 @@ export default function InputSection() {
               value={fontSize}
               disabled={isDisabled}
               onChange={handleFontSizeChange}
+              style={{
+                backgroundImage: `url(${
+                  currentTheme === "dark"
+                    ? menuData.svgIcon.textSizeLight
+                    : menuData.svgIcon.textSizeDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "calc(100% - 20px) center",
+                appearance: "auto",
+              }}
             >
               {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
                 <option key={size} value={size}>
@@ -284,6 +294,16 @@ export default function InputSection() {
               value={editorTheme}
               disabled={isDisabled}
               onChange={handleThemeChange}
+              style={{
+                backgroundImage: `url(${
+                  currentTheme === "dark"
+                    ? menuData.svgIcon.editorColorLight
+                    : menuData.svgIcon.editorColorDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "calc(100% - 20px) center",
+                appearance: "auto",
+              }}
             >
               <option value="vs">vs</option>
               <option value="vs-dark">vs-dark</option>
@@ -301,6 +321,16 @@ export default function InputSection() {
               value={editorLanguage}
               disabled={isDisabled}
               onChange={handleLanguageChange}
+              style={{
+                backgroundImage: `url(${
+                  currentTheme === "dark"
+                    ? menuData.svgIcon.codeLight
+                    : menuData.svgIcon.codeDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "calc(100% - 20px) center",
+                appearance: "auto",
+              }}
             >
               {Object.entries(config.menuLists.languages).map(
                 ([key, label]) => (
