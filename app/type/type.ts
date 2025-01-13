@@ -19,6 +19,8 @@ export interface ButtonProps {
   id: string;
   type: "submit" | "reset" | "button";
   text: string;
+  iconLight: StaticImport | string;
+  iconDark: StaticImport | string;
   onClick: () => void | Promise<void>;
 }
 
