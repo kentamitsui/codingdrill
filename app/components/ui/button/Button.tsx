@@ -1,10 +1,24 @@
 import { useAppContext } from "@/app/context/AppContext";
 import { ButtonProps } from "@/app/type/type";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
-export default function Button({ id, type, text, onClick }: ButtonProps) {
-  const { isDisabled, difficulty, dataType, topic, selectedLanguage } =
-    useAppContext();
+export default function Button({
+  id,
+  type,
+  text,
+  iconLight,
+  iconDark,
+  onClick,
+}: ButtonProps) {
+  const {
+    isDisabled,
+    difficulty,
+    dataType,
+    topic,
+    selectedLanguage,
+    currentTheme,
+  } = useAppContext();
   // 選択肢が全て選択されたかどうかの状態管理に使用
   const [isAllSelected, setIsAllSelected] = useState(false);
 
@@ -28,13 +42,19 @@ export default function Button({ id, type, text, onClick }: ButtonProps) {
     <button
       id={id}
       type={type}
-      className={`w-full rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 dark:bg-slate-700 ${
+      className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 dark:bg-slate-700 ${
         isButtonDisabled ? "cursor-not-allowed opacity-50" : "hover:bg-gray-600"
       } dark:${isButtonDisabled ? "" : "hover:bg-slate-500"}`}
       onClick={onClick}
       disabled={isButtonDisabled}
     >
-      {text}
+      <span className="flex-1 text-center">{text}</span>
+      <Image
+        src={currentTheme === "dark" ? iconLight : iconDark}
+        alt=""
+        width={20}
+        height={20}
+      />
     </button>
   );
 }

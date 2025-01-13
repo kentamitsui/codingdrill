@@ -13,7 +13,7 @@ const ReactSelect = dynamic(
     ssr: false,
   },
 );
-// import Image from "next/image";
+import Image from "next/image";
 
 export default function Sidebar() {
   // createContextを使用して、InputSectionにデータを渡す
@@ -57,11 +57,6 @@ export default function Sidebar() {
 
   // ローカルストレージのデータを各要素に反映する
   const handleLoadData = () => {
-    // const selectElement = document.getElementById(
-    //   "saveData",
-    // ) as HTMLSelectElement;
-    // const selectedId: number = parseInt(selectElement.value, 10);
-
     // セーブデータが選択されていない状態でロードボタンを押した場合、アラートを表示する
     if (!currentSelectedSavedData) {
       alert("Please select a valid option to load.");
@@ -149,15 +144,9 @@ export default function Sidebar() {
           defaultSelected={"difficulty"}
           setSelected={setDifficulty}
           savedLocalStorageValue={difficulty}
+          iconDark={menuData.svgIcon.difficultyDark}
+          iconLight={menuData.svgIcon.difficultyLight}
         />
-        {/* <Image
-          src={menuData.svgIcon.difficulty}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
-
         <Options
           label={"select-type"}
           data={menuData.menuLists.dataType}
@@ -165,14 +154,9 @@ export default function Sidebar() {
           defaultSelected={"data type"}
           setSelected={setDataType}
           savedLocalStorageValue={dataType}
+          iconDark={menuData.svgIcon.dataDark}
+          iconLight={menuData.svgIcon.dataLight}
         />
-        {/* <Image
-          src={menuData.svgIcon.data}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
         <Options
           label={"select-topic"}
           data={menuData.menuLists.topics}
@@ -180,14 +164,9 @@ export default function Sidebar() {
           defaultSelected={"topic"}
           setSelected={setTopic}
           savedLocalStorageValue={topic}
+          iconLight={menuData.svgIcon.topicLight}
+          iconDark={menuData.svgIcon.topicDark}
         />
-        {/* <Image
-          src={menuData.svgIcon.topic}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
         <Options
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
@@ -195,18 +174,15 @@ export default function Sidebar() {
           defaultSelected={"translate"}
           setSelected={setSelectedLanguage}
           savedLocalStorageValue={selectedLanguage}
+          iconLight={menuData.svgIcon.translateLight}
+          iconDark={menuData.svgIcon.translateDark}
         />
-        {/* <Image
-          src={menuData.svgIcon.translate}
-          alt=""
-          className="relative -ml-10"
-          width={20}
-          height={20}
-        /> */}
         <Button
           id="create"
           type="button"
-          text="Create Problem"
+          text="Generate"
+          iconLight={menuData.svgIcon.submitLight}
+          iconDark={menuData.svgIcon.submitDark}
           onClick={handleCreateProblem}
         />
       </div>
@@ -214,30 +190,6 @@ export default function Sidebar() {
         <label htmlFor="savedata" className="sr-only">
           save data
         </label>
-        {/* react-selectを使用しない場合 */}
-        {/* <select
-          className={`rounded-md p-1 duration-300 hover:bg-gray-400 dark:bg-menu dark:hover:bg-slate-700 ${currentSelectedSavedData !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelectedSavedData !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelectedSavedData !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
-          name="data"
-          id="saveData"
-          value={currentSelectedSavedData}
-          disabled={isDisabled}
-          onChange={handleChangeSavedData}
-        >
-          <option className="text-start" value="">
-            Save Data
-          </option>
-          {saveData.length === 0 ? (
-            <option value="" disabled={true}>
-              no saved data
-            </option>
-          ) : (
-            saveData.map((entry, index) => (
-              <option key={`${entry.id}-${index}`} value={entry.id}>
-                {`Data ${entry.id}: ${entry.timestamp} - difficulty: ${entry.difficulty} / data type: ${entry.dataType} / topic: ${entry.topic} / translate: ${entry.selectedLanguage}`}
-              </option>
-            ))
-          )}
-        </select> */}
         <ReactSelect
           selectedSaveData={currentSelectedSavedData}
           handleChangeSavedData={handleChangeSavedData}
@@ -255,11 +207,21 @@ export default function Sidebar() {
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
-            className={`w-full rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+            className={`flex w-full justify-between rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
               isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             Options
+            <Image
+              src={
+                currentTheme === "dark"
+                  ? menuData.svgIcon.listLight
+                  : menuData.svgIcon.listDark
+              }
+              alt=""
+              width={20}
+              height={20}
+            />
           </summary>
           <div
             className={`absolute -right-[4px] z-10 flex w-[150px] flex-col gap-2 rounded-b-md bg-opacity-0 p-[8px_4px_4px_4px] ${
@@ -270,18 +232,24 @@ export default function Sidebar() {
               id="load"
               type="button"
               text="load"
+              iconLight={menuData.svgIcon.loadLight}
+              iconDark={menuData.svgIcon.loadDark}
               onClick={handleLoadData}
             />
             <SaveDataOptionButton
               id="delete"
               type="button"
               text="delete"
+              iconLight={menuData.svgIcon.deteleLight}
+              iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected(currentSelectedSavedData)}
             />
             <SaveDataOptionButton
               id="delete-all"
               type="button"
               text="delete all"
+              iconLight={menuData.svgIcon.deteleAllLight}
+              iconDark={menuData.svgIcon.deteleAllDark}
               onClick={clearLocalStorage}
             />
           </div>

@@ -131,12 +131,36 @@
       "spanish": "Spanish"
     }
   },
-
   "svgIcon": {
-    "language": "/language.svg",
-    "difficulty": "/difficulty.svg",
-    "data": "/data.svg",
-    "topic": "/topic.svg",
-    "translate": "/translate.svg"
+    "codeDark": "/images/codeDark.svg",
+    "codeLight": "/images/codeLight.svg",
+    "copyDark": "/images/copyDark.svg",
+    "copyLight": "/images/copyLight.svg",
+    "dataDark": "/images/dataDark.svg",
+    "dataLight": "/images/dataLight.svg",
+    "deteleAllDark": "/images/deleteAllDark.svg",
+    "deteleAllLight": "/images/deleteAllLight.svg",
+    "deteleDark": "/images/deleteDark.svg",
+    "deteleLight": "/images/deleteLight.svg",
+    "difficultyDark": "/images/difficultyDark.svg",
+    "difficultyLight": "/images/difficultyLight.svg",
+    "editorColorDark": "/images/editorColorDark.svg",
+    "editorColorLight": "/images/editorColorLight.svg",
+    "listDark": "/images/listDark.svg",
+    "listLight": "/images/listLight.svg",
+    "loadDark": "/images/loadDark.svg",
+    "loadLight": "/images/loadLight.svg",
+    "resetDark": "/images/resetDark.svg",
+    "resetLight": "/images/resetLight.svg",
+    "saveDark": "/images/saveDark.svg",
+    "saveLight": "/images/saveLight.svg",
+    "submitDark": "/images/submitDark.svg",
+    "submitLight": "/images/submitLight.svg",
+    "textSizeDark": "/images/textSizeDark.svg",
+    "textSizeLight": "/images/textSizeLight.svg",
+    "topicDark": "/images/topicDark.svg",
+    "topicLight": "/images/topicLight.svg",
+    "translateDark": "/images/translateDark.svg",
+    "translateLight": "/images/translateLight.svg"
   }
 }

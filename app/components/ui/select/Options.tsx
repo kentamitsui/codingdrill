@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { SelectProps } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
-
 export const Options: React.FC<SelectProps> = ({
   label,
   data,
@@ -9,16 +8,22 @@ export const Options: React.FC<SelectProps> = ({
   defaultSelected,
   setSelected,
   savedLocalStorageValue,
+  iconLight,
+  iconDark,
 }) => {
+  const { currentTheme } = useAppContext();
   const { isDisabled } = useAppContext();
   const [currentSelected, setCurrentSelected] = useState("");
 
   useEffect(() => {
     // 更新関数を用いて、loadボタンが押された時にローカルストレージのデータを呼び出し、optionタグを動的に変更する
-    if (savedLocalStorageValue !== null) {
+    if (
+      savedLocalStorageValue !== null &&
+      savedLocalStorageValue !== currentSelected
+    ) {
       setCurrentSelected(savedLocalStorageValue);
     }
-  }, [savedLocalStorageValue]);
+  }, [savedLocalStorageValue, currentSelected]);
 
   // 選択が変更される度に、useStateで値を管理・変更する
   const handleChangeColor = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -33,21 +38,32 @@ export const Options: React.FC<SelectProps> = ({
         {label}
       </label>
       <select
-        className={`w-full rounded-md p-1 duration-300 ${currentSelected !== "" ? "bg-gray-400" : "bg-gray-200"} dark:${currentSelected !== "" ? "bg-slate-700" : "bg-menu"} ${currentSelected !== "" ? "hover:opacity-50" : ""} ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"} hover:bg-gray-400 dark:hover:bg-slate-700`}
+        className={`w-full rounded-md p-1 duration-300 ${
+          currentTheme === "light"
+            ? currentSelected !== ""
+              ? "bg-gray-400"
+              : "bg-gray-200"
+            : currentSelected !== ""
+              ? "bg-slate-700"
+              : "bg-menu"
+        } ${currentSelected !== "" ? "hover:opacity-50" : ""} ${
+          isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+        } hover:bg-gray-400 dark:hover:bg-slate-700`}
         name={name}
         disabled={isDisabled}
         value={currentSelected}
         onChange={handleChangeColor}
-        // onMouseEnter={(event) => (event.currentTarget.open = true)}
-        // onMouseLeave={(event) => (event.currentTarget.open = false)}
+        style={{
+          backgroundImage: `url(${
+            currentTheme === "dark" ? iconLight : iconDark
+          })`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "calc(100% - 20px) center",
+          paddingRight: "30px", // 選択肢の文字と重ならないよう画像分のスペースを確保
+          appearance: "auto",
+        }}
       >
-        <option
-          disabled={
-            currentSelected === "" || currentSelected !== "" ? true : false
-          }
-          className="text-start"
-          value={""}
-        >
+        <option disabled={true} className="text-start" value={""}>
           {defaultSelected}
         </option>
         {label === "select-topic"

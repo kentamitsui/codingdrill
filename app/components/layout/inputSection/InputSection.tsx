@@ -6,6 +6,8 @@ import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
 import { useAppContext } from "@/app/context/AppContext";
 import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
+import Image from "next/image";
+import menuData from "@/app/config/config.json";
 
 export default function InputSection() {
   const {
@@ -25,6 +27,7 @@ export default function InputSection() {
     checkEditorInputed,
     setCheckEditorInputed,
     setSaveData,
+    currentTheme,
   } = useAppContext();
   const { savedData, updateLocalStorage } = useLocalStorageContext();
   // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
@@ -233,11 +236,21 @@ export default function InputSection() {
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
-            className={`w-[120px] rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
+            className={`flex w-[120px] items-center justify-between rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
               isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
-            Options
+            <span className="flex-1 text-center">Options</span>
+            <Image
+              src={
+                currentTheme === "dark"
+                  ? menuData.svgIcon.listLight
+                  : menuData.svgIcon.listDark
+              }
+              alt=""
+              width={20}
+              height={20}
+            />
           </summary>
           <div
             className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 border-t-2 border-t-white bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-[2px] dark:border-t-[#1e1e1e] ${
@@ -254,6 +267,16 @@ export default function InputSection() {
               value={fontSize}
               disabled={isDisabled}
               onChange={handleFontSizeChange}
+              style={{
+                backgroundImage: `url(${
+                  currentTheme === "dark"
+                    ? menuData.svgIcon.textSizeLight
+                    : menuData.svgIcon.textSizeDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "calc(100% - 20px) center",
+                appearance: "auto",
+              }}
             >
               {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
                 <option key={size} value={size}>
@@ -271,6 +294,16 @@ export default function InputSection() {
               value={editorTheme}
               disabled={isDisabled}
               onChange={handleThemeChange}
+              style={{
+                backgroundImage: `url(${
+                  currentTheme === "dark"
+                    ? menuData.svgIcon.editorColorLight
+                    : menuData.svgIcon.editorColorDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "calc(100% - 20px) center",
+                appearance: "auto",
+              }}
             >
               <option value="vs">vs</option>
               <option value="vs-dark">vs-dark</option>
@@ -288,6 +321,16 @@ export default function InputSection() {
               value={editorLanguage}
               disabled={isDisabled}
               onChange={handleLanguageChange}
+              style={{
+                backgroundImage: `url(${
+                  currentTheme === "dark"
+                    ? menuData.svgIcon.codeLight
+                    : menuData.svgIcon.codeDark
+                })`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "calc(100% - 20px) center",
+                appearance: "auto",
+              }}
             >
               {Object.entries(config.menuLists.languages).map(
                 ([key, label]) => (

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 import { ReusableProblemContentProps } from "@/app/type/type";
 import { LoadingAnimation } from "@/app/components/ui/loadingAnimation/LoadingAnimation";
+import Image from "next/image";
+import menuData from "@/app/config/config.json";
 
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC = () => {
@@ -11,6 +13,7 @@ const ProblemSection: React.FC = () => {
     jsonFormattedProblemContent,
     formattedProblemContent,
     setFormattedProblemContent,
+    currentTheme,
   } = useAppContext();
 
   const ReusableParagraph: React.FC<ReusableProblemContentProps> = ({
@@ -76,10 +79,18 @@ const ProblemSection: React.FC = () => {
   }, [jsonFormattedProblemContent, setFormattedProblemContent]);
 
   const copyToClipboard = () => {
+    if (
+      !formattedProblemContent ||
+      formattedProblemContent.trim().length === 0
+    ) {
+      alert("Problem content is empty.");
+      return;
+    }
+
     navigator.clipboard
       .writeText(formattedProblemContent)
       .then(() => {
-        alert("Copied to clipboard!");
+        alert("Copied to clipboard.");
       })
       .catch((err) => {
         console.error("Failed to copy text: ", err);
@@ -97,11 +108,21 @@ const ProblemSection: React.FC = () => {
           Description
         </div>
         <button
-          className={`w-[120px] bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
           onClick={copyToClipboard}
           disabled={isDisabled}
         >
-          copy
+          <span className="flex-1 text-center">copy</span>
+          <Image
+            src={
+              currentTheme === "dark"
+                ? menuData.svgIcon.copyLight
+                : menuData.svgIcon.copyDark
+            }
+            alt=""
+            width={20}
+            height={20}
+          />
         </button>
       </div>
       <div className="p-[15px_30px] leading-normal tracking-wider">
