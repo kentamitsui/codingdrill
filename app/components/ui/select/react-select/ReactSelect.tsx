@@ -156,6 +156,8 @@ export default function ReactSelect({
       height: "20px",
       padding: "0px",
       margin: "0px",
+      color: currentTheme === "dark" ? "#ffffff" : "#000000", // 文字色の切り替え
+      caretColor: currentTheme === "dark" ? "#ffffff" : "#000000", // カーソルの色
     }),
     indicatorsContainer: (provided) => ({
       ...provided,
