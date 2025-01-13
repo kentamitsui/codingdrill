@@ -59,6 +59,7 @@ export const Options: React.FC<SelectProps> = ({
           })`,
           backgroundRepeat: "no-repeat",
           backgroundPosition: "calc(100% - 20px) center",
+          paddingRight: "30px", // 選択肢の文字と重ならないよう画像分のスペースを確保
           appearance: "auto",
         }}
       >
