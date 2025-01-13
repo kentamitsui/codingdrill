@@ -229,7 +229,7 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : ""}`}
           onMouseEnter={(event) =>
             (event.currentTarget.open = isDisabled ? false : true)
           }
