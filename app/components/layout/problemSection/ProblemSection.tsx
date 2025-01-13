@@ -79,10 +79,18 @@ const ProblemSection: React.FC = () => {
   }, [jsonFormattedProblemContent, setFormattedProblemContent]);
 
   const copyToClipboard = () => {
+    if (
+      !formattedProblemContent ||
+      formattedProblemContent.trim().length === 0
+    ) {
+      alert("Problem content is empty.");
+      return;
+    }
+
     navigator.clipboard
       .writeText(formattedProblemContent)
       .then(() => {
-        alert("Copied to clipboard!");
+        alert("Copied to clipboard.");
       })
       .catch((err) => {
         console.error("Failed to copy text: ", err);

@@ -35,7 +35,7 @@ export const ReviewSection: React.FC = () => {
 
   const copyToClipboard = () => {
     if (!jsonFormattedReviewContent) {
-      alert("No review content to copy.");
+      alert("Review content is empty.");
       return;
     }
 
@@ -59,7 +59,7 @@ export const ReviewSection: React.FC = () => {
     navigator.clipboard
       .writeText(formattedReviewContent)
       .then(() => {
-        alert("Copied to clipboard!");
+        alert("Copied to clipboard.");
       })
       .catch((err) => {
         console.error("Failed to copy text: ", err);
