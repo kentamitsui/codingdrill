@@ -83,7 +83,6 @@ const ProblemSection: React.FC = () => {
       !formattedProblemContent ||
       formattedProblemContent.trim().length === 0
     ) {
-      alert("Problem content is empty.");
       return;
     }
 
@@ -108,7 +107,7 @@ const ProblemSection: React.FC = () => {
           Description
         </div>
         <button
-          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 dark:bg-slate-700 ${isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer hover:bg-gray-600"} dark:${isDisabled ? "" : "hover:bg-slate-500"}`}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isDisabled || jsonFormattedProblemContent === null ? "cursor-not-allowed opacity-50" : ""} `}
           onClick={copyToClipboard}
           disabled={isDisabled}
         >

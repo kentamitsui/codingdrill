@@ -38,7 +38,7 @@ export const Options: React.FC<SelectProps> = ({
         {label}
       </label>
       <select
-        className={`w-full rounded-md p-1 duration-300 ${
+        className={`w-full rounded-md p-1 duration-300 hover:bg-gray-400 dark:hover:bg-slate-700 ${
           currentTheme === "light"
             ? currentSelected !== ""
               ? "bg-gray-400"
@@ -48,7 +48,7 @@ export const Options: React.FC<SelectProps> = ({
               : "bg-menu"
         } ${currentSelected !== "" ? "hover:opacity-50" : ""} ${
           isDisabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"
-        } hover:bg-gray-400 dark:hover:bg-slate-700`}
+        } `}
         name={name}
         disabled={isDisabled}
         value={currentSelected}
