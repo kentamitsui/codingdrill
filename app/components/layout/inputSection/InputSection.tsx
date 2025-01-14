@@ -127,6 +127,10 @@ export default function InputSection() {
     if (editorRef.current) {
       const copyEditorvalue = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
 
+      if (copyEditorvalue.length === 0) {
+        return;
+      }
+
       navigator.clipboard
         .writeText(copyEditorvalue)
         .then(() => {
@@ -229,7 +233,7 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : "cursor-pointer"}`}
+          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : ""}`}
           onMouseEnter={(event) =>
             (event.currentTarget.open = isDisabled ? false : true)
           }

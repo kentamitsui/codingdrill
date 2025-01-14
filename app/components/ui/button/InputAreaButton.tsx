@@ -56,15 +56,17 @@ export default function InputAreaButton({
     }
   }, [isAllSelected, jsonFormattedProblemContent, checkEditorInputed]);
 
-  const isButtonDisabled = isDisabled || isEditorInputedState;
+  const isButtonDisabled =
+    isDisabled ||
+    isEditorInputedState ||
+    (checkEditorInputed && checkEditorInputed?.length <= 0) ||
+    false;
 
   return (
     <button
       id={id}
       type={type}
-      className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${
-        isButtonDisabled ? "cursor-not-allowed opacity-50" : ""
-      }`}
+      className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled ? "cursor-not-allowed opacity-50" : ""}`}
       onClick={onClick}
       disabled={isButtonDisabled}
     >
