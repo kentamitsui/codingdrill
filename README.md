@@ -1,6 +1,38 @@
-## test
+<div style="text-align: center">
+  <Img src="public/images/appIcon.svg" style="width: 100px; height: 100px;" />
+  <h1>Coding Drill</h1>
+</div>
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<div style="text-align: center; font-size: 16px;line-height: 1rem;">
+  <p>Coding Drill is a web application for preparing for coding tests.</p>
+  <p>(Coding Drillは、コーディングテストの準備を行うWebアプリです。)</p>
+  <p>It uses ChatGPT-API to create and grade coding problems automatically.</p>
+  <p>(ChatGPT-APIを使用して、自動的に問題の作成と採点を行なっています。)</p>
+</div>
+
+<img style="text-align: center" src="public/images/app_top.png" alt="SVG Image" style="width: auto; height: auto">
+
+## Contents
+
+- [How To Use](#how-to-use)[(使い方)](#how-to-use)
+- [Note](#note)[(留意点)](#note)
+
+## How To Use
+
+1. Choose difficulty, data type, topic, translate, and push the Generate button.  
+   (difficulty, data type, topic, translateを選択し、Generateボタンを押して下さい。)
+2. After a few waiting seconds or a few ten seconds, display problem sentences in the `Description` area.  
+   (数秒〜数十秒後、`Description`エリアに問題文が表示されます。)
+3. Input code in the `Code` area on right display position.  
+   (画面右側の`Code`エリアに、回答となるコードを入力して下さい。)
+4. Move to cursor on `Options` in the above right menu, and push the `submit` button.  
+   (コード入力後に右上の`Options`にマウスを重ね、`submit`ボタンを押して下さい。)
+5. After a few waiting seconds or a few ten seconds, display review sentences on the `Review` area.  
+   (数秒〜数十秒後、画面右下の`Review`エリアに総評文が表示されます。)
+
+## _Note_
+
+**This app is progressing in self-development step by step. Therefore, it non-announce changes features and layouts more. Also, it is possible to stop deployment temporarily or permanently.**
 
 ## Getting Started
 
