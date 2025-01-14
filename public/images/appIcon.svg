@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100" viewBox="0 0 100 100">
+  <!-- 背景（角丸外枠） -->
+  <rect x="5" y="5" width="90" height="90" rx="10" fill="#f0f4ff" stroke="#4A90E2" stroke-width="2" />
+
+  <!-- コードアイコン (< >) -->
+  <text x="26" y="60" font-size="30" font-family="monospace" fill="#4A90E2">
+    &lt;
+  </text>
+  <text x="60" y="60" font-size="30" font-family="monospace" fill="#4A90E2">
+    &gt;
+  </text>
+
+  <!-- 背景 -->
+  <rect id="keyboard" x="15" y="65" width="71" height="20" fill="#4A90E2" rx="5">
+    <animate attributeName="fill" values="#4A90E2;#2D6BE8;#4A90E2" begin="cursor.mouseover" dur="0.5s" fill="freeze" />
+  </rect>
+  <text x="30" y="77" font-size="10" font-family="monospace" fill="white">
+    <tspan x="21" dy="1">Just Use it!</tspan>
+  </text>
+
+  <!-- キーボードのホバーアニメーション -->
+  <animate
+    href="#keyboard"
+    attributeName="fill"
+    values="#0d1117; #334155; #0d1117"
+    dur="1.5s"
+    repeatCount="indefinite"
+  />
+</svg>
