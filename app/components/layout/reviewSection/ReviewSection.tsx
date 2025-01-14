@@ -7,7 +7,7 @@ import menuData from "@/app/config/config.json";
 
 export const ReviewSection: React.FC = () => {
   const {
-    isDisabled,
+    isConnectingToAPI,
     isCreateReview,
     jsonFormattedReviewContent,
     currentTheme,
@@ -77,11 +77,11 @@ export const ReviewSection: React.FC = () => {
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isDisabled || jsonFormattedReviewContent === null ? "cursor-not-allowed opacity-50" : ""} `}
-          disabled={isDisabled}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isConnectingToAPI || jsonFormattedReviewContent === null ? "cursor-not-allowed opacity-50" : ""} `}
+          disabled={isConnectingToAPI}
           onClick={copyToClipboard}
         >
-          <span className="flex-1 text-center">copy</span>
+          <span className="flex-1 text-center">Copy</span>
           <Image
             src={
               currentTheme === "dark"
