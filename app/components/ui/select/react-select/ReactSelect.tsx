@@ -10,7 +10,7 @@ export default function ReactSelect({
   saveData,
   currentTheme,
 }: ReactSelectProps) {
-  const { isDisabled } = useAppContext();
+  const { isConnectingToAPI } = useAppContext();
   const { currentSelectedSavedData } = useLocalStorageContext();
 
   // ローカルストレージの保存データをreact-select用に変換して表示
@@ -142,7 +142,7 @@ export default function ReactSelect({
           : currentTheme === "dark"
             ? "#334155"
             : "#9CA3AF",
-        opacity: isDisabled || currentSelectedSavedData !== "" ? 0.5 : 1,
+        opacity: isConnectingToAPI || currentSelectedSavedData !== "" ? 0.5 : 1,
       },
     }),
     valueContainer: (provided) => ({
@@ -219,7 +219,7 @@ export default function ReactSelect({
         : currentTheme === "dark"
           ? "#d4d4d4"
           : "#000000", // 通常時の文字色
-      cursor: isDisabled ? "not-allowed" : "pointer",
+      cursor: isConnectingToAPI ? "not-allowed" : "pointer",
     }),
   };
 
@@ -233,7 +233,7 @@ export default function ReactSelect({
       options={options && options.length > 0 ? options : [placeholderOption]}
       placeholder="Save Data"
       styles={customStyles}
-      isDisabled={isDisabled} // 無効化を適用
+      isDisabled={isConnectingToAPI} // 無効化を適用
       components={{ DropdownIndicator }}
       isClearable
       isSearchable
