@@ -16,7 +16,7 @@ export default function InputAreaButton({
     dataType,
     topic,
     selectedLanguage,
-    jsonFormattedProblemContent,
+    jsonFormattedQuestionText,
     checkEditorInputed,
     currentTheme,
   } = useAppContext();
@@ -43,7 +43,7 @@ export default function InputAreaButton({
   useEffect(() => {
     if (
       isAllSelected === true &&
-      jsonFormattedProblemContent !== null &&
+      jsonFormattedQuestionText !== null &&
       checkEditorInputed &&
       checkEditorInputed?.length >= 1 &&
       checkEditorInputed?.length <= 5000
@@ -54,7 +54,7 @@ export default function InputAreaButton({
     } else {
       setIsEditorInputedState(true);
     }
-  }, [isAllSelected, jsonFormattedProblemContent, checkEditorInputed]);
+  }, [isAllSelected, jsonFormattedQuestionText, checkEditorInputed]);
 
   const isButtonDisabled =
     isConnectingToAPI ||
