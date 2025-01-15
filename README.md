@@ -79,6 +79,17 @@
 
 **This app is progressing in self-development step by step. Therefore, it non-announce changes features and layouts more. Also, it is possible to stop deployment temporarily or permanently.**
 
+## Credits
+
+This app utilizes the following:
+
+- [OpenAI ChatGPT API](https://openai.com/): Provides AI functionalities for creating and grading coding problems.
+- [React Select](https://react-select.com/home): For custom dropdown menus in the app.
+- [React Split](https://github.com/nathancahill/split/tree/master/packages/react-split)[(Home page)](https://split.js.org/): For custom split line in the app.
+- [Monaco Editor/React](https://microsoft.github.io/monaco-editor): A powerful code editor used in the app.
+- [TailwindCSS](https://www.npmjs.com/package/tailwindcss): A utility-first CSS framework for styling.
+- [next-themes](https://www.npmjs.com/package/next-themes): Enables dark mode and theme management.
+
 ## Getting Started
 
 First, run the development server:
