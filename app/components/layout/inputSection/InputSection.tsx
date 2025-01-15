@@ -13,7 +13,7 @@ export default function InputSection() {
   const {
     isApiLoading,
     setIsApiLoading,
-    setIsCreateReview,
+    setIsReviewCreating,
     difficulty,
     dataType,
     topic,
@@ -155,7 +155,7 @@ export default function InputSection() {
     // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
     setIsApiLoading(true);
     // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
-    setIsCreateReview(true);
+    setIsReviewCreating(true);
     // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
     setJsonFormattedReviewContent(null);
 
@@ -205,7 +205,7 @@ export default function InputSection() {
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
         setIsApiLoading(false);
-        setIsCreateReview(false);
+        setIsReviewCreating(false);
       }
 
       // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新する

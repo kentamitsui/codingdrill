@@ -40,8 +40,10 @@ export interface AppContextProps {
   setIsQuestionCreating: React.Dispatch<
     React.SetStateAction<boolean | undefined>
   >;
-  isCreateReview: boolean | undefined;
-  setIsCreateReview: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isReviewCreating: boolean | undefined;
+  setIsReviewCreating: React.Dispatch<
+    React.SetStateAction<boolean | undefined>
+  >;
   difficulty: string;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   dataType: string;

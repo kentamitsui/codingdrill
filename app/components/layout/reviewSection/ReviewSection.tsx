@@ -8,7 +8,7 @@ import menuData from "@/app/config/config.json";
 export const ReviewSection: React.FC = () => {
   const {
     isApiLoading,
-    isCreateReview,
+    isReviewCreating,
     jsonFormattedReviewContent,
     currentTheme,
   } = useAppContext();
@@ -98,7 +98,7 @@ export const ReviewSection: React.FC = () => {
         id="result_scoring"
         className="flex flex-col gap-5 p-[15px_30px] leading-normal tracking-wider"
       >
-        <LoadingAnimation isCreating={isCreateReview} />
+        <LoadingAnimation isCreating={isReviewCreating} />
         <ReusableParagraph
           content={jsonFormattedReviewContent}
           titleText="Explanation of the algorithm:"
