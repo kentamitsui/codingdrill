@@ -1,16 +1,14 @@
-<div style="text-align: center">
-  <Img src="public/images/appIcon.svg" style="width: 100px; height: 100px;" />
+<div align="center">
+  <Img src="public/images/appIcon.svg" width=100 height=100 />
   <h1>Coding Drill</h1>
 </div>
 
-<div style="text-align: center; font-size: 15px;line-height: 1rem;">
+<div align="center">
   <p>Coding Drill is a web application that uses the ChatGPT-API to automatically create and grade questions of coding test.</p>
   <p>(Coding Drillは、ChatGPT-APIを使用してコーディングテストの問題を自動で作成・採点するWebアプリです。)</p>
 </div>
 
-<div style="text-align: center">
-  <img src="public/images/appImage.png" alt="app image" style="width: auto; height: 400px; display: block; margin: 0 auto;">
-</div>
+<img src="public/images/appImage.png" alt="app image" align="center">
 
 ## Contents
 
@@ -35,38 +33,46 @@
 
 - ### About Load, Delete on Save Data(セーブデータのロード、削除について)
 
-  <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 20px; margin-bottom: 10px">
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-      <img src="public/images/saveDataOption.png" alt="savedata image" style="width: 150px; height: auto;" />
-      <img src="public/images/options.png" alt="savedata image" style="width: 150px; height: auto; margin-top: 8px" />
-      <img src="public/images/loadButton_etc.png" alt="savedata image" style="width: 150px; height: auto;" />
-    </div>
-    <img src="public/images/savedata.png" alt="savedata image" style="width: 200px; height: auto;" />
-  </div>
+<table align="center">
+  <tr>
+    <td>
+      <img src="public/images/saveDataOption.png" alt="save data option" width="150" />
+    </td>
+    <td>
+      <img src="public/images/options.png" alt="options" width="150" />
+    </td>
+    <td>
+      <img src="public/images/loadButton_etc.png" alt="load button" width="150" />
+    </td>
+    <td>
+      <img src="public/images/savedata.png" alt="savedata image" style="width: 200px; height: auto;" />
+    </td>
+  </tr>
+</table>
 
-  1. Move to cursor on `Save Data` the left side bar menu, it select saved data.  
-     (画面左側のサイドバーメニューの`Save Data`にカーソルを移動し、セーブデータを選択します。)
-  2. Selected data, move to cursor on `Options` at below menu it.  
-     (データ選択後、真下の`Options`にカーソルを移動します。)
-  3. Choose `Load,` or `Delete` button.  
-     (`Load`、もしくは`Delete`ボタンを選択します。)
-  4. Push it, display to alert message, select `OK` or `cancel`.  
-     (押すと、アラートメッセージが出力されるので、`OK`もしくは`cancel`を選んで下さい。)
+1. Move to cursor on `Save Data` the left side bar menu, it select saved data.  
+   (画面左側のサイドバーメニューの`Save Data`にカーソルを移動し、セーブデータを選択します。)
+2. Selected data, move to cursor on `Options` at below menu it.  
+   (データ選択後、真下の`Options`にカーソルを移動します。)
+3. Choose `Load,` or `Delete` button.  
+   (`Load`、もしくは`Delete`ボタンを選択します。)
+4. Push it, display to alert message, select `OK` or `cancel`.  
+   (押すと、アラートメッセージが出力されるので、`OK`もしくは`cancel`を選んで下さい。)
 
-  - In case of selected `Load`, display question text, input code, and general review text.  
-    (`Load`を選択した場合、保存されている問題文、入力コード、総評文が表示されます。)
-  - In case of selected `Delete`, delete data in saved it.  
-    (`Delete`を選択した場合、保存されているデータは削除されます。)
-  - ### About All Delete on Save Data(セーブデータの全削除について)
+- In case of selected `Load`, display question text, input code, and general review text.  
+  (`Load`を選択した場合、保存されている問題文、入力コード、総評文が表示されます。)
+- In case of selected `Delete`, delete data in saved it.  
+  (`Delete`を選択した場合、保存されているデータは削除されます。)
+- ### About All Delete on Save Data(セーブデータの全削除について)
 
-  1. Move to cursor on `Options`.  
-     (`Options`にカーソルを移動します。)
-  2. Push `All Delete` button(It's need not to select save data).  
-     (`All Delete`を押します(セーブデータを選択する必要はありません)。)
-  3. Push it, display to alert message at two times.  
-     (押すと、アラートメッセージが二回表示されます。)
-  4. All selected `OK`, all delete data in the save data.  
-     (全て`OK`を選択すると、全てのセーブデータが削除されます。)
+1. Move to cursor on `Options`.  
+   (`Options`にカーソルを移動します。)
+2. Push `All Delete` button(It's need not to select save data).  
+   (`All Delete`を押します(セーブデータを選択する必要はありません)。)
+3. Push it, display to alert message at two times.  
+   (押すと、アラートメッセージが二回表示されます。)
+4. All selected `OK`, all delete data in the save data.  
+   (全て`OK`を選択すると、全てのセーブデータが削除されます。)
 
 ## Features
 
