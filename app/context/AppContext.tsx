@@ -16,7 +16,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isQuestionCreating, setIsQuestionCreating] = useState<
     boolean | undefined
   >(false);
-  const [isCreateReview, setIsCreateReview] = useState<boolean | undefined>(
+  const [isReviewCreating, setIsReviewCreating] = useState<boolean | undefined>(
     false,
   );
 
@@ -75,8 +75,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsApiLoading,
         isQuestionCreating,
         setIsQuestionCreating,
-        isCreateReview,
-        setIsCreateReview,
+        isReviewCreating,
+        setIsReviewCreating,
         difficulty,
         setDifficulty,
         dataType,
