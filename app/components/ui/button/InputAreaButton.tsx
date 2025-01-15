@@ -11,7 +11,7 @@ export default function InputAreaButton({
   onClick,
 }: InputAreaButtonProps) {
   const {
-    isConnectingToAPI,
+    isApiLoading,
     difficulty,
     dataType,
     topic,
@@ -57,7 +57,7 @@ export default function InputAreaButton({
   }, [isAllSelected, jsonFormattedQuestionText, checkEditorInputed]);
 
   const isButtonDisabled =
-    isConnectingToAPI ||
+    isApiLoading ||
     isEditorInputedState ||
     (checkEditorInputed && checkEditorInputed?.length <= 0) ||
     false;

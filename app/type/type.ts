@@ -34,10 +34,8 @@ export interface ButtonProps extends InputAreaButtonProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
-  isConnectingToAPI: boolean | undefined;
-  setIsConnectingToAPI: React.Dispatch<
-    React.SetStateAction<boolean | undefined>
-  >;
+  isApiLoading: boolean | undefined;
+  setIsApiLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   isCreateProblem: boolean | undefined;
   setIsCreateProblem: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   isCreateReview: boolean | undefined;
@@ -227,7 +225,7 @@ export interface LoadingAnimationProps {
 // ReactSelectに対する型定義
 export interface ReactSelectProps {
   selectedSaveData: string | number;
-  isConnectingToAPI: boolean | undefined;
+  isApiLoading: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
   currentTheme: string | undefined;

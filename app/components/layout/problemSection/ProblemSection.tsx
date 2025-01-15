@@ -8,7 +8,7 @@ import menuData from "@/app/config/config.json";
 // 受け取ったJSONデータをキー毎に割り振る
 const ProblemSection: React.FC = () => {
   const {
-    isConnectingToAPI,
+    isApiLoading,
     isCreateProblem,
     jsonFormattedQuestionText,
     formattedProblemContent,
@@ -107,9 +107,9 @@ const ProblemSection: React.FC = () => {
           Description
         </div>
         <button
-          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isConnectingToAPI || jsonFormattedQuestionText === null ? "cursor-not-allowed opacity-50" : ""} `}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || jsonFormattedQuestionText === null ? "cursor-not-allowed opacity-50" : ""} `}
           onClick={copyToClipboard}
-          disabled={isConnectingToAPI}
+          disabled={isApiLoading}
         >
           <span className="flex-1 text-center">Copy</span>
           <Image
