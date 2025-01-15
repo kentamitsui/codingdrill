@@ -12,7 +12,7 @@ export const Options: React.FC<SelectProps> = ({
   iconDark,
 }) => {
   const { currentTheme } = useAppContext();
-  const { isConnectingToAPI } = useAppContext();
+  const { isApiLoading } = useAppContext();
   const [currentSelected, setCurrentSelected] = useState("");
 
   useEffect(() => {
@@ -47,10 +47,10 @@ export const Options: React.FC<SelectProps> = ({
               ? "bg-slate-700"
               : "bg-menu"
         } ${currentSelected !== "" ? "hover:opacity-50" : ""} ${
-          isConnectingToAPI ? "cursor-not-allowed opacity-50" : "cursor-pointer"
+          isApiLoading ? "cursor-not-allowed opacity-50" : "cursor-pointer"
         } `}
         name={name}
-        disabled={isConnectingToAPI}
+        disabled={isApiLoading}
         value={currentSelected}
         onChange={handleChangeColor}
         style={{

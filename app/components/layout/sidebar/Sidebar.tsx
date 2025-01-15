@@ -18,8 +18,8 @@ import Image from "next/image";
 export default function Sidebar() {
   // createContextを使用して、InputSectionにデータを渡す
   const {
-    isConnectingToAPI,
-    setIsConnectingToAPI,
+    isApiLoading,
+    setIsApiLoading,
     setIsCreateProblem,
     difficulty,
     setDifficulty,
@@ -94,7 +94,7 @@ export default function Sidebar() {
       setLoadedEditorContent("");
       setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setIsConnectingToAPI(true);
+      setIsApiLoading(true);
       // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
       setIsCreateProblem(true);
 
@@ -120,7 +120,7 @@ export default function Sidebar() {
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       // また、アニメーションを非表示にする
       if (responseText) {
-        setIsConnectingToAPI(false);
+        setIsApiLoading(false);
         setIsCreateProblem(false);
       }
 
@@ -193,24 +193,22 @@ export default function Sidebar() {
         <ReactSelect
           selectedSaveData={currentSelectedSavedData}
           handleChangeSavedData={handleChangeSavedData}
-          isConnectingToAPI={isConnectingToAPI}
+          isApiLoading={isApiLoading}
           saveData={saveData}
           currentTheme={currentTheme}
         />
         <details
           className={`relative mt-auto flex w-[142px] flex-col ${
-            isConnectingToAPI ? "cursor-not-allowed" : "cursor-pointer"
+            isApiLoading ? "cursor-not-allowed" : "cursor-pointer"
           }`}
           onMouseEnter={(event) =>
-            (event.currentTarget.open = isConnectingToAPI ? false : true)
+            (event.currentTarget.open = isApiLoading ? false : true)
           }
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`flex w-full justify-between rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              isConnectingToAPI
-                ? "pointer-events-none opacity-50"
-                : "cursor-pointer"
+              isApiLoading ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             Options
@@ -227,7 +225,7 @@ export default function Sidebar() {
           </summary>
           <div
             className={`absolute -right-[4px] z-10 flex w-[150px] flex-col gap-2 rounded-b-md bg-opacity-0 p-[8px_4px_4px_4px] ${
-              isConnectingToAPI ? "pointer-events-none opacity-50" : ""
+              isApiLoading ? "pointer-events-none opacity-50" : ""
             }`}
           >
             <SaveDataOptionButton

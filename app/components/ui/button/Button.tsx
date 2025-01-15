@@ -12,7 +12,7 @@ export default function Button({
   onClick,
 }: ButtonProps) {
   const {
-    isConnectingToAPI,
+    isApiLoading,
     difficulty,
     dataType,
     topic,
@@ -36,7 +36,7 @@ export default function Button({
     }
   }, [difficulty, dataType, topic, selectedLanguage]);
 
-  const isButtonDisabled = isConnectingToAPI || !isAllSelected;
+  const isButtonDisabled = isApiLoading || !isAllSelected;
 
   return (
     <button

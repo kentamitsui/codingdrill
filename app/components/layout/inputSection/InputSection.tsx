@@ -11,8 +11,8 @@ import menuData from "@/app/config/config.json";
 
 export default function InputSection() {
   const {
-    isConnectingToAPI,
-    setIsConnectingToAPI,
+    isApiLoading,
+    setIsApiLoading,
     setIsCreateReview,
     difficulty,
     dataType,
@@ -153,7 +153,7 @@ export default function InputSection() {
       : "";
 
     // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-    setIsConnectingToAPI(true);
+    setIsApiLoading(true);
     // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
     setIsCreateReview(true);
     // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
@@ -204,7 +204,7 @@ export default function InputSection() {
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsConnectingToAPI(false);
+        setIsApiLoading(false);
         setIsCreateReview(false);
       }
 
@@ -233,17 +233,15 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className={`relative ml-auto rounded-tr-md ${isConnectingToAPI ? "cursor-not-allowed" : ""}`}
+          className={`relative ml-auto rounded-tr-md ${isApiLoading ? "cursor-not-allowed" : ""}`}
           onMouseEnter={(event) =>
-            (event.currentTarget.open = isConnectingToAPI ? false : true)
+            (event.currentTarget.open = isApiLoading ? false : true)
           }
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`flex w-[120px] items-center justify-between rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              isConnectingToAPI
-                ? "pointer-events-none opacity-50"
-                : "cursor-pointer"
+              isApiLoading ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             <span className="flex-1 text-center">Options</span>
@@ -260,7 +258,7 @@ export default function InputSection() {
           </summary>
           <div
             className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 border-t-2 border-t-white bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-[2px] dark:border-t-[#1e1e1e] ${
-              isConnectingToAPI ? "pointer-events-none" : ""
+              isApiLoading ? "pointer-events-none" : ""
             }`}
           >
             {/* Font Size Select */}
@@ -271,7 +269,7 @@ export default function InputSection() {
               id="fontsize-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={fontSize}
-              disabled={isConnectingToAPI}
+              disabled={isApiLoading}
               onChange={handleFontSizeChange}
               style={{
                 backgroundImage: `url(${
@@ -298,7 +296,7 @@ export default function InputSection() {
               id="theme-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
-              disabled={isConnectingToAPI}
+              disabled={isApiLoading}
               onChange={handleThemeChange}
               style={{
                 backgroundImage: `url(${
@@ -325,7 +323,7 @@ export default function InputSection() {
               id="language-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorLanguage}
-              disabled={isConnectingToAPI}
+              disabled={isApiLoading}
               onChange={handleLanguageChange}
               style={{
                 backgroundImage: `url(${

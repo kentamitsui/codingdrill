@@ -12,9 +12,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   // 選択タグやボタンに使用するdisabled属性の状態管理
-  const [isConnectingToAPI, setIsConnectingToAPI] = useState<
-    boolean | undefined
-  >(false);
+  const [isApiLoading, setIsApiLoading] = useState<boolean | undefined>(false);
   const [isCreateProblem, setIsCreateProblem] = useState<boolean | undefined>(
     false,
   );
@@ -73,8 +71,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AppContext.Provider
       value={{
-        isConnectingToAPI,
-        setIsConnectingToAPI,
+        isApiLoading,
+        setIsApiLoading,
         isCreateProblem,
         setIsCreateProblem,
         isCreateReview,
