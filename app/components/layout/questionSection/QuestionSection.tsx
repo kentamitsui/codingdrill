@@ -6,10 +6,10 @@ import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
 // 受け取ったJSONデータをキー毎に割り振る
-const ProblemSection: React.FC = () => {
+const QuestionSection: React.FC = () => {
   const {
     isApiLoading,
-    isCreateProblem,
+    isQuestionCreating,
     jsonFormattedQuestionText,
     formattedProblemContent,
     setFormattedProblemContent,
@@ -125,7 +125,7 @@ const ProblemSection: React.FC = () => {
         </button>
       </div>
       <div className="p-[15px_30px] leading-normal tracking-wider">
-        <LoadingAnimation isCreating={isCreateProblem} />
+        <LoadingAnimation isCreating={isQuestionCreating} />
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
           <ReusableParagraph
@@ -200,4 +200,4 @@ const ProblemSection: React.FC = () => {
   );
 };
 
-export default ProblemSection;
+export default QuestionSection;

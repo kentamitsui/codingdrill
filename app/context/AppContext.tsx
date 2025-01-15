@@ -13,9 +13,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
 }) => {
   // 選択タグやボタンに使用するdisabled属性の状態管理
   const [isApiLoading, setIsApiLoading] = useState<boolean | undefined>(false);
-  const [isCreateProblem, setIsCreateProblem] = useState<boolean | undefined>(
-    false,
-  );
+  const [isQuestionCreating, setIsQuestionCreating] = useState<
+    boolean | undefined
+  >(false);
   const [isCreateReview, setIsCreateReview] = useState<boolean | undefined>(
     false,
   );
@@ -35,7 +35,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     useState<ProblemContentProps | null>(null);
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
-  // *** テキスト形式なので、ProblemSection.tsxで整形して表示は出来ない ***
+  // *** テキスト形式なので、QuestionSection.tsxで整形して表示は出来ない ***
   const [formattedProblemContent, setFormattedProblemContent] =
     useState<string>("");
 
@@ -73,8 +73,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
       value={{
         isApiLoading,
         setIsApiLoading,
-        isCreateProblem,
-        setIsCreateProblem,
+        isQuestionCreating,
+        setIsQuestionCreating,
         isCreateReview,
         setIsCreateReview,
         difficulty,
