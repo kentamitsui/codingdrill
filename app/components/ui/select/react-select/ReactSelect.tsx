@@ -4,6 +4,7 @@ import { ReactSelectProps } from "@/app/type/type";
 import "@/app/styles/globals.css";
 import { useAppContext } from "@/app/context/AppContext";
 import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
+import Image from "next/image";
 
 export default function ReactSelect({
   handleChangeSavedData,
@@ -33,13 +34,15 @@ export default function ReactSelect({
     return (
       <components.DropdownIndicator {...props}>
         {/* SVG画像 */}
-        <img
+        <Image
           src={
             currentTheme === "dark"
               ? "/images/saveLight.svg"
               : "/images/saveDark.svg"
           }
           alt=""
+          width={20}
+          height={20}
           className="mr-1 h-5 w-5"
         />
         {/* デフォルトの下矢印 open時は向きが逆になる */}
