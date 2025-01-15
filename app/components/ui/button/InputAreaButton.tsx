@@ -73,7 +73,7 @@ export default function InputAreaButton({
       <span className="flex-1 text-center">{text}</span>
       <Image
         src={
-          text === "copy"
+          text === "Copy"
             ? currentTheme === "dark"
               ? menuData.svgIcon.copyLight
               : menuData.svgIcon.copyDark
