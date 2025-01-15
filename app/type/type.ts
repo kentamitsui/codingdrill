@@ -36,8 +36,10 @@ export interface ButtonProps extends InputAreaButtonProps {
 export interface AppContextProps {
   isApiLoading: boolean | undefined;
   setIsApiLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-  isCreateProblem: boolean | undefined;
-  setIsCreateProblem: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isQuestionCreating: boolean | undefined;
+  setIsQuestionCreating: React.Dispatch<
+    React.SetStateAction<boolean | undefined>
+  >;
   isCreateReview: boolean | undefined;
   setIsCreateReview: React.Dispatch<React.SetStateAction<boolean | undefined>>;
   difficulty: string;

@@ -20,7 +20,7 @@ export default function Sidebar() {
   const {
     isApiLoading,
     setIsApiLoading,
-    setIsCreateProblem,
+    setIsQuestionCreating,
     difficulty,
     setDifficulty,
     dataType,
@@ -89,14 +89,14 @@ export default function Sidebar() {
   // 正常にAPIとの送受信が行われたら、受信結果を受け取る
   const handleCreateProblem = async () => {
     try {
-      // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
+      // ボタンが押されたら、QuestionSection.tsx、InputSection.tsxに表示されている内容を空にする
       setJsonFormattedQuestionText(null);
       setLoadedEditorContent("");
       setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsApiLoading(true);
       // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
-      setIsCreateProblem(true);
+      setIsQuestionCreating(true);
 
       const response = await fetch("/api/createProblem", {
         method: "POST",
@@ -121,7 +121,7 @@ export default function Sidebar() {
       // また、アニメーションを非表示にする
       if (responseText) {
         setIsApiLoading(false);
-        setIsCreateProblem(false);
+        setIsQuestionCreating(false);
       }
 
       const JsonText = JSON.parse(responseText);
