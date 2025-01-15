@@ -141,7 +141,7 @@ export default function Sidebar() {
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          defaultSelected={"difficulty"}
+          defaultSelected={"Difficulty"}
           setSelected={setDifficulty}
           savedLocalStorageValue={difficulty}
           iconDark={menuData.svgIcon.difficultyDark}
@@ -151,7 +151,7 @@ export default function Sidebar() {
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          defaultSelected={"data type"}
+          defaultSelected={"Data Type"}
           setSelected={setDataType}
           savedLocalStorageValue={dataType}
           iconDark={menuData.svgIcon.dataDark}
@@ -161,7 +161,7 @@ export default function Sidebar() {
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          defaultSelected={"topic"}
+          defaultSelected={"Topic"}
           setSelected={setTopic}
           savedLocalStorageValue={topic}
           iconLight={menuData.svgIcon.topicLight}
@@ -171,7 +171,7 @@ export default function Sidebar() {
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          defaultSelected={"translate"}
+          defaultSelected={"Translate"}
           setSelected={setSelectedLanguage}
           savedLocalStorageValue={selectedLanguage}
           iconLight={menuData.svgIcon.translateLight}
@@ -233,7 +233,7 @@ export default function Sidebar() {
             <SaveDataOptionButton
               id="load"
               type="button"
-              text="load"
+              text="Load"
               iconLight={menuData.svgIcon.loadLight}
               iconDark={menuData.svgIcon.loadDark}
               onClick={handleLoadData}
@@ -241,7 +241,7 @@ export default function Sidebar() {
             <SaveDataOptionButton
               id="delete"
               type="button"
-              text="delete"
+              text="Delete"
               iconLight={menuData.svgIcon.deteleLight}
               iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected(currentSelectedSavedData)}
@@ -249,7 +249,7 @@ export default function Sidebar() {
             <SaveDataOptionButton
               id="delete-all"
               type="button"
-              text="delete all"
+              text="All Delete"
               iconLight={menuData.svgIcon.deteleAllLight}
               iconDark={menuData.svgIcon.deteleAllDark}
               onClick={clearLocalStorage}

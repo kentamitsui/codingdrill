@@ -348,7 +348,7 @@ export default function InputSection() {
             </select>
             {/* 文字数カウント */}
             <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
-              <p>input: {checkEditorInputed?.length}</p>
+              <p>Input: {checkEditorInputed?.length}</p>
             </div>
             {/* Buttons */}
             <InputAreaButton
