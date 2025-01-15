@@ -30,7 +30,7 @@ export default function Sidebar() {
     selectedLanguage,
     setSelectedLanguage,
     saveData,
-    setJsonFormattedProblemContent,
+    setJsonFormattedQuestionText,
     setJsonFormattedReviewContent,
     setLoadedSelectedLanguage,
     setLoadedEditorLanguage,
@@ -78,7 +78,7 @@ export default function Sidebar() {
         setSelectedLanguage(newLanguage); // 選択された言語を設置する
         setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
       },
-      problemContent: setJsonFormattedProblemContent,
+      problemContent: setJsonFormattedQuestionText,
       editorLanguage: setLoadedEditorLanguage,
       editorContent: setLoadedEditorContent,
       evaluation: setJsonFormattedReviewContent,
@@ -90,7 +90,7 @@ export default function Sidebar() {
   const handleCreateProblem = async () => {
     try {
       // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
-      setJsonFormattedProblemContent(null);
+      setJsonFormattedQuestionText(null);
       setLoadedEditorContent("");
       setJsonFormattedReviewContent(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
@@ -126,7 +126,7 @@ export default function Sidebar() {
 
       const JsonText = JSON.parse(responseText);
       // AppContextのセット関数にデータを設置する
-      setJsonFormattedProblemContent(JsonText);
+      setJsonFormattedQuestionText(JsonText);
       setSelectedLanguage(selectedLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);

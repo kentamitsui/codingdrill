@@ -28,12 +28,12 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [topic, setTopic] = useState<string>("");
   const [selectedLanguage, setSelectedLanguage] = useState<string>("");
 
-  // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の翻訳言語)"の状態管理
+  // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の言語)"の状態管理
   const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
     useState<string>("");
 
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
-  const [jsonFormattedProblemContent, setJsonFormattedProblemContent] =
+  const [jsonFormattedQuestionText, setJsonFormattedQuestionText] =
     useState<ProblemContentProps | null>(null);
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
@@ -87,8 +87,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setTopic,
         selectedLanguage,
         setSelectedLanguage,
-        jsonFormattedProblemContent,
-        setJsonFormattedProblemContent,
+        jsonFormattedQuestionText,
+        setJsonFormattedQuestionText,
         formattedProblemContent,
         setFormattedProblemContent,
         saveData,

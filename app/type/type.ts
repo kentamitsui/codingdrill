@@ -54,8 +54,8 @@ export interface AppContextProps {
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
   saveData: UpdateSaveDataEntryProps[];
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
-  jsonFormattedProblemContent: ProblemContentProps | null;
-  setJsonFormattedProblemContent: React.Dispatch<
+  jsonFormattedQuestionText: ProblemContentProps | null;
+  setJsonFormattedQuestionText: React.Dispatch<
     React.SetStateAction<ProblemContentProps | null>
   >;
   jsonFormattedReviewContent: ReviewResponseProps | null;
