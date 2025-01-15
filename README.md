@@ -39,13 +39,13 @@
       <img src="public/images/saveDataOption.png" alt="save data option" width="150" />
     </td>
     <td>
+      <img src="public/images/savedata.png" alt="savedata image" style="width: 200px; height: auto;" />
+    </td>
+    <td>
       <img src="public/images/options.png" alt="options" width="150" />
     </td>
     <td>
       <img src="public/images/loadButton_etc.png" alt="load button" width="150" />
-    </td>
-    <td>
-      <img src="public/images/savedata.png" alt="savedata image" style="width: 200px; height: auto;" />
     </td>
   </tr>
 </table>
