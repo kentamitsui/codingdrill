@@ -39,7 +39,7 @@
       <img src="public/images/saveDataOption.png" alt="save data option" width="150" />
     </td>
     <td>
-      <img src="public/images/savedata.png" alt="savedata image" style="width: 200px; height: auto;" />
+      <img src="public/images/savedata.png" alt="save data image" width=150 />
     </td>
     <td>
       <img src="public/images/options.png" alt="options" width="150" />
