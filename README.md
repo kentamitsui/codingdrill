@@ -1,14 +1,13 @@
 <div align="center">
   <Img src="public/images/appIcon.svg" width=100 height=100 />
   <h1>Coding Drill</h1>
+  <Img src="public/gif/demo.gif"/>
 </div>
 
 <div align="center">
   <p>Coding Drill is a web application that uses the ChatGPT-API to automatically create and grade questions of coding test.</p>
-  <p>(Coding Drillは、ChatGPT-APIを使用してコーディングテストの問題を自動で作成・採点するWebアプリです。)</p>
+  <p>(Coding Drillは、ChatGPT-APIを使用してコーディングに関する問題を自動で作成・採点するWebアプリです。)</p>
 </div>
-
-<img src="public/images/appImage.png" alt="app image" align="center">
 
 ## Contents
 
