@@ -1,7 +1,9 @@
 <div align="center">
-  <Img src="public/images/appIcon.svg" width=100 height=100 />
+  <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
+    <Img src="public/images/appIcon.svg" width=100 height=100 />
+  </a>
   <h1>Coding Drill</h1>
-  <Img src="public/gif/demo.gif"/>
+  <Img src="public/gif/demo.gif" />
 </div>
 
 <div align="center">
