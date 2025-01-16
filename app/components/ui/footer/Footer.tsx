@@ -6,7 +6,7 @@ export default function Footer() {
       <p>
         © {currentYear} CodingDrill. All rights reserved. Powered by{" "}
         <a href="https://openai.com/" target="_blank" rel="noopener noreferrer">
-          OpenAI&apos;s ChatGPT API
+          OpenAI ChatGPT API
         </a>
       </p>
     </footer>
