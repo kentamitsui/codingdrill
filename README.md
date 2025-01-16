@@ -3,7 +3,7 @@
     <Img src="public/images/appIcon.svg" width=100 height=100 />
   </a>
   <h1>Coding Drill</h1>
-  <Img src="public/gif/demo.gif" />
+  <Img src="public/gif/demo.gif" style="border-radius: 5px;" />
 </div>
 
 <div align="center">
@@ -34,22 +34,9 @@
 
 - ### About Load, Delete on Save Data(セーブデータのロード、削除について)
 
-<table align="center">
-  <tr>
-    <td>
-      <img src="public/images/saveDataOption.png" alt="save data option" width="150" />
-    </td>
-    <td>
-      <img src="public/images/savedata.png" alt="save data image" width=150 />
-    </td>
-    <td>
-      <img src="public/images/options.png" alt="options" width="150" />
-    </td>
-    <td>
-      <img src="public/images/loadButton_etc.png" alt="load button" width="150" />
-    </td>
-  </tr>
-</table>
+<div align="center">
+  <Img src="public/gif/demoOptions.gif" width=250 style="border-radius: 5px;" />
+</div>
 
 1. Move to cursor on `Save Data` the left side bar menu, it select saved data.  
    (画面左側のサイドバーメニューの`Save Data`にカーソルを移動し、セーブデータを選択します。)
