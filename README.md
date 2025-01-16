@@ -3,12 +3,12 @@
     <Img src="public/images/appIcon.svg" width=100 height=100 />
   </a>
   <h1>Coding Drill</h1>
-  <Img src="public/gif/demo.gif" style="border-radius: 5px;" />
+  <Img src="public/gif/demo.gif" />
 </div>
 
 <div align="center">
-  <p>Coding Drill is a web application that uses the ChatGPT-API to automatically create and grade questions of coding test.</p>
-  <p>(Coding Drillは、ChatGPT-APIを使用してコーディングに関する問題を自動で作成・採点するWebアプリです。)</p>
+  <p>Coding Drill is a web application to automatically create and grade questions of coding test.</p>
+  <p>(Coding Drillは、コーディングに関する問題を自動で作成・採点するWebアプリです。)</p>
 </div>
 
 ## Contents
@@ -35,7 +35,7 @@
 - ### About Load, Delete on Save Data(セーブデータのロード、削除について)
 
 <div align="center">
-  <Img src="public/gif/demoOptions.gif" width=250 style="border-radius: 5px;" />
+  <Img src="public/gif/demoOptions.gif" width=250 />
 </div>
 
 1. Move to cursor on `Save Data` the left side bar menu, it select saved data.  
