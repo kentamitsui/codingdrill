@@ -18,7 +18,7 @@ export default function InputSection() {
     dataType,
     topic,
     uiLanguage,
-    formattedProblemContent,
+    formattedQuestionText,
     jsonFormattedQuestionText,
     setJsonFormattedReviewContent,
     loadedEditorLanguage,
@@ -169,7 +169,7 @@ export default function InputSection() {
           topic,
           uiLanguage,
           // JSON形式から整形された問題文を渡す
-          formattedProblemContent,
+          formattedQuestionText,
           editorLanguage,
           currentEditorValue,
         }),

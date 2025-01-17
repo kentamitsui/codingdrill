@@ -11,8 +11,8 @@ const QuestionSection: React.FC = () => {
     isApiLoading,
     isQuestionCreating,
     jsonFormattedQuestionText,
-    formattedProblemContent,
-    setFormattedProblemContent,
+    formattedQuestionText,
+    setFormattedQuestionText,
     currentTheme,
   } = useAppContext();
 
@@ -60,7 +60,7 @@ const QuestionSection: React.FC = () => {
     // ヒントについて
     const hints = `Hints\n${jsonFormattedQuestionText.hints}`;
 
-    const formattedProblemContent =
+    const formattedQuestionDetails =
       description +
       functionSignature +
       size +
@@ -75,19 +75,16 @@ const QuestionSection: React.FC = () => {
       analysis +
       hints;
 
-    setFormattedProblemContent(formattedProblemContent);
-  }, [jsonFormattedQuestionText, setFormattedProblemContent]);
+    setFormattedQuestionText(formattedQuestionDetails);
+  }, [jsonFormattedQuestionText, setFormattedQuestionText]);
 
   const copyToClipboard = () => {
-    if (
-      !formattedProblemContent ||
-      formattedProblemContent.trim().length === 0
-    ) {
+    if (!formattedQuestionText || formattedQuestionText.trim().length === 0) {
       return;
     }
 
     navigator.clipboard
-      .writeText(formattedProblemContent)
+      .writeText(formattedQuestionText)
       .then(() => {
         alert("Copied to clipboard.");
       })
