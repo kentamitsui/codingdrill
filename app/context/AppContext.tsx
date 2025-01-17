@@ -35,7 +35,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
   // *** テキスト形式なので、QuestionSection.tsxで整形して表示は出来ない ***
-  const [formattedProblemContent, setFormattedProblemContent] =
+  const [formattedQuestionText, setFormattedQuestionText] =
     useState<string>("");
 
   // APIから出力されたJSON形式のデータ管理
@@ -86,8 +86,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setUiLanguage,
         jsonFormattedQuestionText,
         setJsonFormattedQuestionText,
-        formattedProblemContent,
-        setFormattedProblemContent,
+        formattedQuestionText,
+        setFormattedQuestionText,
         saveData,
         setSaveData,
         jsonFormattedReviewContent,

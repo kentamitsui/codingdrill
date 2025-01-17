@@ -21,12 +21,12 @@ export default async function handler(
     const {
       topic,
       uiLanguage,
-      formattedProblemContent,
+      formattedQuestionText,
       editorLanguage,
       currentEditorValue,
     } = req.body;
 
-    const baseTemplate = formattedProblemContent;
+    const baseTemplate = formattedQuestionText;
     const codeTemplate =
       `\n\nProgramming Language: ${editorLanguage}` +
       "\n\nUser input code:\n\n" +

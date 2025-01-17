@@ -12,12 +12,12 @@ export async function POST(req: NextRequest) {
     const {
       topic,
       uiLanguage,
-      formattedProblemContent,
+      formattedQuestionText,
       editorLanguage,
       currentEditorValue,
     } = await req.json();
 
-    const baseTemplate = formattedProblemContent;
+    const baseTemplate = formattedQuestionText;
     const codeTemplate =
       `\n\nProgramming Language: ${editorLanguage}` +
       "\n\nUser input code:\n\n" +
