@@ -7,17 +7,15 @@
 </div>
 
 <div align="center">
-  <p>Coding Drill is a web application to automatically create and grade questions of coding.</p>
-  <p>(Coding Drillは、コーディングに関する問題を自動で作成・採点するWebアプリです。)</p>
+  <p>Coding Drillは、コーディングに関する問題を自動で作成・採点するWebアプリです。</p>
 </div>
 
-[English ver ⬇️](#english)
+[English ver ⬇️](#contents)
 
 ## 目次
 
 - [アプリの使い方](#アプリの使い方)
 - [機能](#機能)
-- [留意点](#留意点)
 - [ロードマップ](#ロードマップ)
 - [クレジット](#credits)
 
@@ -26,12 +24,23 @@
 - #### 問題文の作成から総評文の出力まで
 
 ```
-1.  Difficulty, Data Type, Topic, Translate を選択し、 Generateボタンを押します。
-2.  Descriptionエリアに問題文が表示されるまでしばらく待ちます。
-3.  画面右側のCodeエリアに、回答となるコードを入力してください。
-4.  右上のOptionsにカーソルを合わせ、submitボタンを押します。
-5.  Reviewエリアに総評文が表示されます。
+1. Difficulty, Data Type, Topic, Translate を選択し、 Generateボタンを押します。
+2. Descriptionエリアに問題文が表示されるまでしばらく待ちます。
+3. 画面右側のCodeエリアに、回答となるコードを入力してください。
+4. 右上のOptionsにカーソルを合わせ、submitボタンを押します。
+5. Reviewエリアに総評文が表示されます。
 ```
+
+| その他機能                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                  イメージ                                  |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------: |
+| **セーブデータのロード、削除について** <br> 1. 画面左側のサイドバーメニューSave Dataにカーソルを移動し、セーブデータを選択します。 <br> 2. 選択したデータのOptionsにカーソルを移動します。 <br> 3. LoadまたはDeleteボタンを選択します。 <br> 4. アラートメッセージが表示されるので、OKまたはCancelを選択します。 <br> • Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。 <br> • Deleteを選択すると、保存されているデータが削除されます。 <br><br><br> **セーブデータの全削除について** <br> 1. Optionsにカーソルを移動します。 <br> 2. All Deleteボタンを押します。（セーブデータを選択する必要はありません） <br> 3. アラートメッセージが2回表示されます。 <br> 4. すべてOKを選択すると、全てのセーブデータが削除されます。 |       <div><Img src="public/gif/demoOptions.gif" width=350 /></div>        |
+| **仕切り線の操作について** <br> 仕切り線をドラッグ&ドロップすることで、画面比率を調整できます。 <br> また、Restoreボタンを押すと、画面比率が初期状態に戻ります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | <div align="center"><Img src="public/gif/splitLine.gif" width=350 /></div> |
+
+---
+
+---
+
+---
 
 - #### セーブデータのロード、削除について
 
@@ -40,10 +49,10 @@
 </div>
 
 ```
-1.  画面左側のサイドバーメニューSave Dataにカーソルを移動し、セーブデータを選択します。
-2.  選択したデータのOptionsにカーソルを移動します。
-3.  LoadまたはDeleteボタンを選択します。
-4.  アラートメッセージが表示されるので、OKまたはCancelを選択します。
+1. 画面左側のサイドバーメニューSave Dataにカーソルを移動し、セーブデータを選択します。
+2. 選択したデータのOptionsにカーソルを移動します。
+3. LoadまたはDeleteボタンを選択します。
+4. アラートメッセージが表示されるので、OKまたはCancelを選択します。
 
 • Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。
 • Deleteを選択すると、保存されているデータが削除されます。
@@ -52,11 +61,21 @@
 - #### セーブデータの全削除について
 
 ```
-1.  Optionsにカーソルを移動します。
-2.  All Deleteボタンを押します。（セーブデータを選択する必要はありません）
-3.  アラートメッセージが2回表示されます。
-4.  すべてOKを選択すると、全てのセーブデータが削除されます。
+1. Optionsにカーソルを移動します。
+2. All Deleteボタンを押します。（セーブデータを選択する必要はありません）
+3. アラートメッセージが2回表示されます。
+4. すべてOKを選択すると、全てのセーブデータが削除されます。
 ```
+
+- #### 仕切り線について
+
+```
+仕切り線をドラッグ&ドロップすることで、画面比率を調整できます。また、Restoreボタンを押すと、画面比率が初期状態に戻ります。
+```
+
+<div align="center">
+  <Img src="public/gif/splitLine.gif" width=500 />
+</div>
 
 ## 機能
 
@@ -65,13 +84,12 @@
 • 問題文、入力されたコード、総評文はローカルストレージに保存されます。
 • 保存されるタイミングは、総評文が出力された直後です。
 • 仕切り線をドラッグ&ドロップすることで、画面比率をある程度まで調整できます。
-• Restore ボタンを押すと、画面比率が初期状態に戻ります。
 • コピーボタンを押すと、テキストをコピーできます。
-• テキストが空の場合はコピーされません。
+  テキストが空の場合はコピーされません。
 • 🌙 または ☀️ アイコンを押すと、カラーテーマが切り替わります。
-• コードエリアの Options で、フォントサイズ、カラーテーマ、言語設定を変更できます。
-• コードエリアの Input: では、入力文字数をカウントします。
-• 5000字以内のみ送信可能。超過した場合は削減が必要です。
+• コードエリアのOptionsで、フォントサイズ、カラーテーマ、プログラミング言語設定を変更できます。
+  Input:では、入力文字数をカウントします。
+  5000字以内のみ送信可能。超過した場合は削減が必要です。
 ```
 
 > [!NOTE]
@@ -87,17 +105,12 @@
 - ユーザーの入出力データをデータベースに収集する。蓄積されたデータは、Fine Tuning用の学習・検証データとして使用する。
 - 問題文の内容を共有及び、それに対して議論を行う機能を追加()
 
-# English
-
-Overview
-
-Coding Drill is a web application that automatically creates and grades coding questions.
+# English ver
 
 ## Contents
 
 - [How To Use](#how-to-use)
 - [Features](#features)
-- [Note](#note)
 - [Credits](#credits)
 
 ## How To Use
@@ -143,15 +156,20 @@ Coding Drill is a web application that automatically creates and grades coding q
 • Automated creation and grading of coding questions using the ChatGPT API.
 • Data for question text, input codes, and general review text are stored in local storage.
 • The saving timing is immediately after the general review text is output.
-• By dragging and dropping the dividing line, the screen ratio can be adjusted.
-• Pressing the Restore button resets the screen ratio to its initial state.
 • Pressing the Copy button copies the text.
-• If the text is empty, it will not be copied.
+  If the text is empty, it will not be copied.
 • Pressing the 🌙 or ☀️ icon changes the color theme.
-• In the Code Area Options, you can set the editor’s font size, color theme, and language settings.
-• The Input: in the code area counts the number of characters entered.
-• Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.
+• In the Code Area Options, you can set the editor’s font size, color theme, and programming language settings.
+  The Input: in the code area counts the number of characters entered.
+  Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.
 ```
+
+- By dragging and dropping the dividing line, the screen ratio can be adjusted.  
+  Pressing the Restore button resets the screen ratio to its initial state.
+
+<div align="center">
+  <Img src="public/gif/splitLine.gif" width=500 />
+</div>
 
 > [!NOTE]
 >
