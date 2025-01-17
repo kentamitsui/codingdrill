@@ -27,8 +27,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [uiLanguage, setUiLanguage] = useState<string>("");
 
   // ローカルストレージから呼び出された"uiLanguage(文章を表示する際の言語)"の状態管理
-  const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
-    useState<string>("");
+  const [storedUiLanguage, setStoredUiLanguage] = useState<string>("");
 
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   const [jsonFormattedQuestionText, setJsonFormattedQuestionText] =
@@ -93,8 +92,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setSaveData,
         jsonFormattedReviewContent,
         setJsonFormattedReviewContent,
-        loadedSelectedLanguage,
-        setLoadedSelectedLanguage,
+        storedUiLanguage,
+        setStoredUiLanguage,
         loadedEditorLanguage,
         setLoadedEditorLanguage,
         loadedEditorContent,
