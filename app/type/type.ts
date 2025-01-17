@@ -70,8 +70,8 @@ export interface AppContextProps {
   setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
   storedEditorCode: string | null;
   setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
-  checkEditorInputed: string | null;
-  setCheckEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  editorInputedLength: string | null;
+  setEditorInputedLength: React.Dispatch<React.SetStateAction<string | null>>;
   currentTheme: string | undefined;
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }

@@ -17,7 +17,7 @@ export default function InputAreaButton({
     topic,
     uiLanguage,
     jsonFormattedQuestionText,
-    checkEditorInputed,
+    editorInputedLength,
     currentTheme,
   } = useAppContext();
   // 選択肢が全て選択されたかどうかの状態管理に使用
@@ -44,22 +44,22 @@ export default function InputAreaButton({
     if (
       isAllSelected === true &&
       jsonFormattedQuestionText !== null &&
-      checkEditorInputed &&
-      checkEditorInputed?.length >= 1 &&
-      checkEditorInputed?.length <= 5000
+      editorInputedLength &&
+      editorInputedLength?.length >= 1 &&
+      editorInputedLength?.length <= 5000
     ) {
       setIsEditorInputedState(false);
-    } else if (checkEditorInputed && checkEditorInputed?.length >= 5001) {
+    } else if (editorInputedLength && editorInputedLength?.length >= 5001) {
       setIsEditorInputedState(true);
     } else {
       setIsEditorInputedState(true);
     }
-  }, [isAllSelected, jsonFormattedQuestionText, checkEditorInputed]);
+  }, [isAllSelected, jsonFormattedQuestionText, editorInputedLength]);
 
   const isButtonDisabled =
     isApiLoading ||
     isEditorInputedState ||
-    (checkEditorInputed && checkEditorInputed?.length <= 0) ||
+    (editorInputedLength && editorInputedLength?.length <= 0) ||
     false;
 
   return (

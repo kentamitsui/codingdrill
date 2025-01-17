@@ -51,8 +51,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   >("");
   const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
 
-  // エディタの入力内容をチェックするための状態管理
-  const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
+  // エディタの入力内容の文字数をチェックするための状態管理
+  const [editorInputedLength, setEditorInputedLength] = useState<string | null>(
     "",
   );
   // カラーテーマを管理
@@ -97,8 +97,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setStoredEditorLanguage,
         storedEditorCode,
         setStoredEditorCode,
-        checkEditorInputed,
-        setCheckEditorInputed,
+        editorInputedLength,
+        setEditorInputedLength,
         currentTheme,
         setCurrentTheme,
       }}

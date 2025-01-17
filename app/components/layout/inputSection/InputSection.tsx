@@ -24,8 +24,8 @@ export default function InputSection() {
     storedEditorLanguage,
     storedEditorCode,
     setStoredEditorCode,
-    checkEditorInputed,
-    setCheckEditorInputed,
+    editorInputedLength,
+    setEditorInputedLength,
     setSaveData,
     currentTheme,
   } = useAppContext();
@@ -57,7 +57,7 @@ export default function InputSection() {
 
   const handleEditorChange = (value: string | undefined) => {
     setIsEditorInputed(value || "");
-    setCheckEditorInputed(value || "");
+    setEditorInputedLength(value || "");
 
     // 文字数チェックとアラート表示
     if (value) {
@@ -118,9 +118,9 @@ export default function InputSection() {
     const editorValue = editorRef.current?.getValue();
     if (editorValue !== undefined) {
       setIsEditorInputed(editorValue);
-      setCheckEditorInputed(editorValue);
+      setEditorInputedLength(editorValue);
     }
-  }, [setIsEditorInputed, setCheckEditorInputed]);
+  }, [setIsEditorInputed, setEditorInputedLength]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
@@ -346,7 +346,7 @@ export default function InputSection() {
             </select>
             {/* 文字数カウント */}
             <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
-              <p>Input: {checkEditorInputed?.length}</p>
+              <p>Input: {editorInputedLength?.length}</p>
             </div>
             {/* Buttons */}
             <InputAreaButton
