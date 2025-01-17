@@ -31,7 +31,7 @@ export default function Sidebar() {
     setUiLanguage,
     saveData,
     setJsonFormattedQuestionText,
-    setJsonFormattedReviewContent,
+    setReviewText,
     setStoredUiLanguage,
     setLoadedEditorLanguage,
     setLoadedEditorContent,
@@ -81,7 +81,7 @@ export default function Sidebar() {
       problemContent: setJsonFormattedQuestionText,
       editorLanguage: setLoadedEditorLanguage,
       editorContent: setLoadedEditorContent,
-      evaluation: setJsonFormattedReviewContent,
+      evaluation: setReviewText,
     });
   };
 
@@ -92,7 +92,7 @@ export default function Sidebar() {
       // ボタンが押されたら、QuestionSection.tsx、InputSection.tsxに表示されている内容を空にする
       setJsonFormattedQuestionText(null);
       setLoadedEditorContent("");
-      setJsonFormattedReviewContent(null);
+      setReviewText(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsApiLoading(true);
       // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する

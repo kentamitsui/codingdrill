@@ -39,8 +39,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     useState<string>("");
 
   // APIから出力されたJSON形式のデータ管理
-  const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
-    useState<ReviewResponseProps | null>(null);
+  const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
+    null,
+  );
   // ローカルストレージから取得したデータを管理
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
@@ -90,8 +91,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setFormattedQuestionText,
         saveData,
         setSaveData,
-        jsonFormattedReviewContent,
-        setJsonFormattedReviewContent,
+        reviewText,
+        setReviewText,
         storedUiLanguage,
         setStoredUiLanguage,
         loadedEditorLanguage,

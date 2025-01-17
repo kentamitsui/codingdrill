@@ -6,12 +6,8 @@ import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
 export const ReviewSection: React.FC = () => {
-  const {
-    isApiLoading,
-    isReviewCreating,
-    jsonFormattedReviewContent,
-    currentTheme,
-  } = useAppContext();
+  const { isApiLoading, isReviewCreating, reviewText, currentTheme } =
+    useAppContext();
 
   const ReusableParagraph: React.FC<ReusableReviewContentsProps> = ({
     content,
@@ -34,17 +30,17 @@ export const ReviewSection: React.FC = () => {
   };
 
   const copyToClipboard = () => {
-    if (!jsonFormattedReviewContent) {
+    if (!reviewText) {
       return;
     }
 
-    const algorithmExplanation = `Explanation of the algorithm:\n${jsonFormattedReviewContent.algorithmExplanation}\n\n`;
-    const clarity = `Clarity and specificity:\n${jsonFormattedReviewContent.clarity}\n\n`;
-    const efficiency = `Efficiency: ${jsonFormattedReviewContent.efficiency}\n\n`;
-    const testCoverage = `Test coverage: ${jsonFormattedReviewContent.testCoverage}\n\n`;
-    const technicalAccuracy = `Technical accuracy: ${jsonFormattedReviewContent.technicalAccuracy}\n\n`;
-    const suggestionsImprovement = `Improvement suggestions: ${jsonFormattedReviewContent.suggestionsImprovement}\n\n`;
-    const improvementExample = `Example improvement: ${jsonFormattedReviewContent.improvementExample}`;
+    const algorithmExplanation = `Explanation of the algorithm:\n${reviewText.algorithmExplanation}\n\n`;
+    const clarity = `Clarity and specificity:\n${reviewText.clarity}\n\n`;
+    const efficiency = `Efficiency: ${reviewText.efficiency}\n\n`;
+    const testCoverage = `Test coverage: ${reviewText.testCoverage}\n\n`;
+    const technicalAccuracy = `Technical accuracy: ${reviewText.technicalAccuracy}\n\n`;
+    const suggestionsImprovement = `Improvement suggestions: ${reviewText.suggestionsImprovement}\n\n`;
+    const improvementExample = `Example improvement: ${reviewText.improvementExample}`;
 
     const formattedReviewContent =
       algorithmExplanation +
@@ -77,7 +73,7 @@ export const ReviewSection: React.FC = () => {
         </div>
         <button
           id="button-Copy-ReviewArea"
-          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || jsonFormattedReviewContent === null ? "cursor-not-allowed opacity-50" : ""} `}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || reviewText === null ? "cursor-not-allowed opacity-50" : ""} `}
           disabled={isApiLoading}
           onClick={copyToClipboard}
         >
@@ -100,39 +96,39 @@ export const ReviewSection: React.FC = () => {
       >
         <LoadingAnimation isCreating={isReviewCreating} />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Explanation of the algorithm:"
-          paragraphContent={jsonFormattedReviewContent?.algorithmExplanation}
+          paragraphContent={reviewText?.algorithmExplanation}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Clarity and specificity:"
-          paragraphContent={jsonFormattedReviewContent?.clarity}
+          paragraphContent={reviewText?.clarity}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Efficiency:"
-          paragraphContent={jsonFormattedReviewContent?.efficiency}
+          paragraphContent={reviewText?.efficiency}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Test coverage:"
-          paragraphContent={jsonFormattedReviewContent?.testCoverage}
+          paragraphContent={reviewText?.testCoverage}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Technical accuracy:"
-          paragraphContent={jsonFormattedReviewContent?.technicalAccuracy}
+          paragraphContent={reviewText?.technicalAccuracy}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Improvement suggestions:"
-          paragraphContent={jsonFormattedReviewContent?.suggestionsImprovement}
+          paragraphContent={reviewText?.suggestionsImprovement}
         />
         <ReusableParagraph
-          content={jsonFormattedReviewContent}
+          content={reviewText}
           titleText="Example improvement:"
-          paragraphContent={jsonFormattedReviewContent?.improvementExample}
+          paragraphContent={reviewText?.improvementExample}
         />
       </div>
     </div>
