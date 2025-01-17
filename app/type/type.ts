@@ -64,8 +64,8 @@ export interface AppContextProps {
   setJsonFormattedReviewContent: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
-  loadedSelectedLanguage: string | null;
-  setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
+  storedUiLanguage: string | null;
+  setStoredUiLanguage: React.Dispatch<React.SetStateAction<string>>;
   loadedEditorLanguage: string | null;
   setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
   loadedEditorContent: string | null;
@@ -115,7 +115,7 @@ export interface SaveToLocalStorageProps {
   difficulty: string;
   dataType: string;
   topic: string;
-  selectedLanguage: string;
+  uiLanguage: string;
   problemContent: ProblemContentProps | null;
   editorLanguage: string;
   editorContent: string;
@@ -128,7 +128,7 @@ export interface SavedDataEntryProps {
   difficulty: string;
   dataType: string;
   topic: string;
-  selectedLanguage: string;
+  uiLanguage: string;
   problemContent: ProblemContentProps;
   editorLanguage: string;
   editorContent: string;
@@ -141,7 +141,7 @@ export interface SetFunctionsProps {
   difficulty: (value: string) => void;
   dataType: (value: string) => void;
   topic: (value: string) => void;
-  selectedLanguage: (value: string) => void;
+  uiLanguage: (value: string) => void;
   problemContent: (value: ProblemContentProps | null) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
@@ -155,7 +155,7 @@ export interface UpdateSaveDataEntryProps {
   difficulty: string;
   dataType: string;
   topic: string;
-  selectedLanguage: string;
+  uiLanguage: string;
 }
 
 // ProblemContentのベースとなる型定義

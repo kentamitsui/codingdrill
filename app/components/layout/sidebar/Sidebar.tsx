@@ -32,7 +32,7 @@ export default function Sidebar() {
     saveData,
     setJsonFormattedQuestionText,
     setJsonFormattedReviewContent,
-    setLoadedSelectedLanguage,
+    setStoredUiLanguage,
     setLoadedEditorLanguage,
     setLoadedEditorContent,
     currentTheme,
@@ -76,7 +76,7 @@ export default function Sidebar() {
       topic: setTopic,
       uiLanguage: (newLanguage: string) => {
         setUiLanguage(newLanguage); // 選択された言語を設置する
-        setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
+        setStoredUiLanguage(newLanguage); // storedUiLanguage を更新
       },
       problemContent: setJsonFormattedQuestionText,
       editorLanguage: setLoadedEditorLanguage,
