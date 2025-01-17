@@ -24,9 +24,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+  const [uiLanguage, setUiLanguage] = useState<string>("");
 
-  // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の言語)"の状態管理
+  // ローカルストレージから呼び出された"uiLanguage(文章を表示する際の言語)"の状態管理
   const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
     useState<string>("");
 
@@ -83,8 +83,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setDataType,
         topic,
         setTopic,
-        selectedLanguage,
-        setSelectedLanguage,
+        uiLanguage,
+        setUiLanguage,
         jsonFormattedQuestionText,
         setJsonFormattedQuestionText,
         formattedProblemContent,

@@ -20,7 +20,7 @@ export default async function handler(
 
     const {
       topic,
-      selectedLanguage,
+      uiLanguage,
       formattedProblemContent,
       editorLanguage,
       currentEditorValue,
@@ -36,7 +36,7 @@ export default async function handler(
     const prompt = generatePrompt(baseTemplate + codeTemplate, {
       topic,
       language: editorLanguage,
-      display_language: selectedLanguage,
+      display_language: uiLanguage,
     });
 
     const responseText = await sendOpenAIRequest(prompt!);

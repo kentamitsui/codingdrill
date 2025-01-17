@@ -16,7 +16,7 @@ export default function Button({
     difficulty,
     dataType,
     topic,
-    selectedLanguage,
+    uiLanguage,
     currentTheme,
   } = useAppContext();
   // 選択肢が全て選択されたかどうかの状態管理に使用
@@ -28,13 +28,13 @@ export default function Button({
       difficulty !== "" &&
       dataType !== "" &&
       topic !== "" &&
-      selectedLanguage !== ""
+      uiLanguage !== ""
     ) {
       setIsAllSelected(true);
     } else {
       setIsAllSelected(false);
     }
-  }, [difficulty, dataType, topic, selectedLanguage]);
+  }, [difficulty, dataType, topic, uiLanguage]);
 
   const isButtonDisabled = isApiLoading || !isAllSelected;
 

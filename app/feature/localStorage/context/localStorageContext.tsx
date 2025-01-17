@@ -72,7 +72,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setFunctions.difficulty(selectedLoadData.difficulty);
     setFunctions.dataType(selectedLoadData.dataType);
     setFunctions.topic(selectedLoadData.topic);
-    setFunctions.selectedLanguage(selectedLoadData.selectedLanguage);
+    setFunctions.uiLanguage(selectedLoadData.uiLanguage);
     setFunctions.problemContent(selectedLoadData.problemContent);
     setFunctions.editorLanguage(selectedLoadData.editorLanguage);
     setFunctions.editorContent(selectedLoadData.editorContent);

@@ -17,7 +17,7 @@ export default function InputSection() {
     difficulty,
     dataType,
     topic,
-    selectedLanguage,
+    uiLanguage,
     formattedProblemContent,
     jsonFormattedQuestionText,
     setJsonFormattedReviewContent,
@@ -167,7 +167,7 @@ export default function InputSection() {
         },
         body: JSON.stringify({
           topic,
-          selectedLanguage,
+          uiLanguage,
           // JSON形式から整形された問題文を渡す
           formattedProblemContent,
           editorLanguage,
@@ -187,7 +187,7 @@ export default function InputSection() {
         difficulty,
         dataType,
         topic,
-        selectedLanguage,
+        uiLanguage,
         problemContent: jsonFormattedQuestionText,
         editorLanguage,
         editorContent: currentEditorValue,

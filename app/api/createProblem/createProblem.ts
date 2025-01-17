@@ -18,13 +18,13 @@ export default async function handler(
   try {
     validateEnvironmentVariables(["PROMPT_CREATE"]);
 
-    const { difficulty, dataType, topic, selectedLanguage } = req.body;
+    const { difficulty, dataType, topic, uiLanguage } = req.body;
     const promptTemplate = process.env.PROMPT_CREATE;
     const prompt = generatePrompt(promptTemplate, {
       difficulty,
       type: dataType,
       topic,
-      display_language: selectedLanguage,
+      display_language: uiLanguage,
     });
 
     const responseText = await sendOpenAIRequest(prompt!);

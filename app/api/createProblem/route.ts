@@ -9,13 +9,13 @@ export async function POST(req: NextRequest) {
   try {
     validateEnvironmentVariables(["PROMPT_CREATE"]);
 
-    const { difficulty, dataType, topic, selectedLanguage } = await req.json();
+    const { difficulty, dataType, topic, uiLanguage } = await req.json();
     const promptTemplate = process.env.PROMPT_CREATE!;
     const prompt = generatePrompt(promptTemplate, {
       difficulty,
       type: dataType,
       topic,
-      display_language: selectedLanguage,
+      display_language: uiLanguage,
     });
 
     const responseText = await sendOpenAIRequest(prompt!);
