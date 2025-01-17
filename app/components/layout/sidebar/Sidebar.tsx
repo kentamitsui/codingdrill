@@ -33,7 +33,7 @@ export default function Sidebar() {
     setJsonFormattedQuestionText,
     setReviewText,
     setStoredUiLanguage,
-    setLoadedEditorLanguage,
+    setStoredEditorLanguage,
     setLoadedEditorContent,
     currentTheme,
   } = useAppContext();
@@ -79,7 +79,7 @@ export default function Sidebar() {
         setStoredUiLanguage(newLanguage); // storedUiLanguage を更新
       },
       problemContent: setJsonFormattedQuestionText,
-      editorLanguage: setLoadedEditorLanguage,
+      editorLanguage: setStoredEditorLanguage,
       editorContent: setLoadedEditorContent,
       evaluation: setReviewText,
     });

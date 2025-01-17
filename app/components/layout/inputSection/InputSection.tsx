@@ -21,7 +21,7 @@ export default function InputSection() {
     formattedQuestionText,
     jsonFormattedQuestionText,
     setReviewText,
-    loadedEditorLanguage,
+    storedEditorLanguage,
     loadedEditorContent,
     setLoadedEditorContent,
     checkEditorInputed,
@@ -94,10 +94,10 @@ export default function InputSection() {
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorLanguageのデータをエディタ入力部分に反映
   useEffect(() => {
-    if (loadedEditorLanguage) {
-      setEditorLanguage(loadedEditorLanguage);
+    if (storedEditorLanguage) {
+      setEditorLanguage(storedEditorLanguage);
     }
-  }, [loadedEditorLanguage]);
+  }, [storedEditorLanguage]);
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映

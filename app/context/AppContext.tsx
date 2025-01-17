@@ -46,7 +46,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
-  const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
+  const [storedEditorLanguage, setStoredEditorLanguage] = useState<
     string | null
   >("");
   const [loadedEditorContent, setLoadedEditorContent] = useState<string | null>(
@@ -95,8 +95,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setReviewText,
         storedUiLanguage,
         setStoredUiLanguage,
-        loadedEditorLanguage,
-        setLoadedEditorLanguage,
+        storedEditorLanguage,
+        setStoredEditorLanguage,
         loadedEditorContent,
         setLoadedEditorContent,
         checkEditorInputed,
