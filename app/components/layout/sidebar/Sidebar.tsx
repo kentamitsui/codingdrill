@@ -34,7 +34,7 @@ export default function Sidebar() {
     setReviewText,
     setStoredUiLanguage,
     setStoredEditorLanguage,
-    setLoadedEditorContent,
+    setStoredEditorCode,
     currentTheme,
   } = useAppContext();
   const {
@@ -80,7 +80,7 @@ export default function Sidebar() {
       },
       problemContent: setJsonFormattedQuestionText,
       editorLanguage: setStoredEditorLanguage,
-      editorContent: setLoadedEditorContent,
+      editorContent: setStoredEditorCode,
       evaluation: setReviewText,
     });
   };
@@ -91,7 +91,7 @@ export default function Sidebar() {
     try {
       // ボタンが押されたら、QuestionSection.tsx、InputSection.tsxに表示されている内容を空にする
       setJsonFormattedQuestionText(null);
-      setLoadedEditorContent("");
+      setStoredEditorCode("");
       setReviewText(null);
       // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
       setIsApiLoading(true);

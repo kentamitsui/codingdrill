@@ -22,8 +22,8 @@ export default function InputSection() {
     jsonFormattedQuestionText,
     setReviewText,
     storedEditorLanguage,
-    loadedEditorContent,
-    setLoadedEditorContent,
+    storedEditorCode,
+    setStoredEditorCode,
     checkEditorInputed,
     setCheckEditorInputed,
     setSaveData,
@@ -105,13 +105,13 @@ export default function InputSection() {
   // エディタを空にする
   useEffect(() => {
     if (editorRef.current) {
-      if (loadedEditorContent !== null) {
-        editorRef.current.setValue(loadedEditorContent);
+      if (storedEditorCode !== null) {
+        editorRef.current.setValue(storedEditorCode);
       } else {
         editorRef.current.setValue(""); // 正常にsetValueが呼び出される
       }
     }
-  }, [loadedEditorContent]);
+  }, [storedEditorCode]);
 
   // エディタに入力された内容を取得
   useEffect(() => {
@@ -197,10 +197,10 @@ export default function InputSection() {
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setReviewText(JsonText);
 
-      // setLoadedEditorContentに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
+      // setStoredEditorCodeに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
       // ロード直後にもう一度問題作成を行った場合にエディタの中を空になる処理が実行される
       // このセット関数を実行しないと、ロード直後に問題文を作成した場合にエディタの中が空にならないバグが発生する
-      setLoadedEditorContent(currentEditorValue);
+      setStoredEditorCode(currentEditorValue);
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
