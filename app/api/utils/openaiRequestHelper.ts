@@ -51,9 +51,9 @@ export async function sendOpenAIRequest(prompt: string) {
     // console.log("Full OpenAI Response:", JSON.stringify(request, null, 2));
     // console.log("Response Text:", request.choices[0].message.content);
     // console.log("Model Used:", request.model);
-    // console.log("Total Tokens Used:", request.usage?.total_tokens);
-    // console.log("Prompt Tokens:", request.usage?.prompt_tokens);
-    // console.log("Completion Tokens:", request.usage?.completion_tokens);
+    console.log("Total Tokens Used:", request.usage?.total_tokens);
+    console.log("Prompt Tokens:", request.usage?.prompt_tokens);
+    console.log("Completion Tokens:", request.usage?.completion_tokens);
 
     return request.choices[0].message.content;
   } catch (error) {

@@ -68,7 +68,7 @@
 ```
 
 <div align="center">
-  <Img src="public/gif/splitLine.gif" width=500 />
+  <Img src="public/gif/splitLine.gif" width=400 />
 </div>
 
 ## 機能
@@ -82,7 +82,7 @@
 • 🌙 または ☀️ アイコンを押すと、カラーテーマが切り替わります。
 • CodeエリアのOptionsでは、フォントサイズ、カラーテーマ、プログラミング言語設定を変更できます。
   Input:は、Codeエリアの入力文字数を計測します。
-  5000字以内のみ送信可能で、超過した場合は削除が必要です。
+  5000字以内でのみ送信可能で、超過した場合は削除が必要です。
 ```
 
 > [!NOTE]
@@ -90,12 +90,16 @@
 > - 出力内容の品質や精度には細心の注意を払っていますが、誤った内容を出力する可能性があります。
 > - 告知なしに機能やレイアウトが変更される可能性があります。
 > - 告知無しにアプリケーションの公開を一時的、または永久的に停止する可能性があります。
+> - テキストベースの図解を表示する際、表記ズレが生じる場合があります。予めご了承願います。
 
 ## ロードマップ
 
-- Fine Tuningを導入して、より高品質かつ短時間での出力を実現すること。
-- ユーザーの入出力データをデータベースに収集する。蓄積されたデータは、Fine Tuning用の学習・検証データとして使用する。
-- 問題文の内容を共有及び、それに対して議論を行う機能を追加()
+- ChatGPTからの出力内容をより高品質にして、出力までの時間を短縮すること。
+  - プロンプトの適宜修正を行う。
+  - 将来的にユーザーの入出力データを収集して、Fine Tuning用の学習・検証データとして使用。
+- UI/UXの改善。
+- 機能追加
+  - 問題文の内容を共有し、回答に対する議論(計算量の少ない方法の模索など)を行うチャットルームのような場を作成。
 
 ---
 
@@ -109,7 +113,7 @@
 
 ## How To Use
 
-- #### Question create => General Review output flow
+- ### Question create => General Review output flow
 
 ```
 1. Select Difficulty, Data Type, Topic, and Translate, and press the Generate button.
@@ -119,7 +123,9 @@
 5. General review will be displayed in the Review area.
 ```
 
-- #### About Load, Delete on Save Data
+---
+
+- ### About Load, Delete on Save Data
 
 <div align="center">
   <img src="public/gif/demoOptions.gif" width=250 />
@@ -135,7 +141,7 @@
 • Select Delete to delete the stored data.
 ```
 
-- #### About All Delete on Save Data
+- ### About All Delete on Save Data
 
 ```
 1. Move the cursor to Options.
@@ -144,7 +150,9 @@
 4. If you select OK all, all saved data deleted.
 ```
 
-- #### About dividing line
+---
+
+- ### About dividing line
 
 ```
 • The screen ratio can be adjusted by dragging and dropping the dividing lines.
@@ -152,7 +160,7 @@
 ```
 
 <div align="center">
-  <Img src="public/gif/splitLine.gif" width=500 />
+  <Img src="public/gif/splitLine.gif" width=400 />
 </div>
 
 ## Features
@@ -172,9 +180,9 @@
 > [!NOTE]
 >
 > - While I strive for accuracy, there is a possibility that incorrect content may be output.
-> - This application is being developed continuously as a personal project.
 > - Features and layouts may change without notice.
-> - Deployment may be temporarily or permanently stopped.
+> - Deployment may be temporarily or permanently stopped without notice.
+> - Please note that when displaying text-based illustrations, there may be some misalignment.
 
 ## Credits
 
