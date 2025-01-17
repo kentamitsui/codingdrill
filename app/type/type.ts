@@ -60,8 +60,8 @@ export interface AppContextProps {
   setJsonFormattedQuestionText: React.Dispatch<
     React.SetStateAction<ProblemContentProps | null>
   >;
-  jsonFormattedReviewContent: ReviewResponseProps | null;
-  setJsonFormattedReviewContent: React.Dispatch<
+  reviewText: ReviewResponseProps | null;
+  setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
   storedUiLanguage: string | null;

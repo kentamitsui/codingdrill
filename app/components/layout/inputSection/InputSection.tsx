@@ -20,7 +20,7 @@ export default function InputSection() {
     uiLanguage,
     formattedQuestionText,
     jsonFormattedQuestionText,
-    setJsonFormattedReviewContent,
+    setReviewText,
     loadedEditorLanguage,
     loadedEditorContent,
     setLoadedEditorContent,
@@ -157,7 +157,7 @@ export default function InputSection() {
     // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
     setIsReviewCreating(true);
     // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
-    setJsonFormattedReviewContent(null);
+    setReviewText(null);
 
     try {
       const response = await fetch("/api/createReview", {
@@ -195,7 +195,7 @@ export default function InputSection() {
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
-      setJsonFormattedReviewContent(JsonText);
+      setReviewText(JsonText);
 
       // setLoadedEditorContentに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
       // ロード直後にもう一度問題作成を行った場合にエディタの中を空になる処理が実行される
