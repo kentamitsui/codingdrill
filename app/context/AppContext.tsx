@@ -49,9 +49,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [storedEditorLanguage, setStoredEditorLanguage] = useState<
     string | null
   >("");
-  const [loadedEditorContent, setLoadedEditorContent] = useState<string | null>(
-    null,
-  );
+  const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
 
   // エディタの入力内容をチェックするための状態管理
   const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
@@ -97,8 +95,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setStoredUiLanguage,
         storedEditorLanguage,
         setStoredEditorLanguage,
-        loadedEditorContent,
-        setLoadedEditorContent,
+        storedEditorCode,
+        setStoredEditorCode,
         checkEditorInputed,
         setCheckEditorInputed,
         currentTheme,
