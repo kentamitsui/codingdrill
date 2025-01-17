@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
     const {
       topic,
-      selectedLanguage,
+      uiLanguage,
       formattedProblemContent,
       editorLanguage,
       currentEditorValue,
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     const prompt = generatePrompt(baseTemplate + codeTemplate, {
       topic,
       language: editorLanguage,
-      display_language: selectedLanguage,
+      display_language: uiLanguage,
     });
 
     const responseText = await sendOpenAIRequest(prompt!);

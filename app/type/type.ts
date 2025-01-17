@@ -50,8 +50,8 @@ export interface AppContextProps {
   setDataType: React.Dispatch<React.SetStateAction<string>>;
   topic: string;
   setTopic: React.Dispatch<React.SetStateAction<string>>;
-  selectedLanguage: string;
-  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
+  uiLanguage: string;
+  setUiLanguage: React.Dispatch<React.SetStateAction<string>>;
   formattedProblemContent: string;
   setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
   saveData: UpdateSaveDataEntryProps[];

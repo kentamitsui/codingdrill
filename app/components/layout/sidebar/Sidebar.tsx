@@ -27,8 +27,8 @@ export default function Sidebar() {
     setDataType,
     topic,
     setTopic,
-    selectedLanguage,
-    setSelectedLanguage,
+    uiLanguage,
+    setUiLanguage,
     saveData,
     setJsonFormattedQuestionText,
     setJsonFormattedReviewContent,
@@ -74,8 +74,8 @@ export default function Sidebar() {
       difficulty: setDifficulty,
       dataType: setDataType,
       topic: setTopic,
-      selectedLanguage: (newLanguage: string) => {
-        setSelectedLanguage(newLanguage); // 選択された言語を設置する
+      uiLanguage: (newLanguage: string) => {
+        setUiLanguage(newLanguage); // 選択された言語を設置する
         setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
       },
       problemContent: setJsonFormattedQuestionText,
@@ -107,7 +107,7 @@ export default function Sidebar() {
           difficulty,
           dataType,
           topic,
-          selectedLanguage,
+          uiLanguage,
         }),
       });
 
@@ -127,7 +127,7 @@ export default function Sidebar() {
       const JsonText = JSON.parse(responseText);
       // AppContextのセット関数にデータを設置する
       setJsonFormattedQuestionText(JsonText);
-      setSelectedLanguage(selectedLanguage);
+      setUiLanguage(uiLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
@@ -172,8 +172,8 @@ export default function Sidebar() {
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
           defaultSelected={"Translate"}
-          setSelected={setSelectedLanguage}
-          savedLocalStorageValue={selectedLanguage}
+          setSelected={setUiLanguage}
+          savedLocalStorageValue={uiLanguage}
           iconLight={menuData.svgIcon.translateLight}
           iconDark={menuData.svgIcon.translateDark}
         />

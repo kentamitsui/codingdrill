@@ -15,7 +15,7 @@ export default function InputAreaButton({
     difficulty,
     dataType,
     topic,
-    selectedLanguage,
+    uiLanguage,
     jsonFormattedQuestionText,
     checkEditorInputed,
     currentTheme,
@@ -31,13 +31,13 @@ export default function InputAreaButton({
       difficulty !== "" &&
       dataType !== "" &&
       topic !== "" &&
-      selectedLanguage !== ""
+      uiLanguage !== ""
     ) {
       setIsAllSelected(true);
     } else {
       setIsAllSelected(false);
     }
-  }, [difficulty, dataType, topic, selectedLanguage]);
+  }, [difficulty, dataType, topic, uiLanguage]);
 
   // 全ての選択肢が入力、問題文が出力済、エディタに何らかの入力があった場合、submitボタンのdisabled属性をfalseに切り替えて押せるようにする
   useEffect(() => {

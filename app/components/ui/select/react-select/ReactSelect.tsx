@@ -26,7 +26,7 @@ export default function ReactSelect({
         "\n" +
         `Difficulty: ${entry.difficulty} | Data type: ${entry.dataType}` +
         "\n" +
-        `Topic: ${entry.topic} | Translate: ${entry.selectedLanguage}`,
+        `Topic: ${entry.topic} | Translate: ${entry.uiLanguage}`,
     }));
 
   // カスタムのDropdownIndicatorを作成
