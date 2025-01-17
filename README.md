@@ -21,56 +21,50 @@
 
 ## アプリの使い方
 
-- #### 問題文の作成から総評文の出力まで
+- ### 問題文の作成から総評文の出力まで
 
 ```
-1. Difficulty, Data Type, Topic, Translate を選択し、 Generateボタンを押します。
+1. Difficulty, Data Type, Topic, Translateを選択し、 Generateボタンを押します。
 2. Descriptionエリアに問題文が表示されるまでしばらく待ちます。
 3. 画面右側のCodeエリアに、回答となるコードを入力してください。
-4. 右上のOptionsにカーソルを合わせ、submitボタンを押します。
+4. CodeエリアのOptionsにカーソルを合わせ、submitボタンを押します。
 5. Reviewエリアに総評文が表示されます。
 ```
 
-| その他機能                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                  イメージ                                  |
-| :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------: |
-| **セーブデータのロード、削除について** <br> 1. 画面左側のサイドバーメニューSave Dataにカーソルを移動し、セーブデータを選択します。 <br> 2. 選択したデータのOptionsにカーソルを移動します。 <br> 3. LoadまたはDeleteボタンを選択します。 <br> 4. アラートメッセージが表示されるので、OKまたはCancelを選択します。 <br> • Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。 <br> • Deleteを選択すると、保存されているデータが削除されます。 <br><br><br> **セーブデータの全削除について** <br> 1. Optionsにカーソルを移動します。 <br> 2. All Deleteボタンを押します。（セーブデータを選択する必要はありません） <br> 3. アラートメッセージが2回表示されます。 <br> 4. すべてOKを選択すると、全てのセーブデータが削除されます。 |       <div><Img src="public/gif/demoOptions.gif" width=350 /></div>        |
-| **仕切り線の操作について** <br> 仕切り線をドラッグ&ドロップすることで、画面比率を調整できます。 <br> また、Restoreボタンを押すと、画面比率が初期状態に戻ります。                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | <div align="center"><Img src="public/gif/splitLine.gif" width=350 /></div> |
-
 ---
 
----
-
----
-
-- #### セーブデータのロード、削除について
+- ### セーブデータのロード、削除について
 
 <div align="center">
-  <Img src="public/gif/demoOptions.gif" width=250 />
+  <Img src="public/gif/demoOptions.gif" width=275 />
 </div>
 
 ```
-1. 画面左側のサイドバーメニューSave Dataにカーソルを移動し、セーブデータを選択します。
-2. 選択したデータのOptionsにカーソルを移動します。
+1. 画面左側のSave Dataにカーソルを移動し、セーブデータを選択します。
+2. Optionsにカーソルを移動します。
 3. LoadまたはDeleteボタンを選択します。
 4. アラートメッセージが表示されるので、OKまたはCancelを選択します。
 
-• Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。
-• Deleteを選択すると、保存されているデータが削除されます。
+=> Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。
+=> Deleteを選択すると、保存されているデータが削除されます。
 ```
 
-- #### セーブデータの全削除について
+- ### セーブデータの全削除について
 
 ```
 1. Optionsにカーソルを移動します。
 2. All Deleteボタンを押します。（セーブデータを選択する必要はありません）
 3. アラートメッセージが2回表示されます。
-4. すべてOKを選択すると、全てのセーブデータが削除されます。
+4. 全てOKを選択すると、セーブデータが全削除されます。
 ```
 
-- #### 仕切り線について
+---
+
+- ### 仕切り線について
 
 ```
-仕切り線をドラッグ&ドロップすることで、画面比率を調整できます。また、Restoreボタンを押すと、画面比率が初期状態に戻ります。
+• 仕切り線をドラッグ&ドロップすることで、画面比率を調整できます。
+• 画面右上のRestoreボタンを押すと、画面比率が初期設定時に戻ります。
 ```
 
 <div align="center">
@@ -80,21 +74,19 @@
 ## 機能
 
 ```
-• ChatGPT-APIを使用して自動で問題の作成・採点を行います。
-• 問題文、入力されたコード、総評文はローカルストレージに保存されます。
-• 保存されるタイミングは、総評文が出力された直後です。
-• 仕切り線をドラッグ&ドロップすることで、画面比率をある程度まで調整できます。
-• コピーボタンを押すと、テキストをコピーできます。
+• ChatGPT-APIを使用して問題の作成・採点を自動化しています。
+• 問題文、入力コード、総評文はローカルストレージに保存されます。
+  保存されるタイミングは、総評文が出力された直後です。
+• コピーボタンを押すと、エリア内のテキストをコピーできます。
   テキストが空の場合はコピーされません。
 • 🌙 または ☀️ アイコンを押すと、カラーテーマが切り替わります。
-• コードエリアのOptionsで、フォントサイズ、カラーテーマ、プログラミング言語設定を変更できます。
-  Input:では、入力文字数をカウントします。
-  5000字以内のみ送信可能。超過した場合は削減が必要です。
+• CodeエリアのOptionsでは、フォントサイズ、カラーテーマ、プログラミング言語設定を変更できます。
+  Input:は、Codeエリアの入力文字数を計測します。
+  5000字以内のみ送信可能で、超過した場合は削除が必要です。
 ```
 
 > [!NOTE]
 >
-> - このアプリケーションは OpenAI社が提供する ChatGPT API を使用して、問題文・総評文の作成・採点を行なっています。
 > - 出力内容の品質や精度には細心の注意を払っていますが、誤った内容を出力する可能性があります。
 > - 告知なしに機能やレイアウトが変更される可能性があります。
 > - 告知無しにアプリケーションの公開を一時的、または永久的に停止する可能性があります。
@@ -104,6 +96,8 @@
 - Fine Tuningを導入して、より高品質かつ短時間での出力を実現すること。
 - ユーザーの入出力データをデータベースに収集する。蓄積されたデータは、Fine Tuning用の学習・検証データとして使用する。
 - 問題文の内容を共有及び、それに対して議論を行う機能を追加()
+
+---
 
 # English ver
 
@@ -118,11 +112,11 @@
 - #### Question create => General Review output flow
 
 ```
-1. Choose difficulty, data type, topic, translate, and push the Generate button.
-2. After a short wait, the question text is displayed in the Description area.
-3. Input code in the Code area on the right display position.
-4. Move to the cursor on Options in the above right menu, and push the submit button.
-5. After a short wait, the general review text is displayed in the Review area.
+1. Select Difficulty, Data Type, Topic, and Translate, and press the Generate button.
+2. Wait for a while until the question text appears in the Description area.
+3. Input the code for your answer in the Code area on the right side of the screen.
+4. Move the cursor to Options in the Code area and press the submit button.
+5. General review will be displayed in the Review area.
 ```
 
 - #### About Load, Delete on Save Data
@@ -132,48 +126,51 @@
 </div>
 
 ```
-1. Move the cursor to Save Data on the left sidebar menu, then select saved data.
-2. Move the cursor to Options at the below menu.
-3. Choose Load or Delete button.
-4. An alert message will be displayed, select OK or Cancel.
+1. Move the cursor to Save Data on the left side of the screen and select Save Data.
+2. Move the cursor to Options.
+3. Select the Load or Delete button.
+4. Select OK or Cancel when an alert message appears.
 
-• If Load is selected, the saved question text, input code, and general review text will be displayed.
-• If Delete is selected, the saved data will be deleted.
+• If you select Load, the stored question text, input codes, and review text will be displayed.
+• Select Delete to delete the stored data.
 ```
 
 - #### About All Delete on Save Data
 
 ```
 1. Move the cursor to Options.
-2. Push the All Delete button (It’s not necessary to select save data).
-3. An alert message will be displayed twice.
-4. If you select OK for all, all saved data will be deleted.
+2. Push the All Delete button (It's not necessary to select any save data).
+3. An alert message will appear twice.
+4. If you select OK all, all saved data deleted.
 ```
+
+- #### About dividing line
+
+```
+• The screen ratio can be adjusted by dragging and dropping the dividing lines.
+• Pressing the Restore button in the upper right corner of the screen returns the screen ratio to the default setting.
+```
+
+<div align="center">
+  <Img src="public/gif/splitLine.gif" width=500 />
+</div>
 
 ## Features
 
 ```
 • Automated creation and grading of coding questions using the ChatGPT API.
 • Data for question text, input codes, and general review text are stored in local storage.
-• The saving timing is immediately after the general review text is output.
+• The execution time for saving data is immediately after the output of the general review text.
 • Pressing the Copy button copies the text.
   If the text is empty, it will not be copied.
 • Pressing the 🌙 or ☀️ icon changes the color theme.
-• In the Code Area Options, you can set the editor’s font size, color theme, and programming language settings.
+• In the Code Area Options, you can set the editor's font size, color theme, and programming language settings.
   The Input: in the code area counts the number of characters entered.
   Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.
 ```
 
-- By dragging and dropping the dividing line, the screen ratio can be adjusted.  
-  Pressing the Restore button resets the screen ratio to its initial state.
-
-<div align="center">
-  <Img src="public/gif/splitLine.gif" width=500 />
-</div>
-
 > [!NOTE]
 >
-> - This application uses the ChatGPT API provided by OpenAI to create and grade questions and general review texts.
 > - While I strive for accuracy, there is a possibility that incorrect content may be output.
 > - This application is being developed continuously as a personal project.
 > - Features and layouts may change without notice.
