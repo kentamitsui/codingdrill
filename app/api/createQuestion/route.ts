@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     validateEnvironmentVariables(["PROMPT_CREATE"]);
 
     const { difficulty, dataType, topic, uiLanguage } = await req.json();
-    // プロンプトのテンプレートの取得
+    // プロンプトテンプレートを取得
     const promptTemplate = process.env.PROMPT_CREATE;
     if (!promptTemplate) {
       return NextResponse.json(
@@ -30,6 +30,14 @@ export async function POST(req: NextRequest) {
 
     // APIへリクエストを送信・取得
     const responseText = await sendOpenAIRequest(prompt);
+
+    if (!responseText) {
+      return NextResponse.json(
+        { error: "Failed to generate response" },
+        { status: 500 },
+      );
+    }
+
     // APIからのレスポンスを返す
     return NextResponse.json({ responseText });
   } catch (error) {

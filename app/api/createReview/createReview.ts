@@ -1,11 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import dotenv from "dotenv";
 import {
   generatePrompt,
   sendOpenAIRequest,
   validateEnvironmentVariables,
 } from "@/app/api/utils/openaiRequestHelper";
-dotenv.config({ path: ".env.local" });
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,6 +14,7 @@ export default async function handler(
   }
 
   try {
+    // 環境変数のバリデーション
     validateEnvironmentVariables(["PROMPT_CHECK"]);
 
     const {
@@ -33,13 +32,25 @@ export default async function handler(
       currentEditorValue +
       "\n\n" +
       process.env.PROMPT_CHECK;
+    if (!baseTemplate || !codeTemplate) {
+      return res.status(500).json({ error: "Missing prompt template" });
+    }
+
+    // APIへ送信するプロンプトを作成
     const prompt = generatePrompt(baseTemplate + codeTemplate, {
       topic,
       language: editorLanguage,
       display_language: uiLanguage,
     });
 
-    const responseText = await sendOpenAIRequest(prompt!);
+    // APIへリクエストを送信・取得
+    const responseText = await sendOpenAIRequest(prompt);
+
+    if (!responseText) {
+      return res.status(500).json({ error: "Failed to generate response" });
+    }
+
+    // APIからのレスポンスを返す
     res.status(200).json({ responseText });
   } catch (error) {
     console.error("Error fetching data from OpenAI:", error);
