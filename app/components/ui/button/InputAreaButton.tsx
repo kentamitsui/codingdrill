@@ -11,13 +11,13 @@ export default function InputAreaButton({
   onClick,
 }: InputAreaButtonProps) {
   const {
-    isDisabled,
+    isApiLoading,
     difficulty,
     dataType,
     topic,
-    selectedLanguage,
-    jsonFormattedProblemContent,
-    checkEditorInputed,
+    uiLanguage,
+    jsonFormattedQuestionText,
+    editorInputedLength,
     currentTheme,
   } = useAppContext();
   // 選択肢が全て選択されたかどうかの状態管理に使用
@@ -31,35 +31,35 @@ export default function InputAreaButton({
       difficulty !== "" &&
       dataType !== "" &&
       topic !== "" &&
-      selectedLanguage !== ""
+      uiLanguage !== ""
     ) {
       setIsAllSelected(true);
     } else {
       setIsAllSelected(false);
     }
-  }, [difficulty, dataType, topic, selectedLanguage]);
+  }, [difficulty, dataType, topic, uiLanguage]);
 
   // 全ての選択肢が入力、問題文が出力済、エディタに何らかの入力があった場合、submitボタンのdisabled属性をfalseに切り替えて押せるようにする
   useEffect(() => {
     if (
       isAllSelected === true &&
-      jsonFormattedProblemContent !== null &&
-      checkEditorInputed &&
-      checkEditorInputed?.length >= 1 &&
-      checkEditorInputed?.length <= 5000
+      jsonFormattedQuestionText !== null &&
+      editorInputedLength &&
+      editorInputedLength?.length >= 1 &&
+      editorInputedLength?.length <= 5000
     ) {
       setIsEditorInputedState(false);
-    } else if (checkEditorInputed && checkEditorInputed?.length >= 5001) {
+    } else if (editorInputedLength && editorInputedLength?.length >= 5001) {
       setIsEditorInputedState(true);
     } else {
       setIsEditorInputedState(true);
     }
-  }, [isAllSelected, jsonFormattedProblemContent, checkEditorInputed]);
+  }, [isAllSelected, jsonFormattedQuestionText, editorInputedLength]);
 
   const isButtonDisabled =
-    isDisabled ||
+    isApiLoading ||
     isEditorInputedState ||
-    (checkEditorInputed && checkEditorInputed?.length <= 0) ||
+    (editorInputedLength && editorInputedLength?.length <= 0) ||
     false;
 
   return (
@@ -73,7 +73,7 @@ export default function InputAreaButton({
       <span className="flex-1 text-center">{text}</span>
       <Image
         src={
-          text === "copy"
+          text === "Copy"
             ? currentTheme === "dark"
               ? menuData.svgIcon.copyLight
               : menuData.svgIcon.copyDark

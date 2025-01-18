@@ -16,27 +16,28 @@ const ReactSelect = dynamic(
 import Image from "next/image";
 
 export default function Sidebar() {
-  // createContextを使用して、InputSectionにデータを渡す
+  // アプリ全体の状態管理（問題作成、データ取得）
   const {
-    isDisabled,
-    setIsDisabled,
-    setIsCreateProblem,
+    isApiLoading,
+    setIsApiLoading,
+    setIsQuestionCreating,
     difficulty,
     setDifficulty,
     dataType,
     setDataType,
     topic,
     setTopic,
-    selectedLanguage,
-    setSelectedLanguage,
+    uiLanguage,
+    setUiLanguage,
     saveData,
-    setJsonFormattedProblemContent,
-    setJsonFormattedReviewContent,
-    setLoadedSelectedLanguage,
-    setLoadedEditorLanguage,
-    setLoadedEditorContent,
+    setJsonFormattedQuestionText,
+    setReviewText,
+    setStoredUiLanguage,
+    setStoredEditorLanguage,
+    setStoredEditorCode,
     currentTheme,
   } = useAppContext();
+  // ローカルストレージに関するデータ管理
   const {
     currentSelectedSavedData,
     setCurrentSelectedSavedData,
@@ -45,60 +46,50 @@ export default function Sidebar() {
     clearLocalStorage,
   } = useLocalStorageContext();
 
-  // セーブデータの値を動的に変更する
-  // 修正後のhandleChangeSavedData関数
+  // セーブデータの状態(ID)を更新する
   const handleChangeSavedData = (selectedOption: { value: string } | null) => {
-    if (selectedOption) {
-      setCurrentSelectedSavedData(selectedOption.value); // 選択された値を保存
-    } else {
-      setCurrentSelectedSavedData(""); // 未選択時は空文字列を設定
-    }
+    setCurrentSelectedSavedData(selectedOption?.value ?? "");
   };
 
-  // ローカルストレージのデータを各要素に反映する
+  // ローカルストレージからを各要素をロードする
   const handleLoadData = () => {
     // セーブデータが選択されていない状態でロードボタンを押した場合、アラートを表示する
     if (!currentSelectedSavedData) {
-      alert("Please select a valid option to load.");
+      alert("Please select a load data.");
       return;
     }
-
-    // 選択されたセーブデータのIDを取得
-    const selectedId: string | number = currentSelectedSavedData;
 
     // console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
-    // selectedIdについては、後で型を確認する
-    loadSavedData(selectedId, {
+    loadSavedData(currentSelectedSavedData, {
       difficulty: setDifficulty,
       dataType: setDataType,
       topic: setTopic,
-      selectedLanguage: (newLanguage: string) => {
-        setSelectedLanguage(newLanguage); // 選択された言語を設置する
-        setLoadedSelectedLanguage(newLanguage); // loadedSelectedLanguage を更新
+      uiLanguage: (newLanguage: string) => {
+        setUiLanguage(newLanguage); // 選択された言語を設置する
+        setStoredUiLanguage(newLanguage); // storedUiLanguage を更新
       },
-      problemContent: setJsonFormattedProblemContent,
-      editorLanguage: setLoadedEditorLanguage,
-      editorContent: setLoadedEditorContent,
-      evaluation: setJsonFormattedReviewContent,
+      problemContent: setJsonFormattedQuestionText,
+      editorLanguage: setStoredEditorLanguage,
+      editorContent: setStoredEditorCode,
+      evaluation: setReviewText,
     });
   };
 
-  // createProblem.tsに選択後の値を送信する
-  // 正常にAPIとの送受信が行われたら、受信結果を受け取る
-  const handleCreateProblem = async () => {
-    try {
-      // ボタンが押されたら、ProblemSection.tsx、InputSection.tsxに表示されている内容を空にする
-      setJsonFormattedProblemContent(null);
-      setLoadedEditorContent("");
-      setJsonFormattedReviewContent(null);
-      // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setIsDisabled(true);
-      // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
-      setIsCreateProblem(true);
+  // 問題文を生成する
+  const handleCreateQuestion = async () => {
+    // ボタンが押されたら、各エリアの内容を空にする
+    setJsonFormattedQuestionText(null);
+    setStoredEditorCode("");
+    setReviewText(null);
+    // ボタンが押されたら、ボタンコンポーネントに対してcursor-not-allowed等のスタイルを追加する
+    setIsApiLoading(true);
+    // ボタンが押されたら、アニメーションを表示する
+    setIsQuestionCreating(true);
 
-      const response = await fetch("/api/createProblem", {
+    try {
+      const response = await fetch("/api/createQuestion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -107,27 +98,26 @@ export default function Sidebar() {
           difficulty,
           dataType,
           topic,
-          selectedLanguage,
+          uiLanguage,
         }),
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create a problem.");
+        throw new Error("Failed to create a question.");
       }
-      const data = await response.json();
-      const responseText = data.responseText;
 
-      // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
-      // また、アニメーションを非表示にする
+      const { responseText } = await response.json();
+
       if (responseText) {
-        setIsDisabled(false);
-        setIsCreateProblem(false);
+        // APIからのレスポンスがあれば、Buttonコンポーネントのスタイルを元に戻す
+        setIsApiLoading(false);
+        // ローディングアニメーションを非表示にする
+        setIsQuestionCreating(false);
       }
 
-      const JsonText = JSON.parse(responseText);
       // AppContextのセット関数にデータを設置する
-      setJsonFormattedProblemContent(JsonText);
-      setSelectedLanguage(selectedLanguage);
+      setJsonFormattedQuestionText(JSON.parse(responseText));
+      setUiLanguage(uiLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
@@ -141,7 +131,7 @@ export default function Sidebar() {
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
-          defaultSelected={"difficulty"}
+          defaultSelected={"Difficulty"}
           setSelected={setDifficulty}
           savedLocalStorageValue={difficulty}
           iconDark={menuData.svgIcon.difficultyDark}
@@ -151,7 +141,7 @@ export default function Sidebar() {
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
-          defaultSelected={"data type"}
+          defaultSelected={"Data Type"}
           setSelected={setDataType}
           savedLocalStorageValue={dataType}
           iconDark={menuData.svgIcon.dataDark}
@@ -161,7 +151,7 @@ export default function Sidebar() {
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
-          defaultSelected={"topic"}
+          defaultSelected={"Topic"}
           setSelected={setTopic}
           savedLocalStorageValue={topic}
           iconLight={menuData.svgIcon.topicLight}
@@ -171,9 +161,9 @@ export default function Sidebar() {
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
-          defaultSelected={"translate"}
-          setSelected={setSelectedLanguage}
-          savedLocalStorageValue={selectedLanguage}
+          defaultSelected={"Translate"}
+          setSelected={setUiLanguage}
+          savedLocalStorageValue={uiLanguage}
           iconLight={menuData.svgIcon.translateLight}
           iconDark={menuData.svgIcon.translateDark}
         />
@@ -183,7 +173,7 @@ export default function Sidebar() {
           text="Generate"
           iconLight={menuData.svgIcon.submitLight}
           iconDark={menuData.svgIcon.submitDark}
-          onClick={handleCreateProblem}
+          onClick={handleCreateQuestion}
         />
       </div>
       <div className="mt-auto flex flex-col gap-2">
@@ -193,22 +183,22 @@ export default function Sidebar() {
         <ReactSelect
           selectedSaveData={currentSelectedSavedData}
           handleChangeSavedData={handleChangeSavedData}
-          isDisabled={isDisabled}
+          isApiLoading={isApiLoading}
           saveData={saveData}
           currentTheme={currentTheme}
         />
         <details
           className={`relative mt-auto flex w-[142px] flex-col ${
-            isDisabled ? "cursor-not-allowed" : "cursor-pointer"
+            isApiLoading ? "cursor-not-allowed" : "cursor-pointer"
           }`}
           onMouseEnter={(event) =>
-            (event.currentTarget.open = isDisabled ? false : true)
+            (event.currentTarget.open = isApiLoading ? false : true)
           }
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`flex w-full justify-between rounded-md bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
+              isApiLoading ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             Options
@@ -225,13 +215,13 @@ export default function Sidebar() {
           </summary>
           <div
             className={`absolute -right-[4px] z-10 flex w-[150px] flex-col gap-2 rounded-b-md bg-opacity-0 p-[8px_4px_4px_4px] ${
-              isDisabled ? "pointer-events-none opacity-50" : ""
+              isApiLoading ? "pointer-events-none opacity-50" : ""
             }`}
           >
             <SaveDataOptionButton
               id="load"
               type="button"
-              text="load"
+              text="Load"
               iconLight={menuData.svgIcon.loadLight}
               iconDark={menuData.svgIcon.loadDark}
               onClick={handleLoadData}
@@ -239,7 +229,7 @@ export default function Sidebar() {
             <SaveDataOptionButton
               id="delete"
               type="button"
-              text="delete"
+              text="Delete"
               iconLight={menuData.svgIcon.deteleLight}
               iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected(currentSelectedSavedData)}
@@ -247,7 +237,7 @@ export default function Sidebar() {
             <SaveDataOptionButton
               id="delete-all"
               type="button"
-              text="delete all"
+              text="All Delete"
               iconLight={menuData.svgIcon.deteleAllLight}
               iconDark={menuData.svgIcon.deteleAllDark}
               onClick={clearLocalStorage}

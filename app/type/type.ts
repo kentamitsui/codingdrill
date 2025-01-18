@@ -34,40 +34,44 @@ export interface ButtonProps extends InputAreaButtonProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
-  isDisabled: boolean | undefined;
-  setIsDisabled: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-  isCreateProblem: boolean | undefined;
-  setIsCreateProblem: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-  isCreateReview: boolean | undefined;
-  setIsCreateReview: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isApiLoading: boolean | undefined;
+  setIsApiLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isQuestionCreating: boolean | undefined;
+  setIsQuestionCreating: React.Dispatch<
+    React.SetStateAction<boolean | undefined>
+  >;
+  isReviewCreating: boolean | undefined;
+  setIsReviewCreating: React.Dispatch<
+    React.SetStateAction<boolean | undefined>
+  >;
   difficulty: string;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   dataType: string;
   setDataType: React.Dispatch<React.SetStateAction<string>>;
   topic: string;
   setTopic: React.Dispatch<React.SetStateAction<string>>;
-  selectedLanguage: string;
-  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
-  formattedProblemContent: string;
-  setFormattedProblemContent: React.Dispatch<React.SetStateAction<string>>;
+  uiLanguage: string;
+  setUiLanguage: React.Dispatch<React.SetStateAction<string>>;
+  formattedQuestionText: string;
+  setFormattedQuestionText: React.Dispatch<React.SetStateAction<string>>;
   saveData: UpdateSaveDataEntryProps[];
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
-  jsonFormattedProblemContent: ProblemContentProps | null;
-  setJsonFormattedProblemContent: React.Dispatch<
+  jsonFormattedQuestionText: ProblemContentProps | null;
+  setJsonFormattedQuestionText: React.Dispatch<
     React.SetStateAction<ProblemContentProps | null>
   >;
-  jsonFormattedReviewContent: ReviewResponseProps | null;
-  setJsonFormattedReviewContent: React.Dispatch<
+  reviewText: ReviewResponseProps | null;
+  setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
-  loadedSelectedLanguage: string | null;
-  setLoadedSelectedLanguage: React.Dispatch<React.SetStateAction<string>>;
-  loadedEditorLanguage: string | null;
-  setLoadedEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
-  loadedEditorContent: string | null;
-  setLoadedEditorContent: React.Dispatch<React.SetStateAction<string | null>>;
-  checkEditorInputed: string | null;
-  setCheckEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  storedUiLanguage: string | null;
+  setStoredUiLanguage: React.Dispatch<React.SetStateAction<string>>;
+  storedEditorLanguage: string | null;
+  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
+  storedEditorCode: string | null;
+  setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
+  editorInputedLength: string | null;
+  setEditorInputedLength: React.Dispatch<React.SetStateAction<string | null>>;
   currentTheme: string | undefined;
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
@@ -111,7 +115,7 @@ export interface SaveToLocalStorageProps {
   difficulty: string;
   dataType: string;
   topic: string;
-  selectedLanguage: string;
+  uiLanguage: string;
   problemContent: ProblemContentProps | null;
   editorLanguage: string;
   editorContent: string;
@@ -124,7 +128,7 @@ export interface SavedDataEntryProps {
   difficulty: string;
   dataType: string;
   topic: string;
-  selectedLanguage: string;
+  uiLanguage: string;
   problemContent: ProblemContentProps;
   editorLanguage: string;
   editorContent: string;
@@ -137,7 +141,7 @@ export interface SetFunctionsProps {
   difficulty: (value: string) => void;
   dataType: (value: string) => void;
   topic: (value: string) => void;
-  selectedLanguage: (value: string) => void;
+  uiLanguage: (value: string) => void;
   problemContent: (value: ProblemContentProps | null) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
@@ -151,7 +155,7 @@ export interface UpdateSaveDataEntryProps {
   difficulty: string;
   dataType: string;
   topic: string;
-  selectedLanguage: string;
+  uiLanguage: string;
 }
 
 // ProblemContentのベースとなる型定義
@@ -225,7 +229,7 @@ export interface LoadingAnimationProps {
 // ReactSelectに対する型定義
 export interface ReactSelectProps {
   selectedSaveData: string | number;
-  isDisabled: boolean | undefined;
+  isApiLoading: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
   currentTheme: string | undefined;

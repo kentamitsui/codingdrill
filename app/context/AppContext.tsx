@@ -12,11 +12,11 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   // 選択タグやボタンに使用するdisabled属性の状態管理
-  const [isDisabled, setIsDisabled] = useState<boolean | undefined>(false);
-  const [isCreateProblem, setIsCreateProblem] = useState<boolean | undefined>(
-    false,
-  );
-  const [isCreateReview, setIsCreateReview] = useState<boolean | undefined>(
+  const [isApiLoading, setIsApiLoading] = useState<boolean | undefined>(false);
+  const [isQuestionCreating, setIsQuestionCreating] = useState<
+    boolean | undefined
+  >(false);
+  const [isReviewCreating, setIsReviewCreating] = useState<boolean | undefined>(
     false,
   );
 
@@ -24,37 +24,35 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("");
+  const [uiLanguage, setUiLanguage] = useState<string>("");
 
-  // ローカルストレージから呼び出された"selectedLanguage(文章を表示する際の翻訳言語)"の状態管理
-  const [loadedSelectedLanguage, setLoadedSelectedLanguage] =
-    useState<string>("");
+  // ローカルストレージから呼び出された"uiLanguage(文章を表示する際の言語)"の状態管理
+  const [storedUiLanguage, setStoredUiLanguage] = useState<string>("");
 
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
-  const [jsonFormattedProblemContent, setJsonFormattedProblemContent] =
+  const [jsonFormattedQuestionText, setJsonFormattedQuestionText] =
     useState<ProblemContentProps | null>(null);
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   // 主に、クリップボードへのコピー機能やAPIに渡す際のデータとして使用
-  // *** テキスト形式なので、ProblemSection.tsxで整形して表示は出来ない ***
-  const [formattedProblemContent, setFormattedProblemContent] =
+  // *** テキスト形式なので、QuestionSection.tsxで整形して表示は出来ない ***
+  const [formattedQuestionText, setFormattedQuestionText] =
     useState<string>("");
 
   // APIから出力されたJSON形式のデータ管理
-  const [jsonFormattedReviewContent, setJsonFormattedReviewContent] =
-    useState<ReviewResponseProps | null>(null);
+  const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
+    null,
+  );
   // ローカルストレージから取得したデータを管理
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
-  const [loadedEditorLanguage, setLoadedEditorLanguage] = useState<
+  const [storedEditorLanguage, setStoredEditorLanguage] = useState<
     string | null
   >("");
-  const [loadedEditorContent, setLoadedEditorContent] = useState<string | null>(
-    null,
-  );
+  const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
 
-  // エディタの入力内容をチェックするための状態管理
-  const [checkEditorInputed, setCheckEditorInputed] = useState<string | null>(
+  // エディタの入力内容の文字数をチェックするための状態管理
+  const [editorInputedLength, setEditorInputedLength] = useState<string | null>(
     "",
   );
   // カラーテーマを管理
@@ -71,36 +69,36 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <AppContext.Provider
       value={{
-        isDisabled,
-        setIsDisabled,
-        isCreateProblem,
-        setIsCreateProblem,
-        isCreateReview,
-        setIsCreateReview,
+        isApiLoading,
+        setIsApiLoading,
+        isQuestionCreating,
+        setIsQuestionCreating,
+        isReviewCreating,
+        setIsReviewCreating,
         difficulty,
         setDifficulty,
         dataType,
         setDataType,
         topic,
         setTopic,
-        selectedLanguage,
-        setSelectedLanguage,
-        jsonFormattedProblemContent,
-        setJsonFormattedProblemContent,
-        formattedProblemContent,
-        setFormattedProblemContent,
+        uiLanguage,
+        setUiLanguage,
+        jsonFormattedQuestionText,
+        setJsonFormattedQuestionText,
+        formattedQuestionText,
+        setFormattedQuestionText,
         saveData,
         setSaveData,
-        jsonFormattedReviewContent,
-        setJsonFormattedReviewContent,
-        loadedSelectedLanguage,
-        setLoadedSelectedLanguage,
-        loadedEditorLanguage,
-        setLoadedEditorLanguage,
-        loadedEditorContent,
-        setLoadedEditorContent,
-        checkEditorInputed,
-        setCheckEditorInputed,
+        reviewText,
+        setReviewText,
+        storedUiLanguage,
+        setStoredUiLanguage,
+        storedEditorLanguage,
+        setStoredEditorLanguage,
+        storedEditorCode,
+        setStoredEditorCode,
+        editorInputedLength,
+        setEditorInputedLength,
         currentTheme,
         setCurrentTheme,
       }}
