@@ -98,7 +98,7 @@ export default function Sidebar() {
       // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
       setIsQuestionCreating(true);
 
-      const response = await fetch("/api/createProblem", {
+      const response = await fetch("/api/createQuestion", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
