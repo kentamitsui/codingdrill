@@ -17,15 +17,15 @@ export function validateEnvironmentVariables(requiredVariables: string[]) {
 
 // プロンプトの生成
 export function generatePrompt(
-  baseTemplate: string | undefined,
+  baseTemplate: string,
   replacements: Record<string, string>,
 ) {
   // console.log("base:\n", baseTemplate, "\n\n\nreplace:\n", replacements);
-  const result = Object.keys(replacements).reduce(
-    (template, key) =>
-      template?.replaceAll(`%${key}%`, replacements[key] || ""),
-    baseTemplate,
-  );
+  // const result = Object.keys(replacements).reduce(
+  //   (template, key) =>
+  //     template?.replaceAll(`%${key}%`, replacements[key] || ""),
+  //   baseTemplate,
+  // );
   // console.log("\n\n\nGenerated prompt:\n", result);
 
   return Object.keys(replacements).reduce(
