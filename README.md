@@ -96,25 +96,25 @@
 
 ### **新機能追加**
 
-[ ] **コメント投稿機能の追加**
+- [ ] **コメント投稿機能の追加**
 
-- 問題や回答に対して、ユーザーがコメントを投稿できるルームを作成。
+  - 問題や回答に対して、ユーザーがコメントを投稿できるルームを作成。
 
-[ ] **コード実行 & テストケースの追加**
+- [ ] **コード実行 & テストケースの追加**
 
-- ユーザーが自身のコードを実行し、独自のテストケースで結果を確認できる環境を提供。
+  - ユーザーが自身のコードを実行し、独自のテストケースで結果を確認できる環境を提供。
 
-[ ] **ユーザー登録機能の実装**
+- [ ] **ユーザー登録機能の実装**
 
-- ユーザーごとの使用履歴の記録・管理を可能にする。
+  - ユーザーごとの使用履歴の記録・管理を可能にする。
 
-[ ] **タイマー機能の導入**
+- [ ] **タイマー機能の導入**
 
-- 制限時間を設定し、解答速度を測定。登録ユーザーの場合、履歴を記録。
+  - 制限時間を設定し、解答速度を測定。登録ユーザーの場合、履歴を記録。
 
-[ ] **パフォーマンス測定 & ランキング機能**
+- [ ] **パフォーマンス測定 & ランキング機能**
 
-- 実行時間・メモリ消費量を測定し、ランキングを表示。
+  - 実行時間・メモリ消費量を測定し、ランキングを表示。
 
 ---
 
@@ -206,25 +206,25 @@
 
 ### **New Feature Additions**
 
-[ ] **Add Comment Posting Feature**
+- [ ] **Add Comment Posting Feature**
 
-- Create rooms where users can post comments on questions and answers.
+  - Create rooms where users can post comments on questions and answers.
 
-[ ] **Add Code Execution & Custom Test Cases**
+- [ ] **Add Code Execution & Custom Test Cases**
 
-- Provide an environment where users can execute their code and verify results using custom test cases.
+  - Provide an environment where users can execute their code and verify results using custom test cases.
 
-[ ] **Implement User Registration**
+- [ ] **Implement User Registration**
 
-- Enable tracking and managing user activity history.
+  - Enable tracking and managing user activity history.
 
-[ ] **Introduce Timer Functionality**
+- [ ] **Introduce Timer Functionality**
 
-- Set time limits and measure response speed. For registered users, record the time taken to answer.
+  - Set time limits and measure response speed. For registered users, record the time taken to answer.
 
-[ ] **Performance Measurement & Ranking System**
+- [ ] **Performance Measurement & Ranking System**
 
-- Measure execution time and memory consumption and display rankings.
+  - Measure execution time and memory consumption and display rankings.
 
 ## Credits
 
