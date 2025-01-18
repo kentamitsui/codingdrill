@@ -1,45 +1,38 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import {
-  generatePrompt,
   sendOpenAIRequest,
+  generatePrompt,
   validateEnvironmentVariables,
 } from "@/app/api/utils/openaiRequestHelper";
 
+// APIハンドラ: 問題文を生成する
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  // HTTPメソッドのバリデーション
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
     // 環境変数のバリデーション
-    validateEnvironmentVariables(["PROMPT_CHECK"]);
+    validateEnvironmentVariables(["PROMPT_CREATE"]);
 
-    const {
-      topic,
-      uiLanguage,
-      formattedQuestionText,
-      editorLanguage,
-      currentEditorValue,
-    } = req.body;
+    // クライアント側から選択・送信されたデータの取得
+    const { difficulty, dataType, topic, uiLanguage } = req.body;
 
-    const baseTemplate = formattedQuestionText;
-    const codeTemplate =
-      `\n\nProgramming Language: ${editorLanguage}` +
-      "\n\nUser input code:\n\n" +
-      currentEditorValue +
-      "\n\n" +
-      process.env.PROMPT_CHECK;
-    if (!baseTemplate || !codeTemplate) {
+    // 環境変数(.env.local)からプロンプトのテンプレートを取得
+    const promptTemplate = process.env.PROMPT_CREATE;
+    if (!promptTemplate) {
       return res.status(500).json({ error: "Missing prompt template" });
     }
 
     // APIへ送信するプロンプトを作成
-    const prompt = generatePrompt(baseTemplate + codeTemplate, {
+    const prompt = generatePrompt(promptTemplate, {
+      difficulty,
+      type: dataType,
       topic,
-      language: editorLanguage,
       display_language: uiLanguage,
     });
 

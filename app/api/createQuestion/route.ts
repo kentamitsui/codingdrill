@@ -7,26 +7,13 @@ import {
 
 export async function POST(req: NextRequest) {
   try {
-    // 環境変数のバリデーション
-    validateEnvironmentVariables(["PROMPT_CHECK"]);
+    // 環境変数のバリデーション（設定されていなければエラーレスポンス）
+    validateEnvironmentVariables(["PROMPT_CREATE"]);
 
-    const {
-      topic,
-      uiLanguage,
-      formattedQuestionText,
-      editorLanguage,
-      currentEditorValue,
-    } = await req.json();
-
+    const { difficulty, dataType, topic, uiLanguage } = await req.json();
     // プロンプトテンプレートを取得
-    const baseTemplate = formattedQuestionText;
-    const codeTemplate =
-      `\n\nProgramming Language: ${editorLanguage}` +
-      "\n\nUser input code:\n\n" +
-      currentEditorValue +
-      "\n\n" +
-      process.env.PROMPT_CHECK;
-    if (!baseTemplate || !codeTemplate) {
+    const promptTemplate = process.env.PROMPT_CREATE;
+    if (!promptTemplate) {
       return NextResponse.json(
         { error: "Missing prompt template" },
         { status: 500 },
@@ -34,9 +21,10 @@ export async function POST(req: NextRequest) {
     }
 
     // APIへ送信するプロンプトを作成
-    const prompt = generatePrompt(baseTemplate + codeTemplate, {
+    const prompt = generatePrompt(promptTemplate, {
+      difficulty,
+      type: dataType,
       topic,
-      language: editorLanguage,
       display_language: uiLanguage,
     });
 

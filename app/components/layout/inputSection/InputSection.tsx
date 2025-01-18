@@ -11,21 +11,21 @@ import menuData from "@/app/config/config.json";
 
 export default function InputSection() {
   const {
-    isDisabled,
-    setIsDisabled,
-    setIsCreateReview,
+    isApiLoading,
+    setIsApiLoading,
+    setIsReviewCreating,
     difficulty,
     dataType,
     topic,
-    selectedLanguage,
-    formattedProblemContent,
-    jsonFormattedProblemContent,
-    setJsonFormattedReviewContent,
-    loadedEditorLanguage,
-    loadedEditorContent,
-    setLoadedEditorContent,
-    checkEditorInputed,
-    setCheckEditorInputed,
+    uiLanguage,
+    formattedQuestionText,
+    jsonFormattedQuestionText,
+    setReviewText,
+    storedEditorLanguage,
+    storedEditorCode,
+    setStoredEditorCode,
+    editorInputedLength,
+    setEditorInputedLength,
     setSaveData,
     currentTheme,
   } = useAppContext();
@@ -57,7 +57,7 @@ export default function InputSection() {
 
   const handleEditorChange = (value: string | undefined) => {
     setIsEditorInputed(value || "");
-    setCheckEditorInputed(value || "");
+    setEditorInputedLength(value || "");
 
     // 文字数チェックとアラート表示
     if (value) {
@@ -94,10 +94,10 @@ export default function InputSection() {
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorLanguageのデータをエディタ入力部分に反映
   useEffect(() => {
-    if (loadedEditorLanguage) {
-      setEditorLanguage(loadedEditorLanguage);
+    if (storedEditorLanguage) {
+      setEditorLanguage(storedEditorLanguage);
     }
-  }, [loadedEditorLanguage]);
+  }, [storedEditorLanguage]);
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
@@ -105,22 +105,22 @@ export default function InputSection() {
   // エディタを空にする
   useEffect(() => {
     if (editorRef.current) {
-      if (loadedEditorContent !== null) {
-        editorRef.current.setValue(loadedEditorContent);
+      if (storedEditorCode !== null) {
+        editorRef.current.setValue(storedEditorCode);
       } else {
         editorRef.current.setValue(""); // 正常にsetValueが呼び出される
       }
     }
-  }, [loadedEditorContent]);
+  }, [storedEditorCode]);
 
   // エディタに入力された内容を取得
   useEffect(() => {
     const editorValue = editorRef.current?.getValue();
     if (editorValue !== undefined) {
       setIsEditorInputed(editorValue);
-      setCheckEditorInputed(editorValue);
+      setEditorInputedLength(editorValue);
     }
-  }, [setIsEditorInputed, setCheckEditorInputed]);
+  }, [setIsEditorInputed, setEditorInputedLength]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
@@ -153,11 +153,11 @@ export default function InputSection() {
       : "";
 
     // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-    setIsDisabled(true);
+    setIsApiLoading(true);
     // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
-    setIsCreateReview(true);
+    setIsReviewCreating(true);
     // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
-    setJsonFormattedReviewContent(null);
+    setReviewText(null);
 
     try {
       const response = await fetch("/api/createReview", {
@@ -167,9 +167,9 @@ export default function InputSection() {
         },
         body: JSON.stringify({
           topic,
-          selectedLanguage,
+          uiLanguage,
           // JSON形式から整形された問題文を渡す
-          formattedProblemContent,
+          formattedQuestionText,
           editorLanguage,
           currentEditorValue,
         }),
@@ -187,25 +187,25 @@ export default function InputSection() {
         difficulty,
         dataType,
         topic,
-        selectedLanguage,
-        problemContent: jsonFormattedProblemContent,
+        uiLanguage,
+        problemContent: jsonFormattedQuestionText,
         editorLanguage,
         editorContent: currentEditorValue,
         evaluation: JsonText,
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
-      setJsonFormattedReviewContent(JsonText);
+      setReviewText(JsonText);
 
-      // setLoadedEditorContentに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
+      // setStoredEditorCodeに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
       // ロード直後にもう一度問題作成を行った場合にエディタの中を空になる処理が実行される
       // このセット関数を実行しないと、ロード直後に問題文を作成した場合にエディタの中が空にならないバグが発生する
-      setLoadedEditorContent(currentEditorValue);
+      setStoredEditorCode(currentEditorValue);
 
       // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
       if (responseText) {
-        setIsDisabled(false);
-        setIsCreateReview(false);
+        setIsApiLoading(false);
+        setIsReviewCreating(false);
       }
 
       // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新する
@@ -233,15 +233,15 @@ export default function InputSection() {
           Code
         </div>
         <details
-          className={`relative ml-auto rounded-tr-md ${isDisabled ? "cursor-not-allowed" : ""}`}
+          className={`relative ml-auto rounded-tr-md ${isApiLoading ? "cursor-not-allowed" : ""}`}
           onMouseEnter={(event) =>
-            (event.currentTarget.open = isDisabled ? false : true)
+            (event.currentTarget.open = isApiLoading ? false : true)
           }
           onMouseLeave={(event) => (event.currentTarget.open = false)}
         >
           <summary
             className={`flex w-[120px] items-center justify-between rounded-tr-md bg-gray-400 p-1 text-center font-bold duration-300 hover:bg-gray-600 dark:border-[#1e1e1e] dark:bg-slate-700 dark:hover:bg-slate-500 ${
-              isDisabled ? "pointer-events-none opacity-50" : "cursor-pointer"
+              isApiLoading ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
             <span className="flex-1 text-center">Options</span>
@@ -258,7 +258,7 @@ export default function InputSection() {
           </summary>
           <div
             className={`absolute right-0 z-10 flex w-[150px] flex-col gap-2 border-t-2 border-t-white bg-opacity-0 p-[8px_4px_4px_4px] text-sm backdrop-blur-[2px] dark:border-t-[#1e1e1e] ${
-              isDisabled ? "pointer-events-none" : ""
+              isApiLoading ? "pointer-events-none" : ""
             }`}
           >
             {/* Font Size Select */}
@@ -269,7 +269,7 @@ export default function InputSection() {
               id="fontsize-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={fontSize}
-              disabled={isDisabled}
+              disabled={isApiLoading}
               onChange={handleFontSizeChange}
               style={{
                 backgroundImage: `url(${
@@ -296,7 +296,7 @@ export default function InputSection() {
               id="theme-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorTheme}
-              disabled={isDisabled}
+              disabled={isApiLoading}
               onChange={handleThemeChange}
               style={{
                 backgroundImage: `url(${
@@ -323,7 +323,7 @@ export default function InputSection() {
               id="language-select"
               className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
               value={editorLanguage}
-              disabled={isDisabled}
+              disabled={isApiLoading}
               onChange={handleLanguageChange}
               style={{
                 backgroundImage: `url(${
@@ -346,19 +346,19 @@ export default function InputSection() {
             </select>
             {/* 文字数カウント */}
             <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
-              <p>input: {checkEditorInputed?.length}</p>
+              <p>Input: {editorInputedLength?.length}</p>
             </div>
             {/* Buttons */}
             <InputAreaButton
               id="button-Copy-CodeInputArea"
               type="button"
-              text="copy"
+              text="Copy"
               onClick={copyToClipboard}
             />
             <InputAreaButton
               id="submit"
               type="button"
-              text="submit"
+              text="Submit"
               onClick={handleCreateReview}
             />
           </div>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="125" height="125" viewBox="0 0 100 100">
+  <!-- 背景（円形） -->
+  <circle cx="50" cy="50" r="45" fill="#f0f4ff" stroke="#4A90E2" stroke-width="2" />
+
+  <!-- コードアイコン (< >) -->
+  <text x="10" y="57" font-size="30" font-family="monospace" fill="#4A90E2"
+        transform="rotate(-45 50 50)">
+    &lt;
+  </text>
+  <text x="75" y="57" font-size="30" font-family="monospace" fill="#4A90E2"
+        transform="rotate(-45 50 50)">
+    &gt;
+  </text>
+
+  <!-- 文字 -->
+  <rect id="keyboard" x="20" y="43.5" width="60" height="15" fill="#4A90E2" rx="5">
+    <animate attributeName="fill" values="#4A90E2;#2D6BE8;#4A90E2" begin="cursor.mouseover" dur="0.5s" fill="freeze" />
+  </rect>
+  <text x="37" y="53" font-size="7" font-family="monospace" fill="white">
+    <tspan x="30" dy="0.5">Just Use it!</tspan>
+  </text>
+
+  <!-- ホバーアニメーション -->
+  <animate
+    href="#keyboard"
+    attributeName="fill"
+    values="#0d1117; #334155; #0d1117"
+    dur="1.5s"
+    repeatCount="indefinite"
+  />
+</svg>
