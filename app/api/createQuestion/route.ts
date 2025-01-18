@@ -7,10 +7,20 @@ import {
 
 export async function POST(req: NextRequest) {
   try {
+    // 環境変数のバリデーション（設定されていなければエラーレスポンス）
     validateEnvironmentVariables(["PROMPT_CREATE"]);
 
     const { difficulty, dataType, topic, uiLanguage } = await req.json();
-    const promptTemplate = process.env.PROMPT_CREATE!;
+    // プロンプトのテンプレートの取得
+    const promptTemplate = process.env.PROMPT_CREATE;
+    if (!promptTemplate) {
+      return NextResponse.json(
+        { error: "Missing prompt template" },
+        { status: 500 },
+      );
+    }
+
+    // APIへ送信するプロンプトを作成
     const prompt = generatePrompt(promptTemplate, {
       difficulty,
       type: dataType,
@@ -18,7 +28,9 @@ export async function POST(req: NextRequest) {
       display_language: uiLanguage,
     });
 
-    const responseText = await sendOpenAIRequest(prompt!);
+    // APIへリクエストを送信・取得
+    const responseText = await sendOpenAIRequest(prompt);
+    // APIからのレスポンスを返す
     return NextResponse.json({ responseText });
   } catch (error) {
     return NextResponse.json(

@@ -16,7 +16,7 @@ const ReactSelect = dynamic(
 import Image from "next/image";
 
 export default function Sidebar() {
-  // createContextを使用して、InputSectionにデータを渡す
+  // アプリ全体の状態管理（問題作成、データ取得）
   const {
     isApiLoading,
     setIsApiLoading,
@@ -37,6 +37,7 @@ export default function Sidebar() {
     setStoredEditorCode,
     currentTheme,
   } = useAppContext();
+  // ローカルストレージに関するデータ管理
   const {
     currentSelectedSavedData,
     setCurrentSelectedSavedData,
@@ -45,32 +46,23 @@ export default function Sidebar() {
     clearLocalStorage,
   } = useLocalStorageContext();
 
-  // セーブデータの値を動的に変更する
-  // 修正後のhandleChangeSavedData関数
+  // セーブデータの状態(ID)を更新する
   const handleChangeSavedData = (selectedOption: { value: string } | null) => {
-    if (selectedOption) {
-      setCurrentSelectedSavedData(selectedOption.value); // 選択された値を保存
-    } else {
-      setCurrentSelectedSavedData(""); // 未選択時は空文字列を設定
-    }
+    setCurrentSelectedSavedData(selectedOption?.value ?? "");
   };
 
-  // ローカルストレージのデータを各要素に反映する
+  // ローカルストレージからを各要素をロードする
   const handleLoadData = () => {
     // セーブデータが選択されていない状態でロードボタンを押した場合、アラートを表示する
     if (!currentSelectedSavedData) {
-      alert("Please select a valid option to load.");
+      alert("Please select a load data.");
       return;
     }
-
-    // 選択されたセーブデータのIDを取得
-    const selectedId: string | number = currentSelectedSavedData;
 
     // console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
 
     // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
-    // selectedIdについては、後で型を確認する
-    loadSavedData(selectedId, {
+    loadSavedData(currentSelectedSavedData, {
       difficulty: setDifficulty,
       dataType: setDataType,
       topic: setTopic,
@@ -85,19 +77,18 @@ export default function Sidebar() {
     });
   };
 
-  // createProblem.tsに選択後の値を送信する
-  // 正常にAPIとの送受信が行われたら、受信結果を受け取る
-  const handleCreateProblem = async () => {
-    try {
-      // ボタンが押されたら、QuestionSection.tsx、InputSection.tsxに表示されている内容を空にする
-      setJsonFormattedQuestionText(null);
-      setStoredEditorCode("");
-      setReviewText(null);
-      // ボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
-      setIsApiLoading(true);
-      // ボタンが押されたら、状態関数をtrueに更新し、アニメーションを表示する
-      setIsQuestionCreating(true);
+  // 問題文を生成する
+  const handleCreateQuestion = async () => {
+    // ボタンが押されたら、各エリアの内容を空にする
+    setJsonFormattedQuestionText(null);
+    setStoredEditorCode("");
+    setReviewText(null);
+    // ボタンが押されたら、ボタンコンポーネントに対してcursor-not-allowed等のスタイルを追加する
+    setIsApiLoading(true);
+    // ボタンが押されたら、アニメーションを表示する
+    setIsQuestionCreating(true);
 
+    try {
       const response = await fetch("/api/createQuestion", {
         method: "POST",
         headers: {
@@ -112,21 +103,20 @@ export default function Sidebar() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create a problem.");
+        throw new Error("Failed to create a question.");
       }
-      const data = await response.json();
-      const responseText = data.responseText;
 
-      // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
-      // また、アニメーションを非表示にする
+      const { responseText } = await response.json();
+
       if (responseText) {
+        // APIからのレスポンスがあれば、Buttonコンポーネントのスタイルを元に戻す
         setIsApiLoading(false);
+        // ローディングアニメーションを非表示にする
         setIsQuestionCreating(false);
       }
 
-      const JsonText = JSON.parse(responseText);
       // AppContextのセット関数にデータを設置する
-      setJsonFormattedQuestionText(JsonText);
+      setJsonFormattedQuestionText(JSON.parse(responseText));
       setUiLanguage(uiLanguage);
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
@@ -183,7 +173,7 @@ export default function Sidebar() {
           text="Generate"
           iconLight={menuData.svgIcon.submitLight}
           iconDark={menuData.svgIcon.submitDark}
-          onClick={handleCreateProblem}
+          onClick={handleCreateQuestion}
         />
       </div>
       <div className="mt-auto flex flex-col gap-2">
