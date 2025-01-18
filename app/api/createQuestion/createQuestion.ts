@@ -38,6 +38,11 @@ export default async function handler(
 
     // APIへリクエストを送信・取得
     const responseText = await sendOpenAIRequest(prompt);
+
+    if (!responseText) {
+      return res.status(500).json({ error: "Failed to generate response" });
+    }
+
     // APIからのレスポンスを返す
     res.status(200).json({ responseText });
   } catch (error) {

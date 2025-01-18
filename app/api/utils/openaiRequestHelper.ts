@@ -1,12 +1,6 @@
 import OpenAI from "openai";
-import dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-
-// 環境変数の検証
+// 環境変数のバリデーション
 export function validateEnvironmentVariables(requiredVariables: string[]) {
   requiredVariables.forEach((variable) => {
     if (!process.env[variable]) {
@@ -14,6 +8,11 @@ export function validateEnvironmentVariables(requiredVariables: string[]) {
     }
   });
 }
+
+// OpenAIインスタンスを作成
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+});
 
 // プロンプトの生成
 export function generatePrompt(
