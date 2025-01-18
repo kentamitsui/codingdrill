@@ -39,8 +39,8 @@
 3. **Load**または**Delete**ボタンを選択します。
 4. アラートメッセージが表示されるので、**OK**または**Cancel**を選択します。
 
-=> **Load**を選択すると、保存されている問題文・入力コード・総評文が表示されます。  
-=> **Delete**を選択すると、保存されているデータが削除されます。
+- **Load**を選択すると、保存されている問題文・入力コード・総評文が表示されます。
+- **Delete**を選択すると、保存されているデータが削除されます。
 
 <div align="center">
   <Img src="public/gif/demoOptions.gif" width=275 />
@@ -56,11 +56,8 @@
 ---
 
 - ### 仕切り線について
-
-```
-• 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
-• 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
-```
+- 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
+- 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
 
 <div align="center">
   <Img src="public/gif/splitLine.gif" width=500 />
@@ -68,17 +65,15 @@
 
 ## 機能
 
-```
-• ChatGPT-APIを使用して問題の作成・採点を自動化しています。
-• 問題文、入力コード、総評文はローカルストレージに保存されます。
-  保存されるタイミングは、総評文が出力された直後です。
-• コピーボタンを押すと、エリア内のテキストをコピーできます。
-  テキストが空の場合はコピーされません。
-• 🌙 または ☀️ アイコンを押すと、カラーテーマが切り替わります。
-• CodeエリアのOptionsでは、フォントサイズ、カラーテーマ、プログラミング言語設定を変更できます。
-  Input:は、Codeエリアの入力文字数を計測します。
-  5000字以内でのみ送信可能で、超過した場合は削除が必要です。
-```
+- **ChatGPT-APIを使用して問題の作成・採点を自動化しています。**
+- **問題文、入力コード、総評文はローカルストレージに保存されます。**  
+  **保存されるタイミングは、総評文が出力された直後です。**
+- **「Copy」ボタンを押すと、エリア内のテキストをコピーできます。**  
+  **テキストが空の場合はコピーされません。**
+- **🌙 または ☀️ アイコンを押すと、カラーテーマが切り替わります。**
+- **Codeエリアの「Options」では、フォントサイズ、カラーテーマ、プログラミング言語設定を変更できます。**  
+  **「Input:」は、Codeエリアの入力文字数を計測します。**  
+  **5000字以内でのみ送信可能で、超過した場合は削除が必要です。**
 
 > [!NOTE]
 >
@@ -89,35 +84,37 @@
 
 ## ロードマップ
 
-- [ ] **プロンプトの改善 & Fine Tuning**
+- **プロンプトの改善 & Fine Tuning**
 
   - ChatGPT APIの応答精度を向上させるため、プロンプトの最適化を行う。
   - Fine Tuningを活用し、回答速度を向上。
 
-- [ ] **UI/UXの改善**
+- **UI/UXの改善**
+
   - より直感的なデザインの導入。
   - 縦型レイアウトの導入、最適化。
 
 ### **新機能追加**
 
-- [ ] **コメント投稿機能の追加**
+[ ] **コメント投稿機能の追加**
 
-  - 問題や回答に対して、ユーザーがコメントを投稿できるルームを作成。
+- 問題や回答に対して、ユーザーがコメントを投稿できるルームを作成。
 
-- [ ] **コード実行 & テストケースの追加**
+[ ] **コード実行 & テストケースの追加**
 
-  - ユーザーが自身のコードを実行し、独自のテストケースで結果を確認できる環境を提供。
+- ユーザーが自身のコードを実行し、独自のテストケースで結果を確認できる環境を提供。
 
-- [ ] **ユーザー登録機能の実装**
+[ ] **ユーザー登録機能の実装**
 
-  - ユーザーごとの使用履歴の記録・管理を可能にする。
+- ユーザーごとの使用履歴の記録・管理を可能にする。
 
-- [ ] **タイマー機能の導入**
+[ ] **タイマー機能の導入**
 
-  - 制限時間を設定し、解答速度を測定。登録ユーザーの場合、履歴を記録。
+- 制限時間を設定し、解答速度を測定。登録ユーザーの場合、履歴を記録。
 
-- [ ] **パフォーマンス測定 & ランキング機能**
-  - 実行時間・メモリ消費量を測定し、ランキングを表示。
+[ ] **パフォーマンス測定 & ランキング機能**
+
+- 実行時間・メモリ消費量を測定し、ランキングを表示。
 
 ---
 
@@ -178,17 +175,15 @@
 
 ## Features
 
-```
-• Automated creation and grading of coding questions using the ChatGPT API.
-• Data for question text, input codes, and general review text are stored in local storage.
-• The execution time for saving data is immediately after the output of the general review text.
-• Pressing the Copy button copies the text.
-  If the text is empty, it will not be copied.
-• Pressing the 🌙 or ☀️ icon changes the color theme.
-• In the Code Area Options, you can set the editor's font size, color theme, and programming language settings.
-  The Input: in the code area counts the number of characters entered.
-  Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.
-```
+- **Automated creation and grading of coding questions using the ChatGPT API.**
+- **Data for question text, input codes, and general review text are stored in local storage.**
+- **Data is saved to local storage immediately after the general review text is generated.**
+- **Pressing the Copy button copies the text.**
+  - **If the text is empty, it will not be copied.**
+- **Pressing the 🌙 or ☀️ icon changes the color theme.**
+- **In the Code Area Options, you can set the editor's font size, color theme, and programming language settings.**
+  - **The Input: in the code area counts the number of characters entered.**  
+    **Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.**
 
 > [!NOTE]
 >
@@ -199,14 +194,37 @@
 
 ## Roadmap
 
-- Improve prompt quality and utilize Fine-Tuning to enhance output quality and reduce processing time.
-- Improve UI/UX.
-- Add new features:
-  - [ ] Create rooms where users can post comments on questions and answers.
-  - [ ] Allow users to execute code against questions and custom test cases to verify correctness.
-  - [ ] Introduce user registration to track and review usage history.
-  - [ ] Add a timer function to set time limits and measure response time. (For registered users, record the time taken to answer.)
-  - [ ] Measure execution time, memory consumption, and display rankings.
+- **Improve Prompt & Fine Tuning**
+
+  - Optimize prompts to enhance the response accuracy of the ChatGPT API.
+  - Utilize Fine-Tuning to improve answer speed.
+
+- **Improve UI/UX**
+
+  - Introduce a more intuitive design.
+  - Implement and optimize a vertical layout.
+
+### **New Feature Additions**
+
+[ ] **Add Comment Posting Feature**
+
+- Create rooms where users can post comments on questions and answers.
+
+[ ] **Add Code Execution & Custom Test Cases**
+
+- Provide an environment where users can execute their code and verify results using custom test cases.
+
+[ ] **Implement User Registration**
+
+- Enable tracking and managing user activity history.
+
+[ ] **Introduce Timer Functionality**
+
+- Set time limits and measure response speed. For registered users, record the time taken to answer.
+
+[ ] **Performance Measurement & Ranking System**
+
+- Measure execution time and memory consumption and display rankings.
 
 ## Credits
 
