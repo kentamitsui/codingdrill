@@ -95,14 +95,14 @@
 
 ## ロードマップ
 
-- プロンプトの改善やFine Tuning等を行なって、高品質・時間短縮を図る。
-- UI/UXの改善。
+- [ ] プロンプトの改善やFine Tuning等を行なって、高品質・時間短縮を図る。
+- [ ] UI/UXの改善。
 - 機能追加
-  - 問題や回答に対するコメントを投稿出来るルームの作成。
-  - 問題文や独自のテストケースに対して、コードを実行し正解出来るか確認する。
-  - ユーザー登録の追加による、使用状況の記録・確認などを行う。
-  - タイマーを追加して、制限時間の設定や回答までの時間測定。(ユーザー登録済の場合、回答までの時間を記録)
-  - 実行時間やメモリ消費量の測定、出力、ランク付け。
+  - [ ] 問題や回答に対するコメントを投稿出来るルームの作成。
+  - [ ] 問題文や独自のテストケースに対して、コードを実行し正解出来るか確認する。
+  - [ ] ユーザー登録の追加による、使用状況の記録・確認などを行う。
+  - [ ] タイマーを追加して、制限時間の設定や回答までの時間測定。(ユーザー登録済の場合、回答までの時間を記録)
+  - [ ] 実行時間やメモリ消費量の測定、出力、ランク付け。
 
 ---
 
@@ -112,6 +112,7 @@
 
 - [How To Use](#how-to-use)
 - [Features](#features)
+- [Roadmap](#roadmap)
 - [Credits](#credits)
 
 ## How To Use
@@ -189,14 +190,14 @@
 
 ## Roadmap
 
-[] Improve prompt quality and utilize Fine-Tuning to enhance output quality and reduce processing time.  
-[] Improve UI/UX.  
-[] Add new features:  
- [] Create rooms where users can post comments on questions and answers.  
- [] Allow users to execute code against questions and custom test cases to verify correctness.  
- [] Introduce user registration to track and review usage history.  
- [] Add a timer function to set time limits and measure response time. (For registered users, record the time taken to answer.)  
- [] Measure execution time, memory consumption, and display rankings.
+- [ ] Improve prompt quality and utilize Fine-Tuning to enhance output quality and reduce processing time.
+- [ ] Improve UI/UX.
+- Add new features:
+  - [ ] Create rooms where users can post comments on questions and answers.
+  - [ ] Allow users to execute code against questions and custom test cases to verify correctness.
+  - [ ] Introduce user registration to track and review usage history.
+  - [ ] Add a timer function to set time limits and measure response time. (For registered users, record the time taken to answer.)
+  - [ ] Measure execution time, memory consumption, and display rankings.
 
 ## Credits
 
