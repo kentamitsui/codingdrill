@@ -24,27 +24,23 @@
 
 - ### 問題文の作成から総評文の出力まで
 
-```
-1. Difficulty, Data Type, Topic, Translateを選択し、 Generateボタンを押します。
-2. Descriptionエリアに問題文が表示されるまでしばらく待ちます。
-3. 画面右側のCodeエリアに、回答となるコードを入力してください。
-4. CodeエリアのOptionsにカーソルを合わせ、submitボタンを押します。
-5. Reviewエリアに総評文が表示されます。
-```
+1. **Difficulty, Data Type, Topic, Translate**を選択し、 Generateボタンを押します。
+2. **Descriptio**nエリアに問題文が表示されるまでしばらく待ちます。
+3. 画面右側の**Code**エリアに、回答となるコードを入力してください。
+4. **Code**エリアの**Options**にカーソルを合わせ、**submit**ボタンを押します。
+5. **Review**エリアに総評文が表示されます。
 
 ---
 
 - ### セーブデータのロード、削除について
 
-```
-1. 画面左側のSave Dataにカーソルを移動し、セーブデータを選択します。
-2. Optionsにカーソルを移動します。
-3. LoadまたはDeleteボタンを選択します。
-4. アラートメッセージが表示されるので、OKまたはCancelを選択します。
+1. 画面左側の**Save Data**にカーソルを移動し、セーブデータを選択します。
+2. **Options**にカーソルを移動します。
+3. **Load**または**Delete**ボタンを選択します。
+4. アラートメッセージが表示されるので、**OK**または**Cancel**を選択します。
 
-=> Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。
-=> Deleteを選択すると、保存されているデータが削除されます。
-```
+=> **Load**を選択すると、保存されている問題文・入力コード・総評文が表示されます。  
+=> **Delete**を選択すると、保存されているデータが削除されます。
 
 <div align="center">
   <Img src="public/gif/demoOptions.gif" width=275 />
@@ -52,20 +48,18 @@
 
 - ### セーブデータの全削除について
 
-```
-1. Optionsにカーソルを移動します。
-2. All Deleteボタンを押します。（セーブデータを選択する必要はありません）
-3. アラートメッセージが2回表示されます。
-4. 全てOKを選択すると、セーブデータが全削除されます。
-```
+1. **Options**にカーソルを移動します。
+2. **All Delete**ボタンを押します。（セーブデータを選択する必要はありません）
+3. アラートメッセージが**2回表示**されます。
+4. 全て**OK**を選択すると、セーブデータが全削除されます。
 
 ---
 
 - ### 仕切り線について
 
 ```
-• 仕切り線をドラッグ&ドロップすることで、画面比率を調整できます。
-• 画面右上のRestoreボタンを押すと、画面比率が初期設定時に戻ります。
+• 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
+• 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
 ```
 
 <div align="center">
@@ -95,14 +89,35 @@
 
 ## ロードマップ
 
-- [ ] プロンプトの改善やFine Tuning等を行なって、高品質・時間短縮を図る。
-- [ ] UI/UXの改善。
-- 機能追加
-  - [ ] 問題や回答に対するコメントを投稿出来るルームの作成。
-  - [ ] 問題文や独自のテストケースに対して、コードを実行し正解出来るか確認する。
-  - [ ] ユーザー登録の追加による、使用状況の記録・確認などを行う。
-  - [ ] タイマーを追加して、制限時間の設定や回答までの時間測定。(ユーザー登録済の場合、回答までの時間を記録)
-  - [ ] 実行時間やメモリ消費量の測定、出力、ランク付け。
+- [ ] **プロンプトの改善 & Fine Tuning**
+
+  - ChatGPT APIの応答精度を向上させるため、プロンプトの最適化を行う。
+  - Fine Tuningを活用し、回答速度を向上。
+
+- [ ] **UI/UXの改善**
+  - より直感的なデザインの導入。
+  - 縦型レイアウトの導入、最適化。
+
+### **新機能追加**
+
+- [ ] **コメント投稿機能の追加**
+
+  - 問題や回答に対して、ユーザーがコメントを投稿できるルームを作成。
+
+- [ ] **コード実行 & テストケースの追加**
+
+  - ユーザーが自身のコードを実行し、独自のテストケースで結果を確認できる環境を提供。
+
+- [ ] **ユーザー登録機能の実装**
+
+  - ユーザーごとの使用履歴の記録・管理を可能にする。
+
+- [ ] **タイマー機能の導入**
+
+  - 制限時間を設定し、解答速度を測定。登録ユーザーの場合、履歴を記録。
+
+- [ ] **パフォーマンス測定 & ランキング機能**
+  - 実行時間・メモリ消費量を測定し、ランキングを表示。
 
 ---
 
@@ -119,13 +134,11 @@
 
 - ### Question create => General Review output flow
 
-```
-1. Select Difficulty, Data Type, Topic, and Translate, and press the Generate button.
-2. Wait for a while until the question text appears in the Description area.
-3. Input the code for your answer in the Code area on the right side of the screen.
-4. Move the cursor to Options in the Code area and press the submit button.
-5. General review will be displayed in the Review area.
-```
+1. Select **Difficulty, Data Type, Topic, and Translate**, and press the Generate button.
+2. Wait for a while until the question text appears in the **Description** area.
+3. Input the code for your answer in the **Code** area on the right side of the screen.
+4. Move the cursor to **Options** in the Code area and press the submit button.
+5. General review will be displayed in the **Review** area.
 
 ---
 
@@ -135,24 +148,20 @@
   <img src="public/gif/demoOptions.gif" width=250 />
 </div>
 
-```
-1. Move the cursor to Save Data on the left side of the screen and select Save Data.
-2. Move the cursor to Options.
-3. Select the Load or Delete button.
-4. Select OK or Cancel when an alert message appears.
+1. Move the cursor to **Save Data** on the left side of the screen and select save data.
+2. Move the cursor to **Options**.
+3. Select the Load or **Delete** button.
+4. Select **OK** or **Cancel** when an alert message appears.
 
-• If you select Load, the stored question text, input codes, and review text will be displayed.
-• Select Delete to delete the stored data.
-```
+=> If you select **Load**, the stored question text, input codes, and review text will be displayed.  
+=> Select **Delete** to delete the stored data.
 
 - ### About All Delete on Save Data
 
-```
-1. Move the cursor to Options.
-2. Push the All Delete button (It's not necessary to select any save data).
+1. Move the cursor to **Options**.
+2. Push the **All Delete** button (It's not necessary to select any save data).
 3. An alert message will appear twice.
-4. If you select OK all, all saved data deleted.
-```
+4. If you select **OK** all, all saved data deleted.
 
 ---
 
@@ -190,8 +199,8 @@
 
 ## Roadmap
 
-- [ ] Improve prompt quality and utilize Fine-Tuning to enhance output quality and reduce processing time.
-- [ ] Improve UI/UX.
+- Improve prompt quality and utilize Fine-Tuning to enhance output quality and reduce processing time.
+- Improve UI/UX.
 - Add new features:
   - [ ] Create rooms where users can post comments on questions and answers.
   - [ ] Allow users to execute code against questions and custom test cases to verify correctness.
