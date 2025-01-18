@@ -8,6 +8,7 @@
 
 <div align="center">
   <p>Coding Drillは、コーディングに関する問題を自動で作成・採点するWebアプリです。</p>
+  <p>(Coding Drill is a web app that automatically creates and grades coding questions.)</p>
 </div>
 
 [English ver ⬇️](#contents)
@@ -35,10 +36,6 @@
 
 - ### セーブデータのロード、削除について
 
-<div align="center">
-  <Img src="public/gif/demoOptions.gif" width=275 />
-</div>
-
 ```
 1. 画面左側のSave Dataにカーソルを移動し、セーブデータを選択します。
 2. Optionsにカーソルを移動します。
@@ -48,6 +45,10 @@
 => Loadを選択すると、保存されている問題文・入力コード・総評文が表示されます。
 => Deleteを選択すると、保存されているデータが削除されます。
 ```
+
+<div align="center">
+  <Img src="public/gif/demoOptions.gif" width=275 />
+</div>
 
 - ### セーブデータの全削除について
 
@@ -68,7 +69,7 @@
 ```
 
 <div align="center">
-  <Img src="public/gif/splitLine.gif" width=400 />
+  <Img src="public/gif/splitLine.gif" width=500 />
 </div>
 
 ## 機能
@@ -94,12 +95,14 @@
 
 ## ロードマップ
 
-- ChatGPTからの出力内容をより高品質にして、出力までの時間を短縮すること。
-  - プロンプトの適宜修正を行う。
-  - 将来的にユーザーの入出力データを収集して、Fine Tuning用の学習・検証データとして使用。
+- プロンプトの改善やFine Tuning等を行なって、高品質・時間短縮を図る。
 - UI/UXの改善。
 - 機能追加
-  - 問題文の内容を共有し、回答に対する議論(計算量の少ない方法の模索など)を行うチャットルームのような場を作成。
+  - 問題や回答に対するコメントを投稿出来るルームの作成。
+  - 問題文や独自のテストケースに対して、コードを実行し正解出来るか確認する。
+  - ユーザー登録の追加による、使用状況の記録・確認などを行う。
+  - タイマーを追加して、制限時間の設定や回答までの時間測定。(ユーザー登録済の場合、回答までの時間を記録)
+  - 実行時間やメモリ消費量の測定、出力、ランク付け。
 
 ---
 
@@ -183,6 +186,17 @@
 > - Features and layouts may change without notice.
 > - Deployment may be temporarily or permanently stopped without notice.
 > - Please note that when displaying text-based illustrations, there may be some misalignment.
+
+## Roadmap
+
+[] Improve prompt quality and utilize Fine-Tuning to enhance output quality and reduce processing time.  
+[] Improve UI/UX.  
+[] Add new features:  
+ [] Create rooms where users can post comments on questions and answers.  
+ [] Allow users to execute code against questions and custom test cases to verify correctness.  
+ [] Introduce user registration to track and review usage history.  
+ [] Add a timer function to set time limits and measure response time. (For registered users, record the time taken to answer.)  
+ [] Measure execution time, memory consumption, and display rankings.
 
 ## Credits
 
