@@ -11,7 +11,7 @@
   <p>(Coding Drill is a web app that automatically creates and grades coding questions.)</p>
 </div>
 
-[English ver ⬇️](#contents)
+[English ver ⬇️](#english-ver)
 
 ## 目次
 
