@@ -50,6 +50,9 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     string | null
   >("");
   const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
+  // 直近で選択されたエディタの言語を管理
+  const [currentEditorLanguage, setCurrentEditorLanguage] =
+    useState<string>("python");
 
   // エディタの入力内容の文字数をチェックするための状態管理
   const [editorInputedLength, setEditorInputedLength] = useState<string | null>(
@@ -93,8 +96,11 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setReviewText,
         storedUiLanguage,
         setStoredUiLanguage,
+        //////////
         storedEditorLanguage,
         setStoredEditorLanguage,
+        currentEditorLanguage,
+        setCurrentEditorLanguage,
         storedEditorCode,
         setStoredEditorCode,
         editorInputedLength,
