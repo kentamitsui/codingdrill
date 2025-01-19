@@ -8,6 +8,7 @@ import { useLocalStorageContext } from "@/app/feature/localStorage/context/local
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
 
 export default function InputSection() {
   const {
@@ -22,6 +23,8 @@ export default function InputSection() {
     jsonFormattedQuestionText,
     setReviewText,
     storedEditorLanguage,
+    setStoredEditorLanguage,
+    currentEditorLanguage,
     storedEditorCode,
     setStoredEditorCode,
     editorInputedLength,
@@ -72,7 +75,7 @@ export default function InputSection() {
   };
 
   const [fontSize, setFontSize] = useState("14");
-  const [editorLanguage, setEditorLanguage] = useState("python");
+  // const [editorLanguage, setEditorLanguage] = useState("python");
   const [editorTheme, setEditorTheme] = useState("vs-dark");
   const [_, setIsEditorInputed] = useState(editorRef.current?.getValue());
 
@@ -82,22 +85,22 @@ export default function InputSection() {
   ) => {
     setFontSize(event.target.value);
   };
-  const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setEditorLanguage(event.target.value);
-  };
+  // const handleLanguageChange = (
+  //   event: React.ChangeEvent<HTMLSelectElement>,
+  // ) => {
+  //   setEditorLanguage(event.target.value);
+  // };
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
 
-  // Sidebar.tsxでhandleLoadDataが実行された際、
-  // editorLanguageのデータをエディタ入力部分に反映
-  useEffect(() => {
-    if (storedEditorLanguage) {
-      setEditorLanguage(storedEditorLanguage);
-    }
-  }, [storedEditorLanguage]);
+  // // Sidebar.tsxでhandleLoadDataが実行された際、
+  // // editorLanguageのデータをエディタ入力部分に反映
+  // useEffect(() => {
+  //   if (storedEditorLanguage) {
+  //     setEditorLanguage(storedEditorLanguage);
+  //   }
+  // }, [storedEditorLanguage]);
 
   // Sidebar.tsxでhandleLoadDataが実行された際、
   // editorContentのデータをエディタ入力部分に反映
@@ -170,7 +173,7 @@ export default function InputSection() {
           uiLanguage,
           // JSON形式から整形された問題文を渡す
           formattedQuestionText,
-          editorLanguage,
+          editorLanguage: currentEditorLanguage,
           currentEditorValue,
         }),
       });
@@ -189,7 +192,7 @@ export default function InputSection() {
         topic,
         uiLanguage,
         problemContent: jsonFormattedQuestionText,
-        editorLanguage,
+        editorLanguage: currentEditorLanguage,
         editorContent: currentEditorValue,
         evaluation: JsonText,
       });
@@ -316,7 +319,7 @@ export default function InputSection() {
             </select>
 
             {/* Language Select */}
-            <label htmlFor="language-select" className="sr-only">
+            {/* <label htmlFor="language-select" className="sr-only">
               language select
             </label>
             <select
@@ -343,7 +346,11 @@ export default function InputSection() {
                   </option>
                 ),
               )}
-            </select>
+            </select> */}
+            <EditorLanguageOption
+              currentLanguageValue={storedEditorLanguage}
+              setSelectedFunc={setStoredEditorLanguage}
+            />
             {/* 文字数カウント */}
             <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
               <p>Input: {editorInputedLength?.length}</p>
@@ -368,7 +375,7 @@ export default function InputSection() {
         <MonacoEditor
           // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
           fontSize={Number(fontSize)}
-          editorLanguage={editorLanguage}
+          editorLanguage={storedEditorLanguage!}
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
           onMount={handleEditorMount}
