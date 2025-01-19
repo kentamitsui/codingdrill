@@ -18,7 +18,7 @@
 - [アプリの使い方](#アプリの使い方)
 - [機能](#機能)
 - [ロードマップ](#ロードマップ)
-- [クレジット](#credits)
+- [使用技術](#🛠technologies-used)
 
 ## アプリの使い方
 
@@ -125,7 +125,7 @@
 - [How To Use](#how-to-use)
 - [Features](#features)
 - [Roadmap](#roadmap)
-- [Credits](#credits)
+- [Technologies Used](#🛠technologies-used)
 
 ## How To Use
 
@@ -226,16 +226,43 @@
 
   - Measure execution time and memory consumption and display rankings.
 
-## Credits
+## 🛠**Technologies Used**
 
-This app utilizes the following:
+This project is built using the following technologies:
 
-- [OpenAI ChatGPT API](https://openai.com/): Provides AI functionalities for creating and grading coding problems.
-- [React Select](https://react-select.com/home)[(Repository)](https://github.com/JedWatson/react-select): For custom dropdown menus in the app.
-- [React Split](https://split.js.org/)[(Repository)](https://github.com/nathancahill/split/tree/master/packages/react-split): For custom split line in the app.
-- [Monaco Editor](https://microsoft.github.io/monaco-editor)[(npmjs)](https://www.npmjs.com/package/monaco-editor): A powerful code editor used in the app.
-- [TailwindCSS](https://tailwindcss.com/)[(npmjs)](https://www.npmjs.com/package/tailwindcss): A utility-first CSS framework for styling.
-- [next-themes](https://www.npmjs.com/package/next-themes)[(Repository)](https://github.com/pacocoursey/next-themes#readme): Enables dark mode and theme management.
+### **Framework & Libraries**
+
+- [**Next.js**](https://nextjs.org/)[(Repository)](https://github.com/vercel/next.js) - Full-stack React framework
+- [**React**](https://react.dev/)[(Repository)](https://github.com/facebook/react) - UI library for building components
+
+### **API & Data Handling**
+
+- [**OpenAI API**](https://openai.com/)[(Repository)](https://github.com/OPENAI) - ChatGPT API integration
+
+### **Editor & UI**
+
+- [**Monaco Editor**](https://microsoft.github.io/monaco-editor)[(npmjs)](https://www.npmjs.com/package/monaco-editor) - VSCode-based code editor
+- [**React Select**](https://react-select.com/home)[(Repository)](https://github.com/JedWatson/react-select) - Custom dropdown component
+- [**React Split**](https://split.js.org/)[(Repository)](https://github.com/nathancahill/split/tree/master/packages/react-split) - Resizable split panes
+
+### **Styling**
+
+- [**Tailwind CSS**](https://tailwindcss.com/)[(npmjs)](https://www.npmjs.com/package/tailwindcss) - Utility-first CSS framework
+- [**Next themes**](https://www.npmjs.com/package/next-themes)[(Repository)](https://github.com/pacocoursey/next-themes#readme) - Theme and dark mode management
+
+### **Environment Variables**
+
+- Next.js automatically loads environment variables from `.env.local`
+
+### **Type & Development Tools**
+
+- **TypeScript** - Static typing
+- **ESLint & Prettier** - Code formatting & linting
+- **Stylelint & Autoprefixer** - CSS linting and auto-prefixing
+
+### **Build Tools**
+
+- **PostCSS** - Tailwind processing and CSS optimizations
 
 ---
 
