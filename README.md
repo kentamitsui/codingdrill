@@ -143,10 +143,6 @@
 
 - ### About Load, Delete on Save Data
 
-<div align="center">
-  <img src="public/gif/demoOptions.gif" width=250 />
-</div>
-
 1. Move the cursor to **Save Data** on the left side of the screen and select save data.
 2. Move the cursor to **Options**.
 3. Select the Load or **Delete** button.
@@ -154,6 +150,10 @@
 
 - If you select **Load**, the stored question text, input codes, and review text will be displayed.
 - Select **Delete** to delete the stored data.
+
+<div align="center">
+  <img src="public/gif/demoOptions.gif" width=275 />
+</div>
 
 - ### About All Delete on Save Data
 
@@ -164,13 +164,11 @@
 
 - ### About dividing line
 
-```
-• The screen ratio can be adjusted by dragging and dropping the dividing lines.
-• Pressing the Restore button in the upper right corner of the screen returns the screen ratio to the default setting.
-```
+- The screen ratio can be adjusted by **dragging and dropping** the dividing lines.
+- Pressing the **Restore** button in the upper right corner of the screen returns the screen ratio to the default setting.
 
 <div align="center">
-  <Img src="public/gif/splitLine.gif" width=400 />
+  <Img src="public/gif/splitLine.gif" width=500 />
 </div>
 
 ---
@@ -238,7 +236,7 @@ This project is built using the following technologies:
 
 ### **Framework & Libraries**
 
-- [**Next.js**](https://nextjs.org/)[(Repository)](https://github.com/vercel/next.js) - Full-stack React framework
+- [**NextJS**](https://nextjs.org/)[(Repository)](https://github.com/vercel/next.js) - Full-stack React framework
 - [**React**](https://react.dev/)[(Repository)](https://github.com/facebook/react) - UI library for building components
 
 ### **API & Data Handling**
