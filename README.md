@@ -15,10 +15,10 @@ The goal is to provide a place where users can easily use it and can help deepen
 ## 📌目次
 
 - 📜[アプリの使い方](#アプリの使い方)
-- ⚙️[機能](#機能)
+- 🔧[機能](#機能)
 - 💡[今後の展望](#今後の展望)
 - 🛠[使用技術](#technologies-used)
-- 🚀[デプロイ](#deployment)
+- 🌍[デプロイ](#deployment)
 
 📢[English ver ↓](#english-ver)
 
@@ -66,7 +66,7 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 
 ---
 
-## ⚙️機能
+## 🔧機能
 
 - **ChatGPT-APIを使用して問題の作成・採点を自動化しています。**
 - **問題文、入力コード、総評文はローカルストレージに保存されます。**  
@@ -113,10 +113,10 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 ## 📌Contents
 
 - 📜[How To Use](#how-to-use)
-- ⚙️[Features](#features)
+- 🔧[Features](#features)
 - 💡[Future Plans](#future-plans)
 - 🛠[Technologies Used](#technologies-used)
-- 🚀[Deploy](#deploy)
+- 🌍[Deploy](#deployment)
 
 ---
 
@@ -162,7 +162,7 @@ Watch the demo to see how Coding Drill works.
 
 ---
 
-## ⚙️Features
+## 🔧Features
 
 - **Automated creation and grading of coding questions using the ChatGPT API.**
 - **Data for question text, input codes, and general review text are stored in local storage.**
@@ -252,7 +252,7 @@ This project is built using the following technologies:
 
 ---
 
-## **🚀 Deployment**
+## 🌍Deployment
 
 This project is deployed on **Vercel** with automatic CI/CD using **GitHub Actions**.
 
