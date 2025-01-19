@@ -11,7 +11,7 @@
   <p>(Coding Drill is a web app that automatically creates and grades coding questions.)</p>
 </div>
 
-[English ver ⬇️](#english-ver)
+[English ver ↓](#english-ver)
 
 ## 目次
 
@@ -243,13 +243,13 @@ This app utilizes the following:
 
 To get started with this project, follow these steps:
 
-1. git clone https://github.com/kentamitsui/codingdrill.git.
-2. cd codingdrill.
-3. npm i(install dependencies).
+1. **git clone https://github.com/kentamitsui/codingdrill.git** in terminal.
+2. **cd codingdrill** in terminal.
+3. **npm i(install dependencies)** in terminal.
 4. Input **npm run dev** in terminal.
 5. Set up **.env.local**.
-> [!NOTE]
->
-> - After checking the project's contents, please consider and create the environment variables yourself.
+   > [!NOTE]
+   >
+   > - After checking the project's contents, please consider and create the environment variables yourself.
 6. Input **npm run dev** in terminal.
 7. Open **https://localhost:3000** in your blowser.
