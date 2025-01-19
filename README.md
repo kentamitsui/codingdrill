@@ -15,10 +15,10 @@ The goal is to provide a place where users can easily use it and can help deepen
 ## 📌目次
 
 - 📜[アプリの使い方](#アプリの使い方)
-- ⚙️[機能](#⚙️機能)
-- 💡[今後の展望](#💡今後の展望)
-- 🛠[使用技術](#🛠technologies-used)
-- 🚀[デプロイ](#🚀-deployment)
+- ⚙️[機能](#機能)
+- 💡[今後の展望](#今後の展望)
+- 🛠[使用技術](#使用技術)
+- 🚀[デプロイ](#デプロイ)
 
 📢[English ver ↓](#english-ver)
 
@@ -114,9 +114,9 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 
 - 📜[How To Use](#how-to-use)
 - ⚙️[Features](#features)
-- 💡[Future Plans](#💡future-plans)
-- 🛠[Technologies Used](#🛠technologies-used)
-- 🚀[deploy](#🚀-deployment)
+- 💡[Future Plans](#future-plans)
+- 🛠[Technologies Used](#technologies-used)
+- 🚀[Deploy](#deploy)
 
 ---
 
