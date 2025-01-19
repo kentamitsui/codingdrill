@@ -20,6 +20,8 @@
 - [ロードマップ](#ロードマップ)
 - [使用技術](#technologies-used)
 
+---
+
 ## アプリの使い方
 
 - ### 問題文の作成から総評文の出力まで
@@ -29,8 +31,6 @@
 3. 画面右側の**Code**エリアに、回答となるコードを入力してください。
 4. **Code**エリアの**Options**にカーソルを合わせ、**submit**ボタンを押します。
 5. **Review**エリアに総評文が表示されます。
-
----
 
 - ### セーブデータのロード、削除について
 
@@ -53,8 +53,6 @@
 3. アラートメッセージが**2回表示**されます。
 4. 全て**OK**を選択すると、セーブデータが全削除されます。
 
----
-
 - ### 仕切り線について
 - 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
 - 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
@@ -62,6 +60,8 @@
 <div align="center">
   <Img src="public/gif/splitLine.gif" width=500 />
 </div>
+
+---
 
 ## 機能
 
@@ -81,6 +81,8 @@
 > - 告知なしに機能やレイアウトが変更される可能性があります。
 > - 告知無しにアプリケーションの公開を一時的、または永久的に停止する可能性があります。
 > - テキストベースの図解を表示する際、表記ズレが生じる場合があります。予めご了承願います。
+
+---
 
 ## ロードマップ
 
@@ -127,6 +129,8 @@
 - [Roadmap](#roadmap)
 - [Technologies Used](#technologies-used)
 
+---
+
 ## How To Use
 
 - ### Question create => General Review output flow
@@ -136,8 +140,6 @@
 3. Input the code for your answer in the **Code** area on the right side of the screen.
 4. Move the cursor to **Options** in the Code area and press the submit button.
 5. General review will be displayed in the **Review** area.
-
----
 
 - ### About Load, Delete on Save Data
 
@@ -150,8 +152,8 @@
 3. Select the Load or **Delete** button.
 4. Select **OK** or **Cancel** when an alert message appears.
 
-=> If you select **Load**, the stored question text, input codes, and review text will be displayed.  
-=> Select **Delete** to delete the stored data.
+- If you select **Load**, the stored question text, input codes, and review text will be displayed.
+- Select **Delete** to delete the stored data.
 
 - ### About All Delete on Save Data
 
@@ -159,8 +161,6 @@
 2. Push the **All Delete** button (It's not necessary to select any save data).
 3. An alert message will **appear twice**.
 4. If you select **OK** all, all saved data deleted.
-
----
 
 - ### About dividing line
 
@@ -172,6 +172,8 @@
 <div align="center">
   <Img src="public/gif/splitLine.gif" width=400 />
 </div>
+
+---
 
 ## Features
 
@@ -191,6 +193,8 @@
 > - Features and layouts may change without notice.
 > - Deployment may be temporarily or permanently stopped without notice.
 > - Please note that when displaying text-based illustrations, there may be some misalignment.
+
+---
 
 ## Roadmap
 
@@ -225,6 +229,8 @@
 - [ ] **Performance Measurement & Ranking System**
 
   - Measure execution time and memory consumption and display rankings.
+
+---
 
 ## **Technologies Used**
 
