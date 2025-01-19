@@ -2,29 +2,29 @@
   <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
     <Img src="public/images/appIcon.svg" width=100 height=100 />
   </a>
-  <h1>Coding Drill</h1>
+  <h1>💻 Coding Drill</h1>
 </div>
 
-## このプロジェクトについて(About this project)
+## 📖このプロジェクトについて(About this project)
 
 Coding Drillは、コーディングに関する問題を自動で作成・採点する個人開発プロジェクトとして作成しています。  
 目標は、ユーザーが気軽に使用出来てコーディングの知識が深める為に、少しでも役立てる場を提供する事です。  
 (Coding Drill is a personal development project that automatically creates and grades coding questions.  
 The goal is to provide a place where users can easily use it and can help deepen their coding knowledge.)
 
-## 目次
+## 📌目次
 
-- [アプリの使い方](#アプリの使い方)
-- [機能](#機能)
-- [今後の展望](#今後の展望)
-- [使用技術](#technologies-used)
-- [デプロイ](#🚀-deployment)
+- 📜[アプリの使い方](#アプリの使い方)
+- ⚙️[機能](#機能)
+- 💡[今後の展望](#💡今後の展望)
+- 🛠[使用技術](#🛠technologies-used)
+- 🚀[デプロイ](#🚀-deployment)
 
-[English ver ↓](#english-ver)
+📢[English ver ↓](#english-ver)
 
 ---
 
-## アプリの使い方
+## 🕹アプリの使い方
 
 Coding Drillがどのように動くか、まずはデモGIFを見て下さい。
 
@@ -36,7 +36,7 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 2. **解答を入力** → **Code**エリアでコードを入力し、**Options**にカーソルを合わせ**submit**を押します。
 3. **提出 ＆ AIによるフィードバック** → **Review**エリアに総評文が表示されます。
 
-### セーブデータのロード、削除について
+### 💾セーブデータのロード、削除について
 
 1. 画面左側の**Save Data**にカーソルを移動し、セーブデータを選択します。
 2. **Options**にカーソルを移動し、**Load**または**Delete**を選択します。
@@ -49,13 +49,13 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
   <Img src="public/gif/demoOptions.gif" width=275 />
 </div>
 
-### セーブデータの全削除について
+### 🗑セーブデータの全削除について
 
 1. **Options**にカーソルを移動します。
 2. **All Delete**を押します。（セーブデータを選択する必要はありません）
 3. アラートメッセージが**2回表示**されるので、全て**OK**を選択するとセーブデータが全削除されます。
 
-### 仕切り線について
+### 📏仕切り線について
 
 1. 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
 2. 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
@@ -66,7 +66,7 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 
 ---
 
-## 機能
+## ⚙️機能
 
 - **ChatGPT-APIを使用して問題の作成・採点を自動化しています。**
 - **問題文、入力コード、総評文はローカルストレージに保存されます。**  
@@ -87,16 +87,11 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 
 ---
 
-## 今後の展望
+## 💡今後の展望
 
 - **プロンプトの改善 & Fine Tuning**
-
-  - ChatGPT APIの応答精度を向上させるため、プロンプトの最適化を行う。
-  - Fine Tuningの活用。
-
 - **UI/UXの改善**
 
-  - より直感的なデザインの導入。
   - [ ] 縦型レイアウトの導入、最適化。
 
 - [ ] **ユーザー登録機能の実装**
@@ -115,17 +110,17 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 
 # English ver
 
-## Contents
+## 📌Contents
 
-- [How To Use](#how-to-use)
-- [Features](#features)
-- [Future Plans](#future-plans)
-- [Technologies Used](#technologies-used)
-- [deploy](#🚀-deployment)
+- 📜[How To Use](#how-to-use)
+- ⚙️[Features](#features)
+- 💡[Future Plans](#💡future-plans)
+- 🛠[Technologies Used](#🛠technologies-used)
+- 🚀[deploy](#🚀-deployment)
 
 ---
 
-## How To Use
+## 🕹How To Use
 
 Watch the demo to see how Coding Drill works.
 
@@ -137,7 +132,7 @@ Watch the demo to see how Coding Drill works.
 2. **Enter Your Answer** → Input your code in the **Code** area, move the cursor to **Options**, and press Submit.
 3. **Submit & Get AI Feedback** → The general review will be displayed in the **Review** area.
 
-### About Load, Delete on Save Data
+### 💾About Load, Delete on Save Data
 
 1. Move the cursor to **Save Data** on the left side of the screen and select save data.
 2. Move the cursor to **Options**, select the Load or **Delete** button.
@@ -150,13 +145,13 @@ Watch the demo to see how Coding Drill works.
   <img src="public/gif/demoOptions.gif" width=275 />
 </div>
 
-### About All Delete on Save Data
+### 🗑About All Delete on Save Data
 
 1. Move the cursor to **Options**.
 2. Push the **All Delete**(There is no need to select any saved data).
 3. An alert message will **appear twice**, so select **OK** both times to delete all saved data.
 
-### About dividing line
+### 📏About dividing line
 
 1. The screen ratio can be adjusted by **dragging and dropping** the dividing lines.
 2. Pressing the **Restore** button in the upper right corner of the screen returns the screen ratio to the default setting.
@@ -167,7 +162,7 @@ Watch the demo to see how Coding Drill works.
 
 ---
 
-## Features
+## ⚙️Features
 
 - **Automated creation and grading of coding questions using the ChatGPT API.**
 - **Data for question text, input codes, and general review text are stored in local storage.**
@@ -188,16 +183,11 @@ Watch the demo to see how Coding Drill works.
 
 ---
 
-## Future Plans
+## 💡Future Plans
 
 - **Improve Prompt & Fine Tuning**
-
-  - Optimize prompts to enhance the response accuracy of the ChatGPT API.
-  - Utilize Fine-Tuning to improve answer speed.
-
 - **Improve UI/UX**
 
-  - Introduce a more intuitive design.
   - [ ] Implement and optimize a vertical layout.
 
 - [ ] **Implement User Registration**
@@ -214,7 +204,7 @@ Watch the demo to see how Coding Drill works.
 
 ---
 
-## **Technologies Used**
+## 🛠**Technologies Used**
 
 This project is built using the following technologies:
 
@@ -274,7 +264,7 @@ This project is deployed on **Vercel** with automatic CI/CD using **GitHub Actio
 
 ---
 
-## Getting Started
+## 📌Getting Started
 
 To get started with this project, follow these steps:
 
