@@ -54,8 +54,8 @@
 4. 全て**OK**を選択すると、セーブデータが全削除されます。
 
 - ### 仕切り線について
-- 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
-- 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
+  - 仕切り線を**ドラッグ&ドロップ**することで、画面比率を調整できます。
+  - 画面右上の**Restore**ボタンを押すと、画面比率が初期設定時に戻ります。
 
 <div align="center">
   <Img src="public/gif/splitLine.gif" width=500 />
@@ -163,9 +163,8 @@
 4. If you select **OK** all, all saved data deleted.
 
 - ### About dividing line
-
-- The screen ratio can be adjusted by **dragging and dropping** the dividing lines.
-- Pressing the **Restore** button in the upper right corner of the screen returns the screen ratio to the default setting.
+  - The screen ratio can be adjusted by **dragging and dropping** the dividing lines.
+  - Pressing the **Restore** button in the upper right corner of the screen returns the screen ratio to the default setting.
 
 <div align="center">
   <Img src="public/gif/splitLine.gif" width=500 />
