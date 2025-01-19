@@ -17,8 +17,8 @@ The goal is to provide a place where users can easily use it and can help deepen
 - 📜[アプリの使い方](#アプリの使い方)
 - ⚙️[機能](#機能)
 - 💡[今後の展望](#今後の展望)
-- 🛠[使用技術](#使用技術)
-- 🚀[デプロイ](#デプロイ)
+- 🛠[使用技術](#technologies-used)
+- 🚀[デプロイ](#deployment)
 
 📢[English ver ↓](#english-ver)
 
@@ -273,8 +273,8 @@ To get started with this project, follow these steps:
 3. **npm i(install dependencies)** in terminal.
 4. Input **npm run dev** in terminal.
 5. Set up **.env.local**.
-   > [!NOTE]
-   >
-   > - After checking the project's contents, please consider and create the environment variables yourself.
+> [!NOTE]
+>
+> - After checking the project's contents, please consider and create the environment variables yourself.
 6. Input **npm run dev** in terminal.
 7. Open **https://localhost:3000** in your blowser.
