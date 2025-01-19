@@ -18,7 +18,7 @@
 - [アプリの使い方](#アプリの使い方)
 - [機能](#機能)
 - [ロードマップ](#ロードマップ)
-- [使用技術](#🛠technologies-used)
+- [使用技術](#technologies-used)
 
 ## アプリの使い方
 
@@ -125,7 +125,7 @@
 - [How To Use](#how-to-use)
 - [Features](#features)
 - [Roadmap](#roadmap)
-- [Technologies Used](#🛠technologies-used)
+- [Technologies Used](#technologies-used)
 
 ## How To Use
 
@@ -226,7 +226,7 @@
 
   - Measure execution time and memory consumption and display rankings.
 
-## 🛠**Technologies Used**
+## **Technologies Used**
 
 This project is built using the following technologies:
 
