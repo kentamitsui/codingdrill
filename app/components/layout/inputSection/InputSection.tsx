@@ -1,6 +1,5 @@
 import * as monaco from "monaco-editor";
 import MonacoEditor from "@/app/feature/monacoEditor/MonacoEditor";
-import config from "@/app/config/config.json";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
 import { useAppContext } from "@/app/context/AppContext";
@@ -8,6 +7,7 @@ import { useLocalStorageContext } from "@/app/feature/localStorage/context/local
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
 
 export default function InputSection() {
   const {
@@ -22,10 +22,12 @@ export default function InputSection() {
     jsonFormattedQuestionText,
     setReviewText,
     storedEditorLanguage,
+    setStoredEditorLanguage,
+    currentEditorLanguage,
     storedEditorCode,
     setStoredEditorCode,
-    editorInputedLength,
-    setEditorInputedLength,
+    currentEditorInputed,
+    setCurrentEditorInputed,
     setSaveData,
     currentTheme,
   } = useAppContext();
@@ -50,77 +52,74 @@ export default function InputSection() {
 
   // refにMonaco Editorインスタンスを保持
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-  // onMountでMonaco Editorインスタンスをrefに格納
+
+  // エディタがマウントされた際に、ローカルストレージから取得したコードを適用
   const handleEditorMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
+
+    // エディタがマウントされた直後に、保存されているコードを適用
+    if (storedEditorCode !== null) {
+      editor.setValue(storedEditorCode);
+    }
   };
 
+  // エディタの入力内容が変更された際の処理
   const handleEditorChange = (value: string | undefined) => {
-    setIsEditorInputed(value || "");
-    setEditorInputedLength(value || "");
+    if (value !== undefined) {
+      // エディタの入力内容を保存用の状態変数にセット
+      setStoredEditorCode(value);
+      setCurrentEditorInputed(value);
 
-    // 文字数チェックとアラート表示
-    if (value) {
-      // 状態関数の非同期性や再レンダリングを避けるため、valueを使用
+      // 5000文字を超えた場合、アラートを表示して警告
       if (!isAlert && value.length >= 5001) {
         alert("Too many input. The limit is 5000 characters.");
-        setIsAlert(true); // フラグを切り替え、再度条件が満たされるまでアラートを非表示
+        setIsAlert(true); // アラートを一度表示したら、再度超過するまで表示しない
       } else if (isAlert && value.length <= 5000) {
-        setIsAlert(false); // 文字数が5000字以下になったらフラグをfalseに戻す
+        setIsAlert(false); // 5000文字以下に戻ったら、アラートを解除
       }
     }
   };
 
   const [fontSize, setFontSize] = useState("14");
-  const [editorLanguage, setEditorLanguage] = useState("python");
   const [editorTheme, setEditorTheme] = useState("vs-dark");
   const [_, setIsEditorInputed] = useState(editorRef.current?.getValue());
 
-  // [フォントサイズ・言語・エディタテーマ]オプションタグの値を動的に取得
+  // [フォントサイズ・エディタテーマ]オプションタグの値を動的に取得
   const handleFontSizeChange = (
     event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     setFontSize(event.target.value);
   };
-  const handleLanguageChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setEditorLanguage(event.target.value);
-  };
+
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
 
-  // Sidebar.tsxでhandleLoadDataが実行された際、
-  // editorLanguageのデータをエディタ入力部分に反映
+  // `storedEditorCode` の変更があった場合にエディタへ適用し、文字数カウントも更新
   useEffect(() => {
-    if (storedEditorLanguage) {
-      setEditorLanguage(storedEditorLanguage);
+    // `currentEditorInputed` を更新して、ロード直後の文字数カウントが正しく動作するようにする
+    if (storedEditorCode !== null) {
+      setCurrentEditorInputed(storedEditorCode);
     }
-  }, [storedEditorLanguage]);
 
-  // Sidebar.tsxでhandleLoadDataが実行された際、
-  // editorContentのデータをエディタ入力部分に反映
-  // また、Sidebar.tsxでhandleCreateProblem()が実行された際は、
-  // エディタを空にする
-  useEffect(() => {
-    if (editorRef.current) {
-      if (storedEditorCode !== null) {
+    if (editorRef.current && storedEditorCode !== null) {
+      const currentValue = editorRef.current.getValue();
+
+      // すでにエディタに表示されている内容と `storedEditorCode` が異なる場合のみ更新
+      if (currentValue !== storedEditorCode) {
         editorRef.current.setValue(storedEditorCode);
-      } else {
-        editorRef.current.setValue(""); // 正常にsetValueが呼び出される
       }
     }
-  }, [storedEditorCode]);
+  }, [storedEditorCode]); // `storedEditorCode` の変更を監視し、エディタと文字数を更新
 
   // エディタに入力された内容を取得
   useEffect(() => {
     const editorValue = editorRef.current?.getValue();
     if (editorValue !== undefined) {
       setIsEditorInputed(editorValue);
-      setEditorInputedLength(editorValue);
+      setCurrentEditorInputed(editorValue);
     }
-  }, [setIsEditorInputed, setEditorInputedLength]);
+  }, [setIsEditorInputed, setCurrentEditorInputed]);
 
   // クリップボードにコピーする関数
   const copyToClipboard = () => {
@@ -170,7 +169,7 @@ export default function InputSection() {
           uiLanguage,
           // JSON形式から整形された問題文を渡す
           formattedQuestionText,
-          editorLanguage,
+          editorLanguage: currentEditorLanguage,
           currentEditorValue,
         }),
       });
@@ -189,7 +188,7 @@ export default function InputSection() {
         topic,
         uiLanguage,
         problemContent: jsonFormattedQuestionText,
-        editorLanguage,
+        editorLanguage: currentEditorLanguage,
         editorContent: currentEditorValue,
         evaluation: JsonText,
       });
@@ -261,7 +260,7 @@ export default function InputSection() {
               isApiLoading ? "pointer-events-none" : ""
             }`}
           >
-            {/* Font Size Select */}
+            {/* フォントサイズ */}
             <label htmlFor="fontsize-select" className="sr-only">
               fontsize select
             </label>
@@ -288,7 +287,7 @@ export default function InputSection() {
                 </option>
               ))}
             </select>
-            {/* Theme Select */}
+            {/* エディタのテーマ */}
             <label htmlFor="theme-select" className="sr-only">
               theme select
             </label>
@@ -314,41 +313,15 @@ export default function InputSection() {
               <option value="hc-light">hc-light</option>
               <option value="hc-black">hc-black</option>
             </select>
-
-            {/* Language Select */}
-            <label htmlFor="language-select" className="sr-only">
-              language select
-            </label>
-            <select
-              id="language-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
-              value={editorLanguage}
-              disabled={isApiLoading}
-              onChange={handleLanguageChange}
-              style={{
-                backgroundImage: `url(${
-                  currentTheme === "dark"
-                    ? menuData.svgIcon.codeLight
-                    : menuData.svgIcon.codeDark
-                })`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "calc(100% - 20px) center",
-                appearance: "auto",
-              }}
-            >
-              {Object.entries(config.menuLists.languages).map(
-                ([key, label]) => (
-                  <option key={key} value={key}>
-                    {label}
-                  </option>
-                ),
-              )}
-            </select>
+            {/* エディタの言語 */}
+            <EditorLanguageOption
+              currentLanguageValue={storedEditorLanguage}
+              setSelectedFunc={setStoredEditorLanguage}
+            />
             {/* 文字数カウント */}
             <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
-              <p>Input: {editorInputedLength?.length}</p>
+              <p>Input: {currentEditorInputed?.length}</p>
             </div>
-            {/* Buttons */}
             <InputAreaButton
               id="button-Copy-CodeInputArea"
               type="button"
@@ -368,7 +341,7 @@ export default function InputSection() {
         <MonacoEditor
           // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
           fontSize={Number(fontSize)}
-          editorLanguage={editorLanguage}
+          editorLanguage={storedEditorLanguage || "python"}
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
           onMount={handleEditorMount}

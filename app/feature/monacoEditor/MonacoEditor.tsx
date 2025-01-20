@@ -3,6 +3,7 @@
 const Editor = lazy(() => import("@monaco-editor/react"));
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { MonacoEditorProps } from "@/app/type/type";
+import { useAppContext } from "@/app/context/AppContext";
 
 export default function MonacoEditor({
   fontSize,
@@ -11,6 +12,7 @@ export default function MonacoEditor({
   onMount,
   onChange,
 }: MonacoEditorProps) {
+  const { storedEditorCode } = useAppContext();
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
 
@@ -61,6 +63,7 @@ export default function MonacoEditor({
           height={dimensions.height} // 計算した高さを適用
           width={dimensions.width} // 計算した幅を適用
           options={{ fontSize: fontSize }}
+          value={storedEditorCode ?? ""} // storedEditorCodeを直接セットし、ロード時に確実に反映されるようにする
           // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
           onMount={(editor) => {
             if (onMount) {
