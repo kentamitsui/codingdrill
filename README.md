@@ -263,6 +263,96 @@ This project is built using the following technologies:
 
 ---
 
+## Directory Structure
+
+```
+.
+├── README.md
+├── app
+│   ├── api
+│   │   ├── createQuestion
+│   │   │   ├── createQuestion.ts
+│   │   │   └── route.ts
+│   │   ├── createReview
+│   │   │   ├── createReview.ts
+│   │   │   └── route.ts
+│   │   └── utils
+│   │       └── openaiRequestHelper.ts
+│   ├── components
+│   │   ├── layout
+│   │   │   ├── inputSection
+│   │   │   │   └── InputSection.tsx
+│   │   │   ├── questionSection
+│   │   │   │   └── QuestionSection.tsx
+│   │   │   ├── reviewSection
+│   │   │   │   └── ReviewSection.tsx
+│   │   │   └── sidebar
+│   │   │       └── Sidebar.tsx
+│   │   └── ui
+│   │       ├── button
+│   │       │   ├── Button.tsx
+│   │       │   ├── InputAreaButton.tsx
+│   │       │   └── SaveDataOptionButton.tsx
+│   │       ├── footer
+│   │       │   └── Footer.tsx
+│   │       ├── header
+│   │       │   └── Header.tsx
+│   │       ├── loadingAnimation
+│   │       │   └── LoadingAnimation.tsx
+│   │       ├── main
+│   │       │   └── Main.tsx
+│   │       └── select
+│   │           ├── EditorLanguageOption.tsx
+│   │           ├── Options.tsx
+│   │           └── react-select
+│   │               └── ReactSelect.tsx
+│   ├── config
+│   │   └── config.json
+│   ├── context
+│   │   └── AppContext.tsx
+│   ├── feature
+│   │   ├── darkmode
+│   │   │   ├── ThemeSwitch.tsx
+│   │   │   └── components
+│   │   │       └── ui
+│   │   │           ├── IconDarkMode.tsx
+│   │   │           └── IconLightMode.tsx
+│   │   ├── localStorage
+│   │   │   ├── context
+│   │   │   │   └── localStorageContext.tsx
+│   │   │   └── localStorage.ts
+│   │   ├── monacoEditor
+│   │   │   └── MonacoEditor.tsx
+│   │   └── splitter
+│   │       ├── Splitter.tsx
+│   │       ├── components
+│   │       │   └── ui
+│   │       │       └── ResetButton.tsx
+│   │       └── context
+│   │           └── PanelContext.tsx
+│   ├── layout.tsx
+│   ├── page.tsx
+│   ├── styles
+│   │   └── globals.css
+│   ├── type
+│   │   └── type.ts
+│   └── vercel.json
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── public
+│   ├── gif
+│   ├── images
+├── tailwind.config.ts
+├── tsconfig.json
+├── .env.local
+└── .gitignore
+```
+
+---
+
 ## 🌍Deployment
 
 This project is deployed on **Vercel** with automatic CI/CD using **GitHub Actions**.
