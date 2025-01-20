@@ -2,15 +2,18 @@
   <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
     <Img src="public/images/appIcon.svg" width=100 height=100 />
   </a>
-  <h1>💻 Coding Drill</h1>
+  <h1>Coding Drill</h1>
 </div>
 
 ## 📖このプロジェクトについて(About this project)
 
-Coding Drillは、コーディングに関する問題を自動で作成・採点する個人開発プロジェクトとして作成しています。  
-目標は、ユーザーが気軽に使用出来てコーディングの知識が深める為に、少しでも役立てる場を提供する事です。  
-(Coding Drill is a personal development project that automatically creates and grades coding questions.  
-The goal is to provide a place where users can easily use it and can help deepen their coding knowledge.)
+Coding Drillは、コーディングに関する問題を自動で作成・採点するアプリケーションです。  
+自身の技術力向上も兼ねて、ChatGPTを活用したアプリを作りたいと思い開発しています。  
+目標は、ユーザーが気軽に利用して少しでもコーディングの知識が深められる場を提供する事です。
+
+(Coding Drill is an application that automatically creates and grades coding-related questions.  
+I'm developing this application to improve my own technical skills and to create an application that utilizes ChatGPT.  
+My goal is to provide a place where users can easily use and deepen their coding knowledge as much as possible.)
 
 ## 📌目次
 
@@ -26,7 +29,7 @@ The goal is to provide a place where users can easily use it and can help deepen
 
 ## 🕹アプリの使い方
 
-Coding Drillがどのように動くか、まずはデモGIFを見て下さい。
+サンプルのデモGIFを見て大まかな動き。
 
 ![デモ](public/gif/demo.gif)
 
@@ -89,10 +92,10 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 
 ## 💡今後の展望
 
-- **プロンプトの改善 & Fine Tuning**
+- **コードやプロンプトの改善 & Fine Tuning**
 - **UI/UXの改善**
 
-  - [ ] 縦型レイアウトの導入、最適化。
+  - [ ] 縦型レイアウトの導入。
 
 - [ ] **ユーザー登録機能の実装**
 
@@ -105,6 +108,10 @@ Coding Drillがどのように動くか、まずはデモGIFを見て下さい�
 - [ ] **パフォーマンス測定 & ランキング機能**
 
   - 実行時間・メモリ消費量を測定する。
+
+- [ ] **月額有料プランの導入**
+
+  - 一部機能を有料プランのみ提供。
 
 ---
 
@@ -128,14 +135,14 @@ Watch the demo to see how Coding Drill works.
 
 ### **Main Features**
 
-1. **Generate a Question** → Select **Difficulty, Data Type, Topic, and Translate**, then press Generate.
-2. **Enter Your Answer** → Input your code in the **Code** area, move the cursor to **Options**, and press Submit.
+1. **Generate a Question** → Select **Difficulty, Data Type, Topic, and Translate**, then press **Generate**.
+2. **Enter Your Answer** → Input your code in the **Code** area, move the cursor to **Options**, and press **Submit**.
 3. **Submit & Get AI Feedback** → The general review will be displayed in the **Review** area.
 
 ### 💾About Load, Delete on Save Data
 
 1. Move the cursor to **Save Data** on the left side of the screen and select save data.
-2. Move the cursor to **Options**, select the Load or **Delete** button.
+2. Move the cursor to **Options**, select the **Load** or **Delete** button.
 3. Select **OK** or **Cancel** when an alert message appears.
 
 - If you select **Load**, the stored question text, input codes, and review text will be displayed.
@@ -185,22 +192,26 @@ Watch the demo to see how Coding Drill works.
 
 ## 💡Future Plans
 
-- **Improve Prompt & Fine Tuning**
+- **Improve code, Prompt & Fine Tuning**
 - **Improve UI/UX**
 
-  - [ ] Implement and optimize a vertical layout.
+  - [ ] Implement a vertical layout.
 
 - [ ] **Implement User Registration**
 
   - Enable tracking and managing user activity history.
 
-- [ ] **Introduce Timer Functionality**
+- [ ] **Implement Timer Functionality**
 
   - Set time limits and measure response speed. For registered users, record the time taken to answer.
 
-- [ ] **Performance Measurement & Ranking System**
+- [ ] **Implement Performance Measurement & Ranking System**
 
   - Measure execution time and memory consumption and display rankings.
+
+- [ ] **Implement Paid subscription**
+
+  - Some functions are provided only for paid subscription.
 
 ---
 
@@ -247,7 +258,7 @@ This project is built using the following technologies:
 - **NextJS**: Supports SSR & SSG for fast rendering.
 - **Tailwind CSS**: Rapid styling with utility-first approach.
 - **Monaco Editor**: Provides VSCode-like editing experience.
-- **OpenAI API**: Enables AI-generated coding challenges and feedback.
+- **OpenAI API**: Enables AI-generated coding questions and feedback.
 - **Vercel**: Handles seamless deployment with serverless functions.
 
 ---
@@ -273,8 +284,8 @@ To get started with this project, follow these steps:
 3. **npm i(install dependencies)** in terminal.
 4. Input **npm run dev** in terminal.
 5. Set up **.env.local**.
-> [!NOTE]
->
-> - After checking the project's contents, please consider and create the environment variables yourself.
+   > [!NOTE]
+   >
+   > - After checking the project's contents, please consider and create the environment variables yourself.
 6. Input **npm run dev** in terminal.
 7. Open **https://localhost:3000** in your blowser.
