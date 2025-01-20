@@ -374,8 +374,8 @@ To get started with this project, follow these steps:
 3. **npm i(install dependencies)** in terminal.
 4. Input **npm run dev** in terminal.
 5. Set up **.env.local**.
-   > [!NOTE]
-   >
-   > - After checking the project's contents, please consider and create the environment variables yourself.
+> [!NOTE]
+>
+> - After checking the project's contents, please consider and create the environment variables yourself.
 6. Input **npm run dev** in terminal.
 7. Open **https://localhost:3000** in your blowser.
