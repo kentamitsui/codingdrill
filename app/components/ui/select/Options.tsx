@@ -11,8 +11,7 @@ export const Options: React.FC<SelectProps> = ({
   iconLight,
   iconDark,
 }) => {
-  const { currentTheme } = useAppContext();
-  const { isApiLoading } = useAppContext();
+  const { isApiLoading, currentTheme } = useAppContext();
   const [currentSelected, setCurrentSelected] = useState("");
 
   useEffect(() => {

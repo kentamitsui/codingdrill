@@ -68,10 +68,12 @@ export interface AppContextProps {
   setStoredUiLanguage: React.Dispatch<React.SetStateAction<string>>;
   storedEditorLanguage: string | null;
   setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
+  currentEditorLanguage: string;
+  setCurrentEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
   storedEditorCode: string | null;
   setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
-  editorInputedLength: string | null;
-  setEditorInputedLength: React.Dispatch<React.SetStateAction<string | null>>;
+  currentEditorInputed: string | null;
+  setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
   currentTheme: string | undefined;
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
