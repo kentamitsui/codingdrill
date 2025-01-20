@@ -48,13 +48,17 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
   const [storedEditorLanguage, setStoredEditorLanguage] = useState<
     string | null
-  >("");
+  >(null);
+  // 直近で選択されたエディタの言語を管理
+  const [currentEditorLanguage, setCurrentEditorLanguage] =
+    useState<string>("");
+  // ローカルストレージから呼び出されたエディタの入力内容のデータ管理
   const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
-
   // エディタの入力内容の文字数をチェックするための状態管理
-  const [editorInputedLength, setEditorInputedLength] = useState<string | null>(
-    "",
-  );
+  const [currentEditorInputed, setCurrentEditorInputed] = useState<
+    string | null
+  >("");
+
   // カラーテーマを管理
   const [currentTheme, setCurrentTheme] = useState<string | undefined>("");
 
@@ -93,12 +97,15 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setReviewText,
         storedUiLanguage,
         setStoredUiLanguage,
+        //////////
         storedEditorLanguage,
         setStoredEditorLanguage,
+        currentEditorLanguage,
+        setCurrentEditorLanguage,
         storedEditorCode,
         setStoredEditorCode,
-        editorInputedLength,
-        setEditorInputedLength,
+        currentEditorInputed,
+        setCurrentEditorInputed,
         currentTheme,
         setCurrentTheme,
       }}
