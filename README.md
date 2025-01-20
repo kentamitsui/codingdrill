@@ -21,6 +21,7 @@ My goal is to provide a place where users can easily use and deepen their coding
 - 🔧[機能](#機能)
 - 💡[今後の展望](#今後の展望)
 - 🛠[使用技術](#technologies-used)
+- 📂[ディレクトリ構成](#directory-structure)
 - 🌍[デプロイ](#deployment)
 
 📢[English ver ↓](#english-ver)
@@ -123,6 +124,7 @@ My goal is to provide a place where users can easily use and deepen their coding
 - 🔧[Features](#features)
 - 💡[Future Plans](#future-plans)
 - 🛠[Technologies Used](#technologies-used)
+- 📂[Directory Structure](#directory-structure)
 - 🌍[Deploy](#deployment)
 
 ---
@@ -263,7 +265,7 @@ This project is built using the following technologies:
 
 ---
 
-## Directory Structure
+## 📂Directory Structure
 
 ```
 .
