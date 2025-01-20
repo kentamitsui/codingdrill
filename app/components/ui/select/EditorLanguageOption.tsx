@@ -18,7 +18,6 @@ export const EditorLanguageOption: React.FC<EditorLanguageOptionProps> = ({
     setCurrentEditorLanguage,
     currentTheme,
   } = useAppContext();
-  // const [currentEditorLanguage, setCurrentEditorLanguage] = useState("python");
 
   useEffect(() => {
     if (
@@ -27,7 +26,6 @@ export const EditorLanguageOption: React.FC<EditorLanguageOptionProps> = ({
     ) {
       setCurrentEditorLanguage(currentLanguageValue);
     }
-    console.log(currentEditorLanguage);
   }, [currentEditorLanguage, currentLanguageValue]);
 
   const handleLanguageChange = (
@@ -45,7 +43,8 @@ export const EditorLanguageOption: React.FC<EditorLanguageOptionProps> = ({
       <select
         id="language-select"
         className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
-        value={currentLanguageValue ?? ""}
+        // 初期選択がpythonにする
+        value={currentLanguageValue ? currentLanguageValue : "python"}
         disabled={isApiLoading}
         onChange={handleLanguageChange}
         style={{
