@@ -30,7 +30,7 @@ I'll continue to work harder daily to make the service easy for users to use and
 
 ## 🕹アプリの使い方
 
-サンプルのデモGIFを見て大まかな動き。
+Coding Drillがどのように動くかデモをご覧ください。
 
 ![デモ](public/gif/demo.gif)
 
@@ -269,7 +269,6 @@ This project is built using the following technologies:
 
 ```
 .
-├── README.md
 ├── app
 │   ├── api
 │   │   ├── createQuestion
@@ -347,6 +346,8 @@ This project is built using the following technologies:
 ├── public
 │   ├── gif
 │   ├── images
+│   └── icon.svg
+├── README.md
 ├── tailwind.config.ts
 └── tsconfig.json
 ```
