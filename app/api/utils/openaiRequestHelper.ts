@@ -2,11 +2,21 @@ import OpenAI from "openai";
 
 // 環境変数のバリデーション
 export function validateEnvironmentVariables(requiredVariables: string[]) {
+  const missingVariables: string[] = [];
+
+  // 不足している変数を一度に取得する
   requiredVariables.forEach((variable) => {
-    if (!process.env[variable]) {
-      throw new Error(`${variable} is not defined in environment variables`);
+    if (!process.env[variable] || process.env[variable]?.trim() === "") {
+      missingVariables.push(variable);
     }
   });
+
+  // エラー時に全ての不足変数を通知する
+  if (missingVariables.length > 0) {
+    throw new Error(
+      `Missing environment variables: ${missingVariables.join(", ")}`,
+    );
+  }
 }
 
 // OpenAIインスタンスを作成
