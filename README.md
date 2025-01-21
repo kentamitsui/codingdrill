@@ -8,11 +8,11 @@
 ## 📖このプロジェクトについて(About this project)
 
 Coding Drillは、コーディングに関する問題を自動で作成・採点するアプリケーションです。  
-自身の技術力向上も兼ねて、ChatGPTを活用したアプリを作りたいと思い開発しました。  
+自身の技術力向上も兼ねて、ChatGPTを活用したアプリを作りたいと思い開発しています。  
 ユーザーが気軽に利用して、少しでも楽しんで貰えるよう日々頑張ります。
 
 (Coding Drill is an application that automatically creates and grades coding-related questions.  
-I'm developing this application to improve my own technical skills and to create an application that utilizes ChatGPT.  
+I'm developing this application to improve my technical skills and to create an application that utilizes ChatGPT.  
 I'll continue to work harder daily to make the service easy for users to use and enjoy.)
 
 ## 📌目次
@@ -30,7 +30,7 @@ I'll continue to work harder daily to make the service easy for users to use and
 
 ## 🕹アプリの使い方
 
-Coding Drillがどのように動くかは、デモをご覧ください。
+Coding Drillがどのように機能するかは、デモGIFをご覧ください。
 
 ![デモ](public/gif/demo.gif)
 
@@ -94,7 +94,8 @@ Coding Drillがどのように動くかは、デモをご覧ください。
 
 ## 💡今後の展望
 
-- **コードやプロンプトを日々改善 & Fine Tuning**
+- **コードやプロンプトを日々改善**
+- **Fine Tuningの実施と効果測定**
 
 - [ ] **UI/UXの改善**
 
@@ -133,7 +134,7 @@ Coding Drillがどのように動くかは、デモをご覧ください。
 
 ## 🕹How To Use
 
-Watch the demo to see how Coding Drill works.
+You can watch the demo to see how Coding Drill works.
 
 ![demo](public/gif/demo.gif)
 
@@ -152,7 +153,7 @@ Watch the demo to see how Coding Drill works.
 > [!TIP]
 > - If you select **Load**, the stored question text, input codes, and review text will be displayed.
 > - Select **Delete** to delete the stored data.
-> - Data is saved when the general review statement is output.
+> - Data is saved when the review text is output.
 
 <div align="center">
   <img src="public/gif/demoOptions.gif" width=275 />
@@ -184,20 +185,21 @@ Watch the demo to see how Coding Drill works.
   - **If the text is empty, it will not be copied.**
 - **Pressing the 🌙 or ☀️ icon changes the color theme.**
 - **In the Code Area Options, you can set the editor's font size, color theme, and programming language settings.**
-  - **The Input: in the code area counts the number of characters entered.**  
+  - **The Input: count the number of characters entered in the code area.**  
     **Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.**
 
 > [!NOTE]
-> - While I strive for accuracy, there is a possibility that incorrect content may be output.
+> - Please note while I strive for accuracy, there is a possibility that incorrect content may be output.
 > - Features and layouts may change without notice.
 > - Deployment may be temporarily or permanently stopped without notice.
-> - Please note that when displaying text-based illustrations, there may be some misalignment.
+> - Please note that there may be some misalignment when displaying text-based illustrations.
 
 ---
 
 ## 💡Future Plans
 
-- **Daily improvement of codes and prompts & Fine Tuning**
+- **Daily improvement of codes and prompts**
+- **Fine Tuning Implementation and Effectiveness Measurement**
 
 - [ ] **Improve UI/UX**
 
@@ -215,9 +217,9 @@ Watch the demo to see how Coding Drill works.
 
   - Measure execution time and memory consumption and display rankings.
 
-- [ ] **Implement Paid subscription**
+- [ ] **Implement Paid subscriptions**
 
-  - Some functions are provided only for paid subscription.
+  - Some functions are provided only for paid subscriptions.
 
 ---
 
@@ -362,22 +364,77 @@ This project is deployed on **Vercel** with automatic CI/CD using **GitHub Actio
 
 ### **🔧 How to Deploy**
 
-1. **Push to `main` branch** → Triggers Vercel deployment.
-2. **API keys are managed via Vercel Environment Variables**.
-3. **Check live status** → [Deployed Version](https://codingdrill.vercel.app/)
+To deploy the project, follow these steps:
+
+1. **Push changes to the `main` branch**
+
+```
+git add .
+git commit -m "Deploy update"
+git push origin main
+```
+
+This will automatically trigger deployment on Vercel.
+
+2. **Manage Environment Variables**
+API keys, prompt, and environment variables are managed via Vercel Environment Variables.
+Ensure that the following variables are properly set in the Vercel dashboard:
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+3. **Check Deployment Status**
+ - Open the Vercel Dashboard and verify deployment status.
+ - If there are issues, check GitHub Actions logs for debugging.
+
+4. **Access the Live Application**
+Once deployed, the project will be available at:
+
+```
+https://your-app-name.vercel.app/
+```
+
+(Replace your-app-name with your actual project name on Vercel.)
 
 ---
 
 ## 📌Getting Started
 
-To get started with this project, follow these steps:
+To set up the project locally, follow these steps:
 
-1. **git clone https://github.com/kentamitsui/codingdrill.git** in terminal.
-2. **cd codingdrill** in terminal.
-3. **npm i(install dependencies)** in terminal.
-4. Input **npm run dev** in terminal.
-5. Set up **.env.local**.
+1. **Clone the Repository**
+
+```
+git clone https://github.com/kentamitsui/codingdrill.git
+cd codingdrill
+```
+
+2. **Install Dependencies**
+
+```
+npm install
+```
+
+3. **Set Up Environment Variables**
+Before running the project, create a .env.local file in the root directory and add the necessary API keys:
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
 > [!IMPORTANT]
-> - Please provide API KEY and environment variables yourself.
-6. Input **npm run dev** in terminal.
-7. Open **https://localhost:3000** in your blowser.
+> - You must provide your API key, prompt, and environment variables.
+
+4. Run the Development Server
+
+```
+npm run dev
+```
+
+5. Open the Application
+Open the following URL in your browser:
+
+```
+http://localhost:3000
+```
