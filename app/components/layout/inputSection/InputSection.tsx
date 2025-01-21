@@ -173,19 +173,7 @@ export default function InputSection() {
           currentEditorValue,
         }),
       });
-      ///////////////////////////
-      // デバッグ用
-      console.log(
-        "Sent request body:",
-        JSON.stringify({
-          topic,
-          uiLanguage,
-          formattedQuestionText,
-          editorLanguage: currentEditorLanguage,
-          currentEditorValue,
-        }),
-      );
-      ///////////////////////////
+
       if (!response.ok) {
         throw new Error("Failed to create a review.");
       }
@@ -353,7 +341,7 @@ export default function InputSection() {
         <MonacoEditor
           // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
           fontSize={Number(fontSize)}
-          editorLanguage={storedEditorLanguage || "python"}
+          editorLanguage={storedEditorLanguage}
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
           onMount={handleEditorMount}

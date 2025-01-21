@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
         `\n\nProgramming Language: ${editorLanguage}\n\nUser input code:\n\n${currentEditorValue}\n\n${process.env.PROMPT_CHECK}`,
       { topic, language: editorLanguage, display_language: uiLanguage },
     );
-    console.log("Prompt:", prompt);
+
     // プロンプトのundefinedチェック
     if (!prompt) {
       console.error("Generated prompt is undefined or empty.");

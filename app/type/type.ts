@@ -66,8 +66,8 @@ export interface AppContextProps {
   >;
   storedUiLanguage: string | null;
   setStoredUiLanguage: React.Dispatch<React.SetStateAction<string>>;
-  storedEditorLanguage: string | null;
-  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string | null>>;
+  storedEditorLanguage: string;
+  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
   currentEditorLanguage: string;
   setCurrentEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
   storedEditorCode: string | null;

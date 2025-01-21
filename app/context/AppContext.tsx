@@ -46,9 +46,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
   // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
-  const [storedEditorLanguage, setStoredEditorLanguage] = useState<
-    string | null
-  >(null);
+  const [storedEditorLanguage, setStoredEditorLanguage] =
+    useState<string>("python");
   // 直近で選択されたエディタの言語を管理
   const [currentEditorLanguage, setCurrentEditorLanguage] =
     useState<string>("");
