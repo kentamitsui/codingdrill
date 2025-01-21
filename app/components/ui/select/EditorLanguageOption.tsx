@@ -4,7 +4,7 @@ import config from "@/app/config/config.json";
 import { useAppContext } from "@/app/context/AppContext";
 
 interface EditorLanguageOptionProps {
-  currentLanguageValue: string | null;
+  currentLanguageValue: string;
   setSelectedFunc: (value: string) => void;
 }
 
@@ -44,7 +44,7 @@ export const EditorLanguageOption: React.FC<EditorLanguageOptionProps> = ({
         id="language-select"
         className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
         // 初期選択がpythonにする
-        value={currentLanguageValue ? currentLanguageValue : "python"}
+        value={currentLanguageValue}
         disabled={isApiLoading}
         onChange={handleLanguageChange}
         style={{
