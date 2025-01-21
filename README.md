@@ -272,10 +272,8 @@ This project is built using the following technologies:
 ├── app
 │   ├── api
 │   │   ├── createQuestion
-│   │   │   ├── createQuestion.ts
 │   │   │   └── route.ts
 │   │   ├── createReview
-│   │   │   ├── createReview.ts
 │   │   │   └── route.ts
 │   │   └── utils
 │   │       └── openaiRequestHelper.ts
