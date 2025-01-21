@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ responseText });
   } catch (error) {
     return NextResponse.json(
-      { error: "Failed to create a problem" },
+      { error: "Failed to create a review response." },
       { status: 500 },
     );
   }

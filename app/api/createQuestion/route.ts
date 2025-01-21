@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Error processing OpenAI request:", error);
     return NextResponse.json(
-      { error: "Failed to create a problem" },
+      { error: "Failed to create a problem response." },
       { status: 500 },
     );
   }
