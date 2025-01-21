@@ -226,6 +226,7 @@ export interface ReusableReviewContentsProps {
 // LoadingAnimationに対する型定義
 export interface LoadingAnimationProps {
   isCreating: boolean | undefined;
+  text: string;
 }
 
 // ReactSelectに対する型定義

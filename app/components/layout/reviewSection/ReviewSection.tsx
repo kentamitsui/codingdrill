@@ -94,7 +94,7 @@ export const ReviewSection: React.FC = () => {
         id="result_scoring"
         className="flex flex-col gap-5 p-[15px_30px] leading-normal tracking-wider"
       >
-        <LoadingAnimation isCreating={isReviewCreating} />
+        <LoadingAnimation isCreating={isReviewCreating} text={"Now Creating"} />
         <ReusableParagraph
           content={reviewText}
           titleText="Explanation of the algorithm:"
