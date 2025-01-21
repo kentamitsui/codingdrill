@@ -173,7 +173,19 @@ export default function InputSection() {
           currentEditorValue,
         }),
       });
-
+      ///////////////////////////
+      // デバッグ用
+      console.log(
+        "Sent request body:",
+        JSON.stringify({
+          topic,
+          uiLanguage,
+          formattedQuestionText,
+          editorLanguage: currentEditorLanguage,
+          currentEditorValue,
+        }),
+      );
+      ///////////////////////////
       if (!response.ok) {
         throw new Error("Failed to create a review.");
       }
