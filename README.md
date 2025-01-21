@@ -30,7 +30,7 @@ I'll continue to work harder daily to make the service easy for users to use and
 
 ## 🕹アプリの使い方
 
-Coding Drillがどのように動くかデモをご覧ください。
+Coding Drillがどのように動くかは、デモをご覧ください。
 
 ![デモ](public/gif/demo.gif)
 
@@ -46,8 +46,10 @@ Coding Drillがどのように動くかデモをご覧ください。
 2. **Options**にカーソルを移動し、**Load**または**Delete**を選択します。
 3. アラートメッセージが表示されるので、**OK**または**Cancel**を選択します。
 
-- **Load**を選択すると、保存されている問題文・入力コード・総評文が表示されます。
-- **Delete**を選択すると、保存されているデータが削除されます。
+> [!TIP]
+> - **Load**を選択すると、保存されている問題文・入力コード・総評文が表示されます。
+> - **Delete**を選択すると、保存されているデータが削除されます。
+> - データの保存は、総評文が出力された時に行われます。
 
 <div align="center">
   <Img src="public/gif/demoOptions.gif" width=275 />
@@ -83,7 +85,6 @@ Coding Drillがどのように動くかデモをご覧ください。
   **5000字以内でのみ送信可能で、超過した場合は削除が必要です。**
 
 > [!NOTE]
->
 > - 出力内容の品質や精度には細心の注意を払っていますが、誤った内容を出力する可能性があります。
 > - 告知なしに機能やレイアウトが変更される可能性があります。
 > - 告知無しにアプリケーションの公開を一時的、または永久的に停止する可能性があります。
@@ -93,10 +94,11 @@ Coding Drillがどのように動くかデモをご覧ください。
 
 ## 💡今後の展望
 
-- **コードやプロンプトの改善 & Fine Tuning**
-- **UI/UXの改善**
+- **コードやプロンプトを日々改善 & Fine Tuning**
 
-  - [ ] 縦型レイアウトの導入。
+- [ ] **UI/UXの改善**
+
+  - 縦型レイアウトの導入。
 
 - [ ] **ユーザー登録機能の実装**
 
@@ -147,8 +149,10 @@ Watch the demo to see how Coding Drill works.
 2. Move the cursor to **Options**, select the **Load** or **Delete** button.
 3. Select **OK** or **Cancel** when an alert message appears.
 
-- If you select **Load**, the stored question text, input codes, and review text will be displayed.
-- Select **Delete** to delete the stored data.
+> [!TIP]
+> - If you select **Load**, the stored question text, input codes, and review text will be displayed.
+> - Select **Delete** to delete the stored data.
+> - Data is saved when the general review statement is output.
 
 <div align="center">
   <img src="public/gif/demoOptions.gif" width=275 />
@@ -184,7 +188,6 @@ Watch the demo to see how Coding Drill works.
     **Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.**
 
 > [!NOTE]
->
 > - While I strive for accuracy, there is a possibility that incorrect content may be output.
 > - Features and layouts may change without notice.
 > - Deployment may be temporarily or permanently stopped without notice.
@@ -194,10 +197,11 @@ Watch the demo to see how Coding Drill works.
 
 ## 💡Future Plans
 
-- **Improve code, Prompt & Fine Tuning**
-- **Improve UI/UX**
+- **Daily improvement of codes and prompts & Fine Tuning**
 
-  - [ ] Implement a vertical layout.
+- [ ] **Improve UI/UX**
+
+  - Implement a vertical layout.
 
 - [ ] **Implement User Registration**
 
@@ -373,8 +377,7 @@ To get started with this project, follow these steps:
 3. **npm i(install dependencies)** in terminal.
 4. Input **npm run dev** in terminal.
 5. Set up **.env.local**.
-> [!NOTE]
->
+> [!IMPORTANT]
 > - Please provide API KEY and environment variables yourself.
 6. Input **npm run dev** in terminal.
 7. Open **https://localhost:3000** in your blowser.
