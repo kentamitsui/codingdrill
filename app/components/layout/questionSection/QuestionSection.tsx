@@ -122,7 +122,10 @@ const QuestionSection: React.FC = () => {
         </button>
       </div>
       <div className="p-[15px_30px] leading-normal tracking-wider">
-        <LoadingAnimation isCreating={isQuestionCreating} />
+        <LoadingAnimation
+          isCreating={isQuestionCreating}
+          text={"Now Creating"}
+        />
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
           <ReusableParagraph
