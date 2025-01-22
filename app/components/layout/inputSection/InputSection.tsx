@@ -6,6 +6,7 @@ import { useAppContext } from "@/app/context/AppContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import { EditorThemeOption } from "@/app/components/ui/select/EditorThemeOption";
 import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
 
 export default function InputSection() {
@@ -28,6 +29,7 @@ export default function InputSection() {
     currentEditorInputed,
     setCurrentEditorInputed,
     setSaveData,
+    editorTheme,
     currentTheme,
   } = useAppContext();
   // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
@@ -64,7 +66,6 @@ export default function InputSection() {
   };
 
   const [fontSize, setFontSize] = useState("14");
-  const [editorTheme, setEditorTheme] = useState("vs-dark");
   const [_, setIsEditorInputed] = useState(editorRef.current?.getValue());
 
   // [フォントサイズ・エディタテーマ]オプションタグの値を動的に取得
@@ -74,11 +75,7 @@ export default function InputSection() {
     setFontSize(event.target.value);
   };
 
-  const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setEditorTheme(event.target.value);
-  };
-
-  // `storedEditorCode` の変更があった場合にエディタへ適用し、文字数カウントも更新
+  // `storedEditorCode` の変更があった場合、文字数カウントを更新
   useEffect(() => {
     // `currentEditorInputed` を更新して、ロード直後の文字数カウントが正しく動作するようにする
     if (storedEditorCode !== null) {
@@ -271,31 +268,7 @@ export default function InputSection() {
               ))}
             </select>
             {/* エディタのテーマ */}
-            <label htmlFor="theme-select" className="sr-only">
-              theme select
-            </label>
-            <select
-              id="theme-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
-              value={editorTheme}
-              disabled={isApiLoading}
-              onChange={handleThemeChange}
-              style={{
-                backgroundImage: `url(${
-                  currentTheme === "dark"
-                    ? menuData.svgIcon.editorColorLight
-                    : menuData.svgIcon.editorColorDark
-                })`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "calc(100% - 20px) center",
-                appearance: "auto",
-              }}
-            >
-              <option value="vs">vs</option>
-              <option value="vs-dark">vs-dark</option>
-              <option value="hc-light">hc-light</option>
-              <option value="hc-black">hc-black</option>
-            </select>
+            <EditorThemeOption />
             {/* エディタの言語 */}
             <EditorLanguageOption
               currentLanguageValue={storedEditorLanguage}

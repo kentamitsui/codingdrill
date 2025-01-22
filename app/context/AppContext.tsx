@@ -47,6 +47,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // 直近で選択されたエディタの言語を管理
   const [currentEditorLanguage, setCurrentEditorLanguage] =
     useState<string>("");
+  // エディタのテーマを管理
+  const [editorTheme, setEditorTheme] = useState<string>("vs-dark");
   // ローカルストレージから呼び出されたエディタの入力内容のデータ管理
   const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
   // エディタの入力内容をチェックするための状態管理
@@ -90,6 +92,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setSaveData,
         reviewText,
         setReviewText,
+        //// エディタ関連
         storedEditorLanguage,
         setStoredEditorLanguage,
         currentEditorLanguage,
@@ -98,6 +101,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setStoredEditorCode,
         currentEditorInputed,
         setCurrentEditorInputed,
+        editorTheme,
+        setEditorTheme,
         currentTheme,
         setCurrentTheme,
       }}

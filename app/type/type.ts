@@ -64,6 +64,7 @@ export interface AppContextProps {
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
+  //// エディタ関連の状態管理
   storedEditorLanguage: string;
   setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
   currentEditorLanguage: string;
@@ -72,6 +73,8 @@ export interface AppContextProps {
   setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
   currentEditorInputed: string | null;
   setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  editorTheme: string;
+  setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
   currentTheme: string | undefined;
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }

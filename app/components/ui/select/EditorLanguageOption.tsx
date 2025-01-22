@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import menuData from "@/app/config/config.json";
 import config from "@/app/config/config.json";
 import { useAppContext } from "@/app/context/AppContext";
