@@ -121,21 +121,24 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
 
   // ローカルストレージのデータを全て削除する関数
   const clearLocalStorage = () => {
+    // データの全削除なので、確認メッセージを二回出力
     if (!confirm("Is this correct want to delete all data?")) {
       return;
     }
     if (!confirm("Are you sure you want to delete all data?")) {
       return;
     }
-    localStorage.clear();
-    setStoredEntriesPoint([]);
 
-    // 状態を更新してUIに反映
-    const savedLocalStorageData =
-      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
-    if (savedLocalStorageData === undefined) return;
-    setSaveData(savedLocalStorageData);
-    setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
+    // try-catchでエラー処理を行う
+    try {
+      // ローカルストレージのデータを全て削除し、状態をリセット
+      localStorage.clear();
+      setStoredEntriesPoint([]);
+      setSaveData([]);
+      setCurrentSelectedSavedData(""); // 選択状態を未選択にリセット
+    } catch (error) {
+      console.error("Error clearing localStorage:", error);
+    }
   };
 
   return (
