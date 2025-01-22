@@ -31,14 +31,14 @@ export default function InputSection() {
     setSaveData,
     currentTheme,
   } = useAppContext();
-  const { savedData, updateLocalStorage } = useLocalStorageContext();
+  const { storedEntriesPoint, updateLocalStorage } = useLocalStorageContext();
   // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
   const [isAlert, setIsAlert] = useState(false);
 
   useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === null || event.newValue === null) {
-        updateLocalStorage(savedData);
+        updateLocalStorage(storedEntriesPoint);
         return;
       }
     };
@@ -48,7 +48,7 @@ export default function InputSection() {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
     };
-  }, [savedData, updateLocalStorage]);
+  }, [storedEntriesPoint, updateLocalStorage]);
 
   // refにMonaco Editorインスタンスを保持
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);

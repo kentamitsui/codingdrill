@@ -103,7 +103,7 @@ export interface MonacoEditorProps {
 
 // LocalStorageContextに対する型定義
 export interface LocalStorageContextTypeProps {
-  savedData: SavedDataEntryProps[];
+  storedEntriesPoint: SavedDataEntryProps[];
   currentSelectedSavedData: number | string;
   setCurrentSelectedSavedData: (id: number | string) => void;
   updateLocalStorage: (data: SavedDataEntryProps[]) => void;
