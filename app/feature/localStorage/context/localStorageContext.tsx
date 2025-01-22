@@ -44,7 +44,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     SavedDataEntryProps[]
   >([]);
   // セーブデータの選択に伴う背景色の状態管理に使用
-  // セーブデータの選択に伴う背景色の状態管理に使用
   const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
     number | null
   >(null);
@@ -93,7 +92,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // 各セクションのセット関数にデータを渡して状態を更新
-    // 各セクションの状態を更新
     setDifficulty(selectedLoadData.difficulty);
     setDataType(selectedLoadData.dataType);
     setTopic(selectedLoadData.topic);
