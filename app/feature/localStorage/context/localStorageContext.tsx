@@ -100,6 +100,13 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setStoredEditorLanguage(selectedLoadData.editorLanguage);
     setStoredEditorCode(selectedLoadData.editorContent);
     setReviewText(selectedLoadData.evaluation);
+
+    console.log(
+      "storedEntriesPoint: ",
+      storedEntriesPoint,
+      "currentSelectedSavedDataId",
+      currentSelectedSavedDataId,
+    );
   };
 
   // 選択されたデータを削除する関数
