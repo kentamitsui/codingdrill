@@ -86,7 +86,10 @@ export default function ReactSelect({
   };
 
   // プレースホルダーオプション
-  const placeholderOption = { value: null, label: "None" };
+  const placeholderOption = {
+    value: currentSelectedSavedDataId,
+    label: "None",
+  };
 
   // 選択されたオプションを取得
   const selectedOption =
