@@ -66,10 +66,10 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
   const loadSavedData = () => {
     // 既にstate管理しているデータを使用
-    if (!storedEntriesPoint || storedEntriesPoint.length === 0) {
-      alert("No saved data available.");
-      return;
-    }
+    // if (!storedEntriesPoint || storedEntriesPoint.length === 0) {
+    //   alert("No saved data available.");
+    //   return;
+    // }
 
     // 選択されたデータが存在するかをチェック
     if (currentSelectedSavedDataId === null) {
@@ -77,7 +77,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    const selectedLoadData = storedEntriesPoint.find(
+    const selectedLoadData = storedEntriesPoint?.find(
       (entry) => entry.id === currentSelectedSavedDataId,
     );
 
