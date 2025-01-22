@@ -107,7 +107,10 @@ export interface LocalStorageContextTypeProps {
   currentSelectedSavedData: number | string;
   setCurrentSelectedSavedData: (id: number | string) => void;
   updateLocalStorage: (data: SavedDataEntryProps[]) => void;
-  loadSavedData: (id: string | number, setFunctions: SetFunctionsProps) => void;
+  loadSavedData: (
+    id: string | number,
+    setUpdateFunctions: SetUpdateFunctionsProps,
+  ) => void;
   handleDeleteSelected: (id: string | number) => void;
   clearLocalStorage: () => void;
 }
@@ -138,8 +141,8 @@ export interface SavedDataEntryProps {
   timestamp: string;
 }
 
-// SetFunctionsに対する型定義
-export interface SetFunctionsProps {
+// SetUpdateFunctionsに対する型定義
+export interface SetUpdateFunctionsProps {
   difficulty: (value: string) => void;
   dataType: (value: string) => void;
   topic: (value: string) => void;
