@@ -86,7 +86,7 @@ export default function ReactSelect({
   };
 
   // プレースホルダーオプション
-  const placeholderOption = { value: "", label: "None" };
+  const placeholderOption = { value: null, label: "None" };
 
   // 選択されたオプションを取得
   const selectedOption =
@@ -117,22 +117,22 @@ export default function ReactSelect({
       padding: "4px",
       transition: "300ms",
       backgroundColor: state.isDisabled
-        ? currentSelectedSavedDataId === "" && currentTheme === "dark"
+        ? currentSelectedSavedDataId === null && currentTheme === "dark"
           ? "#0D1117"
-          : currentSelectedSavedDataId === "" && currentTheme === "light"
+          : currentSelectedSavedDataId === null && currentTheme === "light"
             ? "#e5e7eb"
-            : currentSelectedSavedDataId !== "" && currentTheme === "dark"
+            : currentSelectedSavedDataId !== null && currentTheme === "dark"
               ? "#334155"
-              : currentSelectedSavedDataId !== "" && currentTheme === "light"
+              : currentSelectedSavedDataId !== null && currentTheme === "light"
                 ? "#9ca3af"
                 : ""
-        : currentSelectedSavedDataId === "" && currentTheme === "dark"
+        : currentSelectedSavedDataId === null && currentTheme === "dark"
           ? "#0D1117"
-          : currentSelectedSavedDataId === "" && currentTheme === "light"
+          : currentSelectedSavedDataId === null && currentTheme === "light"
             ? "#e5e7eb"
-            : currentSelectedSavedDataId !== "" && currentTheme === "dark"
+            : currentSelectedSavedDataId !== null && currentTheme === "dark"
               ? "#334155"
-              : currentSelectedSavedDataId !== "" && currentTheme === "light"
+              : currentSelectedSavedDataId !== null && currentTheme === "light"
                 ? "#9ca3af"
                 : "",
       borderColor: currentTheme === "dark" ? "#0D1117" : "#e5e7eb",
@@ -145,7 +145,7 @@ export default function ReactSelect({
           : currentTheme === "dark"
             ? "#334155"
             : "#9CA3AF",
-        opacity: isApiLoading || currentSelectedSavedDataId !== "" ? 0.5 : 1,
+        opacity: isApiLoading || currentSelectedSavedDataId !== null ? 0.5 : 1,
       },
     }),
     valueContainer: (provided) => ({
