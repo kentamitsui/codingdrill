@@ -37,6 +37,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setStoredEditorLanguage,
     setStoredEditorCode,
     setReviewText,
+    saveData,
     setSaveData,
   } = useAppContext();
   // ローカルストレージから取得したデータの一覧を状態管理
@@ -48,13 +49,12 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     number | null
   >(null);
 
-  // ローカルストレージからデータを取得して、状態を関数(storedEntriesPoint)に渡して更新
-  // これで、他の関数で再利用可能なデータを取得出来る
+  // ローカルストレージからデータを取得
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
       localStorage.getItem("savedData") || "[]",
     );
-    setStoredEntriesPoint(getLocalStorageData);
+    setSaveData(getLocalStorageData);
   }, []);
 
   // ローカルストレージを更新する関数
@@ -66,7 +66,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
   const loadSavedData = () => {
     // 既にstate管理しているデータを使用
-    if (!storedEntriesPoint || storedEntriesPoint.length === 0) {
+    if (!saveData || saveData.length === 0) {
       alert("No saved data available.");
       return;
     }
@@ -77,7 +77,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    const selectedLoadData = storedEntriesPoint.find(
+    const selectedLoadData = saveData.find(
       (entry) => entry.id === currentSelectedSavedDataId,
     );
 
@@ -100,13 +100,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setStoredEditorLanguage(selectedLoadData.editorLanguage);
     setStoredEditorCode(selectedLoadData.editorContent);
     setReviewText(selectedLoadData.evaluation);
-
-    console.log(
-      "storedEntriesPoint: ",
-      storedEntriesPoint,
-      "currentSelectedSavedDataId",
-      currentSelectedSavedDataId,
-    );
   };
 
   // 選択されたデータを削除する関数
