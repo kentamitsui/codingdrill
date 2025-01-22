@@ -212,7 +212,7 @@ export default function Sidebar() {
               text="All Delete"
               iconLight={menuData.svgIcon.deteleAllLight}
               iconDark={menuData.svgIcon.deteleAllDark}
-              onClick={clearLocalStorage}
+              onClick={() => clearLocalStorage()}
             />
           </div>
         </details>
