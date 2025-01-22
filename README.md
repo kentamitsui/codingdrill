@@ -76,8 +76,7 @@ Coding Drillがどのように機能するかは、デモGIFをご覧くださ�
 ## 🔧機能
 
 - **ChatGPT-APIを使用して問題の作成・採点を自動化しています。**
-- **問題文、入力コード、総評文はローカルストレージに保存されます。**  
-  **保存されるタイミングは、総評文が出力された直後です。**
+- **問題文、入力コード、総評文はローカルストレージに保存されます。**
 - **「Copy」ボタンを押すと、エリア内のテキストをコピーできます。**  
   **テキストが空の場合はコピーされません。**
 - **🌙 または ☀️ アイコンを押すと、カラーテーマが切り替わります。**
@@ -184,7 +183,6 @@ You can watch the demo to see how Coding Drill works.
 
 - **Automated creation and grading of coding questions using the ChatGPT API.**
 - **Data for question text, input codes, and general review text are stored in local storage.**
-- **Data is saved to local storage immediately after the general review text is generated.**
 - **Pressing the Copy button copies the text.**
   - **If the text is empty, it will not be copied.**
 - **Pressing the 🌙 or ☀️ icon changes the color theme.**
