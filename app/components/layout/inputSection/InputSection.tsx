@@ -3,7 +3,6 @@ import MonacoEditor from "@/app/feature/monacoEditor/MonacoEditor";
 import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
@@ -171,10 +170,10 @@ export default function InputSection() {
         dataType,
         topic,
         uiLanguage,
-        problemContent: jsonFormattedQuestionText,
+        questionText: jsonFormattedQuestionText,
         editorLanguage: currentEditorLanguage,
-        editorContent: currentEditorValue,
-        evaluation: JsonText,
+        editorCode: currentEditorValue,
+        reviewText: JsonText,
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する

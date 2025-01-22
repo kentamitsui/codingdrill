@@ -86,10 +86,10 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setDataType(selectedLoadData.dataType);
     setTopic(selectedLoadData.topic);
     setUiLanguage(selectedLoadData.uiLanguage);
-    setJsonFormattedQuestionText(selectedLoadData.problemContent);
+    setJsonFormattedQuestionText(selectedLoadData.questionText);
     setStoredEditorLanguage(selectedLoadData.editorLanguage);
-    setStoredEditorCode(selectedLoadData.editorContent);
-    setReviewText(selectedLoadData.evaluation);
+    setStoredEditorCode(selectedLoadData.editorCode);
+    setReviewText(selectedLoadData.reviewText);
   };
 
   // 選択されたデータを削除する関数
