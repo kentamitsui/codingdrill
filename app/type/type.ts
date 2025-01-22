@@ -126,7 +126,7 @@ export interface SaveToLocalStorageProps {
 
 // SavedDataEntryに対する型定義
 export interface SavedDataEntryProps {
-  id: number;
+  id: number | null;
   difficulty: string;
   dataType: string;
   topic: string;
