@@ -32,7 +32,7 @@ I'll continue to work harder daily to make the service easy for users to use and
 
 Coding Drillがどのように機能するかは、デモGIFをご覧ください。
 
-![デモ](public/gif/demo.gif)
+![[デモ](public/gif/demo.gif)](#)
 
 ### **主な機能**
 
@@ -47,6 +47,7 @@ Coding Drillがどのように機能するかは、デモGIFをご覧くださ�
 3. アラートメッセージが表示されるので、**OK**または**Cancel**を選択します。
 
 > [!TIP]
+>
 > - **Load**を選択すると、保存されている問題文・入力コード・総評文が表示されます。
 > - **Delete**を選択すると、保存されているデータが削除されます。
 > - データの保存は、総評文が出力された時に行われます。
@@ -85,6 +86,7 @@ Coding Drillがどのように機能するかは、デモGIFをご覧くださ�
   **5000字以内でのみ送信可能で、超過した場合は削除が必要です。**
 
 > [!NOTE]
+>
 > - 出力内容の品質や精度には細心の注意を払っていますが、誤った内容を出力する可能性があります。
 > - 告知なしに機能やレイアウトが変更される可能性があります。
 > - 告知無しにアプリケーションの公開を一時的、または永久的に停止する可能性があります。
@@ -151,6 +153,7 @@ You can watch the demo to see how Coding Drill works.
 3. Select **OK** or **Cancel** when an alert message appears.
 
 > [!TIP]
+>
 > - If you select **Load**, the stored question text, input codes, and review text will be displayed.
 > - Select **Delete** to delete the stored data.
 > - Data is saved when the review text is output.
@@ -189,6 +192,7 @@ You can watch the demo to see how Coding Drill works.
     **Only 5000 characters or less can be submitted. If it exceeds 5000, please reduce it.**
 
 > [!NOTE]
+>
 > - Please note while I strive for accuracy, there is a possibility that incorrect content may be output.
 > - Features and layouts may change without notice.
 > - Deployment may be temporarily or permanently stopped without notice.
@@ -342,15 +346,15 @@ This project is built using the following technologies:
 │   ├── type
 │   │   └── type.ts
 │   └── vercel.json
+├── public
+│   ├── gif // omitted because many items
+│   ├── images // omitted because many items
+│   └── icon.svg
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
 ├── postcss.config.mjs
-├── public
-│   ├── gif
-│   ├── images
-│   └── icon.svg
 ├── README.md
 ├── tailwind.config.ts
 └── tsconfig.json
@@ -360,11 +364,11 @@ This project is built using the following technologies:
 
 ## 🌍Deployment
 
-This project is deployed on **Vercel** with automatic CI/CD using **GitHub Actions**.
+- This project is deployed on **Vercel** with automatic CI/CD using **GitHub Actions**.
 
 ### **🔧 How to Deploy**
 
-To deploy the project, follow these steps:
+- To deploy the project, follow these steps:
 
 1. **Push changes to the `main` branch**
 
@@ -374,31 +378,33 @@ git commit -m "Deploy update"
 git push origin main
 ```
 
-This will automatically trigger deployment on Vercel.
+- This will automatically trigger deployment on Vercel.
 
 2. **Manage Environment Variables**
 
-Managing Environment Variables Environment variables such as API keys, prompts, etc. are managed in the Vercel environment variables.  
-Ensure that environment variables are properly set in the Vercel dashboard (Settings => Environment Variables).
+- Managing Environment Variables Environment variables such as API keys, prompts, etc. are managed in the Vercel.
+- Ensure that environment variables are properly set in the Vercel dashboard (Settings => Environment Variables).
 
 3. **Check Deployment Status**
- - Open the Vercel Dashboard and verify deployment status.
- - If there are issues, check GitHub Actions logs for debugging.
+
+- Open the Vercel Dashboard and verify deployment status.
+- If there are issues, check GitHub Actions logs for debugging.
 
 4. **Access the Live Application**
-Once deployed, the project will be available at:
+
+- Once deployed, the project will be available at:
 
 ```
 https://your-app-name.vercel.app/
 ```
 
-(Replace your-app-name with your actual project name on Vercel.)
+_(Replace your-app-name with your actual project name on Vercel.)_
 
 ---
 
 ## 📌Getting Started
 
-To set up the project locally, follow these steps:
+- To set up the project locally, follow these steps:
 
 1. **Clone the Repository**
 
@@ -415,14 +421,15 @@ npm install
 
 3. **Set Up Environment Variables**
 
-Before running the project, create a .env.local file in the root directory and add the necessary API keys:
+- Before running the project, create a .env.local file in the root directory and add the necessary API keys and prompt:
 
 ```
 OPENAI_API_KEY=your_openai_api_key_here
+PROMPT=your_prompt
 ```
 
 > [!IMPORTANT]
-> - You must provide your API key, prompt, and environment variables.
+> You must provide your API key, prompt, and environment variables.
 
 4. Run the Development Server
 
@@ -431,7 +438,8 @@ npm run dev
 ```
 
 5. Open the Application
-Open the following URL in your browser:
+
+- Open the following URL in your browser:
 
 ```
 http://localhost:3000
