@@ -32,7 +32,7 @@ I'll continue to work harder daily to make the service easy for users to use and
 
 Coding Drillがどのように機能するかは、デモGIFをご覧ください。
 
-![[デモ](public/gif/demo.gif)](#)
+![デモ](public/gif/demo.gif)
 
 ### **主な機能**
 
