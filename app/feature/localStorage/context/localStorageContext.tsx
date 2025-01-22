@@ -8,7 +8,6 @@ import {
 import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
-  SetUpdateFunctionsProps,
 } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
 const LocalStorageContext = createContext<
@@ -29,7 +28,17 @@ export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
 
 // 各ファイルで、ローカルストレージに関するコンテキストを使用出来るようにするプロバイダー
 export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
-  const { setSaveData } = useAppContext();
+  const {
+    setDifficulty,
+    setDataType,
+    setTopic,
+    setUiLanguage,
+    setJsonFormattedQuestionText,
+    setStoredEditorLanguage,
+    setStoredEditorCode,
+    setReviewText,
+    setSaveData,
+  } = useAppContext();
   // ローカルストレージから取得したデータの一覧を状態管理
   const [storedEntriesPoint, setStoredEntriesPoint] = useState<
     SavedDataEntryProps[]
@@ -39,6 +48,8 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     number | string
   >("");
 
+  // ローカルストレージからデータを取得して、状態を関数(storedEntriesPoint)に渡して更新
+  // これで、他の関数で再利用可能なデータを取得出来る
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
       localStorage.getItem("savedData") || "[]" || "undefined",
@@ -53,34 +64,40 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
-  const loadSavedData = (
-    id: string | number,
-    setUpdateFunctions: SetUpdateFunctionsProps,
-  ) => {
-    const loadData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    // 選択されたデータのIDを取得
-    const selectedLoadData: SavedDataEntryProps = loadData.find(
-      (entry: SavedDataEntryProps) => entry.id === id,
-    );
-
-    if (!selectedLoadData) {
-      alert("Data not found.");
+  const loadSavedData = () => {
+    // 既にstate管理しているデータを使用
+    if (!storedEntriesPoint || storedEntriesPoint.length === 0) {
+      alert("No saved data available.");
       return;
     }
 
-    if (!confirm("Is it correct to load this data?")) {
+    // 選択されたデータが存在するかをチェック
+    const selectedLoadData = storedEntriesPoint.find(
+      (entry) => entry.id === currentSelectedSavedData,
+    );
+
+    if (!selectedLoadData) {
+      alert("Error: Could not load the selected data.");
+      return;
+    }
+
+    // 確認ダイアログ
+    if (!confirm("Are you sure you want to load this entry?")) {
       return;
     }
 
     // 各セクションのセット関数にデータを渡して状態を更新
-    setUpdateFunctions.difficulty(selectedLoadData.difficulty);
-    setUpdateFunctions.dataType(selectedLoadData.dataType);
-    setUpdateFunctions.topic(selectedLoadData.topic);
-    setUpdateFunctions.uiLanguage(selectedLoadData.uiLanguage);
-    setUpdateFunctions.problemContent(selectedLoadData.problemContent);
-    setUpdateFunctions.editorLanguage(selectedLoadData.editorLanguage);
-    setUpdateFunctions.editorContent(selectedLoadData.editorContent);
-    setUpdateFunctions.evaluation(selectedLoadData.evaluation);
+    // 各セクションの状態を更新
+    setDifficulty(selectedLoadData.difficulty);
+    setDataType(selectedLoadData.dataType);
+    setTopic(selectedLoadData.topic);
+    setUiLanguage(selectedLoadData.uiLanguage);
+    setJsonFormattedQuestionText(selectedLoadData.problemContent);
+    setStoredEditorLanguage(selectedLoadData.editorLanguage);
+    setStoredEditorCode(selectedLoadData.editorContent);
+    setReviewText(selectedLoadData.evaluation);
+
+    console.log(currentSelectedSavedData);
   };
 
   // 選択されたデータを削除する関数
@@ -90,7 +107,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
 
     // 選択されたデータが存在するかをチェック
     if (!deleteData.some((entry: SavedDataEntryProps) => entry.id === id)) {
-      alert("Please select a delete data.");
+      alert("Please select a valid data entry to delete.");
       return;
     }
 
