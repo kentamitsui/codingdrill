@@ -31,35 +31,8 @@ export default function InputSection() {
     setSaveData,
     currentTheme,
   } = useAppContext();
-  const { updateLocalStorage } = useLocalStorageContext();
   // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
   const [isAlert, setIsAlert] = useState(false);
-
-  // ローカルストレージの変更を監視し、エディタの入力内容を更新
-  useEffect(() => {
-    const handleStorageChange = (event: StorageEvent) => {
-      // clearLocalStorageが実行された場合、event.key === nullになるので空を返す
-      // セーブデータのリスト更新は、clearLocalStorage内で行われる
-      if (event.key === null) {
-        return;
-      }
-
-      // ローカルストレージの変更がエントリーポイントに関連するものでない場合、無視
-      try {
-        const updatedData = event.newValue ? JSON.parse(event.newValue) : [];
-        updateLocalStorage(updatedData);
-      } catch (error) {
-        console.error("Error parsing updated storage data:", error);
-      }
-    };
-
-    // ローカルストレージの変更を監視
-    window.addEventListener("storage", handleStorageChange);
-    return () => {
-      // クリーンアップ
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [updateLocalStorage]);
 
   // refにMonaco Editorインスタンスを保持
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);

@@ -40,10 +40,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     saveData,
     setSaveData,
   } = useAppContext();
-  // ローカルストレージから取得したデータの一覧を状態管理
-  const [storedEntriesPoint, setStoredEntriesPoint] = useState<
-    SavedDataEntryProps[] | null
-  >(null);
   // セーブデータの選択に伴う背景色の状態管理に使用
   const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
     number | null
@@ -56,12 +52,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     );
     setSaveData(getLocalStorageData);
   }, []);
-
-  // ローカルストレージを更新する関数
-  const updateLocalStorage = (data: SavedDataEntryProps[]) => {
-    localStorage.setItem("savedData", JSON.stringify(data));
-    setStoredEntriesPoint(data);
-  };
 
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
   const loadSavedData = () => {
@@ -154,7 +144,6 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     try {
       // ローカルストレージのデータを全て削除し、状態をリセット
       localStorage.clear();
-      setStoredEntriesPoint([]);
       setSaveData([]);
       setCurrentSelectedSavedDataId(null); // 選択状態を未選択にリセット
     } catch (error) {
@@ -165,10 +154,8 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   return (
     <LocalStorageContext.Provider
       value={{
-        storedEntriesPoint,
         currentSelectedSavedDataId,
         setCurrentSelectedSavedDataId,
-        updateLocalStorage,
         loadSavedData,
         handleDeleteSelected,
         clearLocalStorage,

@@ -38,7 +38,6 @@ export default function Sidebar() {
   // ローカルストレージに関するデータ管理
   const {
     currentSelectedSavedDataId,
-    storedEntriesPoint,
     setCurrentSelectedSavedDataId,
     loadSavedData,
     handleDeleteSelected,

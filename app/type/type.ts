@@ -64,8 +64,6 @@ export interface AppContextProps {
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
-  storedUiLanguage: string | null;
-  setStoredUiLanguage: React.Dispatch<React.SetStateAction<string>>;
   storedEditorLanguage: string;
   setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
   currentEditorLanguage: string;
@@ -103,10 +101,8 @@ export interface MonacoEditorProps {
 
 // LocalStorageContextに対する型定義
 export interface LocalStorageContextTypeProps {
-  storedEntriesPoint: SavedDataEntryProps[] | null;
   currentSelectedSavedDataId: number | null;
   setCurrentSelectedSavedDataId: (id: number | null) => void;
-  updateLocalStorage: (data: SavedDataEntryProps[]) => void;
   loadSavedData: () => void;
   handleDeleteSelected: () => void;
   clearLocalStorage: () => void;

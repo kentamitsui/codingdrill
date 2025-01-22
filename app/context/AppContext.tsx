@@ -25,10 +25,6 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [uiLanguage, setUiLanguage] = useState<string>("");
-
-  // ローカルストレージから呼び出された"uiLanguage(文章を表示する際の言語)"の状態管理
-  const [storedUiLanguage, setStoredUiLanguage] = useState<string>("");
-
   // APIから出力された問題文を、JSON形式からテキストに再構築されたデータの状態管理
   const [jsonFormattedQuestionText, setJsonFormattedQuestionText] =
     useState<ProblemContentProps | null>(null);
@@ -94,9 +90,6 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setSaveData,
         reviewText,
         setReviewText,
-        storedUiLanguage,
-        setStoredUiLanguage,
-        //////////
         storedEditorLanguage,
         setStoredEditorLanguage,
         currentEditorLanguage,
