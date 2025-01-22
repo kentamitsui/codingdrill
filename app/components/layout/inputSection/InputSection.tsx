@@ -6,6 +6,7 @@ import { useAppContext } from "@/app/context/AppContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import { EditorFontOption } from "@/app/components/ui/select/EditorFontOption";
 import { EditorThemeOption } from "@/app/components/ui/select/EditorThemeOption";
 import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
 
@@ -29,6 +30,7 @@ export default function InputSection() {
     currentEditorInputed,
     setCurrentEditorInputed,
     setSaveData,
+    editorFontSize,
     editorTheme,
     currentTheme,
   } = useAppContext();
@@ -65,15 +67,7 @@ export default function InputSection() {
     }
   };
 
-  const [fontSize, setFontSize] = useState("14");
   const [_, setIsEditorInputed] = useState(editorRef.current?.getValue());
-
-  // [フォントサイズ・エディタテーマ]オプションタグの値を動的に取得
-  const handleFontSizeChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setFontSize(event.target.value);
-  };
 
   // `storedEditorCode` の変更があった場合、文字数カウントを更新
   useEffect(() => {
@@ -241,32 +235,7 @@ export default function InputSection() {
             }`}
           >
             {/* フォントサイズ */}
-            <label htmlFor="fontsize-select" className="sr-only">
-              fontsize select
-            </label>
-            <select
-              id="fontsize-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
-              value={fontSize}
-              disabled={isApiLoading}
-              onChange={handleFontSizeChange}
-              style={{
-                backgroundImage: `url(${
-                  currentTheme === "dark"
-                    ? menuData.svgIcon.textSizeLight
-                    : menuData.svgIcon.textSizeDark
-                })`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "calc(100% - 20px) center",
-                appearance: "auto",
-              }}
-            >
-              {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
+            <EditorFontOption />
             {/* エディタのテーマ */}
             <EditorThemeOption />
             {/* エディタの言語 */}
@@ -296,7 +265,7 @@ export default function InputSection() {
       <div className="flex flex-1">
         <MonacoEditor
           // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
-          fontSize={Number(fontSize)}
+          fontSize={Number(editorFontSize)}
           editorLanguage={storedEditorLanguage}
           editorTheme={editorTheme}
           // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
