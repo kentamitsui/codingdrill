@@ -45,8 +45,8 @@ export default function Sidebar() {
   } = useLocalStorageContext();
 
   // セーブデータの状態(ID)を更新する
-  const handleChangeSavedData = (selectedOption: { value: string } | null) => {
-    setCurrentSelectedSavedDataId(selectedOption?.value ?? "");
+  const handleChangeSavedData = (selectedOption: { value: number } | null) => {
+    setCurrentSelectedSavedDataId(selectedOption?.value ?? null);
   };
 
   // 問題文を生成する

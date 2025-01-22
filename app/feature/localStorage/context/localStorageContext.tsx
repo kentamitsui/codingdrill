@@ -44,9 +44,10 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     SavedDataEntryProps[]
   >([]);
   // セーブデータの選択に伴う背景色の状態管理に使用
+  // セーブデータの選択に伴う背景色の状態管理に使用
   const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
-    number | string
-  >("");
+    number | null
+  >(null);
 
   // ローカルストレージからデータを取得して、状態を関数(storedEntriesPoint)に渡して更新
   // これで、他の関数で再利用可能なデータを取得出来る
@@ -72,6 +73,11 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // 選択されたデータが存在するかをチェック
+    if (currentSelectedSavedDataId === null) {
+      alert("No data selected.");
+      return;
+    }
+
     const selectedLoadData = storedEntriesPoint.find(
       (entry) => entry.id === currentSelectedSavedDataId,
     );
@@ -96,12 +102,15 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setStoredEditorLanguage(selectedLoadData.editorLanguage);
     setStoredEditorCode(selectedLoadData.editorContent);
     setReviewText(selectedLoadData.evaluation);
-
-    console.log(currentSelectedSavedDataId);
   };
 
   // 選択されたデータを削除する関数
   const handleDeleteSelected = () => {
+    if (currentSelectedSavedDataId === null) {
+      alert("No data selected.");
+      return;
+    }
+
     // ローカルストレージのデータを取得
     const deleteData = JSON.parse(localStorage.getItem("savedData") || "[]");
 
@@ -129,11 +138,8 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
 
     // 状態を更新してUIに反映
     setSaveData(updatedData);
-
     // currentSelectedSavedDataId をリセットする
-    setCurrentSelectedSavedDataId(
-      currentSelectedSavedDataId ? "" : currentSelectedSavedDataId,
-    ); // 空文字を渡す事で未選択時の背景色に戻す
+    setCurrentSelectedSavedDataId(null); // nullを渡す事で未選択時の背景色に戻す
   };
 
   // ローカルストレージのデータを全て削除する関数
@@ -152,7 +158,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       localStorage.clear();
       setStoredEntriesPoint([]);
       setSaveData([]);
-      setCurrentSelectedSavedDataId(""); // 選択状態を未選択にリセット
+      setCurrentSelectedSavedDataId(null); // 選択状態を未選択にリセット
     } catch (error) {
       console.error("Error clearing localStorage:", error);
     }
