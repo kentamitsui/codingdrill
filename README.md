@@ -377,12 +377,9 @@ git push origin main
 This will automatically trigger deployment on Vercel.
 
 2. **Manage Environment Variables**
-API keys, prompt, and environment variables are managed via Vercel Environment Variables.
-Ensure that the following variables are properly set in the Vercel dashboard:
 
-```
-OPENAI_API_KEY=your_openai_api_key_here
-```
+Managing Environment Variables Environment variables such as API keys, prompts, etc. are managed in the Vercel environment variables.  
+Ensure that environment variables are properly set in the Vercel dashboard (Settings => Environment Variables).
 
 3. **Check Deployment Status**
  - Open the Vercel Dashboard and verify deployment status.
@@ -417,6 +414,7 @@ npm install
 ```
 
 3. **Set Up Environment Variables**
+
 Before running the project, create a .env.local file in the root directory and add the necessary API keys:
 
 ```
