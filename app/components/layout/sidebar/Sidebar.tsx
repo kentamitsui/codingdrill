@@ -37,8 +37,8 @@ export default function Sidebar() {
   } = useAppContext();
   // ローカルストレージに関するデータ管理
   const {
-    currentSelectedSavedData,
-    setCurrentSelectedSavedData,
+    currentSelectedSavedDataId,
+    setCurrentSelectedSavedDataId,
     loadSavedData,
     handleDeleteSelected,
     clearLocalStorage,
@@ -46,7 +46,7 @@ export default function Sidebar() {
 
   // セーブデータの状態(ID)を更新する
   const handleChangeSavedData = (selectedOption: { value: string } | null) => {
-    setCurrentSelectedSavedData(selectedOption?.value ?? "");
+    setCurrentSelectedSavedDataId(selectedOption?.value ?? "");
   };
 
   // 問題文を生成する
@@ -153,7 +153,7 @@ export default function Sidebar() {
           save data
         </label>
         <ReactSelect
-          selectedSaveData={currentSelectedSavedData}
+          selectedSaveData={currentSelectedSavedDataId}
           handleChangeSavedData={handleChangeSavedData}
           isApiLoading={isApiLoading}
           saveData={saveData}
@@ -204,7 +204,7 @@ export default function Sidebar() {
               text="Delete"
               iconLight={menuData.svgIcon.deteleLight}
               iconDark={menuData.svgIcon.deteleDark}
-              onClick={() => handleDeleteSelected(currentSelectedSavedData)}
+              onClick={() => handleDeleteSelected()}
             />
             <SaveDataOptionButton
               id="delete-all"
