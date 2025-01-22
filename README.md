@@ -98,6 +98,7 @@ Coding Drillがどのように機能するかは、デモGIFをご覧くださ�
 
 - **コードやプロンプトを日々改善**
 - **Fine Tuningの実施と効果測定**
+- **テストコードの導入**
 
 - [ ] **UI/UXの改善**
 
@@ -204,6 +205,7 @@ You can watch the demo to see how Coding Drill works.
 
 - **Daily improvement of codes and prompts**
 - **Fine Tuning Implementation and Effectiveness Measurement**
+- **Implement test code**
 
 - [ ] **Improve UI/UX**
 
