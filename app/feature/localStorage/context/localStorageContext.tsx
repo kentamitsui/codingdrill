@@ -44,7 +44,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     SavedDataEntryProps[]
   >([]);
   // セーブデータの選択に伴う背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
+  const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
     number | string
   >("");
 
@@ -73,7 +73,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
 
     // 選択されたデータが存在するかをチェック
     const selectedLoadData = storedEntriesPoint.find(
-      (entry) => entry.id === currentSelectedSavedData,
+      (entry) => entry.id === currentSelectedSavedDataId,
     );
 
     if (!selectedLoadData) {
@@ -97,16 +97,20 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setStoredEditorCode(selectedLoadData.editorContent);
     setReviewText(selectedLoadData.evaluation);
 
-    console.log(currentSelectedSavedData);
+    console.log(currentSelectedSavedDataId);
   };
 
   // 選択されたデータを削除する関数
-  const handleDeleteSelected = (id: string | number) => {
+  const handleDeleteSelected = () => {
     // ローカルストレージのデータを取得
     const deleteData = JSON.parse(localStorage.getItem("savedData") || "[]");
 
     // 選択されたデータが存在するかをチェック
-    if (!deleteData.some((entry: SavedDataEntryProps) => entry.id === id)) {
+    if (
+      !deleteData.some(
+        (entry: SavedDataEntryProps) => entry.id === currentSelectedSavedDataId,
+      )
+    ) {
       alert("Please select a valid data entry to delete.");
       return;
     }
@@ -117,7 +121,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
 
     // 選択されたデータ以外をフィルタリングする
     const updatedData = deleteData.filter(
-      (entry: SavedDataEntryProps) => entry.id !== id,
+      (entry: SavedDataEntryProps) => entry.id !== currentSelectedSavedDataId,
     );
 
     // フィルタリングされたデータを設置する事で、データを削除することと同等の機能を実装
@@ -126,9 +130,9 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     // 状態を更新してUIに反映
     setSaveData(updatedData);
 
-    // currentSelectedSavedData をリセットする
-    setCurrentSelectedSavedData(
-      id === currentSelectedSavedData ? "" : currentSelectedSavedData,
+    // currentSelectedSavedDataId をリセットする
+    setCurrentSelectedSavedDataId(
+      currentSelectedSavedDataId ? "" : currentSelectedSavedDataId,
     ); // 空文字を渡す事で未選択時の背景色に戻す
   };
 
@@ -148,7 +152,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       localStorage.clear();
       setStoredEntriesPoint([]);
       setSaveData([]);
-      setCurrentSelectedSavedData(""); // 選択状態を未選択にリセット
+      setCurrentSelectedSavedDataId(""); // 選択状態を未選択にリセット
     } catch (error) {
       console.error("Error clearing localStorage:", error);
     }
@@ -158,8 +162,8 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     <LocalStorageContext.Provider
       value={{
         storedEntriesPoint,
-        currentSelectedSavedData,
-        setCurrentSelectedSavedData,
+        currentSelectedSavedDataId,
+        setCurrentSelectedSavedDataId,
         updateLocalStorage,
         loadSavedData,
         handleDeleteSelected,
