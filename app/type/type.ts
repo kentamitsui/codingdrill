@@ -158,6 +158,10 @@ export interface UpdateSaveDataEntryProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
+  problemContent: ProblemContentProps | null;
+  editorLanguage: string;
+  editorContent: string;
+  evaluation: ReviewResponseProps | null;
 }
 
 // ProblemContentのベースとなる型定義
