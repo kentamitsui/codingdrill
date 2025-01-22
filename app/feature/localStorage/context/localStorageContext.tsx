@@ -41,8 +41,8 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   } = useAppContext();
   // ローカルストレージから取得したデータの一覧を状態管理
   const [storedEntriesPoint, setStoredEntriesPoint] = useState<
-    SavedDataEntryProps[]
-  >([]);
+    SavedDataEntryProps[] | null
+  >(null);
   // セーブデータの選択に伴う背景色の状態管理に使用
   const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
     number | null
@@ -52,7 +52,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   // これで、他の関数で再利用可能なデータを取得出来る
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
-      localStorage.getItem("savedData") || "[]" || "undefined",
+      localStorage.getItem("savedData") || "[]",
     );
     setStoredEntriesPoint(getLocalStorageData);
   }, []);
