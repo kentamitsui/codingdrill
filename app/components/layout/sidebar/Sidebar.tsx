@@ -38,6 +38,7 @@ export default function Sidebar() {
   // ローカルストレージに関するデータ管理
   const {
     currentSelectedSavedDataId,
+    storedEntriesPoint,
     setCurrentSelectedSavedDataId,
     loadSavedData,
     handleDeleteSelected,
@@ -47,7 +48,14 @@ export default function Sidebar() {
   // セーブデータの状態(ID)を更新する
   const handleChangeSavedData = (selectedOption: { value: number } | null) => {
     setCurrentSelectedSavedDataId(selectedOption?.value || null);
-    console.log(selectedOption?.value);
+    console.log(
+      "selectedOption.value: ",
+      selectedOption?.value,
+      "currentSelectedSavedDataId: ",
+      currentSelectedSavedDataId,
+      "storedEntriesPoint",
+      storedEntriesPoint,
+    );
   };
 
   // 問題文を生成する
