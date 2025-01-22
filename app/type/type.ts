@@ -73,6 +73,8 @@ export interface AppContextProps {
   setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
   currentEditorInputed: string | null;
   setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  editorFontSize: string;
+  setEditorFontSize: React.Dispatch<React.SetStateAction<string>>;
   editorTheme: string;
   setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
   currentTheme: string | undefined;

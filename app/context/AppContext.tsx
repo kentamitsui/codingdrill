@@ -47,6 +47,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   // 直近で選択されたエディタの言語を管理
   const [currentEditorLanguage, setCurrentEditorLanguage] =
     useState<string>("");
+  // エディタのフォントサイズを管理
+  const [editorFontSize, setEditorFontSize] = useState<string>("14");
   // エディタのテーマを管理
   const [editorTheme, setEditorTheme] = useState<string>("vs-dark");
   // ローカルストレージから呼び出されたエディタの入力内容のデータ管理
@@ -101,6 +103,8 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setStoredEditorCode,
         currentEditorInputed,
         setCurrentEditorInputed,
+        editorFontSize,
+        setEditorFontSize,
         editorTheme,
         setEditorTheme,
         currentTheme,

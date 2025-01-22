@@ -1,10 +1,11 @@
 import { useAppContext } from "@/app/context/AppContext";
 import menuData from "@/app/config/config.json";
 
-export const EditorThemeOption: React.FC = ({}) => {
+export const EditorThemeOption: React.FC = () => {
   const { isApiLoading, editorTheme, setEditorTheme, currentTheme } =
     useAppContext();
 
+  // テーマの値を動的に取得
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setEditorTheme(event.target.value);
   };
