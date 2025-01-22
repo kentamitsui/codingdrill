@@ -49,7 +49,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     useState<string>("");
   // ローカルストレージから呼び出されたエディタの入力内容のデータ管理
   const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
-  // エディタの入力内容の文字数をチェックするための状態管理
+  // エディタの入力内容をチェックするための状態管理
   const [currentEditorInputed, setCurrentEditorInputed] = useState<
     string | null
   >("");

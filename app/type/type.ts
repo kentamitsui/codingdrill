@@ -114,10 +114,10 @@ export interface SaveToLocalStorageProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  problemContent: ProblemContentProps | null;
+  questionText: ProblemContentProps | null;
   editorLanguage: string;
-  editorContent: string;
-  evaluation: string;
+  editorCode: string;
+  reviewText: string;
 }
 
 // SavedDataEntryに対する型定義
@@ -154,10 +154,10 @@ export interface UpdateSaveDataEntryProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  problemContent: ProblemContentProps | null;
+  questionText: ProblemContentProps | null;
   editorLanguage: string;
-  editorContent: string;
-  evaluation: ReviewResponseProps | null;
+  editorCode: string;
+  reviewText: ReviewResponseProps | null;
 }
 
 // ProblemContentのベースとなる型定義
