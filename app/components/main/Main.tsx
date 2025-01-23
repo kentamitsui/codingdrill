@@ -1,7 +1,7 @@
 import Sidebar from "@/app/components/layout/sidebar/Sidebar";
 import "@/app/styles/globals.css";
 import SplitHorizontal from "@/app/feature/splitter/Splitter";
-import Footer from "@/app/components/ui/footer/Footer";
+import Footer from "@/app/components/footer/Footer";
 
 const Main = () => {
   return (
