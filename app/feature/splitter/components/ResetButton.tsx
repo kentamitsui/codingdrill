@@ -9,11 +9,11 @@ interface ResetButtonProps {
 }
 
 // パネルサイズをリセットするボタン
-export default function ResetButton({
+const ResetButton = ({
   lightSvgSrc,
   darkSvgSrc,
   altText,
-}: ResetButtonProps) {
+}: ResetButtonProps) => {
   const { currentTheme } = useAppContext();
   const { resetHorizontalPanelSizes, resetVerticalPanelSizes } =
     usePanelContext();
@@ -39,4 +39,6 @@ export default function ResetButton({
       />
     </button>
   );
-}
+};
+
+export default ResetButton;

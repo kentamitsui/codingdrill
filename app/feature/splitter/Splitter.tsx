@@ -7,7 +7,8 @@ import InputSection from "@/app/components/layout/inputSection/InputSection";
 import ReviewSection from "@/app/components/layout/reviewSection/ReviewSection";
 import { usePanelContext } from "@/app/feature/splitter/context/PanelContext";
 
-const Split_Vertical: React.FC = () => {
+// 垂直方向にパネルを分割するコンポーネント
+const SplitVertical: React.FC = () => {
   // PanelContextから垂直方向のパネルサイズ管理に必要な関数を取得
   const { verticalPanelSizes, handleVerticalDragEnd } = usePanelContext();
 
@@ -27,7 +28,8 @@ const Split_Vertical: React.FC = () => {
   );
 };
 
-const Split_Horizontal: React.FC = () => {
+// 水平方向にパネルを分割するコンポーネント
+const SplitHorizontal: React.FC = () => {
   // PanelContextから水平方向のパネルサイズ管理に必要な関数を取得
   const { horizontalPanelSizes, handleHorizontalDragEnd } = usePanelContext();
 
@@ -44,10 +46,10 @@ const Split_Horizontal: React.FC = () => {
         className="ml-2 flex flex-grow rounded-md"
       >
         <QuestionSection />
-        <Split_Vertical />
+        <SplitVertical />
       </Split>
     </Suspense>
   );
 };
 
-export default Split_Horizontal;
+export default SplitHorizontal;
