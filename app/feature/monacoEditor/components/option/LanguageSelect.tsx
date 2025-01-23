@@ -3,12 +3,12 @@ import menuData from "@/app/config/config.json";
 import config from "@/app/config/config.json";
 import { useAppContext } from "@/app/context/AppContext";
 
-interface EditorLanguageOptionProps {
+interface LanguageSelectProps {
   currentLanguageValue: string;
   setSelectedFunc: (value: string) => void;
 }
 
-export const EditorLanguageOption: React.FC<EditorLanguageOptionProps> = ({
+const LanguageSelect: React.FC<LanguageSelectProps> = ({
   currentLanguageValue,
   setSelectedFunc,
 }) => {
@@ -67,3 +67,5 @@ export const EditorLanguageOption: React.FC<EditorLanguageOptionProps> = ({
     </>
   );
 };
+
+export default LanguageSelect;
