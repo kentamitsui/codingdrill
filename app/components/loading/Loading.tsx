@@ -1,9 +1,6 @@
-import { LoadingAnimationProps } from "@/app/type/type";
+import { LoadingProps } from "@/app/type/type";
 
-export const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
-  isCreating,
-  text,
-}) => {
+const Loading: React.FC<LoadingProps> = ({ isCreating, text }) => {
   return isCreating === true ? (
     <div
       className="flex flex-row items-baseline justify-center"
@@ -27,3 +24,5 @@ export const LoadingAnimation: React.FC<LoadingAnimationProps> = ({
     </div>
   ) : null;
 };
+
+export default Loading;
