@@ -108,6 +108,7 @@ export interface MonacoEditorProps {
 export interface LocalStorageContextTypeProps {
   currentSelectedSavedDataId: number | null;
   setCurrentSelectedSavedDataId: (id: number | null) => void;
+  saveToLocalStorage: (data: SaveToLocalStorageProps) => void;
   loadSavedData: () => void;
   handleDeleteSelected: () => void;
   clearLocalStorage: () => void;

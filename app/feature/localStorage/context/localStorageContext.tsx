@@ -8,6 +8,7 @@ import {
 import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
+  SaveToLocalStorageProps,
 } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
 const LocalStorageContext = createContext<
@@ -52,6 +53,37 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     );
     setSaveData(getLocalStorageData);
   }, []);
+
+  // ローカルストレージにデータを保存する関数
+  const saveToLocalStorage = (data: SaveToLocalStorageProps) => {
+    // ローカルストレージからデータを取得
+    const savedData =
+      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
+
+    // セーブデータの最大IDを検索
+    interface SavedDataEntry {
+      id: number;
+      timestamp: string;
+      [key: string]: any;
+    }
+
+    const maxId = savedData.reduce(
+      (max: number, entry: SavedDataEntry) => (entry.id > max ? entry.id : max),
+      0,
+    );
+
+    const timestamp = new Date().toLocaleString();
+
+    const newEntry = {
+      id: maxId + 1, // idに連番を振る
+      timestamp,
+      ...data,
+    };
+
+    // ローカルストレージにデータを保存
+    savedData.push(newEntry);
+    localStorage.setItem("savedData", JSON.stringify(savedData));
+  };
 
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
   const loadSavedData = () => {
@@ -156,6 +188,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
       value={{
         currentSelectedSavedDataId,
         setCurrentSelectedSavedDataId,
+        saveToLocalStorage,
         loadSavedData,
         handleDeleteSelected,
         clearLocalStorage,
