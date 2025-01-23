@@ -3,7 +3,7 @@ import Select, { components } from "react-select";
 import { ReactSelectProps } from "@/app/type/type";
 import "@/app/styles/globals.css";
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
+import { useLocalStorageContext } from "@/app/feature/storage/context/StorageContext";
 import Image from "next/image";
 
 export default function ReactSelect({
