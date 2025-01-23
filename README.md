@@ -288,60 +288,60 @@ This project is built using the following technologies:
 │   │   └── utils
 │   │       └── openaiRequestHelper.ts
 │   ├── components
-│   │   ├── layout
-│   │   │   ├── CodeInputSection
-│   │   │   │   └── CodeInputSection.tsx
-│   │   │   ├── questionSection
-│   │   │   │   └── QuestionSection.tsx
-│   │   │   ├── reviewSection
-│   │   │   │   └── ReviewSection.tsx
-│   │   │   └── sidebar
-│   │   │       └── Sidebar.tsx
-│   │   └── ui
-│   │       ├── button
-│   │       │   ├── BaseButton.tsx
-│   │       │   ├── EditorActionButton.tsx
-│   │       │   └── SaveActionButton.tsx
-│   │       ├── footer
-│   │       │   └── Footer.tsx
-│   │       ├── header
-│   │       │   └── Header.tsx
-│   │       ├── Loading
-│   │       │   └── Loading.tsx
-│   │       ├── main
-│   │       │   └── Main.tsx
-│   │       └── select
-│   │           ├── FontSizeSelect.tsx
-│   │           ├── LanguageSelect.tsx
-│   │           ├── ThemeSelect.tsx
-│   │           ├── Options.tsx
-│   │           └── react-select
-│   │               └── ReactSelect.tsx
+│   │   ├── button
+│   │   │   ├── BaseButton.tsx
+│   │   │   └── SaveActionButton.tsx
+│   │   ├── common
+│   │   │   └── Paragraph.tsx
+│   │   ├── footer
+│   │   │   └── Footer.tsx
+│   │   ├── header
+│   │   │   └── Header.tsx
+│   │   ├── loading
+│   │   │   └── Loading.tsx
+│   │   ├── main
+│   │   │   └── Main.tsx
+│   │   ├── option
+│   │   │   └── Option.tsx
+│   │   ├── sections
+│   │   │   ├── QuestionSection.tsx
+│   │   │   └── ReviewSection.tsx
+│   │   └── sidebar
+│   │       └── Sidebar.tsx
 │   ├── config
 │   │   └── config.json
 │   ├── context
-│   │   └── AppContext.tsx
+│   │   ├── AppContext.tsx
+│   │   └── Providers.tsx
 │   ├── feature
 │   │   ├── darkmode
-│   │   │   ├── ThemeSwitch.tsx
+│   │   │   ├── ThemeToggle.tsx
 │   │   │   └── components
-│   │   │       └── ui
-│   │   │           ├── DarkModeToggleButton.tsx
-│   │   │           └── LightModeToggleButton.tsx
-│   │   ├── localStorage
-│   │   │   ├── context
-│   │   │   │   └── localStorageContext.tsx
-│   │   │   └── localStorage.ts
+│   │   │       ├── DarkModeToggleButton.tsx
+│   │   │       └── LightModeToggleButton.tsx
 │   │   ├── monacoEditor
-│   │   │   ├── EditorSection.tsx
-│   │   │   └── MonacoEditor.tsx
-│   │   └── splitter
-│   │       ├── Splitter.tsx
-│   │       ├── components
-│   │       │   └── ui
-│   │       │       └── ResetButton.tsx
+│   │   │   ├── components
+│   │   │   │   ├── MonacoEditor.tsx
+│   │   │   │   ├── button
+│   │   │   │   │   └── EditorActionButton.tsx
+│   │   │   │   └── option
+│   │   │   │       ├── FontSizeSelect.tsx
+│   │   │   │       ├── LanguageSelect.tsx
+│   │   │   │       └── ThemeSelect.tsx
+│   │   │   └── sections
+│   │   │       ├── CodeInputSection.tsx
+│   │   │       └── EditorSection.tsx
+│   │   ├── react-select
+│   │   │   └── ReactSelect.tsx
+│   │   ├── splitter
+│   │   │   ├── Splitter.tsx
+│   │   │   ├── components
+│   │   │   │   └── ResetButton.tsx
+│   │   │   └── context
+│   │   │       └── PanelContext.tsx
+│   │   └── storage
 │   │       └── context
-│   │           └── PanelContext.tsx
+│   │           └── StorageContext.tsx
 │   ├── layout.tsx
 │   ├── page.tsx
 │   ├── styles
@@ -357,8 +357,7 @@ This project is built using the following technologies:
 ├── public
 │   ├── gif // omitted because many items
 │   ├── icon.svg
-│   └── images // omitted  because many items
-├── .env.local
+│   └── images // omitted because many items
 ├── README.md
 ├── tailwind.config.ts
 └── tsconfig.json
