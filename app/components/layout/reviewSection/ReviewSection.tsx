@@ -1,7 +1,7 @@
 import { useAppContext } from "@/app/context/AppContext";
 import React from "react";
 import { ReusableReviewContentsProps } from "@/app/type/type";
-import { LoadingAnimation } from "@/app/components/ui/loadingAnimation/LoadingAnimation";
+import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
@@ -94,7 +94,7 @@ export const ReviewSection: React.FC = () => {
         id="result_scoring"
         className="flex flex-col gap-5 p-[15px_30px] leading-normal tracking-wider"
       >
-        <LoadingAnimation isCreating={isReviewCreating} text={"Now Creating"} />
+        <Loading isCreating={isReviewCreating} text={"Now Creating"} />
         <ReusableParagraph
           content={reviewText}
           titleText="Explanation of the algorithm:"

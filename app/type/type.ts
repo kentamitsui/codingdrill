@@ -229,8 +229,8 @@ export interface ReusableReviewContentsProps {
   paragraphContent: string | null | undefined;
 }
 
-// LoadingAnimationに対する型定義
-export interface LoadingAnimationProps {
+// Loadingに対する型定義
+export interface LoadingProps {
   isCreating: boolean | undefined;
   text: string;
 }

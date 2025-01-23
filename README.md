@@ -306,8 +306,8 @@ This project is built using the following technologies:
 │   │       │   └── Footer.tsx
 │   │       ├── header
 │   │       │   └── Header.tsx
-│   │       ├── loadingAnimation
-│   │       │   └── LoadingAnimation.tsx
+│   │       ├── Loading
+│   │       │   └── Loading.tsx
 │   │       ├── main
 │   │       │   └── Main.tsx
 │   │       └── select

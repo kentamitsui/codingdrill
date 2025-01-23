@@ -1,6 +1,6 @@
 "use client";
 
-import { LoadingAnimation } from "@/app/components/ui/loadingAnimation/LoadingAnimation";
+import Loading from "@/app/components/loading/Loading";
 const Editor = lazy(() => import("@monaco-editor/react"));
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { MonacoEditorProps } from "@/app/type/type";
@@ -65,7 +65,7 @@ const MonacoEditor = ({
           width={dimensions.width} // 計算した幅を適用
           options={{ fontSize: fontSize }}
           value={storedEditorCode ?? ""} // storedEditorCodeを直接セットし、ロード時に確実に反映されるようにする
-          loading={<LoadingAnimation isCreating={true} text={"Now Loading"} />}
+          loading={<Loading isCreating={true} text={"Now Loading"} />}
           // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
           onMount={(editor) => {
             if (onMount) {

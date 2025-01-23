@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 import { ReusableProblemContentProps } from "@/app/type/type";
-import { LoadingAnimation } from "@/app/components/ui/loadingAnimation/LoadingAnimation";
+import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
@@ -122,10 +122,7 @@ const QuestionSection: React.FC = () => {
         </button>
       </div>
       <div className="p-[15px_30px] leading-normal tracking-wider">
-        <LoadingAnimation
-          isCreating={isQuestionCreating}
-          text={"Now Creating"}
-        />
+        <Loading isCreating={isQuestionCreating} text={"Now Creating"} />
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
           <ReusableParagraph
