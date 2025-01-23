@@ -1,5 +1,5 @@
-import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
 import { useAppContext } from "@/app/context/AppContext";
+import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
@@ -28,7 +28,7 @@ export default function InputSection() {
     setSaveData,
     currentTheme,
   } = useAppContext();
-
+  const { saveToLocalStorage } = useLocalStorageContext();
   /**
    * クリップボードにコピーするハンドラー
    * - 現在のエディタの入力内容をコピーする
