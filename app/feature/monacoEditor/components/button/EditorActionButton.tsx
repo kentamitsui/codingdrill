@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
-export default function InputAreaButton({
+const EditorActionButton = ({
   id,
   type,
   text,
   onClick,
-}: InputAreaButtonProps) {
+}: InputAreaButtonProps) => {
   const {
     isApiLoading,
     difficulty,
@@ -87,4 +87,6 @@ export default function InputAreaButton({
       />
     </button>
   );
-}
+};
+
+export default EditorActionButton;

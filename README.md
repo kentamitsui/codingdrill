@@ -299,9 +299,9 @@ This project is built using the following technologies:
 │   │   │       └── Sidebar.tsx
 │   │   └── ui
 │   │       ├── button
-│   │       │   ├── Button.tsx
-│   │       │   ├── InputAreaButton.tsx
-│   │       │   └── SaveDataOptionButton.tsx
+│   │       │   ├── BaseButton.tsx
+│   │       │   ├── EditorActionButton.tsx
+│   │       │   └── SaveActionButton.tsx
 │   │       ├── footer
 │   │       │   └── Footer.tsx
 │   │       ├── header
