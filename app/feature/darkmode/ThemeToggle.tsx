@@ -6,7 +6,7 @@ import LightModeToggleButton from "@/app/feature/darkmode/components/LightModeTo
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 
-export default function ThemeSwitch() {
+const ThemeToggle = () => {
   const { setCurrentTheme } = useAppContext();
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
@@ -34,4 +34,6 @@ export default function ThemeSwitch() {
   ) : (
     <DarkModeToggleButton toggle={() => setTheme("dark")} />
   );
-}
+};
+
+export default ThemeToggle;

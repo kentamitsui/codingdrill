@@ -2,7 +2,7 @@ interface ColorTheme {
   toggle: () => void;
 }
 
-export const DarkModeToggleButton: React.FC<ColorTheme> = ({ toggle }) => {
+const DarkModeToggleButton: React.FC<ColorTheme> = ({ toggle }) => {
   return (
     <button
       onClick={toggle}
