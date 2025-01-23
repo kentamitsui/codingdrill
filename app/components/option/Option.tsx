@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { SelectProps } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
-export const Options: React.FC<SelectProps> = ({
+
+const Option: React.FC<SelectProps> = ({
   label,
   data,
   name,
@@ -87,4 +88,4 @@ export const Options: React.FC<SelectProps> = ({
   );
 };
 
-export default Options;
+export default Option;

@@ -1,7 +1,7 @@
 "use client";
 
 import menuData from "@/app/config/config.json";
-import Options from "@/app/components/ui/select/Options";
+import Option from "@/app/components/option/Option";
 import Button from "@/app/components/ui/button/Button";
 import SaveDataOptionButton from "@/app/components/ui/button/SaveDataOptionButton";
 import { useAppContext } from "@/app/context/AppContext";
@@ -99,7 +99,7 @@ export default function Sidebar() {
   return (
     <aside className="flex max-h-[300px] w-[150px] flex-col rounded-md bg-gray-200 p-1 text-sm dark:bg-[#0d1117]">
       <div className="flex flex-col gap-2">
-        <Options
+        <Option
           label={"select-difficulty"}
           data={menuData.menuLists.difficulty}
           name={"difficulty"}
@@ -109,7 +109,7 @@ export default function Sidebar() {
           iconDark={menuData.svgIcon.difficultyDark}
           iconLight={menuData.svgIcon.difficultyLight}
         />
-        <Options
+        <Option
           label={"select-type"}
           data={menuData.menuLists.dataType}
           name={"type"}
@@ -119,7 +119,7 @@ export default function Sidebar() {
           iconDark={menuData.svgIcon.dataDark}
           iconLight={menuData.svgIcon.dataLight}
         />
-        <Options
+        <Option
           label={"select-topic"}
           data={menuData.menuLists.topics}
           name={"topic"}
@@ -129,7 +129,7 @@ export default function Sidebar() {
           iconLight={menuData.svgIcon.topicLight}
           iconDark={menuData.svgIcon.topicDark}
         />
-        <Options
+        <Option
           label={"select-display-language"}
           data={menuData.menuLists.displayLanguages}
           name={"display-language"}
@@ -173,7 +173,7 @@ export default function Sidebar() {
               isApiLoading ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
-            Options
+            Option
             <Image
               src={
                 currentTheme === "dark"
