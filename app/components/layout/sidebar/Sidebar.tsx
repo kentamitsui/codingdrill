@@ -2,8 +2,8 @@
 
 import menuData from "@/app/config/config.json";
 import Option from "@/app/components/option/Option";
-import Button from "@/app/components/ui/button/Button";
-import SaveDataOptionButton from "@/app/components/ui/button/SaveDataOptionButton";
+import BaseButton from "@/app/components/button/BaseButton";
+import SaveActionButton from "@/app/components/button/SaveActionButton";
 import { useAppContext } from "@/app/context/AppContext";
 import { useLocalStorageContext } from "@/app/feature/storage/context/StorageContext";
 import dynamic from "next/dynamic";
@@ -139,7 +139,7 @@ export default function Sidebar() {
           iconLight={menuData.svgIcon.translateLight}
           iconDark={menuData.svgIcon.translateDark}
         />
-        <Button
+        <BaseButton
           id="create"
           type="button"
           text="Generate"
@@ -173,7 +173,7 @@ export default function Sidebar() {
               isApiLoading ? "pointer-events-none opacity-50" : "cursor-pointer"
             }`}
           >
-            Option
+            Options
             <Image
               src={
                 currentTheme === "dark"
@@ -190,7 +190,7 @@ export default function Sidebar() {
               isApiLoading ? "pointer-events-none opacity-50" : ""
             }`}
           >
-            <SaveDataOptionButton
+            <SaveActionButton
               id="load"
               type="button"
               text="Load"
@@ -198,7 +198,7 @@ export default function Sidebar() {
               iconDark={menuData.svgIcon.loadDark}
               onClick={() => loadSavedData()}
             />
-            <SaveDataOptionButton
+            <SaveActionButton
               id="delete"
               type="button"
               text="Delete"
@@ -206,7 +206,7 @@ export default function Sidebar() {
               iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected()}
             />
-            <SaveDataOptionButton
+            <SaveActionButton
               id="delete-all"
               type="button"
               text="All Delete"

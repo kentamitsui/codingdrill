@@ -2,14 +2,14 @@ import { useAppContext } from "@/app/context/AppContext";
 import { ButtonProps } from "@/app/type/type";
 import Image from "next/image";
 
-export default function SaveDataOptionButton({
+const SaveActionButton = ({
   id,
   type,
   text,
   iconLight,
   iconDark,
   onClick,
-}: ButtonProps) {
+}: ButtonProps) => {
   const { isApiLoading, currentTheme } = useAppContext();
 
   return (
@@ -31,4 +31,6 @@ export default function SaveDataOptionButton({
       />
     </button>
   );
-}
+};
+
+export default SaveActionButton;

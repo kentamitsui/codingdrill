@@ -1,6 +1,6 @@
 import { useAppContext } from "@/app/context/AppContext";
 import { useLocalStorageContext } from "@/app/feature/storage/context/StorageContext";
-import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
+import EditorActionButton from "@/app/feature/monacoEditor/components/button/EditorActionButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 import FontSizeSelect from "@/app/feature/monacoEditor/components/option/FontSizeSelect";
@@ -179,14 +179,14 @@ export default function InputSection() {
               <p>Input: {currentEditorInputed?.length}</p>
             </div>
             {/* エディタの入力内容をコピー */}
-            <InputAreaButton
+            <EditorActionButton
               id="button-Copy-CodeInputArea"
               type="button"
               text="Copy"
               onClick={copyToClipboard}
             />
             {/* レビュー生成 */}
-            <InputAreaButton
+            <EditorActionButton
               id="submit"
               type="button"
               text="Submit"

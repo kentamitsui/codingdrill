@@ -3,14 +3,14 @@ import { ButtonProps } from "@/app/type/type";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-export default function Button({
+const BaseButton = ({
   id,
   type,
   text,
   iconLight,
   iconDark,
   onClick,
-}: ButtonProps) {
+}: ButtonProps) => {
   const {
     isApiLoading,
     difficulty,
@@ -57,4 +57,6 @@ export default function Button({
       />
     </button>
   );
-}
+};
+
+export default BaseButton;
