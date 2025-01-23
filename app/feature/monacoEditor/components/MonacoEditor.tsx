@@ -1,19 +1,18 @@
 "use client";
 
 import { LoadingAnimation } from "@/app/components/ui/loadingAnimation/LoadingAnimation";
-
 const Editor = lazy(() => import("@monaco-editor/react"));
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
 import { MonacoEditorProps } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
 
-export default function MonacoEditor({
+const MonacoEditor = ({
   fontSize,
   editorLanguage,
   editorTheme,
   onMount,
   onChange,
-}: MonacoEditorProps) {
+}: MonacoEditorProps) => {
   const { storedEditorCode } = useAppContext();
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
   const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
@@ -83,4 +82,6 @@ export default function MonacoEditor({
       </Suspense>
     </div>
   );
-}
+};
+
+export default MonacoEditor;

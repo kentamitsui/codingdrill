@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from "react";
 import MonacoEditor from "@/app/feature/monacoEditor/components/MonacoEditor";
 import { useAppContext } from "@/app/context/AppContext";
 
-export default function EditorSection() {
+const EditorSection = () => {
   const {
     storedEditorLanguage,
     storedEditorCode,
@@ -90,4 +90,6 @@ export default function EditorSection() {
       />
     </div>
   );
-}
+};
+
+export default EditorSection;
