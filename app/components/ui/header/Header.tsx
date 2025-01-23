@@ -1,5 +1,5 @@
 import ThemeToggle from "@/app/feature/darkmode/ThemeToggle";
-import ResetButton from "@/app/feature/splitter/components/ui/ResetButton";
+import ResetButton from "@/app/feature/splitter/components/ResetButton";
 import menuData from "@/app/config/config.json";
 
 const Header = () => {
