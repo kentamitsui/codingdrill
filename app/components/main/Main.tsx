@@ -3,7 +3,7 @@ import "@/app/styles/globals.css";
 import SplitHorizontal from "@/app/feature/splitter/Splitter";
 import Footer from "@/app/components/ui/footer/Footer";
 
-export default function Main() {
+const Main = () => {
   return (
     <>
       <main className="my-2 flex-grow overflow-hidden">
@@ -16,4 +16,6 @@ export default function Main() {
       <Footer />
     </>
   );
-}
+};
+
+export default Main;
