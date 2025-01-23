@@ -1,8 +1,8 @@
 "use client";
 
 import { useTheme } from "next-themes";
-import IconDarkMode from "@/app/feature/darkmode/components/ui/IconDarkMode";
-import IconLightMode from "@/app/feature/darkmode/components/ui/IconLightMode";
+import DarkModeToggleButton from "@/app/feature/darkmode/components/DarkModeToggleButton";
+import LightModeToggleButton from "@/app/feature/darkmode/components/LightModeToggleButton";
 import { useEffect, useState } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 
@@ -30,8 +30,8 @@ export default function ThemeSwitch() {
   }
 
   return resolvedTheme === "dark" ? (
-    <IconLightMode toggle={() => setTheme("light")} />
+    <LightModeToggleButton toggle={() => setTheme("light")} />
   ) : (
-    <IconDarkMode toggle={() => setTheme("dark")} />
+    <DarkModeToggleButton toggle={() => setTheme("dark")} />
   );
 }
