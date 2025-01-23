@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "@/app/context/AppContext";
-import { ReusableProblemContentProps } from "@/app/type/type";
+import ReusableParagraph from "@/app/components/common/ReusableParagraph";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
-// 受け取ったJSONデータをキー毎に割り振る
+// 問題文を表示するコンポーネント
 const QuestionSection: React.FC = () => {
   const {
     isApiLoading,
@@ -15,26 +15,6 @@ const QuestionSection: React.FC = () => {
     setFormattedQuestionText,
     currentTheme,
   } = useAppContext();
-
-  const ReusableParagraph: React.FC<ReusableProblemContentProps> = ({
-    content,
-    titleText,
-    paragraphContent,
-  }) => {
-    return (
-      <div className="whitespace-break-spaces">
-        {/* タイトル */}
-        <p className="text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {content ? titleText : null}
-        </p>
-        {/* 複数行対応の本文 */}
-        <div className="ml-4 text-[16px] font-normal width_1440px:ml-5 width_1440px:text-[18px] width_1680px:ml-[22px] width_1680px:text-[20px]">
-          {content &&
-            [paragraphContent].map((line, index) => <p key={index}>{line}</p>)}
-        </div>
-      </div>
-    );
-  };
 
   // クリップボードに文字列をコピーする関数
   useEffect(() => {

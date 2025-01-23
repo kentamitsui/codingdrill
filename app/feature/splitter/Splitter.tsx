@@ -2,7 +2,7 @@
 
 import React, { lazy, Suspense } from "react";
 const Split = lazy(() => import("react-split"));
-import QuestionSection from "@/app/components/layout/questionSection/QuestionSection";
+import QuestionSection from "@/app/components/sections/QuestionSection";
 import CodeInputSection from "@/app/feature/monacoEditor/sections/CodeInputSection";
 import ReviewSection from "@/app/components/layout/reviewSection/ReviewSection";
 import { usePanelContext } from "@/app/feature/splitter/context/PanelContext";
