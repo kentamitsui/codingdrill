@@ -6,7 +6,7 @@ import menuData from "@/app/config/config.json";
 import { EditorFontOption } from "@/app/components/ui/select/EditorFontOption";
 import { EditorThemeOption } from "@/app/components/ui/select/EditorThemeOption";
 import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
-import EditorSection from "@/app/feature/monacoEditor/EditorSection";
+import EditorSection from "@/app/feature/monacoEditor/sections/EditorSection";
 
 export default function InputSection() {
   const {
