@@ -66,13 +66,13 @@ const MonacoEditor = ({
           options={{ fontSize: fontSize }}
           value={storedEditorCode ?? ""} // storedEditorCodeを直接セットし、ロード時に確実に反映されるようにする
           loading={<Loading isCreating={true} text={"Now Loading"} />}
-          // InputSection.tsxから渡されたプロパティをonMountメソッドで実行する
+          // CodeInputSection.tsxから渡されたプロパティをonMountメソッドで実行する
           onMount={(editor) => {
             if (onMount) {
               onMount(editor);
             }
           }}
-          // InputSection.tsxから渡されたプロパティをonChangeメソッドで実行する
+          // CodeInputSection.tsxから渡されたプロパティをonChangeメソッドで実行する
           onChange={(value) => {
             if (onChange) {
               onChange(value);
