@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./styles/globals.css";
 import { ThemeProvider } from "next-themes";
 import Head from "next/head";
+import { Analytics } from "@vercel/analytics/next";
 
 export const metadata: Metadata = {
   title: "Coding Drill",
@@ -29,6 +30,7 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );
