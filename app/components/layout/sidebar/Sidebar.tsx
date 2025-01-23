@@ -32,49 +32,21 @@ export default function Sidebar() {
     saveData,
     setJsonFormattedQuestionText,
     setReviewText,
-    setStoredUiLanguage,
-    setStoredEditorLanguage,
     setStoredEditorCode,
     currentTheme,
   } = useAppContext();
   // ローカルストレージに関するデータ管理
   const {
-    currentSelectedSavedData,
-    setCurrentSelectedSavedData,
+    currentSelectedSavedDataId,
+    setCurrentSelectedSavedDataId,
     loadSavedData,
     handleDeleteSelected,
     clearLocalStorage,
   } = useLocalStorageContext();
 
   // セーブデータの状態(ID)を更新する
-  const handleChangeSavedData = (selectedOption: { value: string } | null) => {
-    setCurrentSelectedSavedData(selectedOption?.value ?? "");
-  };
-
-  // ローカルストレージからを各要素をロードする
-  const handleLoadData = () => {
-    // セーブデータが選択されていない状態でロードボタンを押した場合、アラートを表示する
-    if (!currentSelectedSavedData) {
-      alert("Please select a load data.");
-      return;
-    }
-
-    // console.log("selectedId:", selectedId, "\ntype:", typeof selectedId);
-
-    // ローカルストレージに保存されているデータを呼び出し、様々な場所で渡す
-    loadSavedData(currentSelectedSavedData, {
-      difficulty: setDifficulty,
-      dataType: setDataType,
-      topic: setTopic,
-      uiLanguage: (newLanguage: string) => {
-        setUiLanguage(newLanguage); // 選択された言語を設置する
-        setStoredUiLanguage(newLanguage); // storedUiLanguage を更新
-      },
-      problemContent: setJsonFormattedQuestionText,
-      editorLanguage: setStoredEditorLanguage,
-      editorContent: setStoredEditorCode,
-      evaluation: setReviewText,
-    });
+  const handleChangeSavedData = (selectedOption: { value: number } | null) => {
+    setCurrentSelectedSavedDataId(selectedOption?.value || null);
   };
 
   // 問題文を生成する
@@ -181,7 +153,7 @@ export default function Sidebar() {
           save data
         </label>
         <ReactSelect
-          selectedSaveData={currentSelectedSavedData}
+          selectedSaveData={currentSelectedSavedDataId}
           handleChangeSavedData={handleChangeSavedData}
           isApiLoading={isApiLoading}
           saveData={saveData}
@@ -224,7 +196,7 @@ export default function Sidebar() {
               text="Load"
               iconLight={menuData.svgIcon.loadLight}
               iconDark={menuData.svgIcon.loadDark}
-              onClick={handleLoadData}
+              onClick={() => loadSavedData()}
             />
             <SaveDataOptionButton
               id="delete"
@@ -232,7 +204,7 @@ export default function Sidebar() {
               text="Delete"
               iconLight={menuData.svgIcon.deteleLight}
               iconDark={menuData.svgIcon.deteleDark}
-              onClick={() => handleDeleteSelected(currentSelectedSavedData)}
+              onClick={() => handleDeleteSelected()}
             />
             <SaveDataOptionButton
               id="delete-all"
@@ -240,7 +212,7 @@ export default function Sidebar() {
               text="All Delete"
               iconLight={menuData.svgIcon.deteleAllLight}
               iconDark={menuData.svgIcon.deteleAllDark}
-              onClick={clearLocalStorage}
+              onClick={() => clearLocalStorage()}
             />
           </div>
         </details>

@@ -8,7 +8,6 @@ import {
 import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
-  SetFunctionsProps,
 } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
 const LocalStorageContext = createContext<
@@ -29,119 +28,134 @@ export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
 
 // 各ファイルで、ローカルストレージに関するコンテキストを使用出来るようにするプロバイダー
 export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
-  const { setSaveData } = useAppContext();
-  const [savedData, setSavedData] = useState<SavedDataEntryProps[]>([]);
+  const {
+    setDifficulty,
+    setDataType,
+    setTopic,
+    setUiLanguage,
+    setJsonFormattedQuestionText,
+    setStoredEditorLanguage,
+    setStoredEditorCode,
+    setReviewText,
+    saveData,
+    setSaveData,
+  } = useAppContext();
   // セーブデータの選択に伴う背景色の状態管理に使用
-  const [currentSelectedSavedData, setCurrentSelectedSavedData] = useState<
-    number | string
-  >("");
+  const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
+    number | null
+  >(null);
 
+  // ローカルストレージからデータを取得
   useEffect(() => {
     const getLocalStorageData = JSON.parse(
-      localStorage.getItem("savedData") || "[]" || "undefined",
+      localStorage.getItem("savedData") || "[]",
     );
-    setSavedData(getLocalStorageData);
+    setSaveData(getLocalStorageData);
   }, []);
 
-  // ローカルストレージを更新する関数
-  const updateLocalStorage = (data: SavedDataEntryProps[]) => {
-    localStorage.setItem("savedData", JSON.stringify(data));
-    setSavedData(data);
-  };
-
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
-  const loadSavedData = (
-    id: string | number,
-    setFunctions: SetFunctionsProps,
-  ) => {
-    const loadData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    const selectedLoadData: SavedDataEntryProps = loadData.find(
-      (entry: SavedDataEntryProps) => entry.id === id,
-    );
-
-    if (!selectedLoadData) {
-      alert("Data not found.");
+  const loadSavedData = () => {
+    // 既にstate管理しているデータを使用
+    if (!saveData || saveData.length === 0) {
+      alert("No saved data available.");
       return;
     }
 
-    if (!confirm("Is it correct to load this data?")) {
+    // 選択されたデータが存在するかをチェック
+    if (currentSelectedSavedDataId === null) {
+      alert("No data selected.");
+      return;
+    }
+
+    const selectedLoadData = saveData.find(
+      (entry) => entry.id === currentSelectedSavedDataId,
+    );
+
+    if (!selectedLoadData) {
+      alert("Error: Could not load the selected data.");
+      return;
+    }
+
+    // 確認ダイアログ
+    if (!confirm("Are you sure you want to load this entry?")) {
       return;
     }
 
     // 各セクションのセット関数にデータを渡して状態を更新
-    setFunctions.difficulty(selectedLoadData.difficulty);
-    setFunctions.dataType(selectedLoadData.dataType);
-    setFunctions.topic(selectedLoadData.topic);
-    setFunctions.uiLanguage(selectedLoadData.uiLanguage);
-    setFunctions.problemContent(selectedLoadData.problemContent);
-    setFunctions.editorLanguage(selectedLoadData.editorLanguage);
-    setFunctions.editorContent(selectedLoadData.editorContent);
-    setFunctions.evaluation(selectedLoadData.evaluation);
+    setDifficulty(selectedLoadData.difficulty);
+    setDataType(selectedLoadData.dataType);
+    setTopic(selectedLoadData.topic);
+    setUiLanguage(selectedLoadData.uiLanguage);
+    setJsonFormattedQuestionText(selectedLoadData.questionText);
+    setStoredEditorLanguage(selectedLoadData.editorLanguage);
+    setStoredEditorCode(selectedLoadData.editorCode);
+    setReviewText(selectedLoadData.reviewText);
   };
 
   // 選択されたデータを削除する関数
-  const handleDeleteSelected = (id: string | number) => {
+  const handleDeleteSelected = () => {
+    if (currentSelectedSavedDataId === null) {
+      alert("No data selected.");
+      return;
+    }
+
     // ローカルストレージのデータを取得
     const deleteData = JSON.parse(localStorage.getItem("savedData") || "[]");
-    // 選択されたデータ以外を全てフィルタリングする
-    const filterData = deleteData.filter(
-      (entry: SavedDataEntryProps) => entry.id !== id,
-    );
-    // 選択されたデータのIDを取得
-    const selectedDeleteData: SavedDataEntryProps = deleteData.find(
-      (entry: SavedDataEntryProps) => entry.id === id,
-    );
 
-    if (!selectedDeleteData) {
-      alert("Please select a valid option to delete.");
+    // 選択されたデータが存在するかをチェック
+    if (
+      !deleteData.some(
+        (entry: SavedDataEntryProps) => entry.id === currentSelectedSavedDataId,
+      )
+    ) {
+      alert("Please select a valid data entry to delete.");
       return;
     }
 
-    if (!confirm("Is it correct to delete this data?")) {
+    if (!confirm("Are you sure you want to delete this data?")) {
       return;
     }
+
+    // 選択されたデータ以外をフィルタリングする
+    const updatedData = deleteData.filter(
+      (entry: SavedDataEntryProps) => entry.id !== currentSelectedSavedDataId,
+    );
 
     // フィルタリングされたデータを設置する事で、データを削除することと同等の機能を実装
-    localStorage.setItem("savedData", JSON.stringify(filterData));
+    localStorage.setItem("savedData", JSON.stringify(updatedData));
 
     // 状態を更新してUIに反映
-    const savedLocalStorageData =
-      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
-    if (savedLocalStorageData === undefined) return;
-    setSaveData(savedLocalStorageData);
-
-    // currentSelectedSavedData をリセットする
-    if (id === currentSelectedSavedData) {
-      setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
-    }
+    setSaveData(updatedData);
+    // currentSelectedSavedDataId をリセットする
+    setCurrentSelectedSavedDataId(null); // nullを渡す事で未選択時の背景色に戻す
   };
 
   // ローカルストレージのデータを全て削除する関数
   const clearLocalStorage = () => {
+    // データの全削除なので、確認メッセージを二回出力
     if (!confirm("Is this correct want to delete all data?")) {
       return;
     }
     if (!confirm("Are you sure you want to delete all data?")) {
       return;
     }
-    localStorage.clear();
-    setSavedData([]);
 
-    // 状態を更新してUIに反映
-    const savedLocalStorageData =
-      JSON.parse(localStorage.getItem("savedData") || "[]") || [];
-    if (savedLocalStorageData === undefined) return;
-    setSaveData(savedLocalStorageData);
-    setCurrentSelectedSavedData(""); // 空文字を渡す事で未選択時の背景色に戻す
+    // try-catchでエラー処理を行う
+    try {
+      // ローカルストレージのデータを全て削除し、状態をリセット
+      localStorage.clear();
+      setSaveData([]);
+      setCurrentSelectedSavedDataId(null); // 選択状態を未選択にリセット
+    } catch (error) {
+      console.error("Error clearing localStorage:", error);
+    }
   };
 
   return (
     <LocalStorageContext.Provider
       value={{
-        savedData,
-        currentSelectedSavedData,
-        setCurrentSelectedSavedData,
-        updateLocalStorage,
+        currentSelectedSavedDataId,
+        setCurrentSelectedSavedDataId,
         loadSavedData,
         handleDeleteSelected,
         clearLocalStorage,

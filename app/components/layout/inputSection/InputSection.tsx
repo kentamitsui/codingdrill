@@ -1,13 +1,12 @@
-import * as monaco from "monaco-editor";
-import MonacoEditor from "@/app/feature/monacoEditor/MonacoEditor";
-import { useRef, useState, useEffect } from "react";
 import saveToLocalStorage from "@/app/feature/localStorage/localStorage";
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import { EditorFontOption } from "@/app/components/ui/select/EditorFontOption";
+import { EditorThemeOption } from "@/app/components/ui/select/EditorThemeOption";
 import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
+import EditorSection from "@/app/feature/monacoEditor/EditorSection";
 
 export default function InputSection() {
   const {
@@ -24,114 +23,25 @@ export default function InputSection() {
     storedEditorLanguage,
     setStoredEditorLanguage,
     currentEditorLanguage,
-    storedEditorCode,
     setStoredEditorCode,
     currentEditorInputed,
-    setCurrentEditorInputed,
     setSaveData,
     currentTheme,
   } = useAppContext();
-  const { savedData, updateLocalStorage } = useLocalStorageContext();
-  // エディタ内の文字数カウントに関するアラート表示管理用のフラグ
-  const [isAlert, setIsAlert] = useState(false);
 
-  useEffect(() => {
-    const handleStorageChange = (event: StorageEvent) => {
-      if (event.key === null || event.newValue === null) {
-        updateLocalStorage(savedData);
-        return;
-      }
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, [savedData, updateLocalStorage]);
-
-  // refにMonaco Editorインスタンスを保持
-  const editorRef = useRef<monaco.editor.IStandaloneCodeEditor | null>(null);
-
-  // エディタがマウントされた際に、ローカルストレージから取得したコードを適用
-  const handleEditorMount = (editor: monaco.editor.IStandaloneCodeEditor) => {
-    editorRef.current = editor;
-
-    // エディタがマウントされた直後に、保存されているコードを適用
-    if (storedEditorCode !== null) {
-      editor.setValue(storedEditorCode);
-    }
-  };
-
-  // エディタの入力内容が変更された際の処理
-  const handleEditorChange = (value: string | undefined) => {
-    if (value !== undefined) {
-      // エディタの入力内容を保存用の状態変数にセット
-      setStoredEditorCode(value);
-      setCurrentEditorInputed(value);
-
-      // 5000文字を超えた場合、アラートを表示して警告
-      if (!isAlert && value.length >= 5001) {
-        alert("Too many input. The limit is 5000 characters.");
-        setIsAlert(true); // アラートを一度表示したら、再度超過するまで表示しない
-      } else if (isAlert && value.length <= 5000) {
-        setIsAlert(false); // 5000文字以下に戻ったら、アラートを解除
-      }
-    }
-  };
-
-  const [fontSize, setFontSize] = useState("14");
-  const [editorTheme, setEditorTheme] = useState("vs-dark");
-  const [_, setIsEditorInputed] = useState(editorRef.current?.getValue());
-
-  // [フォントサイズ・エディタテーマ]オプションタグの値を動的に取得
-  const handleFontSizeChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    setFontSize(event.target.value);
-  };
-
-  const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setEditorTheme(event.target.value);
-  };
-
-  // `storedEditorCode` の変更があった場合にエディタへ適用し、文字数カウントも更新
-  useEffect(() => {
-    // `currentEditorInputed` を更新して、ロード直後の文字数カウントが正しく動作するようにする
-    if (storedEditorCode !== null) {
-      setCurrentEditorInputed(storedEditorCode);
-    }
-
-    if (editorRef.current && storedEditorCode !== null) {
-      const currentValue = editorRef.current.getValue();
-
-      // すでにエディタに表示されている内容と `storedEditorCode` が異なる場合のみ更新
-      if (currentValue !== storedEditorCode) {
-        editorRef.current.setValue(storedEditorCode);
-      }
-    }
-  }, [storedEditorCode]); // `storedEditorCode` の変更を監視し、エディタと文字数を更新
-
-  // エディタに入力された内容を取得
-  useEffect(() => {
-    const editorValue = editorRef.current?.getValue();
-    if (editorValue !== undefined) {
-      setIsEditorInputed(editorValue);
-      setCurrentEditorInputed(editorValue);
-    }
-  }, [setIsEditorInputed, setCurrentEditorInputed]);
-
-  // クリップボードにコピーする関数
+  /**
+   * クリップボードにコピーするハンドラー
+   * - 現在のエディタの入力内容をコピーする
+   * - EditorSection で入力した内容は currentEditorInputed に集約されている
+   */
   const copyToClipboard = () => {
-    if (editorRef.current) {
-      const copyEditorvalue = editorRef.current.getValue(); // Monaco Editor 内のコンテンツを取得
-
-      if (copyEditorvalue.length === 0) {
+    if (currentEditorInputed) {
+      if (currentEditorInputed?.length === 0) {
         return;
       }
 
       navigator.clipboard
-        .writeText(copyEditorvalue)
+        .writeText(currentEditorInputed || "")
         .then(() => {
           alert("Copied to clipboard!");
         })
@@ -144,18 +54,17 @@ export default function InputSection() {
     }
   };
 
-  // createProblem.tsに選択後の値を送信する
-  // 正常にAPIとの送受信が行われたら、受信結果を受け取る
+  /**
+   * サーバーへ問題文＋コードを投げてレビューを生成するハンドラー
+   * - API呼び出し後、レスポンスとして受け取った ChatGPT AI の返信をセット
+   * - レスポンスの内容を localStorage に保存し、React Context にも保存している
+   * - ローディングや処理結果の表示は isApiLoading / setIsReviewCreating で管理
+   */
   const handleCreateReview = async () => {
-    const currentEditorValue = editorRef.current
-      ? editorRef.current.getValue()
-      : "";
-
-    // submitボタンが押されたら、状態関数をtrueに更新しcursor-not-allowed等のスタイルを追加する
+    const currentEditorValue = currentEditorInputed || "";
+    // Submit ボタンが押されたらローディング状態にする
     setIsApiLoading(true);
-    // submitボタンが押されたら、状態関数をtrueに更新しローディングアニメーションを表示する
     setIsReviewCreating(true);
-    // ボタンが押されたら、ReviewSectionに表示されている内容を空にする
     setReviewText(null);
 
     try {
@@ -181,33 +90,29 @@ export default function InputSection() {
       const responseText = data.responseText;
       const JsonText = JSON.parse(responseText);
 
-      // ローカルストレージにデータ(問題文・エディタの入力内容・総評)を保存する
+      // ReviewSection に返却データを反映
       saveToLocalStorage({
         difficulty,
         dataType,
         topic,
         uiLanguage,
-        problemContent: jsonFormattedQuestionText,
+        questionText: jsonFormattedQuestionText,
         editorLanguage: currentEditorLanguage,
-        editorContent: currentEditorValue,
-        evaluation: JsonText,
+        editorCode: currentEditorValue,
+        reviewText: JsonText,
       });
 
       // ReviewSectionにChatGPT-APIの返信データを設置する
       setReviewText(JsonText);
 
-      // setStoredEditorCodeに`currentEditorValue`を設置する事で、上段78-86行にあるuseEffect()内に記述している条件式にある、
-      // ロード直後にもう一度問題作成を行った場合にエディタの中を空になる処理が実行される
-      // このセット関数を実行しないと、ロード直後に問題文を作成した場合にエディタの中が空にならないバグが発生する
+      // エディタ入力内容を Context に再度保存
       setStoredEditorCode(currentEditorValue);
 
-      // APIからのレスポンスを確認して、Buttonコンポーネントのスタイルを元に戻す
+      // ローカルストレージから最新データを取得し、React Select へ表示されるセーブデータを更新
       if (responseText) {
         setIsApiLoading(false);
         setIsReviewCreating(false);
       }
-
-      // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新する
       const savedLocalStorageData =
         JSON.parse(localStorage.getItem("savedData") || "[]") || [];
       if (savedLocalStorageData === undefined) return;
@@ -260,59 +165,10 @@ export default function InputSection() {
               isApiLoading ? "pointer-events-none" : ""
             }`}
           >
-            {/* フォントサイズ */}
-            <label htmlFor="fontsize-select" className="sr-only">
-              fontsize select
-            </label>
-            <select
-              id="fontsize-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
-              value={fontSize}
-              disabled={isApiLoading}
-              onChange={handleFontSizeChange}
-              style={{
-                backgroundImage: `url(${
-                  currentTheme === "dark"
-                    ? menuData.svgIcon.textSizeLight
-                    : menuData.svgIcon.textSizeDark
-                })`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "calc(100% - 20px) center",
-                appearance: "auto",
-              }}
-            >
-              {[10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20].map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
+            {/* エディタのフォントサイズ */}
+            <EditorFontOption />
             {/* エディタのテーマ */}
-            <label htmlFor="theme-select" className="sr-only">
-              theme select
-            </label>
-            <select
-              id="theme-select"
-              className="w-full cursor-pointer rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700"
-              value={editorTheme}
-              disabled={isApiLoading}
-              onChange={handleThemeChange}
-              style={{
-                backgroundImage: `url(${
-                  currentTheme === "dark"
-                    ? menuData.svgIcon.editorColorLight
-                    : menuData.svgIcon.editorColorDark
-                })`,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "calc(100% - 20px) center",
-                appearance: "auto",
-              }}
-            >
-              <option value="vs">vs</option>
-              <option value="vs-dark">vs-dark</option>
-              <option value="hc-light">hc-light</option>
-              <option value="hc-black">hc-black</option>
-            </select>
+            <EditorThemeOption />
             {/* エディタの言語 */}
             <EditorLanguageOption
               currentLanguageValue={storedEditorLanguage}
@@ -322,12 +178,14 @@ export default function InputSection() {
             <div className="w-full cursor-text rounded-md bg-gray-200 p-1 duration-300 hover:bg-gray-400 dark:bg-[#0d1117] dark:hover:bg-slate-700">
               <p>Input: {currentEditorInputed?.length}</p>
             </div>
+            {/* エディタの入力内容をコピー */}
             <InputAreaButton
               id="button-Copy-CodeInputArea"
               type="button"
               text="Copy"
               onClick={copyToClipboard}
             />
+            {/* レビュー生成 */}
             <InputAreaButton
               id="submit"
               type="button"
@@ -337,18 +195,8 @@ export default function InputSection() {
           </div>
         </details>
       </div>
-      <div className="flex flex-1">
-        <MonacoEditor
-          // フォントサイズは数値で指定する必要がある為、Numberメソッドで文字列を変換する
-          fontSize={Number(fontSize)}
-          editorLanguage={storedEditorLanguage}
-          editorTheme={editorTheme}
-          // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
-          onMount={handleEditorMount}
-          // エディタ内の入力内容をMoancoEditor.tsxへプロパティとして渡す
-          onChange={handleEditorChange}
-        />
-      </div>
+      {/* Monaco Editor の領域を EditorSection コンポーネントに分割 */}
+      <EditorSection />
     </section>
   );
 }

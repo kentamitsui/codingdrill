@@ -12,7 +12,7 @@ export default function ReactSelect({
   currentTheme,
 }: ReactSelectProps) {
   const { isApiLoading } = useAppContext();
-  const { currentSelectedSavedData } = useLocalStorageContext();
+  const { currentSelectedSavedDataId } = useLocalStorageContext();
 
   // ローカルストレージの保存データをreact-select用に変換して表示
   const options =
@@ -86,11 +86,14 @@ export default function ReactSelect({
   };
 
   // プレースホルダーオプション
-  const placeholderOption = { value: "", label: "None" };
+  const placeholderOption = {
+    value: currentSelectedSavedDataId,
+    label: "None",
+  };
 
   // 選択されたオプションを取得
   const selectedOption =
-    options?.find((option) => option.value === currentSelectedSavedData) ||
+    options?.find((option) => option.value === currentSelectedSavedDataId) ||
     null;
 
   // スタイルのカスタマイズ
@@ -117,22 +120,22 @@ export default function ReactSelect({
       padding: "4px",
       transition: "300ms",
       backgroundColor: state.isDisabled
-        ? currentSelectedSavedData === "" && currentTheme === "dark"
+        ? currentSelectedSavedDataId === null && currentTheme === "dark"
           ? "#0D1117"
-          : currentSelectedSavedData === "" && currentTheme === "light"
+          : currentSelectedSavedDataId === null && currentTheme === "light"
             ? "#e5e7eb"
-            : currentSelectedSavedData !== "" && currentTheme === "dark"
+            : currentSelectedSavedDataId !== null && currentTheme === "dark"
               ? "#334155"
-              : currentSelectedSavedData !== "" && currentTheme === "light"
+              : currentSelectedSavedDataId !== null && currentTheme === "light"
                 ? "#9ca3af"
                 : ""
-        : currentSelectedSavedData === "" && currentTheme === "dark"
+        : currentSelectedSavedDataId === null && currentTheme === "dark"
           ? "#0D1117"
-          : currentSelectedSavedData === "" && currentTheme === "light"
+          : currentSelectedSavedDataId === null && currentTheme === "light"
             ? "#e5e7eb"
-            : currentSelectedSavedData !== "" && currentTheme === "dark"
+            : currentSelectedSavedDataId !== null && currentTheme === "dark"
               ? "#334155"
-              : currentSelectedSavedData !== "" && currentTheme === "light"
+              : currentSelectedSavedDataId !== null && currentTheme === "light"
                 ? "#9ca3af"
                 : "",
       borderColor: currentTheme === "dark" ? "#0D1117" : "#e5e7eb",
@@ -145,7 +148,7 @@ export default function ReactSelect({
           : currentTheme === "dark"
             ? "#334155"
             : "#9CA3AF",
-        opacity: isApiLoading || currentSelectedSavedData !== "" ? 0.5 : 1,
+        opacity: isApiLoading || currentSelectedSavedDataId !== null ? 0.5 : 1,
       },
     }),
     valueContainer: (provided) => ({
