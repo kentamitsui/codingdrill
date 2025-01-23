@@ -43,7 +43,7 @@ const CodeInputSection = () => {
       navigator.clipboard
         .writeText(currentEditorInputed || "")
         .then(() => {
-          alert("Copied to clipboard!");
+          alert("Copied to clipboard.");
         })
         .catch((err) => {
           console.error("Failed to copy text: ", err);

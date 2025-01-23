@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppContext } from "@/app/context/AppContext";
-import ReusableParagraph from "@/app/components/common/ReusableParagraph";
+import Paragraph from "@/app/components/common/Paragraph";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
@@ -105,57 +105,57 @@ const QuestionSection: React.FC = () => {
         <Loading isCreating={isQuestionCreating} text={"Now Creating"} />
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Description"
             paragraphContent={jsonFormattedQuestionText?.problemStatement}
           />
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Function Signature"
             paragraphContent={jsonFormattedQuestionText?.functionSignature}
           />
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Constraints"
             paragraphContent={`Size: ${jsonFormattedQuestionText?.constraints.size}\nValue Range: ${jsonFormattedQuestionText?.constraints.valueRange}\nK Range: ${jsonFormattedQuestionText?.constraints.kRange}`}
           />
           {/* 例題等の項目 */}
           <div className="mt-8">
-            <ReusableParagraph
+            <Paragraph
               content={jsonFormattedQuestionText}
               titleText="Example 1"
               paragraphContent={`Input:\n${jsonFormattedQuestionText?.example1?.input}\nOutput: ${jsonFormattedQuestionText?.example1?.output}\nExplanation: ${jsonFormattedQuestionText?.example1?.explanation}`}
             />
           </div>
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Example 2"
             paragraphContent={`Input:\n${jsonFormattedQuestionText?.example2?.input}\nOutput: ${jsonFormattedQuestionText?.example2?.output}\nExplanation: ${jsonFormattedQuestionText?.example2?.explanation}`}
           />
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Example 3"
             paragraphContent={`Input:\n${jsonFormattedQuestionText?.example3?.input}\nOutput: ${jsonFormattedQuestionText?.example3?.output}\nExplanation: ${jsonFormattedQuestionText?.example3?.explanation}`}
           />
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Edge Case 1"
             paragraphContent={`Input:\n${jsonFormattedQuestionText?.edgeCase1?.input}\nOutput: ${jsonFormattedQuestionText?.edgeCase1?.output}\nExplanation: ${jsonFormattedQuestionText?.edgeCase1?.explanation}`}
           />
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Edge Case 2"
             paragraphContent={`Input:\n${jsonFormattedQuestionText?.edgeCase2?.input}\nOutput: ${jsonFormattedQuestionText?.edgeCase2?.output}\nExplanation: ${jsonFormattedQuestionText?.edgeCase2?.explanation}`}
           />
-          <ReusableParagraph
+          <Paragraph
             content={jsonFormattedQuestionText}
             titleText="Edge Case 3"
             paragraphContent={`Input:\n${jsonFormattedQuestionText?.edgeCase3?.input}\nOutput: ${jsonFormattedQuestionText?.edgeCase3?.output}\nExplanation: ${jsonFormattedQuestionText?.edgeCase3?.explanation}`}
           />
           {/* analysis */}
           <div className="mt-8">
-            <ReusableParagraph
+            <Paragraph
               content={jsonFormattedQuestionText}
               titleText="Analysis"
               paragraphContent={`Time Complexity: ${
@@ -165,7 +165,7 @@ const QuestionSection: React.FC = () => {
           </div>
           {/* hints */}
           <div className="mt-8">
-            <ReusableParagraph
+            <Paragraph
               content={jsonFormattedQuestionText}
               titleText="Hints"
               paragraphContent={`${jsonFormattedQuestionText?.hints}`}
