@@ -8,7 +8,7 @@ import { useAppContext } from "@/app/context/AppContext";
 import { useLocalStorageContext } from "@/app/feature/storage/context/StorageContext";
 import dynamic from "next/dynamic";
 const ReactSelect = dynamic(
-  () => import("@/app/components/ui/select/react-select/ReactSelect"),
+  () => import("@/app/feature/react-select/ReactSelect"),
   {
     ssr: false,
   },
