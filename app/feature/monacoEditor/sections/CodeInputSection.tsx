@@ -8,7 +8,7 @@ import ThemeSelect from "@/app/feature/monacoEditor/components/option/ThemeSelec
 import LanguageSelect from "@/app/feature/monacoEditor/components/option/LanguageSelect";
 import EditorSection from "@/app/feature/monacoEditor/sections/EditorSection";
 
-export default function InputSection() {
+const CodeInputSection = () => {
   const {
     isApiLoading,
     setIsApiLoading,
@@ -199,4 +199,6 @@ export default function InputSection() {
       <EditorSection />
     </section>
   );
-}
+};
+
+export default CodeInputSection;

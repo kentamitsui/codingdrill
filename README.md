@@ -289,8 +289,8 @@ This project is built using the following technologies:
 │   │       └── openaiRequestHelper.ts
 │   ├── components
 │   │   ├── layout
-│   │   │   ├── inputSection
-│   │   │   │   └── InputSection.tsx
+│   │   │   ├── CodeInputSection
+│   │   │   │   └── CodeInputSection.tsx
 │   │   │   ├── questionSection
 │   │   │   │   └── QuestionSection.tsx
 │   │   │   ├── reviewSection

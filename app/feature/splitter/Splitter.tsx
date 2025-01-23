@@ -3,7 +3,7 @@
 import React, { lazy, Suspense } from "react";
 const Split = lazy(() => import("react-split"));
 import QuestionSection from "@/app/components/layout/questionSection/QuestionSection";
-import InputSection from "@/app/components/layout/inputSection/InputSection";
+import CodeInputSection from "@/app/feature/monacoEditor/sections/CodeInputSection";
 import ReviewSection from "@/app/components/layout/reviewSection/ReviewSection";
 import { usePanelContext } from "@/app/feature/splitter/context/PanelContext";
 
@@ -22,7 +22,7 @@ const SplitVertical: React.FC = () => {
       direction="vertical"
       onDragEnd={handleVerticalDragEnd}
     >
-      <InputSection />
+      <CodeInputSection />
       <ReviewSection />
     </Split>
   );
