@@ -1,33 +1,13 @@
 import { useAppContext } from "@/app/context/AppContext";
 import React from "react";
-import { ReusableReviewContentsProps } from "@/app/type/type";
+import Paragraph from "@/app/components/common/Paragraph";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
-export const ReviewSection: React.FC = () => {
+const ReviewSection: React.FC = () => {
   const { isApiLoading, isReviewCreating, reviewText, currentTheme } =
     useAppContext();
-
-  const ReusableParagraph: React.FC<ReusableReviewContentsProps> = ({
-    content,
-    titleText,
-    paragraphContent,
-  }) => {
-    return (
-      <div>
-        {/* タイトル */}
-        <p className="text-[20px] font-medium width_1440px:text-[22px] width_1680px:text-[24px]">
-          {content ? titleText : null}
-        </p>
-        {/* 複数行対応の本文 */}
-        <div className="ml-4 whitespace-break-spaces text-[16px] font-normal width_1440px:ml-5 width_1440px:text-[18px] width_1680px:ml-[22px] width_1680px:text-[20px]">
-          {content &&
-            [paragraphContent].map((line, index) => <p key={index}>{line}</p>)}
-        </div>
-      </div>
-    );
-  };
 
   const copyToClipboard = () => {
     if (!reviewText) {
@@ -95,37 +75,37 @@ export const ReviewSection: React.FC = () => {
         className="flex flex-col gap-5 p-[15px_30px] leading-normal tracking-wider"
       >
         <Loading isCreating={isReviewCreating} text={"Now Creating"} />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Explanation of the algorithm:"
           paragraphContent={reviewText?.algorithmExplanation}
         />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Clarity and specificity:"
           paragraphContent={reviewText?.clarity}
         />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Efficiency:"
           paragraphContent={reviewText?.efficiency}
         />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Test coverage:"
           paragraphContent={reviewText?.testCoverage}
         />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Technical accuracy:"
           paragraphContent={reviewText?.technicalAccuracy}
         />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Improvement suggestions:"
           paragraphContent={reviewText?.suggestionsImprovement}
         />
-        <ReusableParagraph
+        <Paragraph
           content={reviewText}
           titleText="Example improvement:"
           paragraphContent={reviewText?.improvementExample}

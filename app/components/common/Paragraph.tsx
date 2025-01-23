@@ -1,6 +1,6 @@
-import { ReusableProblemContentProps } from "@/app/type/type";
+import { QuestionParagraphProps, ReviewParagraphProps } from "@/app/type/type";
 
-const ReusableParagraph: React.FC<ReusableProblemContentProps> = ({
+const Paragraph: React.FC<QuestionParagraphProps | ReviewParagraphProps> = ({
   content,
   titleText,
   paragraphContent,
@@ -20,4 +20,4 @@ const ReusableParagraph: React.FC<ReusableProblemContentProps> = ({
   );
 };
 
-export default ReusableParagraph;
+export default Paragraph;
