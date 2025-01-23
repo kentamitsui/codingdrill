@@ -130,7 +130,7 @@ Coding Drillがどのように機能するかは、デモGIFをご覧くださ�
 - 💡[Future Plans](#future-plans)
 - 🛠[Technologies Used](#technologies-used)
 - 📂[Directory Structure](#directory-structure)
-- 🌍[Deploy](#deployment)
+- 🌍[Deployment](#deployment)
 
 ---
 
@@ -311,7 +311,9 @@ This project is built using the following technologies:
 │   │       ├── main
 │   │       │   └── Main.tsx
 │   │       └── select
+│   │           ├── EditorFontOption.tsx
 │   │           ├── EditorLanguageOption.tsx
+│   │           ├── EditorThemeOption.tsx
 │   │           ├── Options.tsx
 │   │           └── react-select
 │   │               └── ReactSelect.tsx
@@ -331,6 +333,7 @@ This project is built using the following technologies:
 │   │   │   │   └── localStorageContext.tsx
 │   │   │   └── localStorage.ts
 │   │   ├── monacoEditor
+│   │   │   ├── EditorSection.tsx
 │   │   │   └── MonacoEditor.tsx
 │   │   └── splitter
 │   │       ├── Splitter.tsx
@@ -346,15 +349,16 @@ This project is built using the following technologies:
 │   ├── type
 │   │   └── type.ts
 │   └── vercel.json
-├── public
-│   ├── gif // omitted because many items
-│   ├── images // omitted because many items
-│   └── icon.svg
 ├── next-env.d.ts
 ├── next.config.mjs
 ├── package-lock.json
 ├── package.json
 ├── postcss.config.mjs
+├── public
+│   ├── gif // omitted because many items
+│   ├── icon.svg
+│   └── images // omitted  because many items
+├── .env.local
 ├── README.md
 ├── tailwind.config.ts
 └── tsconfig.json
