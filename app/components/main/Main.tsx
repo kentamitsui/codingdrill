@@ -1,4 +1,4 @@
-import Sidebar from "@/app/components/layout/sidebar/Sidebar";
+import Sidebar from "@/app/components/sidebar/Sidebar";
 import "@/app/styles/globals.css";
 import SplitHorizontal from "@/app/feature/splitter/Splitter";
 import Footer from "@/app/components/footer/Footer";
@@ -11,7 +11,6 @@ const Main = () => {
           <Sidebar />
           <SplitHorizontal />
         </div>
-        <footer className="text-3xl">test</footer>
       </main>
       <Footer />
     </>

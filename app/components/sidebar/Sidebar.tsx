@@ -15,7 +15,7 @@ const ReactSelect = dynamic(
 );
 import Image from "next/image";
 
-export default function Sidebar() {
+const Sidebar = () => {
   // アプリ全体の状態管理（問題作成、データ取得）
   const {
     isApiLoading,
@@ -219,4 +219,6 @@ export default function Sidebar() {
       </div>
     </aside>
   );
-}
+};
+
+export default Sidebar;
