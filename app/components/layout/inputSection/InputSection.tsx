@@ -1,5 +1,5 @@
 import { useAppContext } from "@/app/context/AppContext";
-import { useLocalStorageContext } from "@/app/feature/localStorage/context/localStorageContext";
+import { useLocalStorageContext } from "@/app/feature/storage/context/StorageContext";
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
