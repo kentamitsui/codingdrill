@@ -2,7 +2,7 @@ interface ColorTheme {
   toggle: () => void;
 }
 
-export const IconLightMode: React.FC<ColorTheme> = ({ toggle }) => {
+export const LightModeToggleButton: React.FC<ColorTheme> = ({ toggle }) => {
   return (
     <button
       onClick={toggle}
@@ -26,4 +26,4 @@ export const IconLightMode: React.FC<ColorTheme> = ({ toggle }) => {
   );
 };
 
-export default IconLightMode;
+export default LightModeToggleButton;

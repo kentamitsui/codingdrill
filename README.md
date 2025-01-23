@@ -326,8 +326,8 @@ This project is built using the following technologies:
 │   │   │   ├── ThemeSwitch.tsx
 │   │   │   └── components
 │   │   │       └── ui
-│   │   │           ├── IconDarkMode.tsx
-│   │   │           └── IconLightMode.tsx
+│   │   │           ├── DarkModeToggleButton.tsx
+│   │   │           └── LightModeToggleButton.tsx
 │   │   ├── localStorage
 │   │   │   ├── context
 │   │   │   │   └── localStorageContext.tsx
