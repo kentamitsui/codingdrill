@@ -108,6 +108,7 @@ export interface MonacoEditorProps {
 export interface LocalStorageContextTypeProps {
   currentSelectedSavedDataId: number | null;
   setCurrentSelectedSavedDataId: (id: number | null) => void;
+  saveToLocalStorage: (data: SaveToLocalStorageProps) => void;
   loadSavedData: () => void;
   handleDeleteSelected: () => void;
   clearLocalStorage: () => void;
@@ -203,8 +204,8 @@ export interface ProblemContentProps extends ProblemContentBase {
   hints?: string;
 }
 
-// ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
-export interface ReusableProblemContentProps {
+// Paragraph(APIからのレスポンスを展開する)に対する型定義
+export interface QuestionParagraphProps {
   content: ProblemContentProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
@@ -221,15 +222,15 @@ export interface ReviewResponseProps {
   improvementExample: string | null;
 }
 
-// ReusableParagraph(APIからのレスポンスを展開する)に対する型定義
-export interface ReusableReviewContentsProps {
+// Paragraph(APIからのレスポンスを展開する)に対する型定義
+export interface ReviewParagraphProps {
   content: ReviewResponseProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
 }
 
-// LoadingAnimationに対する型定義
-export interface LoadingAnimationProps {
+// Loadingに対する型定義
+export interface LoadingProps {
   isCreating: boolean | undefined;
   text: string;
 }
