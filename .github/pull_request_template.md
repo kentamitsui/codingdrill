@@ -8,8 +8,8 @@ A brief description of the purpose of the pull request. Explain the **what** and
 
 ### Changes Made
 
-- List the major changes in this pull request.
-- Highlight important aspects of the code that were modified, added, or removed.
+- #### List the major changes in this pull request.
+- #### Highlight important aspects of the code that were modified, added, or removed.
 
 Example:
 
