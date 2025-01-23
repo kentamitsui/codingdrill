@@ -1,6 +1,6 @@
 import * as monaco from "monaco-editor";
 import { useRef, useState, useEffect } from "react";
-import MonacoEditor from "@/app/feature/monacoEditor/MonacoEditor";
+import MonacoEditor from "@/app/feature/monacoEditor/components/MonacoEditor";
 import { useAppContext } from "@/app/context/AppContext";
 
 export default function EditorSection() {
