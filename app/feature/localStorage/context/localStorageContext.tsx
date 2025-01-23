@@ -109,7 +109,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // 確認ダイアログ
-    if (!confirm("Are you sure you want to load this entry?")) {
+    if (!confirm("Are you sure you want to load this data?")) {
       return;
     }
 
