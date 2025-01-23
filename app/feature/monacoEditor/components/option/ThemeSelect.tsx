@@ -1,7 +1,7 @@
 import { useAppContext } from "@/app/context/AppContext";
 import menuData from "@/app/config/config.json";
 
-export const EditorThemeOption: React.FC = () => {
+const ThemeSelect: React.FC = () => {
   const { isApiLoading, editorTheme, setEditorTheme, currentTheme } =
     useAppContext();
 
@@ -40,3 +40,5 @@ export const EditorThemeOption: React.FC = () => {
     </>
   );
 };
+
+export default ThemeSelect;

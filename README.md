@@ -311,9 +311,9 @@ This project is built using the following technologies:
 │   │       ├── main
 │   │       │   └── Main.tsx
 │   │       └── select
-│   │           ├── EditorFontOption.tsx
-│   │           ├── EditorLanguageOption.tsx
-│   │           ├── EditorThemeOption.tsx
+│   │           ├── FontSizeSelect.tsx
+│   │           ├── LanguageSelect.tsx
+│   │           ├── ThemeSelect.tsx
 │   │           ├── Options.tsx
 │   │           └── react-select
 │   │               └── ReactSelect.tsx

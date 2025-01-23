@@ -1,7 +1,7 @@
 import { useAppContext } from "@/app/context/AppContext";
 import menuData from "@/app/config/config.json";
 
-export const EditorFontOption: React.FC = () => {
+const FontSizeSelect: React.FC = () => {
   const { isApiLoading, editorFontSize, setEditorFontSize, currentTheme } =
     useAppContext();
 
@@ -43,3 +43,5 @@ export const EditorFontOption: React.FC = () => {
     </>
   );
 };
+
+export default FontSizeSelect;

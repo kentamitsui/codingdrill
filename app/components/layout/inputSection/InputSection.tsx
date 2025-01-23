@@ -3,9 +3,9 @@ import { useLocalStorageContext } from "@/app/feature/storage/context/StorageCon
 import InputAreaButton from "@/app/components/ui/button/InputAreaButton";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
-import { EditorFontOption } from "@/app/components/ui/select/EditorFontOption";
-import { EditorThemeOption } from "@/app/components/ui/select/EditorThemeOption";
-import { EditorLanguageOption } from "@/app/components/ui/select/EditorLanguageOption";
+import FontSizeSelect from "@/app/feature/monacoEditor/components/option/FontSizeSelect";
+import ThemeSelect from "@/app/feature/monacoEditor/components/option/ThemeSelect";
+import LanguageSelect from "@/app/feature/monacoEditor/components/option/LanguageSelect";
 import EditorSection from "@/app/feature/monacoEditor/sections/EditorSection";
 
 export default function InputSection() {
@@ -166,11 +166,11 @@ export default function InputSection() {
             }`}
           >
             {/* エディタのフォントサイズ */}
-            <EditorFontOption />
+            <FontSizeSelect />
             {/* エディタのテーマ */}
-            <EditorThemeOption />
+            <ThemeSelect />
             {/* エディタの言語 */}
-            <EditorLanguageOption
+            <LanguageSelect
               currentLanguageValue={storedEditorLanguage}
               setSelectedFunc={setStoredEditorLanguage}
             />
