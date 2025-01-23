@@ -64,8 +64,7 @@ export interface AppContextProps {
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
-  storedUiLanguage: string | null;
-  setStoredUiLanguage: React.Dispatch<React.SetStateAction<string>>;
+  //// エディタ関連の状態管理
   storedEditorLanguage: string;
   setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
   currentEditorLanguage: string;
@@ -74,6 +73,10 @@ export interface AppContextProps {
   setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
   currentEditorInputed: string | null;
   setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  editorFontSize: string;
+  setEditorFontSize: React.Dispatch<React.SetStateAction<string>>;
+  editorTheme: string;
+  setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
   currentTheme: string | undefined;
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
@@ -103,12 +106,10 @@ export interface MonacoEditorProps {
 
 // LocalStorageContextに対する型定義
 export interface LocalStorageContextTypeProps {
-  savedData: SavedDataEntryProps[];
-  currentSelectedSavedData: number | string;
-  setCurrentSelectedSavedData: (id: number | string) => void;
-  updateLocalStorage: (data: SavedDataEntryProps[]) => void;
-  loadSavedData: (id: string | number, setFunctions: SetFunctionsProps) => void;
-  handleDeleteSelected: (id: string | number) => void;
+  currentSelectedSavedDataId: number | null;
+  setCurrentSelectedSavedDataId: (id: number | null) => void;
+  loadSavedData: () => void;
+  handleDeleteSelected: () => void;
   clearLocalStorage: () => void;
 }
 
@@ -118,15 +119,15 @@ export interface SaveToLocalStorageProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  problemContent: ProblemContentProps | null;
+  questionText: ProblemContentProps | null;
   editorLanguage: string;
-  editorContent: string;
-  evaluation: string;
+  editorCode: string;
+  reviewText: string;
 }
 
 // SavedDataEntryに対する型定義
 export interface SavedDataEntryProps {
-  id: string;
+  id: number | null;
   difficulty: string;
   dataType: string;
   topic: string;
@@ -138,8 +139,8 @@ export interface SavedDataEntryProps {
   timestamp: string;
 }
 
-// SetFunctionsに対する型定義
-export interface SetFunctionsProps {
+// SetUpdateFunctionsに対する型定義
+export interface SetUpdateFunctionsProps {
   difficulty: (value: string) => void;
   dataType: (value: string) => void;
   topic: (value: string) => void;
@@ -152,12 +153,16 @@ export interface SetFunctionsProps {
 
 // UpdateSaveDataEntryに対する型定義
 export interface UpdateSaveDataEntryProps {
-  id: string;
+  id: number | null;
   timestamp: string;
   difficulty: string;
   dataType: string;
   topic: string;
   uiLanguage: string;
+  questionText: ProblemContentProps | null;
+  editorLanguage: string;
+  editorCode: string;
+  reviewText: ReviewResponseProps | null;
 }
 
 // ProblemContentのベースとなる型定義
@@ -231,7 +236,7 @@ export interface LoadingAnimationProps {
 
 // ReactSelectに対する型定義
 export interface ReactSelectProps {
-  selectedSaveData: string | number;
+  selectedSaveData: number | null;
   isApiLoading: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
