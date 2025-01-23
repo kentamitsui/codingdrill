@@ -289,8 +289,8 @@ This project is built using the following technologies:
 │   │       └── openaiRequestHelper.ts
 │   ├── components
 │   │   ├── layout
-│   │   │   ├── inputSection
-│   │   │   │   └── InputSection.tsx
+│   │   │   ├── CodeInputSection
+│   │   │   │   └── CodeInputSection.tsx
 │   │   │   ├── questionSection
 │   │   │   │   └── QuestionSection.tsx
 │   │   │   ├── reviewSection
@@ -299,21 +299,21 @@ This project is built using the following technologies:
 │   │   │       └── Sidebar.tsx
 │   │   └── ui
 │   │       ├── button
-│   │       │   ├── Button.tsx
-│   │       │   ├── InputAreaButton.tsx
-│   │       │   └── SaveDataOptionButton.tsx
+│   │       │   ├── BaseButton.tsx
+│   │       │   ├── EditorActionButton.tsx
+│   │       │   └── SaveActionButton.tsx
 │   │       ├── footer
 │   │       │   └── Footer.tsx
 │   │       ├── header
 │   │       │   └── Header.tsx
-│   │       ├── loadingAnimation
-│   │       │   └── LoadingAnimation.tsx
+│   │       ├── Loading
+│   │       │   └── Loading.tsx
 │   │       ├── main
 │   │       │   └── Main.tsx
 │   │       └── select
-│   │           ├── EditorFontOption.tsx
-│   │           ├── EditorLanguageOption.tsx
-│   │           ├── EditorThemeOption.tsx
+│   │           ├── FontSizeSelect.tsx
+│   │           ├── LanguageSelect.tsx
+│   │           ├── ThemeSelect.tsx
 │   │           ├── Options.tsx
 │   │           └── react-select
 │   │               └── ReactSelect.tsx
@@ -326,8 +326,8 @@ This project is built using the following technologies:
 │   │   │   ├── ThemeSwitch.tsx
 │   │   │   └── components
 │   │   │       └── ui
-│   │   │           ├── IconDarkMode.tsx
-│   │   │           └── IconLightMode.tsx
+│   │   │           ├── DarkModeToggleButton.tsx
+│   │   │           └── LightModeToggleButton.tsx
 │   │   ├── localStorage
 │   │   │   ├── context
 │   │   │   │   └── localStorageContext.tsx
