@@ -24,8 +24,8 @@ export interface BaseButtonProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
-  isApiLoading: boolean | undefined;
-  setIsApiLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
+  isApiLoading: boolean;
+  setIsApiLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isQuestionCreating: boolean | undefined;
   setIsQuestionCreating: React.Dispatch<
     React.SetStateAction<boolean | undefined>

@@ -12,7 +12,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   // 選択タグやボタンに使用するdisabled属性の状態管理
-  const [isApiLoading, setIsApiLoading] = useState<boolean | undefined>(false);
+  const [isApiLoading, setIsApiLoading] = useState<boolean>(false);
   const [isQuestionCreating, setIsQuestionCreating] = useState<
     boolean | undefined
   >(false);
