@@ -10,7 +10,7 @@ const ReviewSection: React.FC = () => {
     useAppContext();
 
   const copyToClipboard = () => {
-    if (!reviewText) {
+    if (reviewText === null) {
       return;
     }
 
@@ -30,6 +30,13 @@ const ReviewSection: React.FC = () => {
       technicalAccuracy +
       suggestionsImprovement +
       improvementExample;
+
+    if (
+      formattedReviewContent === null ||
+      formattedReviewContent.trim().length === 0
+    ) {
+      return;
+    }
 
     navigator.clipboard
       .writeText(formattedReviewContent)

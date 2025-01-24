@@ -11,14 +11,13 @@ const QuestionSection: React.FC = () => {
     isApiLoading,
     isQuestionCreating,
     jsonFormattedQuestionText,
-    formattedQuestionText,
-    setFormattedQuestionText,
     currentTheme,
   } = useAppContext();
 
   // クリップボードに文字列をコピーする関数
-  useEffect(() => {
-    if (!jsonFormattedQuestionText) {
+
+  const copyToClipboard = () => {
+    if (jsonFormattedQuestionText === null) {
       return;
     }
 
@@ -55,16 +54,15 @@ const QuestionSection: React.FC = () => {
       analysis +
       hints;
 
-    setFormattedQuestionText(formattedQuestionDetails);
-  }, [jsonFormattedQuestionText, setFormattedQuestionText]);
-
-  const copyToClipboard = () => {
-    if (!formattedQuestionText || formattedQuestionText.trim().length === 0) {
+    if (
+      formattedQuestionDetails === null ||
+      formattedQuestionDetails.trim().length === 0
+    ) {
       return;
     }
 
     navigator.clipboard
-      .writeText(formattedQuestionText)
+      .writeText(formattedQuestionDetails)
       .then(() => {
         alert("Copied to clipboard.");
       })
