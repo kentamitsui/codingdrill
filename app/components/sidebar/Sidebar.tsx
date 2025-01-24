@@ -14,6 +14,7 @@ const ReactSelect = dynamic(
   },
 );
 import Image from "next/image";
+import { ProblemContentProps } from "@/app/type/type";
 
 const Sidebar = () => {
   // アプリ全体の状態管理（問題作成、データ取得）
@@ -87,9 +88,20 @@ const Sidebar = () => {
         setIsQuestionCreating(false);
       }
 
+      // 型ガード関数を使用して、APIからのレスポンスが正しい形式であるかを判定する
+      const isProblemContentProps = (
+        responseObject: unknown,
+      ): responseObject is ProblemContentProps => {
+        return typeof responseObject === "object" && responseObject !== null;
+      };
+
       // AppContextのセット関数にデータを設置する
-      setJsonFormattedQuestionText(JSON.parse(responseText));
-      setUiLanguage(uiLanguage);
+      if (isProblemContentProps(JSON.parse(responseText))) {
+        setJsonFormattedQuestionText(JSON.parse(responseText));
+        setUiLanguage(uiLanguage);
+      } else {
+        console.error("Invalid API response format:", JSON.parse(responseText));
+      }
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");

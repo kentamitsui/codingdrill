@@ -31,7 +31,7 @@ export interface AppContextProps {
   setIsQuestionCreating: React.Dispatch<React.SetStateAction<boolean>>;
   isReviewCreating: boolean;
   setIsReviewCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  //
+  // Sidebar.tsxで選択された難易度、データタイプ、トピック、UI言語を管理
   difficulty: string;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   dataType: string;
