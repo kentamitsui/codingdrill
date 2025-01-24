@@ -26,10 +26,8 @@ export interface BaseButtonProps {
 export interface AppContextProps {
   isApiLoading: boolean;
   setIsApiLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  isQuestionCreating: boolean | undefined;
-  setIsQuestionCreating: React.Dispatch<
-    React.SetStateAction<boolean | undefined>
-  >;
+  isQuestionCreating: boolean;
+  setIsQuestionCreating: React.Dispatch<React.SetStateAction<boolean>>;
   isReviewCreating: boolean | undefined;
   setIsReviewCreating: React.Dispatch<
     React.SetStateAction<boolean | undefined>
