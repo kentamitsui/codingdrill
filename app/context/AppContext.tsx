@@ -23,9 +23,11 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [uiLanguage, setUiLanguage] = useState<string>("");
 
   // APIから出力された問題文をJSON形式で管理
-  const [jsonFormattedQuestionText, setJsonFormattedQuestionText] =
+  const [jsonQuestionText, setJsonQuestionText] =
     useState<ProblemContentProps | null>(null);
-  // APIから出力されたJSON形式のデータ管理
+  // APIに送信する問題文(テキストベース)を管理(APIのリクエスト、クリップボードコピー時に使用)
+  const [storedQuestionText, setStoredQuestionText] = useState<string>("");
+  // APIから出力されたフィードバックを管理
   const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
     null,
   );
@@ -78,15 +80,14 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setTopic,
         uiLanguage,
         setUiLanguage,
-        jsonFormattedQuestionText,
-        setJsonFormattedQuestionText,
-        // formattedQuestionText,
-        // setFormattedQuestionText,
+        jsonQuestionText,
+        setJsonQuestionText,
+        storedQuestionText,
+        setStoredQuestionText,
         saveData,
         setSaveData,
         reviewText,
         setReviewText,
-        //// エディタ関連
         storedEditorLanguage,
         setStoredEditorLanguage,
         currentEditorLanguage,

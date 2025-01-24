@@ -43,9 +43,11 @@ export interface AppContextProps {
   // APIから出力された問題文、エディタの入力内容、フィードバックを管理
   saveData: UpdateSaveDataEntryProps[];
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
+  storedQuestionText: string;
+  setStoredQuestionText: React.Dispatch<React.SetStateAction<string>>;
   //　APIから出力された問題文をJSON形式で管理
-  jsonFormattedQuestionText: ProblemContentProps | null;
-  setJsonFormattedQuestionText: React.Dispatch<
+  jsonQuestionText: ProblemContentProps | null;
+  setJsonQuestionText: React.Dispatch<
     React.SetStateAction<ProblemContentProps | null>
   >;
   // APIから出力されたフィードバックをJSON形式で管理

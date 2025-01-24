@@ -37,13 +37,13 @@ export async function POST(req: NextRequest) {
     const {
       topic,
       uiLanguage,
-      formattedQuestionText,
+      storedQuestionText,
       editorLanguage,
       currentEditorValue,
     } = requestData;
 
     // プロンプトテンプレートの取得とバリデーション
-    if (!formattedQuestionText || !editorLanguage || !currentEditorValue) {
+    if (!storedQuestionText || !editorLanguage || !currentEditorValue) {
       return NextResponse.json(
         { error: "Missing required request parameters." },
         { status: 400 },
@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
     }
     // APIへ送信するプロンプトを作成
     const prompt = generatePrompt(
-      formattedQuestionText +
+      storedQuestionText +
         `\n\nProgramming Language: ${editorLanguage}\n\nUser input code:\n\n${currentEditorValue}\n\n${process.env.PROMPT_CHECK}`,
       { topic, language: editorLanguage, display_language: uiLanguage },
     );
