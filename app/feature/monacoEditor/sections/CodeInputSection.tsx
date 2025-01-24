@@ -180,14 +180,12 @@ const CodeInputSection = () => {
             </div>
             {/* エディタの入力内容をコピー */}
             <EditorActionButton
-              id="button-Copy-CodeInputArea"
               type="button"
               text="Copy"
               onClick={copyToClipboard}
             />
             {/* レビュー生成 */}
             <EditorActionButton
-              id="submit"
               type="button"
               text="Submit"
               onClick={handleCreateReview}
