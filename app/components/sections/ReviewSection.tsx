@@ -1,53 +1,28 @@
 import { useAppContext } from "@/app/context/AppContext";
-import React from "react";
+import React, { useMemo } from "react";
 import Paragraph from "@/app/components/common/Paragraph";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import clipboardCopy from "@/app/feature/clipboardCopy/clipboardCopy";
 
 const ReviewSection: React.FC = () => {
   const { isApiLoading, isReviewCreating, reviewText, currentTheme } =
     useAppContext();
 
-  const copyToClipboard = () => {
-    if (reviewText === null) {
-      return;
-    }
+  const formattedReviewText = useMemo(() => {
+    if (reviewText === null) return null;
 
-    const algorithmExplanation = `Explanation of the algorithm:\n${reviewText.algorithmExplanation}\n\n`;
-    const clarity = `Clarity and specificity:\n${reviewText.clarity}\n\n`;
-    const efficiency = `Efficiency: ${reviewText.efficiency}\n\n`;
-    const testCoverage = `Test coverage: ${reviewText.testCoverage}\n\n`;
-    const technicalAccuracy = `Technical accuracy: ${reviewText.technicalAccuracy}\n\n`;
-    const suggestionsImprovement = `Improvement suggestions: ${reviewText.suggestionsImprovement}\n\n`;
-    const improvementExample = `Example improvement: ${reviewText.improvementExample}`;
-
-    const formattedReviewContent =
-      algorithmExplanation +
-      clarity +
-      efficiency +
-      testCoverage +
-      technicalAccuracy +
-      suggestionsImprovement +
-      improvementExample;
-
-    if (
-      formattedReviewContent === null ||
-      formattedReviewContent.trim().length === 0
-    ) {
-      return;
-    }
-
-    navigator.clipboard
-      .writeText(formattedReviewContent)
-      .then(() => {
-        alert("Copied to clipboard.");
-      })
-      .catch((err) => {
-        console.error("Failed to copy text: ", err);
-        alert("Failed to copy text.");
-      });
-  };
+    return [
+      `Explanation of the algorithm:\n${reviewText.algorithmExplanation}\n\n`,
+      `Clarity and specificity:\n${reviewText.clarity}\n\n`,
+      `Efficiency: ${reviewText.efficiency}\n\n`,
+      `Test coverage: ${reviewText.testCoverage}\n\n`,
+      `Technical accuracy: ${reviewText.technicalAccuracy}\n\n`,
+      `Improvement suggestions: ${reviewText.suggestionsImprovement}\n\n`,
+      `Example improvement: ${reviewText.improvementExample}`,
+    ].join("");
+  }, [reviewText]);
 
   return (
     <div
@@ -62,7 +37,7 @@ const ReviewSection: React.FC = () => {
           id="button-Copy-ReviewArea"
           className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || reviewText === null ? "cursor-not-allowed opacity-50" : ""} `}
           disabled={isApiLoading}
-          onClick={copyToClipboard}
+          onClick={() => clipboardCopy({ context: formattedReviewText })}
         >
           <span className="flex-1 text-center">Copy</span>
           <Image
