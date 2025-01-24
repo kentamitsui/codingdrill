@@ -24,14 +24,14 @@ export interface BaseButtonProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
+  // API使用中の状態管理
   isApiLoading: boolean;
   setIsApiLoading: React.Dispatch<React.SetStateAction<boolean>>;
   isQuestionCreating: boolean;
   setIsQuestionCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  isReviewCreating: boolean | undefined;
-  setIsReviewCreating: React.Dispatch<
-    React.SetStateAction<boolean | undefined>
-  >;
+  isReviewCreating: boolean;
+  setIsReviewCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  //
   difficulty: string;
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
   dataType: string;
