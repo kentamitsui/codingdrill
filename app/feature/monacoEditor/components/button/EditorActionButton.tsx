@@ -1,15 +1,10 @@
 import { useAppContext } from "@/app/context/AppContext";
-import { InputAreaButtonProps } from "@/app/type/type";
+import { BaseButtonProps } from "@/app/type/type";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
-const EditorActionButton = ({
-  id,
-  type,
-  text,
-  onClick,
-}: InputAreaButtonProps) => {
+const EditorActionButton = ({ type, text, onClick }: BaseButtonProps) => {
   const {
     isApiLoading,
     difficulty,
@@ -64,7 +59,6 @@ const EditorActionButton = ({
 
   return (
     <button
-      id={id}
       type={type}
       className={`flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isButtonDisabled ? "cursor-not-allowed opacity-50" : ""}`}
       onClick={onClick}
@@ -73,12 +67,12 @@ const EditorActionButton = ({
       <span className="flex-1 text-center">{text}</span>
       <Image
         src={
-          text === "Copy"
-            ? currentTheme === "dark"
+          currentTheme === "dark"
+            ? text === "Copy"
               ? menuData.svgIcon.copyLight
-              : menuData.svgIcon.copyDark
-            : currentTheme === "dark"
-              ? menuData.svgIcon.submitLight
+              : menuData.svgIcon.submitLight
+            : text === "Copy"
+              ? menuData.svgIcon.copyDark
               : menuData.svgIcon.submitDark
         }
         alt=""

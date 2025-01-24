@@ -140,11 +140,8 @@ const Sidebar = () => {
           iconDark={menuData.svgIcon.translateDark}
         />
         <BaseButton
-          id="create"
           type="button"
           text="Generate"
-          iconLight={menuData.svgIcon.submitLight}
-          iconDark={menuData.svgIcon.submitDark}
           onClick={handleCreateQuestion}
         />
       </div>
@@ -191,27 +188,18 @@ const Sidebar = () => {
             }`}
           >
             <SaveActionButton
-              id="load"
               type="button"
               text="Load"
-              iconLight={menuData.svgIcon.loadLight}
-              iconDark={menuData.svgIcon.loadDark}
               onClick={() => loadSavedData()}
             />
             <SaveActionButton
-              id="delete"
               type="button"
               text="Delete"
-              iconLight={menuData.svgIcon.deteleLight}
-              iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected()}
             />
             <SaveActionButton
-              id="delete-all"
               type="button"
               text="All Delete"
-              iconLight={menuData.svgIcon.deteleAllLight}
-              iconDark={menuData.svgIcon.deteleAllDark}
               onClick={() => clearLocalStorage()}
             />
           </div>

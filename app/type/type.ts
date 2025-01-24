@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 // 選択タグに対する型定義
 export interface OptionProps {
@@ -16,22 +15,11 @@ export interface OptionProps {
   iconDark: string;
 }
 
-// inputareaに対する型定義
-export interface InputAreaButtonProps {
-  id: string;
-  type: "submit" | "reset" | "button";
-  text: string;
-  onClick: () => void | Promise<void>;
-}
-
 // ボタンに対する型定義
-export interface ButtonProps extends InputAreaButtonProps {
-  id: string;
+export interface BaseButtonProps {
   type: "submit" | "reset" | "button";
   text: string;
-  iconLight: StaticImport | string;
-  iconDark: StaticImport | string;
-  onClick: () => void | Promise<void>;
+  onClick: () => void | Promise<void>; // 同期・非同期の関数に対応
 }
 
 // AppContextに対する型定義
