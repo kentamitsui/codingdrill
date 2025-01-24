@@ -3,15 +3,17 @@ import type * as monaco from "monaco-editor";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 // 選択タグに対する型定義
-export interface SelectProps {
+export interface OptionProps {
   label: string; // セレクトボックスのラベル
-  data: { [key: string]: { [key: string]: string } | string }; // optionやoptgroupのデータ構造
   name: string; // セレクトボックスのname属性
-  defaultSelected?: string; // 初期表示時の値
-  setSelected: Dispatch<SetStateAction<string>>; // 更新関数
-  savedLocalStorageValue: string;
-  iconLight: StaticImport | string;
-  iconDark: StaticImport | string;
+  defaultSelected?: string; // 初期表示時のプレースホルダー的な値
+  setSelected: Dispatch<SetStateAction<string>>; // 選択肢を更新する関数
+  savedLocalStorageValue: string | null; // ローカルストレージに保存された値(nullを考慮)
+  data:
+    | Record<string, string> // 通常のoptionリスト
+    | Record<string, Record<string, string>>;
+  iconLight: string;
+  iconDark: string;
 }
 
 // inputareaに対する型定義
