@@ -34,7 +34,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setDataType,
     setTopic,
     setUiLanguage,
-    setJsonFormattedQuestionText,
+    setJsonQuestionText,
     setStoredEditorLanguage,
     setStoredEditorCode,
     setReviewText,
@@ -118,7 +118,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     setDataType(selectedLoadData.dataType);
     setTopic(selectedLoadData.topic);
     setUiLanguage(selectedLoadData.uiLanguage);
-    setJsonFormattedQuestionText(selectedLoadData.questionText);
+    setJsonQuestionText(selectedLoadData.questionText);
     setStoredEditorLanguage(selectedLoadData.editorLanguage);
     setStoredEditorCode(selectedLoadData.editorCode);
     setReviewText(selectedLoadData.reviewText);

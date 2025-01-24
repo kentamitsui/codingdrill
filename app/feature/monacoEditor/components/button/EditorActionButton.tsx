@@ -11,7 +11,7 @@ const EditorActionButton = ({ type, text, onClick }: BaseButtonProps) => {
     dataType,
     topic,
     uiLanguage,
-    jsonFormattedQuestionText,
+    jsonQuestionText,
     currentEditorInputed,
     currentTheme,
   } = useAppContext();
@@ -38,7 +38,7 @@ const EditorActionButton = ({ type, text, onClick }: BaseButtonProps) => {
   useEffect(() => {
     if (
       isAllSelected === true &&
-      jsonFormattedQuestionText !== null &&
+      jsonQuestionText !== null &&
       currentEditorInputed &&
       currentEditorInputed?.length >= 1 &&
       currentEditorInputed?.length <= 5000
@@ -49,7 +49,7 @@ const EditorActionButton = ({ type, text, onClick }: BaseButtonProps) => {
     } else {
       setIsEditorInputedState(true);
     }
-  }, [isAllSelected, jsonFormattedQuestionText, currentEditorInputed]);
+  }, [isAllSelected, jsonQuestionText, currentEditorInputed]);
 
   const isButtonDisabled =
     isApiLoading ||

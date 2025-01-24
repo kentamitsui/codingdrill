@@ -31,7 +31,7 @@ const Sidebar = () => {
     uiLanguage,
     setUiLanguage,
     saveData,
-    setJsonFormattedQuestionText,
+    setJsonQuestionText,
     setReviewText,
     setStoredEditorCode,
     currentTheme,
@@ -53,7 +53,7 @@ const Sidebar = () => {
   // 問題文を生成する
   const handleCreateQuestion = async () => {
     // ボタンが押されたら、各エリアの内容を空にする
-    setJsonFormattedQuestionText(null);
+    setJsonQuestionText(null);
     setStoredEditorCode("");
     setReviewText(null);
     // ボタンが押されたら、ボタンコンポーネントに対してcursor-not-allowed等のスタイルを追加する
@@ -95,9 +95,9 @@ const Sidebar = () => {
         return typeof responseObject === "object" && responseObject !== null;
       };
 
-      // AppContextのセット関数にデータを設置する
+      // 型の確認後、セット関数にデータを設置する
       if (isProblemContentProps(JSON.parse(responseText))) {
-        setJsonFormattedQuestionText(JSON.parse(responseText));
+        setJsonQuestionText(JSON.parse(responseText));
         setUiLanguage(uiLanguage);
       } else {
         console.error("Invalid API response format:", JSON.parse(responseText));
