@@ -40,14 +40,15 @@ export interface AppContextProps {
   setTopic: React.Dispatch<React.SetStateAction<string>>;
   uiLanguage: string;
   setUiLanguage: React.Dispatch<React.SetStateAction<string>>;
-  formattedQuestionText: string;
-  setFormattedQuestionText: React.Dispatch<React.SetStateAction<string>>;
+  // APIから出力された問題文、エディタの入力内容、フィードバックを管理
   saveData: UpdateSaveDataEntryProps[];
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
+  //　APIから出力された問題文をJSON形式で管理
   jsonFormattedQuestionText: ProblemContentProps | null;
   setJsonFormattedQuestionText: React.Dispatch<
     React.SetStateAction<ProblemContentProps | null>
   >;
+  // APIから出力されたフィードバックをJSON形式で管理
   reviewText: ReviewResponseProps | null;
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
@@ -159,9 +160,9 @@ interface ProblemContentBase {
   problemStatement: string;
   functionSignature: string;
   constraints: {
-    size?: string;
-    valueRange?: string;
-    kRange?: string;
+    size: string;
+    valueRange: string;
+    kRange: string;
   };
 }
 
@@ -182,14 +183,14 @@ interface AnalysisProps {
 
 // 各Propsを継承し型定義を行う
 export interface ProblemContentProps extends ProblemContentBase {
-  example1?: ExampleProps;
-  example2?: ExampleProps;
-  example3?: ExampleProps;
-  edgeCase1?: ExampleProps;
-  edgeCase2?: ExampleProps;
-  edgeCase3?: ExampleProps;
-  analysis?: AnalysisProps;
-  hints?: string;
+  example1: ExampleProps;
+  example2: ExampleProps;
+  example3: ExampleProps;
+  edgeCase1: ExampleProps;
+  edgeCase2: ExampleProps;
+  edgeCase3: ExampleProps;
+  analysis: AnalysisProps;
+  hints: string;
 }
 
 // Paragraph(APIからのレスポンスを展開する)に対する型定義
