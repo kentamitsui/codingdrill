@@ -27,7 +27,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     useState<ProblemContentProps | null>(null);
   // APIに送信する問題文(テキストベース)を管理(APIのリクエスト、クリップボードコピー時に使用)
   const [storedQuestionText, setStoredQuestionText] = useState<string>("");
-  // APIから出力されたフィードバックを管理
+  // APIから出力されたフィードバックを管理(初期値ではデータが無いのでnull)
   const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
     null,
   );

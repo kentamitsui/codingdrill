@@ -50,7 +50,7 @@ export interface AppContextProps {
   setJsonQuestionText: React.Dispatch<
     React.SetStateAction<ProblemContentProps | null>
   >;
-  // APIから出力されたフィードバックをJSON形式で管理
+  // APIから出力されたフィードバックをJSON形式で管理(初期値ではデータが無いのでnull)
   reviewText: ReviewResponseProps | null;
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
@@ -70,6 +70,11 @@ export interface AppContextProps {
   setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
   currentTheme: string | undefined;
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
+}
+
+// clipboardCopyButtonに対する型定義
+export interface clipboardCopyProps {
+  context: string | null;
 }
 
 // PanelContextに対する型定義

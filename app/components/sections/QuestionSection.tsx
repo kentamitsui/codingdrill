@@ -1,9 +1,10 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 import Paragraph from "@/app/components/common/Paragraph";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import clipboardCopy from "@/app/feature/clipboardCopy/clipboardCopy";
 
 // 問題文を表示するコンポーネント
 const QuestionSection: React.FC = () => {
@@ -36,23 +37,6 @@ const QuestionSection: React.FC = () => {
     ].join("");
   }, [jsonQuestionText]);
 
-  // クリップボードに文字列をコピーする関数
-  const copyToClipboard = () => {
-    if (formattedQuestionDetails === null) {
-      return;
-    }
-
-    navigator.clipboard
-      .writeText(formattedQuestionDetails)
-      .then(() => {
-        alert("Copied to clipboard.");
-      })
-      .catch((err) => {
-        console.error("Failed to copy text: ", err);
-        alert("Failed to copy text.");
-      });
-  };
-
   // formattedQuestionDetailsが変更される度に、setStoredQuestionTextを更新
   useEffect(() => {
     if (formattedQuestionDetails.trim().length > 0) {
@@ -71,7 +55,7 @@ const QuestionSection: React.FC = () => {
         </div>
         <button
           className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || jsonQuestionText === null ? "cursor-not-allowed opacity-50" : ""} `}
-          onClick={copyToClipboard}
+          onClick={() => clipboardCopy({ context: formattedQuestionDetails })}
           disabled={isApiLoading}
         >
           <span className="flex-1 text-center">Copy</span>
