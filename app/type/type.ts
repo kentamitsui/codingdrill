@@ -91,17 +91,32 @@ export interface clipboardCopyProps {
 }
 
 // PanelContextに対する型定義
-export interface PanelContextType {
-  initialHorizontalSizes: number[];
-  initialVerticalSizes: number[];
-  horizontalPanelSizes: number[];
-  verticalPanelSizes: number[];
-  setHorizontalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>;
-  setVerticalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>;
-  resetHorizontalPanelSizes: () => void;
-  resetVerticalPanelSizes: () => void;
-  handleHorizontalDragEnd: (newSizes: number[]) => void;
-  handleVerticalDragEnd: (newSizes: number[]) => void;
+export interface PanelLayoutContextProps {
+  ////////////////////////////////
+  // 初期パネルサイズ（変更不可）
+  ////////////////////////////////
+  initialHorizontalSizes: readonly number[]; // 水平方向のパネルの初期サイズ
+  initialVerticalSizes: readonly number[]; // 垂直方向のパネルの初期サイズ
+
+  ////////////////////////////////
+  // 現在のパネルサイズ（状態管理）
+  ////////////////////////////////
+  horizontalPanelSizes: number[]; // 水平方向のパネルサイズ
+  verticalPanelSizes: number[]; // 垂直方向のパネルサイズ
+  setHorizontalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>; // 水平方向のパネルサイズを更新
+  setVerticalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>; // 垂直方向のパネルサイズを更新
+
+  ////////////////////////////////
+  // パネルサイズのリセット処理
+  ////////////////////////////////
+  resetHorizontalSizes: () => void; // 水平方向のパネルサイズをリセット
+  resetVerticalSizes: () => void; // 垂直方向のパネルサイズをリセット
+
+  ////////////////////////////////
+  // ドラッグ終了時のパネルサイズ更新処理
+  ////////////////////////////////
+  updateHorizontalSizes: (newSizes: number[]) => void; // 水平方向のパネルサイズ更新
+  updateVerticalSizes: (newSizes: number[]) => void; // 垂直方向のパネルサイズ更新
 }
 
 // Monaco Editorに対する型定義

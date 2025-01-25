@@ -15,13 +15,12 @@ const ResetButton = ({
   altText,
 }: ResetButtonProps) => {
   const { currentTheme } = useAppContext();
-  const { resetHorizontalPanelSizes, resetVerticalPanelSizes } =
-    usePanelContext();
+  const { resetHorizontalSizes, resetVerticalSizes } = usePanelContext();
 
   // 水平方向・垂直方向のパネルサイズをリセットする関数
   const handlePanelSizeReset = () => {
-    resetHorizontalPanelSizes();
-    resetVerticalPanelSizes();
+    resetHorizontalSizes();
+    resetVerticalSizes();
   };
 
   return (
