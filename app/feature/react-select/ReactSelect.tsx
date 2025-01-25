@@ -13,6 +13,7 @@ export default function ReactSelect({
   const { isApiLoading, currentTheme } = useAppContext();
   const { currentSelectedSavedDataId } = useLocalStorageContext();
 
+  // React-Selectのオプションデータを作成
   // ローカルストレージの保存データをreact-select用に変換して表示
   const options =
     saveData &&
@@ -28,7 +29,7 @@ export default function ReactSelect({
         `Topic: ${entry.topic}   Translate: ${entry.uiLanguage}`,
     }));
 
-  // カスタムのDropdownIndicatorを作成
+  // カスタムのDropdownIndicator(アイコン付きドロップダウン)
   const DropdownIndicator = (props: any) => {
     return (
       <components.DropdownIndicator {...props}>
@@ -39,7 +40,7 @@ export default function ReactSelect({
               ? "/images/saveLight.svg"
               : "/images/saveDark.svg"
           }
-          alt=""
+          alt="save data icon"
           width={20}
           height={20}
           className="mr-1 h-5 w-5"
@@ -84,18 +85,18 @@ export default function ReactSelect({
     );
   };
 
-  // プレースホルダーオプション
+  // プレースホルダーの設定(デフォルト値)
   const placeholderOption = {
     value: currentSelectedSavedDataId,
     label: "None",
   };
 
-  // 選択されたオプションを取得
+  // 現在選択中のオプションを取得
   const selectedOption =
     options?.find((option) => option.value === currentSelectedSavedDataId) ||
     null;
 
-  // スタイルのカスタマイズ
+  // react-select のカスタムスタイル
   interface CustomStyles {
     control: (provided: any, state: any) => any;
     valueContainer: (provided: any) => any;
@@ -150,62 +151,72 @@ export default function ReactSelect({
         opacity: isApiLoading || currentSelectedSavedDataId !== null ? 0.5 : 1,
       },
     }),
+    // 選択された値のコンテナ(選択エリアのスタイル)
     valueContainer: (provided) => ({
       ...provided,
-      height: "20px",
-      padding: "0px",
-      margin: "0px",
+      height: "20px", // 選択エリアの高さ
+      padding: "0px", // 余白を削除
+      margin: "0px", // マージンを削除
     }),
+    // ユーザーが入力するテキストエリア(検索ボックス)
     input: (provided) => ({
       ...provided,
-      height: "20px",
-      padding: "0px",
-      margin: "0px",
-      color: currentTheme === "dark" ? "#ffffff" : "#000000", // 文字色の切り替え
+      height: "20px", // 入力エリアの高さ
+      padding: "0px", // 余白を削除
+      margin: "0px", // マージンを削除
+      color: currentTheme === "dark" ? "#ffffff" : "#000000", // 文字色(テーマに応じて変更)
       caretColor: currentTheme === "dark" ? "#ffffff" : "#000000", // カーソルの色
     }),
+    // インジケーターコンテナ(アイコン部分のスタイル)
     indicatorsContainer: (provided) => ({
       ...provided,
-      height: "20px",
+      height: "20px", // アイコンエリアの高さ
     }),
+    // インジケーター(区切り線)のスタイル(非表示)
     indicatorSeparator: (provided) => ({
       ...provided,
-      display: "none",
+      display: "none", // 区切り線を非表示にする
     }),
+    // ドロップダウンのインジケーター(開閉ボタンのアイコン)
     dropdownIndicator: (provided) => ({
       ...provided,
-      height: "20px",
-      padding: "0px",
+      height: "20px", // ドロップダウンアイコンの高さ
+      padding: "0px", // 余白を削除
     }),
+    // 選択された値(単一選択の場合のテキスト表示)
     singleValue: (provided) => ({
       ...provided,
-      textAlign: "start",
-      margin: "0px",
-      color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色
+      textAlign: "start", // テキストを左寄せ
+      margin: "0px", // マージンを削除
+      color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色(テーマに応じて変更)
     }),
+    // プレースホルダー(選択されていない場合の表示テキスト)
     placeholder: (provided) => ({
       ...provided,
-      height: "20px",
-      margin: "0px",
-      color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色
+      height: "20px", // プレースホルダーエリアの高さ
+      margin: "0px", // マージンを削除
+      color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色(テーマに応じて変更)
     }),
+    // ドロップダウンメニュー全体のスタイル
     menu: (provided) => ({
       ...provided,
       width: "350px", // ドロップダウンメニュー全体の幅を指定
       borderRadius: "8px", // rounded-md
       color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色
     }),
+    // ドロップダウンメニュー内のリストスタイル
     menuList: (provided) => ({
       ...provided,
-      width: "100%", // メニュー内のリストの幅を親要素(menu)に合わせる
-      textAlign: "left", // 必要に応じてカスタマイズ
-      padding: "0px",
-      borderRadius: "6px", // rounded-md
-      color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色
+      width: "100%", // リストの幅をメニューに合わせる
+      textAlign: "left", // 左寄せ
+      padding: "0px", // 余白を削除
+      borderRadius: "6px", // 角を丸くする(rounded-md)
+      color: currentTheme === "dark" ? "#d4d4d4" : "#000000", // 文字色(テーマに応じて変更)
     }),
+    // 各オプション(選択肢)のスタイル
     option: (provided, state) => ({
       ...provided,
-      whiteSpace: "break-spaces",
+      whiteSpace: "break-spaces", // テキストの折り返しを有効化
       backgroundColor: state.isSelected
         ? currentTheme === "dark"
           ? "#334155"
@@ -224,7 +235,7 @@ export default function ReactSelect({
         : currentTheme === "dark"
           ? "#d4d4d4"
           : "#000000", // 通常時の文字色
-      cursor: isApiLoading ? "not-allowed" : "pointer",
+      cursor: isApiLoading ? "not-allowed" : "pointer", // APIリクエスト中は無効化
     }),
   };
 
@@ -238,10 +249,10 @@ export default function ReactSelect({
       options={options && options.length > 0 ? options : [placeholderOption]}
       placeholder="Save Data"
       styles={customStyles}
-      isDisabled={isApiLoading} // 無効化を適用
+      isDisabled={isApiLoading} // APIリクエスト中は無効化を適用
       components={{ DropdownIndicator }}
-      isClearable
-      isSearchable
+      isClearable // クリアボタンを表示
+      isSearchable // 検索機能を有効化
     />
   );
 }
