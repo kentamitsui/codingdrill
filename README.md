@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
-    <Img src="public/gif/justDoit!.gif" width=150 height=150 />
+    <Img src="public/gif/JustDoIt!.gif" width=150 height=150 />
   </a>
   <h1>⇧ Click it! ⇧</h1>
 </div>
@@ -9,11 +9,11 @@
 
 Coding Drillは、コーディングに関する問題を自動で作成・採点するアプリケーションです。  
 自身の技術力向上も兼ねて、ChatGPTを活用したアプリを作りたいと思い開発しています。  
-ユーザーが気軽に利用して、少しでも楽しんで貰えるよう日々頑張ります。
+ユーザーが気軽に利用して、算数ドリルと解くような感覚で少しでも楽しんで貰えるよう日々頑張ります。
 
 (Coding Drill is an application that automatically creates and grades coding-related questions.  
 I'm developing this application to improve my technical skills and to create an application that utilizes ChatGPT.  
-I'll continue to work harder daily to make the service easy for users to use and enjoy.)
+I'll continue to work our best every day to make it easy for users to use the site and enjoy it as much as possible, just like solving an math drill.)
 
 ## 📌目次
 
