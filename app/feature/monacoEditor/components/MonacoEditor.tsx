@@ -14,10 +14,12 @@ const MonacoEditor = ({
   onChange,
 }: MonacoEditorProps) => {
   const { storedEditorCode } = useAppContext();
+  // エディタの親要素を取得し、リサイズ監視を行う
   const editorContainerRef = useRef<HTMLDivElement>(null); // 親要素の参照を取得
-  const [dimensions, setDimensions] = useState({ height: 0, width: 0 });
+  const [dimensions, setDimensions] = useState({ height: 0, width: 0 }); // エディタのサイズを管理
 
   useEffect(() => {
+    // 親要素のサイズを取得し、エディタのサイズを更新
     const updateDimensions = () => {
       if (editorContainerRef.current) {
         const rect = editorContainerRef.current.getBoundingClientRect();
@@ -59,13 +61,15 @@ const MonacoEditor = ({
     <div ref={editorContainerRef} style={{ flex: 1, overflow: "hidden" }}>
       <Suspense>
         <Editor
-          language={editorLanguage}
-          theme={editorTheme}
+          // Monaco Editor の基本設定
+          language={editorLanguage} // 設定されたプログラミング言語を適用
+          theme={editorTheme} // 設定されたテーマ（ライト / ダーク）を適用
           height={dimensions.height} // 計算した高さを適用
           width={dimensions.width} // 計算した幅を適用
-          options={{ fontSize: fontSize }}
+          options={{ fontSize: fontSize }} // エディタのフォントサイズを適用
           value={storedEditorCode ?? ""} // storedEditorCodeを直接セットし、ロード時に確実に反映されるようにする
-          loading={<Loading isCreating={true} text={"Now Loading"} />}
+          loading={<Loading isCreating={true} text={"Now Loading"} />} // ローティングアニメーションの設定
+          // イベントハンドラの設定
           // CodeInputSection.tsxから渡されたプロパティをonMountメソッドで実行する
           onMount={(editor) => {
             if (onMount) {

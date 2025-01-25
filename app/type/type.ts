@@ -265,5 +265,4 @@ export interface ReactSelectProps {
   isApiLoading: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
-  currentTheme: string | undefined;
 }
