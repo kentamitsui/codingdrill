@@ -11,51 +11,58 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // API使用中の状態管理
-  const [isApiLoading, setIsApiLoading] = useState<boolean>(false);
-  const [isQuestionCreating, setIsQuestionCreating] = useState<boolean>(false);
-  const [isReviewCreating, setIsReviewCreating] = useState<boolean>(false);
   ////////////////////////////////
-  // Sidebar.tsxで選択された難易度、データタイプ、トピック、UI言語を管理
-  const [difficulty, setDifficulty] = useState<string>("");
-  const [dataType, setDataType] = useState<string>("");
-  const [topic, setTopic] = useState<string>("");
-  const [uiLanguage, setUiLanguage] = useState<string>("");
+  // APIリクエストの状態管理（リクエスト中のボタン制御に使用）
   ////////////////////////////////
-  // APIから出力された問題文をJSON形式で管理
-  const [jsonQuestionText, setJsonQuestionText] =
-    useState<QuestionTextProps | null>(null);
-  // APIに送信する問題文(テキストベース)を管理(APIのリクエスト、クリップボードコピー時に使用)
-  const [storedQuestionText, setStoredQuestionText] = useState<string>("");
-  // APIから出力されたフィードバックを管理(初期値ではデータが無いのでnull)
-  const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
-    null,
-  );
-  ////////////////////////////////
-  // ローカルストレージから取得したデータを管理
-  const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
+  const [isApiLoading, setIsApiLoading] = useState<boolean>(false); // APIの処理中フラグ
+  const [isQuestionCreating, setIsQuestionCreating] = useState<boolean>(false); // 問題生成中フラグ
+  const [isReviewCreating, setIsReviewCreating] = useState<boolean>(false); // レビュー生成中フラグ
 
-  // ローカルストレージから呼び出された"エディタ言語、エディタの入力内容"のデータ管理
+  ////////////////////////////////
+  // エディタの状態管理
+  ////////////////////////////////
   const [storedEditorLanguage, setStoredEditorLanguage] =
-    useState<string>("python");
-  // 直近で選択されたエディタの言語を管理
+    useState<string>("python"); // ローカルストレージから復元されたエディタの言語
   const [currentEditorLanguage, setCurrentEditorLanguage] =
-    useState<string>("");
-  // エディタのフォントサイズを管理
-  const [editorFontSize, setEditorFontSize] = useState<string>("14");
-  // エディタのテーマを管理
-  const [editorTheme, setEditorTheme] = useState<string>("vs-dark");
-  // ローカルストレージから呼び出されたエディタの入力内容のデータ管理
-  const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null);
-  // エディタの入力内容をチェックするための状態管理
+    useState<string>(""); // 現在選択されているエディタの言語
+  const [editorFontSize, setEditorFontSize] = useState<string>("14"); // エディタのフォントサイズ
+  const [editorTheme, setEditorTheme] = useState<string>("vs-dark"); // エディタのテーマ（ダークモードなど）
+  const [storedEditorCode, setStoredEditorCode] = useState<string | null>(null); // ローカルストレージから復元されたエディタのコード
   const [currentEditorInputed, setCurrentEditorInputed] = useState<
     string | null
-  >("");
+  >(""); // 現在エディタに入力されているコード
 
-  // カラーテーマを管理
-  const [currentTheme, setCurrentTheme] = useState<string | undefined>("");
+  ////////////////////////////////
+  // サイドバーの選択状態管理（ユーザーの選択を保持）
+  ////////////////////////////////
+  const [difficulty, setDifficulty] = useState<string>(""); // 選択された難易度
+  const [dataType, setDataType] = useState<string>(""); // 選択されたデータタイプ
+  const [topic, setTopic] = useState<string>(""); // 選択されたトピック
+  const [uiLanguage, setUiLanguage] = useState<string>(""); // 選択されたUI言語
 
-  // ローカルストレージからデータを取得し、react-selectコンポーネントに表示されるセーブデータオプションを更新
+  ////////////////////////////////
+  // 問題文とレビューの状態管理
+  ////////////////////////////////
+  const [jsonQuestionText, setJsonQuestionText] =
+    useState<QuestionTextProps | null>(null); // APIから取得した問題文（JSON形式）
+  const [storedQuestionText, setStoredQuestionText] = useState<string>(""); // APIに送信する問題文（テキスト形式）
+  const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
+    null,
+  ); // APIから取得したレビュー内容
+
+  ////////////////////////////////
+  // ローカルストレージのデータ管理
+  ////////////////////////////////
+  const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]); // 保存された問題データ
+
+  ////////////////////////////////
+  // アプリ全体のテーマ管理
+  ////////////////////////////////
+  const [currentTheme, setCurrentTheme] = useState<string | undefined>(""); // カラーテーマ（ライト/ダークモード）
+
+  ////////////////////////////////
+  // ローカルストレージからデータを取得し、セーブデータを更新
+  ////////////////////////////////
   useEffect(() => {
     const savedLocalStorageData =
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
@@ -63,6 +70,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
     if (savedLocalStorageData === undefined) return;
     setSaveData(savedLocalStorageData);
   }, [setSaveData]);
+
   return (
     <AppContext.Provider
       value={{
@@ -72,6 +80,18 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setIsQuestionCreating,
         isReviewCreating,
         setIsReviewCreating,
+        storedEditorLanguage,
+        setStoredEditorLanguage,
+        currentEditorLanguage,
+        setCurrentEditorLanguage,
+        editorFontSize,
+        setEditorFontSize,
+        editorTheme,
+        setEditorTheme,
+        storedEditorCode,
+        setStoredEditorCode,
+        currentEditorInputed,
+        setCurrentEditorInputed,
         difficulty,
         setDifficulty,
         dataType,
@@ -84,22 +104,10 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
         setJsonQuestionText,
         storedQuestionText,
         setStoredQuestionText,
-        saveData,
-        setSaveData,
         reviewText,
         setReviewText,
-        storedEditorLanguage,
-        setStoredEditorLanguage,
-        currentEditorLanguage,
-        setCurrentEditorLanguage,
-        storedEditorCode,
-        setStoredEditorCode,
-        currentEditorInputed,
-        setCurrentEditorInputed,
-        editorFontSize,
-        setEditorFontSize,
-        editorTheme,
-        setEditorTheme,
+        saveData,
+        setSaveData,
         currentTheme,
         setCurrentTheme,
       }}
