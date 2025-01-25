@@ -167,7 +167,6 @@ const Sidebar = () => {
           handleChangeSavedData={handleChangeSavedData}
           isApiLoading={isApiLoading}
           saveData={saveData}
-          currentTheme={currentTheme}
         />
         <details
           className={`relative mt-auto flex w-[142px] flex-col ${

@@ -9,9 +9,8 @@ import Image from "next/image";
 export default function ReactSelect({
   handleChangeSavedData,
   saveData,
-  currentTheme,
 }: ReactSelectProps) {
-  const { isApiLoading } = useAppContext();
+  const { isApiLoading, currentTheme } = useAppContext();
   const { currentSelectedSavedDataId } = useLocalStorageContext();
 
   // ローカルストレージの保存データをreact-select用に変換して表示
@@ -22,7 +21,7 @@ export default function ReactSelect({
       label:
         `Data ${entry.id}` +
         "\n" +
-        `Time: ${entry.timestamp}` +
+        `Date: ${entry.timestamp}` +
         "\n" +
         `Difficulty: ${entry.difficulty}   Data type: ${entry.dataType}` +
         "\n" +
