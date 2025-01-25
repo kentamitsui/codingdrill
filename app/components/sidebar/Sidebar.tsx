@@ -14,6 +14,7 @@ const ReactSelect = dynamic(
   },
 );
 import Image from "next/image";
+import { QuestionTextProps } from "@/app/type/type";
 
 const Sidebar = () => {
   // アプリ全体の状態管理（問題作成、データ取得）
@@ -30,7 +31,8 @@ const Sidebar = () => {
     uiLanguage,
     setUiLanguage,
     saveData,
-    setJsonFormattedQuestionText,
+    setJsonQuestionText,
+    setStoredEditorLanguage,
     setReviewText,
     setStoredEditorCode,
     currentTheme,
@@ -52,7 +54,7 @@ const Sidebar = () => {
   // 問題文を生成する
   const handleCreateQuestion = async () => {
     // ボタンが押されたら、各エリアの内容を空にする
-    setJsonFormattedQuestionText(null);
+    setJsonQuestionText(null);
     setStoredEditorCode("");
     setReviewText(null);
     // ボタンが押されたら、ボタンコンポーネントに対してcursor-not-allowed等のスタイルを追加する
@@ -87,9 +89,20 @@ const Sidebar = () => {
         setIsQuestionCreating(false);
       }
 
-      // AppContextのセット関数にデータを設置する
-      setJsonFormattedQuestionText(JSON.parse(responseText));
-      setUiLanguage(uiLanguage);
+      // 型ガード関数を使用して、APIからのレスポンスが正しい形式であるかを判定する
+      const isQuestionTextProps = (
+        responseObject: unknown,
+      ): responseObject is QuestionTextProps => {
+        return typeof responseObject === "object" && responseObject !== null;
+      };
+
+      // 型の確認後、セット関数にデータを設置する
+      if (isQuestionTextProps(JSON.parse(responseText))) {
+        setJsonQuestionText(JSON.parse(responseText));
+        setUiLanguage(uiLanguage);
+      } else {
+        console.error("Invalid API response format:", JSON.parse(responseText));
+      }
     } catch (error) {
       console.error("Error occurred while creating a problem:", error);
       alert("Error occurred while creating the problem.");
@@ -140,11 +153,8 @@ const Sidebar = () => {
           iconDark={menuData.svgIcon.translateDark}
         />
         <BaseButton
-          id="create"
           type="button"
           text="Generate"
-          iconLight={menuData.svgIcon.submitLight}
-          iconDark={menuData.svgIcon.submitDark}
           onClick={handleCreateQuestion}
         />
       </div>
@@ -157,7 +167,6 @@ const Sidebar = () => {
           handleChangeSavedData={handleChangeSavedData}
           isApiLoading={isApiLoading}
           saveData={saveData}
-          currentTheme={currentTheme}
         />
         <details
           className={`relative mt-auto flex w-[142px] flex-col ${
@@ -191,27 +200,30 @@ const Sidebar = () => {
             }`}
           >
             <SaveActionButton
-              id="load"
               type="button"
               text="Load"
-              iconLight={menuData.svgIcon.loadLight}
-              iconDark={menuData.svgIcon.loadDark}
-              onClick={() => loadSavedData()}
+              // ローカルストレージに保存されたデータを読み込み、各状態更新関数に適用する
+              onClick={() =>
+                loadSavedData({
+                  difficulty: setDifficulty, // 難易度を更新
+                  dataType: setDataType, // データ型を更新
+                  topic: setTopic, // トピックを更新
+                  uiLanguage: setUiLanguage, // UIの表示言語を更新
+                  questionText: setJsonQuestionText, // 問題文の内容を更新
+                  editorLanguage: setStoredEditorLanguage, // エディタの言語設定を更新
+                  editorContent: setStoredEditorCode, // エディタのコード内容を更新
+                  reviewText: setReviewText, // レビュー内容を更新
+                })
+              }
             />
             <SaveActionButton
-              id="delete"
               type="button"
               text="Delete"
-              iconLight={menuData.svgIcon.deteleLight}
-              iconDark={menuData.svgIcon.deteleDark}
               onClick={() => handleDeleteSelected()}
             />
             <SaveActionButton
-              id="delete-all"
               type="button"
               text="All Delete"
-              iconLight={menuData.svgIcon.deteleAllLight}
-              iconDark={menuData.svgIcon.deteleAllDark}
               onClick={() => clearLocalStorage()}
             />
           </div>

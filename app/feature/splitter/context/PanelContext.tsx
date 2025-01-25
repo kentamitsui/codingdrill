@@ -1,9 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { PanelContextType } from "@/app/type/type";
+import { PanelLayoutContextProps } from "@/app/type/type";
 
-const PanelContext = createContext<PanelContextType | undefined>(undefined);
+const PanelContext = createContext<PanelLayoutContextProps | undefined>(
+  undefined,
+);
 
 export const PanelProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
@@ -19,19 +21,19 @@ export const PanelProvider: React.FC<{ children: React.ReactNode }> = ({
     useState(initialVerticalSizes);
 
   // 水平方向のパネルサイズをリセットする関数
-  const resetHorizontalPanelSizes = () => {
+  const resetHorizontalSizes = () => {
     setHorizontalPanelSizes([...initialHorizontalSizes]);
     window.dispatchEvent(new Event("resize"));
   };
 
   // 垂直方向のパネルサイズをリセットする関数
-  const resetVerticalPanelSizes = () => {
+  const resetVerticalSizes = () => {
     setVerticalPanelSizes([...initialVerticalSizes]);
     window.dispatchEvent(new Event("resize"));
   };
 
   // 水平方向のドラッグ終了時点でのパネルサイズを処理する関数
-  const handleHorizontalDragEnd = (newSizes: number[]) => {
+  const updateHorizontalSizes = (newSizes: number[]) => {
     if (JSON.stringify(newSizes) !== JSON.stringify(horizontalPanelSizes)) {
       window.dispatchEvent(new Event("resize"));
       setHorizontalPanelSizes(newSizes);
@@ -39,7 +41,7 @@ export const PanelProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   // 垂直方向のドラッグ終了時点でのパネルサイズを処理する関数
-  const handleVerticalDragEnd = (newSizes: number[]) => {
+  const updateVerticalSizes = (newSizes: number[]) => {
     if (JSON.stringify(newSizes) !== JSON.stringify(verticalPanelSizes)) {
       window.dispatchEvent(new Event("resize"));
       setVerticalPanelSizes(newSizes);
@@ -56,10 +58,10 @@ export const PanelProvider: React.FC<{ children: React.ReactNode }> = ({
         verticalPanelSizes,
         setHorizontalPanelSizes,
         setVerticalPanelSizes,
-        resetHorizontalPanelSizes,
-        resetVerticalPanelSizes,
-        handleHorizontalDragEnd,
-        handleVerticalDragEnd,
+        resetHorizontalSizes,
+        resetVerticalSizes,
+        updateHorizontalSizes,
+        updateVerticalSizes,
       }}
     >
       {children}

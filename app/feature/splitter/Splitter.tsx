@@ -10,7 +10,7 @@ import { usePanelContext } from "@/app/feature/splitter/context/PanelContext";
 // 垂直方向にパネルを分割するコンポーネント
 const SplitVertical: React.FC = () => {
   // PanelContextから垂直方向のパネルサイズ管理に必要な関数を取得
-  const { verticalPanelSizes, handleVerticalDragEnd } = usePanelContext();
+  const { verticalPanelSizes, updateVerticalSizes } = usePanelContext();
 
   return (
     <Split
@@ -20,7 +20,7 @@ const SplitVertical: React.FC = () => {
       gutterSize={8}
       gutterAlign="center"
       direction="vertical"
-      onDragEnd={handleVerticalDragEnd}
+      onDragEnd={updateVerticalSizes}
     >
       <CodeInputSection />
       <ReviewSection />
@@ -31,7 +31,7 @@ const SplitVertical: React.FC = () => {
 // 水平方向にパネルを分割するコンポーネント
 const SplitHorizontal: React.FC = () => {
   // PanelContextから水平方向のパネルサイズ管理に必要な関数を取得
-  const { horizontalPanelSizes, handleHorizontalDragEnd } = usePanelContext();
+  const { horizontalPanelSizes, updateHorizontalSizes } = usePanelContext();
 
   return (
     <Suspense>
@@ -42,7 +42,7 @@ const SplitHorizontal: React.FC = () => {
         gutterSize={8}
         gutterAlign="center"
         direction="horizontal"
-        onDragEnd={handleHorizontalDragEnd}
+        onDragEnd={updateHorizontalSizes}
         className="ml-2 flex flex-grow rounded-md"
       >
         <QuestionSection />

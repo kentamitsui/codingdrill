@@ -1,78 +1,48 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 import Paragraph from "@/app/components/common/Paragraph";
 import Loading from "@/app/components/loading/Loading";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
+import clipboardCopy from "@/app/feature/clipboardCopy/clipboardCopy";
 
 // 問題文を表示するコンポーネント
 const QuestionSection: React.FC = () => {
   const {
     isApiLoading,
     isQuestionCreating,
-    jsonFormattedQuestionText,
-    formattedQuestionText,
-    setFormattedQuestionText,
+    jsonQuestionText,
+    setStoredQuestionText,
     currentTheme,
   } = useAppContext();
 
-  // クリップボードに文字列をコピーする関数
+  // useMemoでメモ化
+  const formattedQuestionDetails = useMemo(() => {
+    if (jsonQuestionText === null) return "";
+
+    return [
+      `Description\n${jsonQuestionText.problemStatement}\n\n`,
+      `Function Signature\n${jsonQuestionText.functionSignature}\n\n`,
+      `size: ${jsonQuestionText.constraints.size}\n`,
+      `valueRange: ${jsonQuestionText.constraints.valueRange}\n`,
+      `kRange: ${jsonQuestionText.constraints.kRange}\n\n`,
+      `Example 1\nInput:\n${jsonQuestionText.example1?.input}\nOutput: ${jsonQuestionText.example1?.output}\nExplanation: ${jsonQuestionText.example1?.explanation}\n\n`,
+      `Example 2\nInput:\n${jsonQuestionText.example2?.input}\nOutput: ${jsonQuestionText.example2?.output}\nExplanation: ${jsonQuestionText.example2?.explanation}\n\n`,
+      `Example 3\nInput:\n${jsonQuestionText.example3?.input}\nOutput: ${jsonQuestionText.example3?.output}\nExplanation: ${jsonQuestionText.example3?.explanation}\n\n`,
+      `edgeCase 1\nInput:\n${jsonQuestionText.edgeCase1?.input}\nOutput: ${jsonQuestionText.edgeCase1?.output}\nExplanation: ${jsonQuestionText.edgeCase1?.explanation}\n\n`,
+      `edgeCase 2\nInput:\n${jsonQuestionText.edgeCase2?.input}\nOutput: ${jsonQuestionText.edgeCase2?.output}\nExplanation: ${jsonQuestionText.edgeCase2?.explanation}\n\n`,
+      `edgeCase 3\nInput:\n${jsonQuestionText.edgeCase3?.input}\nOutput: ${jsonQuestionText.edgeCase3?.output}\nExplanation: ${jsonQuestionText.edgeCase3?.explanation}\n\n`,
+      `Analysis\nTime Complexity: ${jsonQuestionText.analysis?.timeComplexity}\nSpace Complexity: ${jsonQuestionText.analysis?.spaceComplexity}\nEdge Cases: ${jsonQuestionText.analysis?.edgeCases}\nOther Consideration: ${jsonQuestionText.analysis?.otherConsiderations}\n\n`,
+      `Hints\n${jsonQuestionText.hints}`,
+    ].join("");
+  }, [jsonQuestionText]);
+
+  // formattedQuestionDetailsが変更される度に、setStoredQuestionTextを更新
   useEffect(() => {
-    if (!jsonFormattedQuestionText) {
-      return;
+    if (formattedQuestionDetails.trim().length > 0) {
+      setStoredQuestionText(formattedQuestionDetails);
     }
-
-    // 問題文やフォーマットについて
-    const description = `Description\n${jsonFormattedQuestionText.problemStatement}\n\n`;
-    const functionSignature = `function Signature\n${jsonFormattedQuestionText.functionSignature}\n\n`;
-    const size = `size: ${jsonFormattedQuestionText.constraints.size}\n\n`;
-    const valueRange = `valueRange: ${jsonFormattedQuestionText.constraints.valueRange}\n\n`;
-    const kRange = `kRange: ${jsonFormattedQuestionText.constraints.kRange}\n\n`;
-    // 例題やエッジケース等について
-    const example1 = `Example 1\nInput:\n${jsonFormattedQuestionText.example1?.input}\nOutput: ${jsonFormattedQuestionText.example1?.output}\nExplanation: ${jsonFormattedQuestionText.example1?.explanation}\n\n`;
-    const example2 = `Example 2\nInput:\n${jsonFormattedQuestionText.example2?.input}\nOutput: ${jsonFormattedQuestionText.example2?.output}\nExplanation: ${jsonFormattedQuestionText.example2?.explanation}\n\n`;
-    const example3 = `Example 3\nInput:\n${jsonFormattedQuestionText.example3?.input}\nOutput: ${jsonFormattedQuestionText.example3?.output}\nExplanation: ${jsonFormattedQuestionText.example3?.explanation}\n\n`;
-    const edgeCase1 = `edgeCase 1\nInput:\n${jsonFormattedQuestionText.edgeCase1?.input}\nOutput: ${jsonFormattedQuestionText.edgeCase1?.output}\nExplanation: ${jsonFormattedQuestionText.edgeCase1?.explanation}\n\n`;
-    const edgeCase2 = `edgeCase 2\nInput:\n${jsonFormattedQuestionText.edgeCase2?.input}\nOutput: ${jsonFormattedQuestionText.edgeCase2?.output}\nExplanation: ${jsonFormattedQuestionText.edgeCase2?.explanation}\n\n`;
-    const edgeCase3 = `edgeCase 3\nInput:\n${jsonFormattedQuestionText.edgeCase3?.input}\nOutput: ${jsonFormattedQuestionText.edgeCase3?.output}\nExplanation: ${jsonFormattedQuestionText.edgeCase3?.explanation}\n\n`;
-    // 要件等について
-    const analysis = `Analysis\nTime Complexity: ${jsonFormattedQuestionText.analysis?.timeComplexity}\nSpace Complexity: ${jsonFormattedQuestionText.analysis?.spaceComplexity}\nEdge Cases: ${jsonFormattedQuestionText.analysis?.edgeCases}\nOther Consideration: ${jsonFormattedQuestionText.analysis?.otherConsiderations}\n\n`;
-    // ヒントについて
-    const hints = `Hints\n${jsonFormattedQuestionText.hints}`;
-
-    const formattedQuestionDetails =
-      description +
-      functionSignature +
-      size +
-      valueRange +
-      kRange +
-      example1 +
-      example2 +
-      example3 +
-      edgeCase1 +
-      edgeCase2 +
-      edgeCase3 +
-      analysis +
-      hints;
-
-    setFormattedQuestionText(formattedQuestionDetails);
-  }, [jsonFormattedQuestionText, setFormattedQuestionText]);
-
-  const copyToClipboard = () => {
-    if (!formattedQuestionText || formattedQuestionText.trim().length === 0) {
-      return;
-    }
-
-    navigator.clipboard
-      .writeText(formattedQuestionText)
-      .then(() => {
-        alert("Copied to clipboard.");
-      })
-      .catch((err) => {
-        console.error("Failed to copy text: ", err);
-        alert("Failed to copy text.");
-      });
-  };
+  }, [formattedQuestionDetails, setStoredQuestionText]);
 
   return (
     <section
@@ -84,8 +54,8 @@ const QuestionSection: React.FC = () => {
           Description
         </div>
         <button
-          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || jsonFormattedQuestionText === null ? "cursor-not-allowed opacity-50" : ""} `}
-          onClick={copyToClipboard}
+          className={`flex w-[120px] items-center justify-between bg-gray-400 p-1 duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500 ${isApiLoading || jsonQuestionText === null ? "cursor-not-allowed opacity-50" : ""} `}
+          onClick={() => clipboardCopy({ context: formattedQuestionDetails })}
           disabled={isApiLoading}
         >
           <span className="flex-1 text-center">Copy</span>
@@ -106,69 +76,69 @@ const QuestionSection: React.FC = () => {
         <div className="grid gap-5 whitespace-break-spaces">
           {/* description等の項目 */}
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Description"
-            paragraphContent={jsonFormattedQuestionText?.problemStatement}
+            paragraphContent={jsonQuestionText?.problemStatement}
           />
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Function Signature"
-            paragraphContent={jsonFormattedQuestionText?.functionSignature}
+            paragraphContent={jsonQuestionText?.functionSignature}
           />
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Constraints"
-            paragraphContent={`Size: ${jsonFormattedQuestionText?.constraints.size}\nValue Range: ${jsonFormattedQuestionText?.constraints.valueRange}\nK Range: ${jsonFormattedQuestionText?.constraints.kRange}`}
+            paragraphContent={`Size: ${jsonQuestionText?.constraints.size}\nValue Range: ${jsonQuestionText?.constraints.valueRange}\nK Range: ${jsonQuestionText?.constraints.kRange}`}
           />
           {/* 例題等の項目 */}
           <div className="mt-8">
             <Paragraph
-              content={jsonFormattedQuestionText}
+              content={jsonQuestionText}
               titleText="Example 1"
-              paragraphContent={`Input:\n${jsonFormattedQuestionText?.example1?.input}\nOutput: ${jsonFormattedQuestionText?.example1?.output}\nExplanation: ${jsonFormattedQuestionText?.example1?.explanation}`}
+              paragraphContent={`Input:\n${jsonQuestionText?.example1?.input}\nOutput: ${jsonQuestionText?.example1?.output}\nExplanation: ${jsonQuestionText?.example1?.explanation}`}
             />
           </div>
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Example 2"
-            paragraphContent={`Input:\n${jsonFormattedQuestionText?.example2?.input}\nOutput: ${jsonFormattedQuestionText?.example2?.output}\nExplanation: ${jsonFormattedQuestionText?.example2?.explanation}`}
+            paragraphContent={`Input:\n${jsonQuestionText?.example2?.input}\nOutput: ${jsonQuestionText?.example2?.output}\nExplanation: ${jsonQuestionText?.example2?.explanation}`}
           />
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Example 3"
-            paragraphContent={`Input:\n${jsonFormattedQuestionText?.example3?.input}\nOutput: ${jsonFormattedQuestionText?.example3?.output}\nExplanation: ${jsonFormattedQuestionText?.example3?.explanation}`}
+            paragraphContent={`Input:\n${jsonQuestionText?.example3?.input}\nOutput: ${jsonQuestionText?.example3?.output}\nExplanation: ${jsonQuestionText?.example3?.explanation}`}
           />
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Edge Case 1"
-            paragraphContent={`Input:\n${jsonFormattedQuestionText?.edgeCase1?.input}\nOutput: ${jsonFormattedQuestionText?.edgeCase1?.output}\nExplanation: ${jsonFormattedQuestionText?.edgeCase1?.explanation}`}
+            paragraphContent={`Input:\n${jsonQuestionText?.edgeCase1?.input}\nOutput: ${jsonQuestionText?.edgeCase1?.output}\nExplanation: ${jsonQuestionText?.edgeCase1?.explanation}`}
           />
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Edge Case 2"
-            paragraphContent={`Input:\n${jsonFormattedQuestionText?.edgeCase2?.input}\nOutput: ${jsonFormattedQuestionText?.edgeCase2?.output}\nExplanation: ${jsonFormattedQuestionText?.edgeCase2?.explanation}`}
+            paragraphContent={`Input:\n${jsonQuestionText?.edgeCase2?.input}\nOutput: ${jsonQuestionText?.edgeCase2?.output}\nExplanation: ${jsonQuestionText?.edgeCase2?.explanation}`}
           />
           <Paragraph
-            content={jsonFormattedQuestionText}
+            content={jsonQuestionText}
             titleText="Edge Case 3"
-            paragraphContent={`Input:\n${jsonFormattedQuestionText?.edgeCase3?.input}\nOutput: ${jsonFormattedQuestionText?.edgeCase3?.output}\nExplanation: ${jsonFormattedQuestionText?.edgeCase3?.explanation}`}
+            paragraphContent={`Input:\n${jsonQuestionText?.edgeCase3?.input}\nOutput: ${jsonQuestionText?.edgeCase3?.output}\nExplanation: ${jsonQuestionText?.edgeCase3?.explanation}`}
           />
           {/* analysis */}
           <div className="mt-8">
             <Paragraph
-              content={jsonFormattedQuestionText}
+              content={jsonQuestionText}
               titleText="Analysis"
               paragraphContent={`Time Complexity: ${
-                jsonFormattedQuestionText?.analysis?.timeComplexity
-              }\nSpace Complexity: ${jsonFormattedQuestionText?.analysis?.spaceComplexity}\nEdge Cases: ${jsonFormattedQuestionText?.analysis?.edgeCases}\nOther Consideration: ${jsonFormattedQuestionText?.analysis?.otherConsiderations}`}
+                jsonQuestionText?.analysis?.timeComplexity
+              }\nSpace Complexity: ${jsonQuestionText?.analysis?.spaceComplexity}\nEdge Cases: ${jsonQuestionText?.analysis?.edgeCases}\nOther Consideration: ${jsonQuestionText?.analysis?.otherConsiderations}`}
             />
           </div>
           {/* hints */}
           <div className="mt-8">
             <Paragraph
-              content={jsonFormattedQuestionText}
+              content={jsonQuestionText}
               titleText="Hints"
-              paragraphContent={`${jsonFormattedQuestionText?.hints}`}
+              paragraphContent={`${jsonQuestionText?.hints}`}
             />
           </div>
         </div>
