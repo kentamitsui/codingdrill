@@ -2,7 +2,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import {
   AppContextProps,
   ReviewResponseProps,
-  ProblemContentProps,
+  QuestionTextProps,
   UpdateSaveDataEntryProps,
 } from "@/app/type/type";
 
@@ -24,7 +24,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   ////////////////////////////////
   // APIから出力された問題文をJSON形式で管理
   const [jsonQuestionText, setJsonQuestionText] =
-    useState<ProblemContentProps | null>(null);
+    useState<QuestionTextProps | null>(null);
   // APIに送信する問題文(テキストベース)を管理(APIのリクエスト、クリップボードコピー時に使用)
   const [storedQuestionText, setStoredQuestionText] = useState<string>("");
   // APIから出力されたフィードバックを管理(初期値ではデータが無いのでnull)
