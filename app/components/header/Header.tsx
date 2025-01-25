@@ -1,6 +1,5 @@
 import ThemeToggle from "@/app/feature/darkmode/ThemeToggle";
-import ResetButton from "@/app/feature/splitter/components/ResetButton";
-import menuData from "@/app/config/config.json";
+import RestoreButton from "@/app/feature/splitter/components/RestoreButton";
 
 const Header = () => {
   return (
@@ -8,11 +7,7 @@ const Header = () => {
       <h1 className="text-xl">Coding Drill</h1>
       <div className="ml-auto flex items-center justify-center">
         <ThemeToggle />
-        <ResetButton
-          lightSvgSrc={menuData.svgIcon.resetLight}
-          darkSvgSrc={menuData.svgIcon.resetDark}
-          altText="restore layout"
-        />
+        <RestoreButton />
       </div>
     </header>
   );

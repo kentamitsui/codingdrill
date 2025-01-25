@@ -336,7 +336,7 @@ This project is built using the following technologies:
 │   │   ├── splitter
 │   │   │   ├── Splitter.tsx
 │   │   │   ├── components
-│   │   │   │   └── ResetButton.tsx
+│   │   │   │   └── RestoreButton.tsx
 │   │   │   └── context
 │   │   │       └── PanelContext.tsx
 │   │   └── storage
