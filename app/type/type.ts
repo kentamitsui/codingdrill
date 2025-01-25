@@ -24,51 +24,64 @@ export interface BaseButtonProps {
 
 // AppContextに対する型定義
 export interface AppContextProps {
-  // API使用中の状態管理
-  isApiLoading: boolean;
+  ////////////////////////////////
+  // APIリクエストの状態管理（リクエスト中のボタン制御に使用）
+  ////////////////////////////////
+  isApiLoading: boolean; // APIの処理中フラグ
   setIsApiLoading: React.Dispatch<React.SetStateAction<boolean>>;
-  isQuestionCreating: boolean;
+  isQuestionCreating: boolean; // 問題生成中フラグ
   setIsQuestionCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  isReviewCreating: boolean;
+  isReviewCreating: boolean; // レビュー生成中フラグ
   setIsReviewCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  // Sidebar.tsxで選択された難易度、データタイプ、トピック、UI言語を管理
-  difficulty: string;
+
+  ////////////////////////////////
+  // エディタの状態管理（コードエディタの設定・入力状態を管理）
+  ////////////////////////////////
+  storedEditorLanguage: string; // ローカルストレージから復元されたエディタの言語
+  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
+  currentEditorLanguage: string; // 現在選択されているエディタの言語
+  setCurrentEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
+  storedEditorCode: string | null; // ローカルストレージから復元されたエディタのコード
+  setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
+  currentEditorInputed: string | null; // 現在エディタに入力されているコード
+  setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  editorFontSize: string; // エディタのフォントサイズ
+  setEditorFontSize: React.Dispatch<React.SetStateAction<string>>;
+  editorTheme: string; // エディタのテーマ（ダークモードなど）
+  setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
+
+  ////////////////////////////////
+  // サイドバーの選択状態管理（ユーザーの選択を保持）
+  ////////////////////////////////
+  difficulty: string; // 選択された難易度
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
-  dataType: string;
+  dataType: string; // 選択されたデータタイプ
   setDataType: React.Dispatch<React.SetStateAction<string>>;
-  topic: string;
+  topic: string; // 選択されたトピック
   setTopic: React.Dispatch<React.SetStateAction<string>>;
-  uiLanguage: string;
+  uiLanguage: string; // 選択されたUI言語
   setUiLanguage: React.Dispatch<React.SetStateAction<string>>;
-  // APIから出力された問題文、エディタの入力内容、フィードバックを管理
-  saveData: UpdateSaveDataEntryProps[];
+
+  ////////////////////////////////
+  // 問題文とレビューの状態管理（APIから取得・送信するデータ）
+  ////////////////////////////////
+  saveData: UpdateSaveDataEntryProps[]; // 保存された問題データ
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
-  storedQuestionText: string;
+  storedQuestionText: string; // APIに送信する問題文（テキスト形式）
   setStoredQuestionText: React.Dispatch<React.SetStateAction<string>>;
-  //　APIから出力された問題文をJSON形式で管理
-  jsonQuestionText: QuestionTextProps | null;
+  jsonQuestionText: QuestionTextProps | null; // APIから取得した問題文（JSON形式）
   setJsonQuestionText: React.Dispatch<
     React.SetStateAction<QuestionTextProps | null>
   >;
-  // APIから出力されたフィードバックをJSON形式で管理(初期値ではデータが無いのでnull)
-  reviewText: ReviewResponseProps | null;
+  reviewText: ReviewResponseProps | null; // APIから取得したレビュー内容（JSON形式）
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
-  //// エディタ関連の状態管理
-  storedEditorLanguage: string;
-  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
-  currentEditorLanguage: string;
-  setCurrentEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
-  storedEditorCode: string | null;
-  setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
-  currentEditorInputed: string | null;
-  setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
-  editorFontSize: string;
-  setEditorFontSize: React.Dispatch<React.SetStateAction<string>>;
-  editorTheme: string;
-  setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
-  currentTheme: string | undefined;
+
+  ////////////////////////////////
+  // アプリ全体のテーマ管理（ライト/ダークモード）
+  ////////////////////////////////
+  currentTheme: string | undefined; // カラーテーマ（ライト/ダークモード）
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
