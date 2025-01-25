@@ -1,8 +1,8 @@
 <div align="center">
   <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
-    <Img src="public/images/appIcon.svg" width=100 height=100 />
+    <Img src="public/gif/justDoit!.gif" width=150 height=150 />
   </a>
-  <h1>Coding Drill</h1>
+  <h1>⇧ Click it! ⇧</h1>
 </div>
 
 ## 📖このプロジェクトについて(About this project)
@@ -336,7 +336,7 @@ This project is built using the following technologies:
 │   │   ├── splitter
 │   │   │   ├── Splitter.tsx
 │   │   │   ├── components
-│   │   │   │   └── ResetButton.tsx
+│   │   │   │   └── RestoreButton.tsx
 │   │   │   └── context
 │   │   │       └── PanelContext.tsx
 │   │   └── storage

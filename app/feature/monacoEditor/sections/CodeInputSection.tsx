@@ -7,6 +7,7 @@ import FontSizeSelect from "@/app/feature/monacoEditor/components/option/FontSiz
 import ThemeSelect from "@/app/feature/monacoEditor/components/option/ThemeSelect";
 import LanguageSelect from "@/app/feature/monacoEditor/components/option/LanguageSelect";
 import EditorSection from "@/app/feature/monacoEditor/sections/EditorSection";
+import clipboardCopy from "@/app/feature/clipboardCopy/clipboardCopy";
 
 const CodeInputSection = () => {
   const {
@@ -17,8 +18,8 @@ const CodeInputSection = () => {
     dataType,
     topic,
     uiLanguage,
-    formattedQuestionText,
-    jsonFormattedQuestionText,
+    storedQuestionText,
+    jsonQuestionText,
     setReviewText,
     storedEditorLanguage,
     setStoredEditorLanguage,
@@ -29,30 +30,6 @@ const CodeInputSection = () => {
     currentTheme,
   } = useAppContext();
   const { saveToLocalStorage } = useLocalStorageContext();
-  /**
-   * クリップボードにコピーするハンドラー
-   * - 現在のエディタの入力内容をコピーする
-   * - EditorSection で入力した内容は currentEditorInputed に集約されている
-   */
-  const copyToClipboard = () => {
-    if (currentEditorInputed) {
-      if (currentEditorInputed?.length === 0) {
-        return;
-      }
-
-      navigator.clipboard
-        .writeText(currentEditorInputed || "")
-        .then(() => {
-          alert("Copied to clipboard.");
-        })
-        .catch((err) => {
-          console.error("Failed to copy text: ", err);
-          alert("Failed to copy text.");
-        });
-    } else {
-      alert("Editor is not ready yet.");
-    }
-  };
 
   /**
    * サーバーへ問題文＋コードを投げてレビューを生成するハンドラー
@@ -77,7 +54,7 @@ const CodeInputSection = () => {
           topic,
           uiLanguage,
           // JSON形式から整形された問題文を渡す
-          formattedQuestionText,
+          storedQuestionText,
           editorLanguage: currentEditorLanguage,
           currentEditorValue,
         }),
@@ -90,25 +67,25 @@ const CodeInputSection = () => {
       const responseText = data.responseText;
       const JsonText = JSON.parse(responseText);
 
-      // ReviewSection に返却データを反映
+      // ReviewSectionに返却データを反映
       saveToLocalStorage({
         difficulty,
         dataType,
         topic,
         uiLanguage,
-        questionText: jsonFormattedQuestionText,
+        questionText: jsonQuestionText,
         editorLanguage: currentEditorLanguage,
         editorCode: currentEditorValue,
         reviewText: JsonText,
       });
 
-      // ReviewSectionにChatGPT-APIの返信データを設置する
+      // APIからのレスポンスを保存
       setReviewText(JsonText);
 
-      // エディタ入力内容を Context に再度保存
+      // エディタ入力内容をContextに再度保存
       setStoredEditorCode(currentEditorValue);
 
-      // ローカルストレージから最新データを取得し、React Select へ表示されるセーブデータを更新
+      // ローカルストレージから最新データを取得し、ReactSelectへ表示されるセーブデータを更新
       if (responseText) {
         setIsApiLoading(false);
         setIsReviewCreating(false);
@@ -180,14 +157,12 @@ const CodeInputSection = () => {
             </div>
             {/* エディタの入力内容をコピー */}
             <EditorActionButton
-              id="button-Copy-CodeInputArea"
               type="button"
               text="Copy"
-              onClick={copyToClipboard}
+              onClick={() => clipboardCopy({ context: currentEditorInputed })}
             />
             {/* レビュー生成 */}
             <EditorActionButton
-              id="submit"
               type="button"
               text="Submit"
               onClick={handleCreateReview}

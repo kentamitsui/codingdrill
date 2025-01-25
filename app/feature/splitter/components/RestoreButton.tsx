@@ -1,27 +1,17 @@
 import { useAppContext } from "@/app/context/AppContext";
 import { usePanelContext } from "@/app/feature/splitter/context/PanelContext";
+import menuData from "@/app/config/config.json";
 import Image from "next/image";
 
-interface ResetButtonProps {
-  lightSvgSrc: string;
-  darkSvgSrc: string;
-  altText: string;
-}
-
 // パネルサイズをリセットするボタン
-const ResetButton = ({
-  lightSvgSrc,
-  darkSvgSrc,
-  altText,
-}: ResetButtonProps) => {
+const RestoreButton = () => {
   const { currentTheme } = useAppContext();
-  const { resetHorizontalPanelSizes, resetVerticalPanelSizes } =
-    usePanelContext();
+  const { resetHorizontalSizes, resetVerticalSizes } = usePanelContext();
 
   // 水平方向・垂直方向のパネルサイズをリセットする関数
   const handlePanelSizeReset = () => {
-    resetHorizontalPanelSizes();
-    resetVerticalPanelSizes();
+    resetHorizontalSizes();
+    resetVerticalSizes();
   };
 
   return (
@@ -32,8 +22,12 @@ const ResetButton = ({
       Restore
       <Image
         className="ml-2"
-        src={currentTheme === "dark" ? lightSvgSrc : darkSvgSrc}
-        alt={altText}
+        src={
+          currentTheme === "dark"
+            ? menuData.svgIcon.resetLight
+            : menuData.svgIcon.resetDark
+        }
+        alt={"restore layout"}
         width={20}
         height={20}
       />
@@ -41,4 +35,4 @@ const ResetButton = ({
   );
 };
 
-export default ResetButton;
+export default RestoreButton;

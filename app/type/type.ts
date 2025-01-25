@@ -1,98 +1,122 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 // 選択タグに対する型定義
-export interface SelectProps {
+export interface OptionProps {
   label: string; // セレクトボックスのラベル
-  data: { [key: string]: { [key: string]: string } | string }; // optionやoptgroupのデータ構造
   name: string; // セレクトボックスのname属性
-  defaultSelected?: string; // 初期表示時の値
-  setSelected: Dispatch<SetStateAction<string>>; // 更新関数
-  savedLocalStorageValue: string;
-  iconLight: StaticImport | string;
-  iconDark: StaticImport | string;
-}
-
-// inputareaに対する型定義
-export interface InputAreaButtonProps {
-  id: string;
-  type: "submit" | "reset" | "button";
-  text: string;
-  onClick: () => void | Promise<void>;
+  defaultSelected?: string; // 初期表示時のプレースホルダー的な値
+  setSelected: Dispatch<SetStateAction<string>>; // 選択肢を更新する関数
+  savedLocalStorageValue: string | null; // ローカルストレージに保存された値(nullを考慮)
+  data:
+    | Record<string, string> // 通常のoptionリスト
+    | Record<string, Record<string, string>>;
+  iconLight: string;
+  iconDark: string;
 }
 
 // ボタンに対する型定義
-export interface ButtonProps extends InputAreaButtonProps {
-  id: string;
+export interface BaseButtonProps {
   type: "submit" | "reset" | "button";
   text: string;
-  iconLight: StaticImport | string;
-  iconDark: StaticImport | string;
-  onClick: () => void | Promise<void>;
+  onClick: () => void | Promise<void>; // 同期・非同期の関数に対応
 }
 
 // AppContextに対する型定義
 export interface AppContextProps {
-  isApiLoading: boolean | undefined;
-  setIsApiLoading: React.Dispatch<React.SetStateAction<boolean | undefined>>;
-  isQuestionCreating: boolean | undefined;
-  setIsQuestionCreating: React.Dispatch<
-    React.SetStateAction<boolean | undefined>
-  >;
-  isReviewCreating: boolean | undefined;
-  setIsReviewCreating: React.Dispatch<
-    React.SetStateAction<boolean | undefined>
-  >;
-  difficulty: string;
+  ////////////////////////////////
+  // APIリクエストの状態管理（リクエスト中のボタン制御に使用）
+  ////////////////////////////////
+  isApiLoading: boolean; // APIの処理中フラグ
+  setIsApiLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isQuestionCreating: boolean; // 問題生成中フラグ
+  setIsQuestionCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  isReviewCreating: boolean; // レビュー生成中フラグ
+  setIsReviewCreating: React.Dispatch<React.SetStateAction<boolean>>;
+
+  ////////////////////////////////
+  // エディタの状態管理（コードエディタの設定・入力状態を管理）
+  ////////////////////////////////
+  storedEditorLanguage: string; // ローカルストレージから復元されたエディタの言語
+  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
+  currentEditorLanguage: string; // 現在選択されているエディタの言語
+  setCurrentEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
+  storedEditorCode: string | null; // ローカルストレージから復元されたエディタのコード
+  setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
+  currentEditorInputed: string | null; // 現在エディタに入力されているコード
+  setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
+  editorFontSize: string; // エディタのフォントサイズ
+  setEditorFontSize: React.Dispatch<React.SetStateAction<string>>;
+  editorTheme: string; // エディタのテーマ（ダークモードなど）
+  setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
+
+  ////////////////////////////////
+  // サイドバーの選択状態管理（ユーザーの選択を保持）
+  ////////////////////////////////
+  difficulty: string; // 選択された難易度
   setDifficulty: React.Dispatch<React.SetStateAction<string>>;
-  dataType: string;
+  dataType: string; // 選択されたデータタイプ
   setDataType: React.Dispatch<React.SetStateAction<string>>;
-  topic: string;
+  topic: string; // 選択されたトピック
   setTopic: React.Dispatch<React.SetStateAction<string>>;
-  uiLanguage: string;
+  uiLanguage: string; // 選択されたUI言語
   setUiLanguage: React.Dispatch<React.SetStateAction<string>>;
-  formattedQuestionText: string;
-  setFormattedQuestionText: React.Dispatch<React.SetStateAction<string>>;
-  saveData: UpdateSaveDataEntryProps[];
+
+  ////////////////////////////////
+  // 問題文とレビューの状態管理（APIから取得・送信するデータ）
+  ////////////////////////////////
+  saveData: UpdateSaveDataEntryProps[]; // 保存された問題データ
   setSaveData: React.Dispatch<React.SetStateAction<UpdateSaveDataEntryProps[]>>;
-  jsonFormattedQuestionText: ProblemContentProps | null;
-  setJsonFormattedQuestionText: React.Dispatch<
-    React.SetStateAction<ProblemContentProps | null>
+  storedQuestionText: string; // APIに送信する問題文（テキスト形式）
+  setStoredQuestionText: React.Dispatch<React.SetStateAction<string>>;
+  jsonQuestionText: QuestionTextProps | null; // APIから取得した問題文（JSON形式）
+  setJsonQuestionText: React.Dispatch<
+    React.SetStateAction<QuestionTextProps | null>
   >;
-  reviewText: ReviewResponseProps | null;
+  reviewText: ReviewResponseProps | null; // APIから取得したレビュー内容（JSON形式）
   setReviewText: React.Dispatch<
     React.SetStateAction<ReviewResponseProps | null>
   >;
-  //// エディタ関連の状態管理
-  storedEditorLanguage: string;
-  setStoredEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
-  currentEditorLanguage: string;
-  setCurrentEditorLanguage: React.Dispatch<React.SetStateAction<string>>;
-  storedEditorCode: string | null;
-  setStoredEditorCode: React.Dispatch<React.SetStateAction<string | null>>;
-  currentEditorInputed: string | null;
-  setCurrentEditorInputed: React.Dispatch<React.SetStateAction<string | null>>;
-  editorFontSize: string;
-  setEditorFontSize: React.Dispatch<React.SetStateAction<string>>;
-  editorTheme: string;
-  setEditorTheme: React.Dispatch<React.SetStateAction<string>>;
-  currentTheme: string | undefined;
+
+  ////////////////////////////////
+  // アプリ全体のテーマ管理（ライト/ダークモード）
+  ////////////////////////////////
+  currentTheme: string | undefined; // カラーテーマ（ライト/ダークモード）
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
+// clipboardCopyButtonに対する型定義
+export interface clipboardCopyProps {
+  context: string | null;
+}
+
 // PanelContextに対する型定義
-export interface PanelContextType {
-  initialHorizontalSizes: number[];
-  initialVerticalSizes: number[];
-  horizontalPanelSizes: number[];
-  verticalPanelSizes: number[];
-  setHorizontalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>;
-  setVerticalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>;
-  resetHorizontalPanelSizes: () => void;
-  resetVerticalPanelSizes: () => void;
-  handleHorizontalDragEnd: (newSizes: number[]) => void;
-  handleVerticalDragEnd: (newSizes: number[]) => void;
+export interface PanelLayoutContextProps {
+  ////////////////////////////////
+  // 初期パネルサイズ（変更不可）
+  ////////////////////////////////
+  initialHorizontalSizes: readonly number[]; // 水平方向のパネルの初期サイズ
+  initialVerticalSizes: readonly number[]; // 垂直方向のパネルの初期サイズ
+
+  ////////////////////////////////
+  // 現在のパネルサイズ（状態管理）
+  ////////////////////////////////
+  horizontalPanelSizes: number[]; // 水平方向のパネルサイズ
+  verticalPanelSizes: number[]; // 垂直方向のパネルサイズ
+  setHorizontalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>; // 水平方向のパネルサイズを更新
+  setVerticalPanelSizes: React.Dispatch<React.SetStateAction<number[]>>; // 垂直方向のパネルサイズを更新
+
+  ////////////////////////////////
+  // パネルサイズのリセット処理
+  ////////////////////////////////
+  resetHorizontalSizes: () => void; // 水平方向のパネルサイズをリセット
+  resetVerticalSizes: () => void; // 垂直方向のパネルサイズをリセット
+
+  ////////////////////////////////
+  // ドラッグ終了時のパネルサイズ更新処理
+  ////////////////////////////////
+  updateHorizontalSizes: (newSizes: number[]) => void; // 水平方向のパネルサイズ更新
+  updateVerticalSizes: (newSizes: number[]) => void; // 垂直方向のパネルサイズ更新
 }
 
 // Monaco Editorに対する型定義
@@ -109,7 +133,7 @@ export interface LocalStorageContextTypeProps {
   currentSelectedSavedDataId: number | null;
   setCurrentSelectedSavedDataId: (id: number | null) => void;
   saveToLocalStorage: (data: SaveToLocalStorageProps) => void;
-  loadSavedData: () => void;
+  loadSavedData: (updateFunctions: SetUpdateFunctionsProps) => void;
   handleDeleteSelected: () => void;
   clearLocalStorage: () => void;
 }
@@ -120,7 +144,7 @@ export interface SaveToLocalStorageProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  questionText: ProblemContentProps | null;
+  questionText: QuestionTextProps | null;
   editorLanguage: string;
   editorCode: string;
   reviewText: string;
@@ -128,16 +152,16 @@ export interface SaveToLocalStorageProps {
 
 // SavedDataEntryに対する型定義
 export interface SavedDataEntryProps {
-  id: number | null;
+  id: number;
+  timestamp: string;
   difficulty: string;
   dataType: string;
   topic: string;
   uiLanguage: string;
-  problemContent: ProblemContentProps;
+  questionText: QuestionTextProps;
   editorLanguage: string;
   editorContent: string;
-  evaluation: ReviewResponseProps;
-  timestamp: string;
+  reviewText: ReviewResponseProps;
 }
 
 // SetUpdateFunctionsに対する型定義
@@ -146,10 +170,10 @@ export interface SetUpdateFunctionsProps {
   dataType: (value: string) => void;
   topic: (value: string) => void;
   uiLanguage: (value: string) => void;
-  problemContent: (value: ProblemContentProps | null) => void;
+  questionText: (value: QuestionTextProps | null) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
-  evaluation: (value: ReviewResponseProps | null) => void;
+  reviewText: (value: ReviewResponseProps | null) => void;
 }
 
 // UpdateSaveDataEntryに対する型定義
@@ -160,7 +184,7 @@ export interface UpdateSaveDataEntryProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  questionText: ProblemContentProps | null;
+  questionText: QuestionTextProps | null;
   editorLanguage: string;
   editorCode: string;
   reviewText: ReviewResponseProps | null;
@@ -171,9 +195,9 @@ interface ProblemContentBase {
   problemStatement: string;
   functionSignature: string;
   constraints: {
-    size?: string;
-    valueRange?: string;
-    kRange?: string;
+    size: string;
+    valueRange: string;
+    kRange: string;
   };
 }
 
@@ -193,20 +217,20 @@ interface AnalysisProps {
 }
 
 // 各Propsを継承し型定義を行う
-export interface ProblemContentProps extends ProblemContentBase {
-  example1?: ExampleProps;
-  example2?: ExampleProps;
-  example3?: ExampleProps;
-  edgeCase1?: ExampleProps;
-  edgeCase2?: ExampleProps;
-  edgeCase3?: ExampleProps;
-  analysis?: AnalysisProps;
-  hints?: string;
+export interface QuestionTextProps extends ProblemContentBase {
+  example1: ExampleProps;
+  example2: ExampleProps;
+  example3: ExampleProps;
+  edgeCase1: ExampleProps;
+  edgeCase2: ExampleProps;
+  edgeCase3: ExampleProps;
+  analysis: AnalysisProps;
+  hints: string;
 }
 
 // Paragraph(APIからのレスポンスを展開する)に対する型定義
 export interface QuestionParagraphProps {
-  content: ProblemContentProps | null;
+  content: QuestionTextProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
 }
@@ -241,5 +265,4 @@ export interface ReactSelectProps {
   isApiLoading: boolean | undefined;
   handleChangeSavedData: (event: any) => void;
   saveData: UpdateSaveDataEntryProps[];
-  currentTheme: string | undefined;
 }
