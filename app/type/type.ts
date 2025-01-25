@@ -1,7 +1,64 @@
 import { Dispatch, SetStateAction } from "react";
 import type * as monaco from "monaco-editor";
 
-// 選択タグに対する型定義
+///////////////////////////////
+// 共通で使用される型定義
+///////////////////////////////
+
+// QuestionTextのベースとなる型定義
+interface QuestionTextBase {
+  questionText: string;
+  functionSignature: string;
+  constraints: {
+    size: string;
+    valueRange: string;
+    kRange: string;
+  };
+}
+
+// Exampleの型定義
+interface ExampleProps {
+  input: string;
+  output: string;
+  explanation: string;
+}
+
+// Analysisの型定義
+interface AnalysisProps {
+  timeComplexity: string;
+  spaceComplexity: string;
+  edgeCases: string;
+  otherConsiderations: string;
+}
+
+// APIから取得した問題文の型定義
+export interface QuestionTextProps extends QuestionTextBase {
+  example1: ExampleProps;
+  example2: ExampleProps;
+  example3: ExampleProps;
+  edgeCase1: ExampleProps;
+  edgeCase2: ExampleProps;
+  edgeCase3: ExampleProps;
+  analysis: AnalysisProps;
+  hints: string;
+}
+
+// APIから取得したレビューの型定義
+export interface ReviewResponseProps {
+  algorithmExplanation: string | null;
+  clarity: string | null;
+  efficiency: string | null;
+  testCoverage: string | null;
+  technicalAccuracy: string | null;
+  suggestionsImprovement: string | null;
+  improvementExample: string | null;
+}
+
+///////////////////////////////
+// UIコンポーネント関連の型定義
+///////////////////////////////
+
+// 選択タグの型定義
 export interface OptionProps {
   label: string; // セレクトボックスのラベル
   name: string; // セレクトボックスのname属性
@@ -15,14 +72,35 @@ export interface OptionProps {
   iconDark: string;
 }
 
-// ボタンに対する型定義
+// ボタンの型定義
 export interface BaseButtonProps {
   type: "submit" | "reset" | "button";
   text: string;
   onClick: () => void | Promise<void>; // 同期・非同期の関数に対応
 }
 
-// AppContextに対する型定義
+// ReactSelectの型定義
+export interface ReactSelectProps {
+  selectedSaveData: number | null;
+  isApiLoading: boolean | undefined;
+  handleChangeSavedData: (event: any) => void;
+  saveData: UpdateSaveDataEntryProps[];
+}
+
+// Monaco Editorの型定義
+export interface MonacoEditorProps {
+  fontSize: number;
+  editorLanguage: string;
+  editorTheme: string;
+  onMount?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
+  onChange?: (value: string | undefined) => void;
+}
+
+///////////////////////////////
+// コンテキスト関連の型定義
+///////////////////////////////
+
+// AppContextの型定義
 export interface AppContextProps {
   ////////////////////////////////
   // APIリクエストの状態管理（リクエスト中のボタン制御に使用）
@@ -85,12 +163,7 @@ export interface AppContextProps {
   setCurrentTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
-// clipboardCopyButtonに対する型定義
-export interface clipboardCopyProps {
-  context: string | null;
-}
-
-// PanelContextに対する型定義
+// PanelContextの型定義
 export interface PanelLayoutContextProps {
   ////////////////////////////////
   // 初期パネルサイズ（変更不可）
@@ -119,16 +192,7 @@ export interface PanelLayoutContextProps {
   updateVerticalSizes: (newSizes: number[]) => void; // 垂直方向のパネルサイズ更新
 }
 
-// Monaco Editorに対する型定義
-export interface MonacoEditorProps {
-  fontSize: number;
-  editorLanguage: string;
-  editorTheme: string;
-  onMount?: (editor: monaco.editor.IStandaloneCodeEditor) => void;
-  onChange?: (value: string | undefined) => void;
-}
-
-// LocalStorageContextに対する型定義
+// LocalStorageContextの型定義
 export interface LocalStorageContextTypeProps {
   currentSelectedSavedDataId: number | null;
   setCurrentSelectedSavedDataId: (id: number | null) => void;
@@ -138,7 +202,11 @@ export interface LocalStorageContextTypeProps {
   clearLocalStorage: () => void;
 }
 
-// SaveToLocalStorageに対する型定義
+///////////////////////////////
+// 保存データ管理の型定義
+///////////////////////////////
+
+// SaveToLocalStorageの型定義
 export interface SaveToLocalStorageProps {
   difficulty: string;
   dataType: string;
@@ -150,21 +218,19 @@ export interface SaveToLocalStorageProps {
   reviewText: string;
 }
 
-// SavedDataEntryに対する型定義
-export interface SavedDataEntryProps {
+// SavedDataEntryの型定義
+export interface SavedDataEntryProps extends SaveToLocalStorageProps {
   id: number;
   timestamp: string;
-  difficulty: string;
-  dataType: string;
-  topic: string;
-  uiLanguage: string;
-  questionText: QuestionTextProps;
-  editorLanguage: string;
-  editorContent: string;
-  reviewText: ReviewResponseProps;
 }
 
-// SetUpdateFunctionsに対する型定義
+// UpdateSaveDataEntryの型定義
+export interface UpdateSaveDataEntryProps extends SaveToLocalStorageProps {
+  id: number | null;
+  timestamp: string;
+}
+
+// SetUpdateFunctions(loadsavedataに使用)の型定義
 export interface SetUpdateFunctionsProps {
   difficulty: (value: string) => void;
   dataType: (value: string) => void;
@@ -176,93 +242,31 @@ export interface SetUpdateFunctionsProps {
   reviewText: (value: ReviewResponseProps | null) => void;
 }
 
-// UpdateSaveDataEntryに対する型定義
-export interface UpdateSaveDataEntryProps {
-  id: number | null;
-  timestamp: string;
-  difficulty: string;
-  dataType: string;
-  topic: string;
-  uiLanguage: string;
-  questionText: QuestionTextProps | null;
-  editorLanguage: string;
-  editorCode: string;
-  reviewText: ReviewResponseProps | null;
+///////////////////////////////
+// ユーティリティ型定義
+///////////////////////////////
+
+// clipboardCopyButtonの型定義
+export interface clipboardCopyProps {
+  context: string | null;
 }
 
-// ProblemContentのベースとなる型定義
-interface ProblemContentBase {
-  problemStatement: string;
-  functionSignature: string;
-  constraints: {
-    size: string;
-    valueRange: string;
-    kRange: string;
-  };
-}
-
-// Exampleの型定義
-interface ExampleProps {
-  input: string;
-  output: string;
-  explanation: string;
-}
-
-// Analysisの型定義
-interface AnalysisProps {
-  timeComplexity: string;
-  spaceComplexity: string;
-  edgeCases: string;
-  otherConsiderations: string;
-}
-
-// 各Propsを継承し型定義を行う
-export interface QuestionTextProps extends ProblemContentBase {
-  example1: ExampleProps;
-  example2: ExampleProps;
-  example3: ExampleProps;
-  edgeCase1: ExampleProps;
-  edgeCase2: ExampleProps;
-  edgeCase3: ExampleProps;
-  analysis: AnalysisProps;
-  hints: string;
-}
-
-// Paragraph(APIからのレスポンスを展開する)に対する型定義
+// Paragraph(問題文のコピー時に使用)の型定義
 export interface QuestionParagraphProps {
   content: QuestionTextProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
 }
 
-// ReviewSectionに対する型定義
-export interface ReviewResponseProps {
-  algorithmExplanation: string | null;
-  clarity: string | null;
-  efficiency: string | null;
-  testCoverage: string | null;
-  technicalAccuracy: string | null;
-  suggestionsImprovement: string | null;
-  improvementExample: string | null;
-}
-
-// Paragraph(APIからのレスポンスを展開する)に対する型定義
+// Paragraph(フィードバックのコピー時に使用)の型定義
 export interface ReviewParagraphProps {
   content: ReviewResponseProps | null;
   titleText: string;
   paragraphContent: string | null | undefined;
 }
 
-// Loadingに対する型定義
+// Loadingの型定義
 export interface LoadingProps {
   isCreating: boolean | undefined;
   text: string;
-}
-
-// ReactSelectに対する型定義
-export interface ReactSelectProps {
-  selectedSaveData: number | null;
-  isApiLoading: boolean | undefined;
-  handleChangeSavedData: (event: any) => void;
-  saveData: UpdateSaveDataEntryProps[];
 }
