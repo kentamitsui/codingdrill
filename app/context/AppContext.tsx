@@ -15,13 +15,13 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isApiLoading, setIsApiLoading] = useState<boolean>(false);
   const [isQuestionCreating, setIsQuestionCreating] = useState<boolean>(false);
   const [isReviewCreating, setIsReviewCreating] = useState<boolean>(false);
-
+  ////////////////////////////////
   // Sidebar.tsxで選択された難易度、データタイプ、トピック、UI言語を管理
   const [difficulty, setDifficulty] = useState<string>("");
   const [dataType, setDataType] = useState<string>("");
   const [topic, setTopic] = useState<string>("");
   const [uiLanguage, setUiLanguage] = useState<string>("");
-
+  ////////////////////////////////
   // APIから出力された問題文をJSON形式で管理
   const [jsonQuestionText, setJsonQuestionText] =
     useState<ProblemContentProps | null>(null);
@@ -31,7 +31,7 @@ export const SelectedDataProvider: React.FC<{ children: React.ReactNode }> = ({
   const [reviewText, setReviewText] = useState<ReviewResponseProps | null>(
     null,
   );
-
+  ////////////////////////////////
   // ローカルストレージから取得したデータを管理
   const [saveData, setSaveData] = useState<UpdateSaveDataEntryProps[]>([]);
 
