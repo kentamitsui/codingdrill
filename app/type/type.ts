@@ -124,7 +124,8 @@ export interface SaveToLocalStorageProps {
 
 // SavedDataEntryに対する型定義
 export interface SavedDataEntryProps {
-  id: number | null;
+  id: number;
+  timestamp: string;
   difficulty: string;
   dataType: string;
   topic: string;
@@ -133,7 +134,6 @@ export interface SavedDataEntryProps {
   editorLanguage: string;
   editorContent: string;
   evaluation: ReviewResponseProps;
-  timestamp: string;
 }
 
 // SetUpdateFunctionsに対する型定義

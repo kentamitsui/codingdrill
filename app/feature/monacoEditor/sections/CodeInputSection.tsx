@@ -67,7 +67,7 @@ const CodeInputSection = () => {
       const responseText = data.responseText;
       const JsonText = JSON.parse(responseText);
 
-      // ReviewSection に返却データを反映
+      // ReviewSectionに返却データを反映
       saveToLocalStorage({
         difficulty,
         dataType,

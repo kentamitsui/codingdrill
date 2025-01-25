@@ -60,23 +60,17 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     const savedData =
       JSON.parse(localStorage.getItem("savedData") || "[]") || [];
 
-    // セーブデータの最大IDを検索
-    interface SavedDataEntry {
-      id: number;
-      timestamp: string;
-      [key: string]: any;
-    }
-
+    // 保存データの最大値を取得
     const maxId = savedData.reduce(
-      (max: number, entry: SavedDataEntry) => (entry.id > max ? entry.id : max),
+      (max: number, entry: SavedDataEntryProps) =>
+        entry.id > max ? entry.id : max,
       0,
     );
 
-    const timestamp = new Date().toLocaleString();
-
+    // 連番を振って新しいデータを作成
     const newEntry = {
-      id: maxId + 1, // idに連番を振る
-      timestamp,
+      id: maxId + 1,
+      timestamp: new Date().toLocaleString(),
       ...data,
     };
 
