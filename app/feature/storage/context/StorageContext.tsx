@@ -9,6 +9,7 @@ import {
   LocalStorageContextTypeProps,
   SavedDataEntryProps,
   SaveToLocalStorageProps,
+  SetUpdateFunctionsProps,
 } from "@/app/type/type";
 import { useAppContext } from "@/app/context/AppContext";
 const LocalStorageContext = createContext<
@@ -29,18 +30,7 @@ export const useLocalStorageContext = (): LocalStorageContextTypeProps => {
 
 // 各ファイルで、ローカルストレージに関するコンテキストを使用出来るようにするプロバイダー
 export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
-  const {
-    setDifficulty,
-    setDataType,
-    setTopic,
-    setUiLanguage,
-    setJsonQuestionText,
-    setStoredEditorLanguage,
-    setStoredEditorCode,
-    setReviewText,
-    saveData,
-    setSaveData,
-  } = useAppContext();
+  const { saveData, setSaveData } = useAppContext();
   // セーブデータの選択に伴う背景色の状態管理に使用
   const [currentSelectedSavedDataId, setCurrentSelectedSavedDataId] = useState<
     number | null
@@ -80,7 +70,7 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
   };
 
   // ローカルストレージからデータを取得して、各セクションのセット関数にデータを渡して状態を更新
-  const loadSavedData = () => {
+  const loadSavedData = (updateFunctions: SetUpdateFunctionsProps) => {
     // 既にstate管理しているデータを使用
     if (!saveData || saveData.length === 0) {
       alert("No saved data available.");
@@ -108,14 +98,14 @@ export const LocalStorageProvider = ({ children }: { children: ReactNode }) => {
     }
 
     // 各セクションのセット関数にデータを渡して状態を更新
-    setDifficulty(selectedLoadData.difficulty);
-    setDataType(selectedLoadData.dataType);
-    setTopic(selectedLoadData.topic);
-    setUiLanguage(selectedLoadData.uiLanguage);
-    setJsonQuestionText(selectedLoadData.questionText);
-    setStoredEditorLanguage(selectedLoadData.editorLanguage);
-    setStoredEditorCode(selectedLoadData.editorCode);
-    setReviewText(selectedLoadData.reviewText);
+    updateFunctions.difficulty(selectedLoadData.difficulty);
+    updateFunctions.dataType(selectedLoadData.dataType);
+    updateFunctions.topic(selectedLoadData.topic);
+    updateFunctions.uiLanguage(selectedLoadData.uiLanguage);
+    updateFunctions.questionText(selectedLoadData.questionText);
+    updateFunctions.editorLanguage(selectedLoadData.editorLanguage);
+    updateFunctions.editorContent(selectedLoadData.editorCode);
+    updateFunctions.reviewText(selectedLoadData.reviewText);
   };
 
   // 選択されたデータを削除する関数

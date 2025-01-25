@@ -14,7 +14,7 @@ const ReactSelect = dynamic(
   },
 );
 import Image from "next/image";
-import { ProblemContentProps } from "@/app/type/type";
+import { QuestionTextProps } from "@/app/type/type";
 
 const Sidebar = () => {
   // アプリ全体の状態管理（問題作成、データ取得）
@@ -32,6 +32,7 @@ const Sidebar = () => {
     setUiLanguage,
     saveData,
     setJsonQuestionText,
+    setStoredEditorLanguage,
     setReviewText,
     setStoredEditorCode,
     currentTheme,
@@ -89,14 +90,14 @@ const Sidebar = () => {
       }
 
       // 型ガード関数を使用して、APIからのレスポンスが正しい形式であるかを判定する
-      const isProblemContentProps = (
+      const isQuestionTextProps = (
         responseObject: unknown,
-      ): responseObject is ProblemContentProps => {
+      ): responseObject is QuestionTextProps => {
         return typeof responseObject === "object" && responseObject !== null;
       };
 
       // 型の確認後、セット関数にデータを設置する
-      if (isProblemContentProps(JSON.parse(responseText))) {
+      if (isQuestionTextProps(JSON.parse(responseText))) {
         setJsonQuestionText(JSON.parse(responseText));
         setUiLanguage(uiLanguage);
       } else {
@@ -202,7 +203,19 @@ const Sidebar = () => {
             <SaveActionButton
               type="button"
               text="Load"
-              onClick={() => loadSavedData()}
+              // ローカルストレージに保存されたデータを読み込み、各状態更新関数に適用する
+              onClick={() =>
+                loadSavedData({
+                  difficulty: setDifficulty, // 難易度を更新
+                  dataType: setDataType, // データ型を更新
+                  topic: setTopic, // トピックを更新
+                  uiLanguage: setUiLanguage, // UIの表示言語を更新
+                  questionText: setJsonQuestionText, // 問題文の内容を更新
+                  editorLanguage: setStoredEditorLanguage, // エディタの言語設定を更新
+                  editorContent: setStoredEditorCode, // エディタのコード内容を更新
+                  reviewText: setReviewText, // レビュー内容を更新
+                })
+              }
             />
             <SaveActionButton
               type="button"
