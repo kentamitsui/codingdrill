@@ -314,6 +314,8 @@ This project is built using the following technologies:
 │   │   ├── AppContext.tsx
 │   │   └── Providers.tsx
 │   ├── feature
+│   │   ├── clipboardCopy
+│   │   │   └── clipboardCopy.ts
 │   │   ├── darkmode
 │   │   │   ├── ThemeToggle.tsx
 │   │   │   └── components
