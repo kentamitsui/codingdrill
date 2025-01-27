@@ -7,7 +7,7 @@ import type * as monaco from "monaco-editor";
 
 // QuestionTextのベースとなる型定義
 interface QuestionTextBase {
-  questionText: string;
+  problemStatement: string;
   functionSignature: string;
   constraints: {
     size: string;
@@ -212,10 +212,10 @@ export interface SaveToLocalStorageProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  questionText: QuestionTextProps | null;
+  questionText: QuestionTextProps;
   editorLanguage: string;
   editorCode: string;
-  reviewText: string;
+  reviewText: ReviewResponseProps;
 }
 
 // SavedDataEntryの型定義
@@ -236,10 +236,10 @@ export interface SetUpdateFunctionsProps {
   dataType: (value: string) => void;
   topic: (value: string) => void;
   uiLanguage: (value: string) => void;
-  questionText: (value: QuestionTextProps | null) => void;
+  questionText: (value: QuestionTextProps) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
-  reviewText: (value: ReviewResponseProps | null) => void;
+  reviewText: (value: ReviewResponseProps) => void;
 }
 
 ///////////////////////////////
