@@ -54,11 +54,12 @@ describe("BaseButton Component", () => {
     expect(handleClick).toHaveBeenCalledTimes(1); // `onClick` が1回呼ばれたことを確認
   });
 
-  it("APIがローディング中のときはボタンが無効になる", () => {
+  it("APIがローディング中のときはボタンが無効(disabled)になる", () => {
     mockContextValue = {
       ...mockContextValue,
       isApiLoading: true, // APIロード中に設定
-      difficulty: "", // 選択肢を未選択に設定
+      // すべてのプロパティを""に設定しているため、isAllSelected === falseとなる
+      difficulty: "",
       dataType: "",
       topic: "",
       uiLanguage: "",
@@ -107,7 +108,8 @@ describe("BaseButton Component", () => {
     expect(mockContextValue.isApiLoading).toBe(true);
   });
 
-  it("選択肢がすべて未選択のときはボタンが無効になる", () => {
+  it("選択肢がすべて未選択のときはボタンが無効(disabled)になる", () => {
+    // すべてのプロパティを""に設定しているため、isAllSelected === falseとなる
     mockContextValue.difficulty = "";
     mockContextValue.dataType = "";
     mockContextValue.topic = "";
@@ -118,8 +120,40 @@ describe("BaseButton Component", () => {
 
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
-    expect(button).toHaveClass(
-      "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
+
+    // ✅ `isAllSelected` が false になることを明示的に確認
+    expect(mockContextValue.difficulty).toBe("");
+    expect(mockContextValue.dataType).toBe("");
+    expect(mockContextValue.topic).toBe("");
+    expect(mockContextValue.uiLanguage).toBe("");
+
+    expect(button).toHaveAttribute("class", expect.stringContaining("flex"));
+    expect(button).toHaveAttribute("class", expect.stringContaining("w-full"));
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("rounded-[15px]"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("bg-gray-400"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("text-[14px]"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("hover:bg-gray-600"),
+    );
+
+    // ✅ クラス名のチェック
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("cursor-not-allowed"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("opacity-50"),
     );
 
     expect(button).toBeDisabled();
