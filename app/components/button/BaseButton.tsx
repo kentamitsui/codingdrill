@@ -1,7 +1,7 @@
+import React from "react";
 import Image from "next/image";
 import { useAppContext } from "@/app/context/AppContext";
 import { BaseButtonProps } from "@/app/type/type";
-import { useEffect, useState } from "react";
 import menuData from "@/app/config/config.json";
 
 const BaseButton = ({ type, text, onClick }: BaseButtonProps) => {
@@ -13,24 +13,10 @@ const BaseButton = ({ type, text, onClick }: BaseButtonProps) => {
     uiLanguage,
     currentTheme,
   } = useAppContext();
-  // 選択肢が全て選択されたかどうかの状態管理に使用
-  const [isAllSelected, setIsAllSelected] = useState<boolean>(false);
-
-  // 全ての選択肢が選択されたかどうかを判定する
-  useEffect(() => {
-    if (
-      difficulty !== "" &&
-      dataType !== "" &&
-      topic !== "" &&
-      uiLanguage !== ""
-    ) {
-      setIsAllSelected(true);
-    } else {
-      setIsAllSelected(false);
-    }
-  }, [difficulty, dataType, topic, uiLanguage]);
-
-  const isButtonDisabled = isApiLoading || !isAllSelected;
+  // 選択肢が全て選択されているかどうか、またAPI通信中かどうかでdisabled属性を切り替える
+  const isAllSelected =
+    difficulty !== "" && dataType !== "" && topic !== "" && uiLanguage !== "";
+  const isButtonDisabled = isApiLoading || !isAllSelected; // NOT論理(!)を使用
 
   return (
     <button
