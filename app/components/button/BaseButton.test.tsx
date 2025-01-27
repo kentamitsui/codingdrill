@@ -72,7 +72,7 @@ describe("BaseButton Component", () => {
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
 
-    console.log("ボタンのクラス名:", button.className); // ✅ クラス名をデバッグ
+    // console.log("ボタンのクラス名:", button.className); // ✅ クラス名をデバッグ
 
     expect(button).toHaveAttribute(
       "class",
@@ -213,7 +213,7 @@ describe("BaseButton Component", () => {
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
 
     // ✅ クラス名のデバッグ
-    console.log("ボタンのクラス:", button.className);
+    // console.log("ボタンのクラス:", button.className);
 
     // スタイルの適用を調べるので、クラス名の並び順の動的な変更の可能性は考慮しない
     expect(button).toHaveClass(
