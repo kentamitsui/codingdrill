@@ -212,10 +212,10 @@ export interface SaveToLocalStorageProps {
   dataType: string;
   topic: string;
   uiLanguage: string;
-  questionText: QuestionTextProps;
+  questionText: QuestionTextProps | null;
   editorLanguage: string;
   editorCode: string;
-  reviewText: ReviewResponseProps;
+  reviewText: ReviewResponseProps | null;
 }
 
 // SavedDataEntryの型定義
@@ -236,10 +236,10 @@ export interface SetUpdateFunctionsProps {
   dataType: (value: string) => void;
   topic: (value: string) => void;
   uiLanguage: (value: string) => void;
-  questionText: (value: QuestionTextProps) => void;
+  questionText: (value: QuestionTextProps | null) => void;
   editorLanguage: (value: string) => void;
   editorContent: (value: string) => void;
-  reviewText: (value: ReviewResponseProps) => void;
+  reviewText: (value: ReviewResponseProps | null) => void;
 }
 
 ///////////////////////////////
