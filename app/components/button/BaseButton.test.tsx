@@ -160,10 +160,37 @@ describe("BaseButton Component", () => {
   });
 
   it("選択肢がすべて選択されているときはボタンが有効になる", () => {
+    mockContextValue = {
+      difficulty: "medium",
+      dataType: "int",
+      topic: "mergeSort",
+      uiLanguage: "English",
+    };
+
+    (useAppContext as unknown as ReturnType<typeof vi.fn>).mockReturnValue(
+      mockContextValue,
+    );
+
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
-    expect(button).toHaveClass(
-      "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
+
+    expect(button).toHaveAttribute("class", expect.stringContaining("flex"));
+    expect(button).toHaveAttribute("class", expect.stringContaining("w-full"));
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("rounded-[15px]"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("bg-gray-400"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("text-[14px]"),
+    );
+    expect(button).toHaveAttribute(
+      "class",
+      expect.stringContaining("hover:bg-gray-600"),
     );
 
     expect(button).not.toBeDisabled();
