@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "sort-css": "stylelint app/globals.css --fix"
+    "sort-css": "stylelint app/globals.css --fix",
+    "test": "vitest",
+    "test:once": "vitest run"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0-rc.0",
@@ -22,6 +24,9 @@
     "react-split": "^2.0.14"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
@@ -29,6 +34,7 @@
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.1.5",
     "eslint-plugin-tailwindcss": "^3.18.0",
+    "jsdom": "^26.0.0",
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.10",
@@ -38,7 +44,9 @@
     "stylelint-config-tailwindcss": "^0.0.7",
     "stylelint-order": "^6.0.4",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.0.4"
   },
   "type": "module"
 }
