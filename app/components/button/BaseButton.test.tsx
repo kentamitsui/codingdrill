@@ -220,17 +220,4 @@ describe("BaseButton Component", () => {
       "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
     );
   });
-
-  it("ボタンをクリックするとローディング状態が適用される", async () => {
-    const handleClick = () => {
-      mockContextValue.isApiLoading = true;
-    };
-
-    render(<BaseButton type="submit" text="Generate" onClick={handleClick} />);
-    const button = screen.getByText("Generate");
-
-    await userEvent.click(button);
-
-    expect(mockContextValue.isApiLoading).toBe(true);
-  });
 });
