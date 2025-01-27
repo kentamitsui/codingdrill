@@ -211,10 +211,11 @@ describe("BaseButton Component", () => {
   it("ボタンのスタイルが適用されている", () => {
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
-    expect(button).toHaveClass(
-      "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
-    );
 
+    // ✅ クラス名のデバッグ
+    console.log("ボタンのクラス:", button.className);
+
+    // スタイルの適用を調べるので、クラス名の並び順の動的な変更の可能性は考慮しない
     expect(button).toHaveClass(
       "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
     );
