@@ -9,7 +9,7 @@
 
 Coding Drillは、コーディングに関する問題を自動で作成・採点するアプリケーションです。  
 自身の技術力向上も兼ねて、ChatGPTを活用したアプリを作りたいと思い開発しています。  
-ユーザーが気軽に利用して、算数ドリルと解くような感覚で少しでも楽しんで貰えるよう日々頑張ります。
+ユーザーが気軽に利用して、算数ドリルを解くような感覚で少しでも楽しんで貰えるよう日々頑張ります。
 
 (Coding Drill is an application that automatically creates and grades coding-related questions.  
 I'm developing this application to improve my technical skills and to create an application that utilizes ChatGPT.  
