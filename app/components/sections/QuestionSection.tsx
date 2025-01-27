@@ -21,7 +21,7 @@ const QuestionSection: React.FC = () => {
     if (jsonQuestionText === null) return "";
 
     return [
-      `Description\n${jsonQuestionText.problemStatement}\n\n`,
+      `Description\n${jsonQuestionText.questionText}\n\n`,
       `Function Signature\n${jsonQuestionText.functionSignature}\n\n`,
       `size: ${jsonQuestionText.constraints.size}\n`,
       `valueRange: ${jsonQuestionText.constraints.valueRange}\n`,
@@ -78,7 +78,7 @@ const QuestionSection: React.FC = () => {
           <Paragraph
             content={jsonQuestionText}
             titleText="Description"
-            paragraphContent={jsonQuestionText?.problemStatement}
+            paragraphContent={jsonQuestionText?.questionText}
           />
           <Paragraph
             content={jsonQuestionText}
