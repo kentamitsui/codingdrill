@@ -2,7 +2,6 @@
   <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
     <Img src="public/gif/JustDoIt!.gif" width=150 height=150 />
   </a>
-  <h1>⇧ Click it! ⇧</h1>
 </div>
 
 ## 📖このプロジェクトについて(About this project)
@@ -289,6 +288,7 @@ This project is built using the following technologies:
 │   │       └── openaiRequestHelper.ts
 │   ├── components
 │   │   ├── button
+│   │   │   ├── BaseButton.test.tsx
 │   │   │   ├── BaseButton.tsx
 │   │   │   └── SaveActionButton.tsx
 │   │   ├── common
@@ -357,12 +357,14 @@ This project is built using the following technologies:
 ├── package.json
 ├── postcss.config.mjs
 ├── public
-│   ├── gif // omitted because many items
+│   ├── gif // omitted
 │   ├── icon.svg
-│   └── images // omitted because many items
+│   └── images // omitted
 ├── README.md
 ├── tailwind.config.ts
-└── tsconfig.json
+├── tsconfig.json
+├── vitest-setup.ts
+└── vitest.config.ts
 ```
 
 ---
