@@ -197,8 +197,15 @@ describe("BaseButton Component", () => {
   });
 
   it("ボタンのテキストが正しく表示される", () => {
-    render(<BaseButton type="button" text="Click Me" onClick={() => {}} />);
-    expect(screen.getByText("Click Me")).toBeInTheDocument();
+    render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
+
+    // ✅ ボタンのテキストが適切に表示されているか確認
+    expect(screen.getByText("Generate")).toBeInTheDocument();
+
+    // ✅ ボタンとして取得できるかを確認（より厳密なテスト）
+    expect(
+      screen.getByRole("button", { name: "Generate" }),
+    ).toBeInTheDocument();
   });
 
   it("ボタンのスタイルが適用されている", () => {
