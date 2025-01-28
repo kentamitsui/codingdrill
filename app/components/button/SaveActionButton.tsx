@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { useAppContext } from "@/app/context/AppContext";
 import { BaseButtonProps } from "@/app/type/type";
