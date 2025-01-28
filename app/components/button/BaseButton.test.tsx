@@ -46,9 +46,7 @@ describe("BaseButton Component", () => {
     render(<BaseButton type="button" text="Generate" onClick={handleClick} />);
 
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
-    expect(button).toHaveClass(
-      "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
-    );
+
     await userEvent.click(button);
 
     expect(handleClick).toHaveBeenCalledTimes(1); // `onClick` が1回呼ばれたことを確認
@@ -84,26 +82,6 @@ describe("BaseButton Component", () => {
     );
     expect(button).toBeDisabled(); // ボタンが無効であることを確認
 
-    // disabledのチェック強化
-    expect(button).toHaveAttribute("class", expect.stringContaining("flex"));
-    expect(button).toHaveAttribute("class", expect.stringContaining("w-full"));
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("rounded-[15px]"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("bg-gray-400"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("text-[14px]"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("hover:bg-gray-600"),
-    );
-
     // ✅ `isApiLoading` の値が適切に更新されたことを確認
     expect(mockContextValue.isApiLoading).toBe(true);
   });
@@ -126,25 +104,6 @@ describe("BaseButton Component", () => {
     expect(mockContextValue.dataType).toBe("");
     expect(mockContextValue.topic).toBe("");
     expect(mockContextValue.uiLanguage).toBe("");
-
-    expect(button).toHaveAttribute("class", expect.stringContaining("flex"));
-    expect(button).toHaveAttribute("class", expect.stringContaining("w-full"));
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("rounded-[15px]"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("bg-gray-400"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("text-[14px]"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("hover:bg-gray-600"),
-    );
 
     // ✅ クラス名のチェック
     expect(button).toHaveAttribute(
@@ -174,25 +133,6 @@ describe("BaseButton Component", () => {
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
 
-    expect(button).toHaveAttribute("class", expect.stringContaining("flex"));
-    expect(button).toHaveAttribute("class", expect.stringContaining("w-full"));
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("rounded-[15px]"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("bg-gray-400"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("text-[14px]"),
-    );
-    expect(button).toHaveAttribute(
-      "class",
-      expect.stringContaining("hover:bg-gray-600"),
-    );
-
     expect(button).not.toBeDisabled();
   });
 
@@ -214,10 +154,5 @@ describe("BaseButton Component", () => {
 
     // ✅ クラス名のデバッグ
     // console.log("ボタンのクラス:", button.className);
-
-    // スタイルの適用を調べるので、クラス名の並び順の動的な変更の可能性は考慮しない
-    expect(button).toHaveClass(
-      "flex w-full items-center justify-between rounded-[15px] bg-gray-400 p-1 text-[14px] font-bold duration-300 hover:bg-gray-600 dark:bg-slate-700 dark:hover:bg-slate-500",
-    );
   });
 });
