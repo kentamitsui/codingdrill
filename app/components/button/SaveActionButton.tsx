@@ -35,7 +35,7 @@ const SaveActionButton = ({ type, text, onClick }: BaseButtonProps) => {
                   ? menuData.svgIcon.deleteAllDark
                   : menuData.svgIcon.loadLight
         }
-        alt=""
+        alt={""}
         width={20}
         height={20}
       />
