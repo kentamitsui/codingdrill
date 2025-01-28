@@ -39,4 +39,20 @@ describe("SaveActionButton Component", () => {
       ).toBeInTheDocument();
     },
   );
+
+  it.each([["Load"], ["Delete"], ["All Delete"]])(
+    "ボタンがクリックされたときに onClick が呼ばれる  (text=%s)",
+    async (text) => {
+      const handleClick = vi.fn();
+      render(
+        <SaveActionButton type="button" text={text} onClick={handleClick} />,
+      );
+
+      const button = screen.getByRole("button", { name: text }); // `button` を取得
+
+      await userEvent.click(button);
+
+      expect(handleClick).toHaveBeenCalledTimes(1); // `onClick` が1回呼ばれたことを確認
+    },
+  );
 });
