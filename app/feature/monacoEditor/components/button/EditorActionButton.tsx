@@ -1,6 +1,5 @@
 import { useAppContext } from "@/app/context/AppContext";
 import { BaseButtonProps } from "@/app/type/type";
-import { useEffect, useState } from "react";
 import Image from "next/image";
 import menuData from "@/app/config/config.json";
 
@@ -16,46 +15,19 @@ const EditorActionButton = ({ type, text, onClick }: BaseButtonProps) => {
     currentTheme,
   } = useAppContext();
   // 選択肢が全て選択されたかどうかの状態管理に使用
-  const [isAllSelected, setIsAllSelected] = useState(false);
-  const [isEditorInputedState, setIsEditorInputedState] =
-    useState<boolean>(true);
-
-  // 全ての選択肢が選択されたかどうかを判定する
-  useEffect(() => {
-    if (
-      difficulty !== "" &&
-      dataType !== "" &&
-      topic !== "" &&
-      uiLanguage !== ""
-    ) {
-      setIsAllSelected(true);
-    } else {
-      setIsAllSelected(false);
-    }
-  }, [difficulty, dataType, topic, uiLanguage]);
+  const isAllSelected =
+    difficulty !== "" && dataType !== "" && topic !== "" && uiLanguage !== "";
 
   // 全ての選択肢が入力、問題文が出力済、エディタに何らかの入力があった場合、submitボタンのdisabled属性をfalseに切り替えて押せるようにする
-  useEffect(() => {
-    if (
-      isAllSelected === true &&
-      jsonQuestionText !== null &&
-      currentEditorInputed &&
-      currentEditorInputed?.length >= 1 &&
-      currentEditorInputed?.length <= 5000
-    ) {
-      setIsEditorInputedState(false);
-    } else if (currentEditorInputed && currentEditorInputed?.length >= 5001) {
-      setIsEditorInputedState(true);
-    } else {
-      setIsEditorInputedState(true);
-    }
-  }, [isAllSelected, jsonQuestionText, currentEditorInputed]);
+  // NOT演算子(!)を活用
+  const isEditorInputedState =
+    !isAllSelected ||
+    jsonQuestionText === null ||
+    !currentEditorInputed ||
+    currentEditorInputed.length < 1 ||
+    currentEditorInputed.length > 5000;
 
-  const isButtonDisabled =
-    isApiLoading ||
-    isEditorInputedState ||
-    (currentEditorInputed && currentEditorInputed?.length <= 0) ||
-    false;
+  const isButtonDisabled = isApiLoading || isEditorInputedState;
 
   return (
     <button
