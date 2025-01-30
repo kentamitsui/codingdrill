@@ -1,3 +1,4 @@
+import React from "react";
 import Image from "next/image";
 import { useAppContext } from "@/app/context/AppContext";
 import { BaseButtonProps } from "@/app/type/type";
@@ -34,7 +35,7 @@ const SaveActionButton = ({ type, text, onClick }: BaseButtonProps) => {
                   ? menuData.svgIcon.deleteAllDark
                   : menuData.svgIcon.loadLight
         }
-        alt=""
+        alt={""}
         width={20}
         height={20}
       />
