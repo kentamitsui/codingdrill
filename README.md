@@ -1,9 +1,3 @@
-<div align="center">
-  <a href="https://codingdrill.vercel.app/" target="_blank" rel="noopener noreferrer">
-    <Img src="public/gif/JustDoIt!.gif" width=150 height=150 />
-  </a>
-</div>
-
 ## 📖このプロジェクトについて(About this project)
 
 Coding Drillは、コーディングに関する問題を自動で作成・採点するアプリケーションです。  
