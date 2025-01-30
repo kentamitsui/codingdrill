@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, it, expect, beforeEach, vi } from "vitest";
-import SaveActionButton from "./SaveActionButton";
+import SaveActionButton from "../SaveActionButton";
 import { useAppContext } from "@/app/context/AppContext";
 
 // useAppContext のモック
