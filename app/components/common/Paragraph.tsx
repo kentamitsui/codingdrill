@@ -1,3 +1,4 @@
+import React from "react";
 import { QuestionParagraphProps, ReviewParagraphProps } from "@/app/type/type";
 
 const Paragraph: React.FC<QuestionParagraphProps | ReviewParagraphProps> = ({
