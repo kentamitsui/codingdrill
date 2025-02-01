@@ -65,17 +65,68 @@ describe("Paragraph Component", () => {
     expect(screen.getByText("これはレビューの本文です。")).toBeInTheDocument();
   });
 
-  // it("本文が複数行対応で表示される", () => {
-  //   const props: QuestionParagraphProps = {
-  //     content: dummyQuestionText,
-  //     titleText: "レビュータイトル",
-  //     paragraphContent: "1行目\n2行目\n3行目",
-  //   };
+  // 最終行が奇数の場合
+  it("本文が複数行に分割されて表示される", () => {
+    const props: QuestionParagraphProps = {
+      content: dummyQuestionText,
+      titleText: "レビュータイトル",
+      paragraphContent: "1行目。2行目。3行目。",
+    };
 
-  //   render(<Paragraph {...props} />);
+    render(<Paragraph {...props} />);
 
-  //   expect(screen.getByText("1行目")).toBeInTheDocument();
-  //   expect(screen.getByText("2行目")).toBeInTheDocument();
-  //   expect(screen.getByText("3行目")).toBeInTheDocument();
-  // });
+    // 各行が個別の <p> タグとしてレンダリングされているか確認
+    expect(screen.getByText("1行目。2行目。")).toBeInTheDocument();
+    expect(screen.getByText("3行目。")).toBeInTheDocument();
+  });
+
+  // 最終行が奇数の場合
+  it("英語の文章が複数行に分割されて表示される", () => {
+    const props: QuestionParagraphProps = {
+      content: dummyQuestionText,
+      titleText: "English Test",
+      paragraphContent: "This is line 1. This is line 2. This is line 3.",
+    };
+
+    render(<Paragraph {...props} />);
+
+    expect(
+      screen.getByText("This is line 1. This is line 2."),
+    ).toBeInTheDocument();
+    expect(screen.getByText("This is line 3.")).toBeInTheDocument();
+  });
+
+  // 最終行が偶数の場合
+  it("本文が複数行に分割されて表示され、最終行が偶数である", () => {
+    const props: QuestionParagraphProps = {
+      content: dummyQuestionText,
+      titleText: "レビュータイトル",
+      paragraphContent: "1行目。2行目。3行目。4行目。",
+    };
+
+    render(<Paragraph {...props} />);
+
+    // 各行が個別の <p> タグとしてレンダリングされているか確認
+    expect(screen.getByText("1行目。2行目。")).toBeInTheDocument();
+    expect(screen.getByText("3行目。4行目。")).toBeInTheDocument();
+  });
+
+  // 最終行が奇数の場合
+  it("英語の文章が複数行に分割されて表示され、最終行が偶数である", () => {
+    const props: QuestionParagraphProps = {
+      content: dummyQuestionText,
+      titleText: "English Test",
+      paragraphContent:
+        "This is line 1. This is line 2. This is line 3. This is line 4.",
+    };
+
+    render(<Paragraph {...props} />);
+
+    expect(
+      screen.getByText("This is line 1. This is line 2."),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText("This is line 3. This is line 4."),
+    ).toBeInTheDocument();
+  });
 });

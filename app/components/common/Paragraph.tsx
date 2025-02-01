@@ -18,7 +18,7 @@ const Paragraph: React.FC<QuestionParagraphProps | ReviewParagraphProps> = ({
       const currentLines = lineSplits.slice(i, i + lineSizes);
       // 最終行かどうか確認する
       const isLastLines = i + lineSizes >= lineSplits.length;
-      // 最終チャンク以外の場合、かつ完全なペアであれば末尾にピリオドを追加
+      // 最終行以外の場合、かつ偶数行であればdelimiter(トリムしたもの)を追加
       const extraPeriod =
         !isLastLines && currentLines.length === lineSizes
           ? delimiter.trim()
