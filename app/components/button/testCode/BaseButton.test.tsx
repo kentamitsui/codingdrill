@@ -2,7 +2,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, test, expect, beforeEach, vi } from "vitest";
 import BaseButton from "../BaseButton";
 import { useAppContext } from "@/app/context/AppContext";
 
@@ -34,14 +34,14 @@ describe("BaseButton Component", () => {
     );
   });
 
-  it("ボタンが正しくレンダリングされる", () => {
+  test("ボタンが正しくレンダリングされる", () => {
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     expect(
       screen.getByRole("button", { name: "Generate" }), // ボタン要素である事、text="Generate"のボタンを取得する事を確認
     ).toBeInTheDocument();
   });
 
-  it("ボタンがクリックされたときに onClick が呼ばれる", async () => {
+  test("ボタンがクリックされたときに onClick が呼ばれる", async () => {
     const handleClick = vi.fn();
     render(<BaseButton type="button" text="Generate" onClick={handleClick} />);
 
@@ -52,7 +52,7 @@ describe("BaseButton Component", () => {
     expect(handleClick).toHaveBeenCalledTimes(1); // `onClick` が1回呼ばれたことを確認
   });
 
-  it("APIがローディング中のときはボタンが無効(disabled)になる", () => {
+  test("APIがローディング中のときはボタンが無効(disabled)になる", () => {
     mockContextValue = {
       ...mockContextValue,
       isApiLoading: true, // APIロード中に設定
@@ -86,7 +86,7 @@ describe("BaseButton Component", () => {
     expect(mockContextValue.isApiLoading).toBe(true);
   });
 
-  it("選択肢がすべて未選択のときはボタンが無効(disabled)になる", () => {
+  test("選択肢がすべて未選択のときはボタンが無効(disabled)になる", () => {
     // すべてのプロパティを""に設定しているため、isAllSelected === falseとなる
     mockContextValue.difficulty = "";
     mockContextValue.dataType = "";
@@ -118,7 +118,7 @@ describe("BaseButton Component", () => {
     expect(button).toBeDisabled();
   });
 
-  it("選択肢がすべて選択されているときはボタンが有効になる", () => {
+  test("選択肢がすべて選択されているときはボタンが有効になる", () => {
     mockContextValue = {
       difficulty: "medium",
       dataType: "int",
@@ -136,7 +136,7 @@ describe("BaseButton Component", () => {
     expect(button).not.toBeDisabled();
   });
 
-  it("ボタンのテキストが正しく表示される", () => {
+  test("ボタンのテキストが正しく表示される", () => {
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
 
     // ✅ ボタンのテキストが適切に表示されているか確認
@@ -148,7 +148,7 @@ describe("BaseButton Component", () => {
     ).toBeInTheDocument();
   });
 
-  it("ボタンのスタイルが適用されている", () => {
+  test("ボタンのスタイルが適用されている", () => {
     render(<BaseButton type="button" text="Generate" onClick={() => {}} />);
     const button = screen.getByRole("button", { name: "Generate" }); // `button` を取得
 
