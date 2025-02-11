@@ -7,7 +7,7 @@ import {
   ReviewResponseProps,
   QuestionTextProps,
 } from "@/app/type/type";
-import { describe, it, expect } from "vitest";
+import { describe, test, expect } from "vitest";
 
 const dummyQuestionText: QuestionTextProps = {
   problemStatement: "ダミーの問題文",
@@ -51,7 +51,7 @@ export const dummyReviewText: ReviewResponseProps = {
 };
 
 describe("Paragraph Component: Question text", () => {
-  it("タイトルが表示される (content が true の場合)", () => {
+  test("タイトルが表示される (content が true の場合)", () => {
     const props: QuestionParagraphProps = {
       content: dummyQuestionText,
       titleText: "テストタイトル",
@@ -62,7 +62,7 @@ describe("Paragraph Component: Question text", () => {
     expect(screen.getByText("テストタイトル")).toBeInTheDocument();
   });
 
-  it("タイトルが表示されない (content が false の場合)", () => {
+  test("タイトルが表示されない (content が false の場合)", () => {
     const props: QuestionParagraphProps = {
       content: null,
       titleText: "表示されないタイトル",
@@ -73,7 +73,7 @@ describe("Paragraph Component: Question text", () => {
     expect(screen.queryByText("表示されないタイトル")).not.toBeInTheDocument();
   });
 
-  it("本文が表示される", () => {
+  test("本文が表示される", () => {
     const props: QuestionParagraphProps = {
       content: dummyQuestionText,
       titleText: "レビュータイトル",
@@ -85,7 +85,7 @@ describe("Paragraph Component: Question text", () => {
   });
 
   // 最終行が奇数の場合
-  it("本文が複数行に分割されて表示される", () => {
+  test("本文が複数行に分割されて表示される", () => {
     const props: QuestionParagraphProps = {
       content: dummyQuestionText,
       titleText: "レビュータイトル",
@@ -100,7 +100,7 @@ describe("Paragraph Component: Question text", () => {
   });
 
   // 最終行が奇数の場合
-  it("英語の文章が複数行に分割されて表示される", () => {
+  test("英語の文章が複数行に分割されて表示される", () => {
     const props: QuestionParagraphProps = {
       content: dummyQuestionText,
       titleText: "English Test",
@@ -116,7 +116,7 @@ describe("Paragraph Component: Question text", () => {
   });
 
   // 最終行が偶数の場合
-  it("本文が複数行に分割されて表示され、最終行が偶数である", () => {
+  test("本文が複数行に分割されて表示され、最終行が偶数である", () => {
     const props: QuestionParagraphProps = {
       content: dummyQuestionText,
       titleText: "レビュータイトル",
@@ -131,7 +131,7 @@ describe("Paragraph Component: Question text", () => {
   });
 
   // 最終行が奇数の場合
-  it("英語の文章が複数行に分割されて表示され、最終行が偶数である", () => {
+  test("英語の文章が複数行に分割されて表示され、最終行が偶数である", () => {
     const props: QuestionParagraphProps = {
       content: dummyQuestionText,
       titleText: "English Test",
@@ -151,7 +151,7 @@ describe("Paragraph Component: Question text", () => {
 });
 
 describe("Paragraph Component: Review text", () => {
-  it("タイトルが表示される (content が true の場合)", () => {
+  test("タイトルが表示される (content が true の場合)", () => {
     const props: ReviewParagraphProps = {
       content: dummyReviewText,
       titleText: "テストタイトル",
@@ -162,7 +162,7 @@ describe("Paragraph Component: Review text", () => {
     expect(screen.getByText("テストタイトル")).toBeInTheDocument();
   });
 
-  it("タイトルが表示されない (content が false の場合)", () => {
+  test("タイトルが表示されない (content が false の場合)", () => {
     const props: ReviewParagraphProps = {
       content: null,
       titleText: "表示されないタイトル",
@@ -173,7 +173,7 @@ describe("Paragraph Component: Review text", () => {
     expect(screen.queryByText("表示されないタイトル")).not.toBeInTheDocument();
   });
 
-  it("本文が表示される", () => {
+  test("本文が表示される", () => {
     const props: ReviewParagraphProps = {
       content: dummyReviewText,
       titleText: "レビュータイトル",
@@ -185,7 +185,7 @@ describe("Paragraph Component: Review text", () => {
   });
 
   // 最終行が奇数の場合
-  it("本文が複数行に分割されて表示される", () => {
+  test("本文が複数行に分割されて表示される", () => {
     const props: ReviewParagraphProps = {
       content: dummyReviewText,
       titleText: "レビュータイトル",
@@ -200,7 +200,7 @@ describe("Paragraph Component: Review text", () => {
   });
 
   // 最終行が奇数の場合
-  it("英語の文章が複数行に分割されて表示される", () => {
+  test("英語の文章が複数行に分割されて表示される", () => {
     const props: ReviewParagraphProps = {
       content: dummyReviewText,
       titleText: "English Test",
@@ -216,7 +216,7 @@ describe("Paragraph Component: Review text", () => {
   });
 
   // 最終行が偶数の場合
-  it("本文が複数行に分割されて表示され、最終行が偶数である", () => {
+  test("本文が複数行に分割されて表示され、最終行が偶数である", () => {
     const props: ReviewParagraphProps = {
       content: dummyReviewText,
       titleText: "レビュータイトル",
@@ -231,7 +231,7 @@ describe("Paragraph Component: Review text", () => {
   });
 
   // 最終行が奇数の場合
-  it("英語の文章が複数行に分割されて表示され、最終行が偶数である", () => {
+  test("英語の文章が複数行に分割されて表示され、最終行が偶数である", () => {
     const props: ReviewParagraphProps = {
       content: dummyReviewText,
       titleText: "English Test",

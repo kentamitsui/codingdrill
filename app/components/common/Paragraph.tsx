@@ -10,19 +10,22 @@ const Paragraph: React.FC<QuestionParagraphProps | ReviewParagraphProps> = ({
   const lineBreaks = (text: string, lineSizes: number = 2): string[] => {
     // 日本語では"。 "が文末にあり、それ以外の言語では". "が文末にある事を想定
     const delimiter = text.includes("。") ? "。" : ". ";
+    // delimiterの定義に従って、句点でテキストを分割
     const lineSplits = text.split(delimiter);
     const lines = [];
 
-    // 偶数行のみ改行を行う
+    // 各文章を2つずつで一塊に加工し、linesに格納する
     for (let i = 0; i < lineSplits.length; i += lineSizes) {
+      // sliceでlinesにpushする内容を上書きする
       const currentLines = lineSplits.slice(i, i + lineSizes);
       // 最終行かどうか確認する
       const isLastLines = i + lineSizes >= lineSplits.length;
-      // 最終行以外の場合、かつ偶数行であればdelimiter(トリムしたもの)を追加
+      // 最終行以外の場合、かつ偶数行であればdelimiter.trim()を実行
       const extraPeriod =
         !isLastLines && currentLines.length === lineSizes
           ? delimiter.trim()
           : "";
+      // delimiterを区切り文字として連結した文字列を返し、extraPeriod(句点)を文末に加える。
       const pushLines = currentLines.join(delimiter) + extraPeriod;
       lines.push(pushLines);
     }

@@ -1,8 +1,7 @@
-// SaveActionButton.test.tsx
 import React from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, beforeEach, vi } from "vitest";
+import { describe, test, expect, beforeEach, vi } from "vitest";
 import SaveActionButton from "../SaveActionButton";
 import { useAppContext } from "@/app/context/AppContext";
 
@@ -30,7 +29,7 @@ describe("SaveActionButton Component", () => {
     );
   });
 
-  it.each([["Load"], ["Delete"], ["All Delete"]])(
+  test.each([["Load"], ["Delete"], ["All Delete"]])(
     "ボタンが正しくレンダリングされる (text=%s)",
     (text) => {
       render(<SaveActionButton type="button" text={text} onClick={() => {}} />);
@@ -40,7 +39,7 @@ describe("SaveActionButton Component", () => {
     },
   );
 
-  it.each([["Load"], ["Delete"], ["All Delete"]])(
+  test.each([["Load"], ["Delete"], ["All Delete"]])(
     "ボタンがクリックされたときに onClick が呼ばれる (text=%s)",
     async (text) => {
       const handleClick = vi.fn();
@@ -56,7 +55,7 @@ describe("SaveActionButton Component", () => {
     },
   );
 
-  it.each([["Load"], ["Delete"], ["All Delete"]])(
+  test.each([["Load"], ["Delete"], ["All Delete"]])(
     "APIがローディング中のときはボタンが無効(disabled)になる (text=%s)",
     (text) => {
       mockContextValue = {
@@ -88,7 +87,7 @@ describe("SaveActionButton Component", () => {
     },
   );
 
-  it.each([["Load"], ["Delete"], ["All Delete"]])(
+  test.each([["Load"], ["Delete"], ["All Delete"]])(
     "ボタンのテキストが正しく表示される (text=%s)",
     (text) => {
       render(<SaveActionButton type="button" text={text} onClick={() => {}} />);
