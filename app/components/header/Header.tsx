@@ -1,3 +1,4 @@
+import React from "react";
 import ThemeToggle from "@/app/feature/darkmode/ThemeToggle";
 import RestoreButton from "@/app/feature/splitter/components/RestoreButton";
 

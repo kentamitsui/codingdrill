@@ -5,8 +5,10 @@ interface ColorTheme {
 const LightModeToggleButton: React.FC<ColorTheme> = ({ toggle }) => {
   return (
     <button
+      type="button"
       onClick={toggle}
       className="flex h-10 w-10 items-center justify-center rounded-full"
+      aria-label="Toggle theme"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
