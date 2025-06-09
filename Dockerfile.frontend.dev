@@ -1,0 +1,18 @@
+FROM node:18-alpine
+
+WORKDIR /frontend.dev
+
+# 開発用の依存関係をインストール
+COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* .npmrc* ./
+RUN \
+  if [ -f yarn.lock ]; then yarn install; \
+  elif [ -f package-lock.json ]; then npm install; \
+  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install; \
+  else echo "Lockfile not found." && exit 1; \
+  fi
+
+# ソースコードをコピー
+COPY . .
+
+# 開発サーバーを起動
+CMD ["npm", "run", "dev"] 
