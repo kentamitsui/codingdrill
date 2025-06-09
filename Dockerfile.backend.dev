@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+WORKDIR /backend.dev
+
+# 開発用の依存関係をインストール
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 依存関係をインストール
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# アプリケーションのコードをコピー
+COPY backend.dev ./backend.dev
+
+# 環境変数を設定
+ENV PYTHONUNBUFFERED=1
+ENV DJANGO_SETTINGS_MODULE=backend.settings
+ENV DEBUG=1
+
+# ポートを公開
+EXPOSE 8000
+
+# 開発サーバーを起動
+CMD ["python", "backend.dev/manage.py", "runserver", "0.0.0.0:8000"] 
