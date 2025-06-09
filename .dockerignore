@@ -1,0 +1,19 @@
+Dockerfile*
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git
+# Django関連の追加
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.sqlite3
+media/
+static/

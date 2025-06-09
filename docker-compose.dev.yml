@@ -1,0 +1,90 @@
+services:
+  frontend:
+    image: frontend-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend.dev
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://backend:8000
+      - NODE_ENV=development
+    networks:
+      app-network:
+        aliases:
+          - frontend
+    depends_on:
+      - backend
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  backend:
+    image: backend-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.backend.dev
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=1
+      - ALLOWED_HOSTS=localhost,127.0.0.1
+      - DJANGO_SETTINGS_MODULE=backend.settings
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_NAME=codingdrill_dev
+      - DB_USER=dev_user
+      - DB_PASSWORD=dev_password
+    networks:
+      app-network:
+        aliases:
+          - backend
+    volumes:
+      - ./backend:/app/backend
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      - MYSQL_DATABASE=codingdrill_dev
+      - MYSQL_USER=dev_user
+      - MYSQL_PASSWORD=dev_password
+      - MYSQL_ROOT_PASSWORD=root_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      app-network:
+        aliases:
+          - mysql
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "localhost",
+          "-u",
+          "root",
+          "-p$$MYSQL_ROOT_PASSWORD",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  app-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: app-network-dev
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16
+
+volumes:
+  mysql_data:
