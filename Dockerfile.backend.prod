@@ -1,0 +1,26 @@
+FROM python:3.11-slim
+
+WORKDIR /backend.prod
+
+# 本番用の依存関係をインストール
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
+
+# 依存関係をインストール
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# アプリケーションのコードをコピー
+COPY backend.prod ./backend.prod
+
+# 環境変数を設定
+ENV PYTHONUNBUFFERED=1
+ENV DJANGO_SETTINGS_MODULE=backend.settings
+ENV DEBUG=0
+
+# ポートを公開
+EXPOSE 8000
+
+# Gunicornで起動
+CMD ["gunicorn", "backend.prod.wsgi:application", "--bind", "0.0.0.0:8000"] 
