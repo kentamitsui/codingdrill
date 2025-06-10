@@ -1,10 +1,33 @@
+# Node
 node_modules
+
+# Cursor
 .cursor
 .vscode
 .next
+
+# Text
 text
 process_data.py
 fineTuning/
 .DS_Store
+
+# Environment
 .env
 .env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+*.sqlite3
+media/
+static/
+
+# 依存関係ファイル
+requirements.txt
+requirements.dev.txt
