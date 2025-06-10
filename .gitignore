@@ -16,6 +16,7 @@ fineTuning/
 .env
 .env.local
 
+backend.dev/
 # Python
 __pycache__/
 *.py[cod]
