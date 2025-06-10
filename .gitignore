@@ -8,3 +8,8 @@ fineTuning/
 .DS_Store
 .env
 .env.local
+
+backend.dev/
+
+requirements.txt
+requirements.dev.txt
