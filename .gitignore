@@ -18,6 +18,10 @@ fineTuning/
 
 
 backend.dev/
+backend.dev/backend/
+backend.dev/requirements.txt
+backend.dev/requirements.dev.txt
+
 # Python
 __pycache__/
 *.py[cod]
