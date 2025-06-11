@@ -30,11 +30,11 @@ services:
       - DEBUG=1
       - ALLOWED_HOSTS=localhost,127.0.0.1
       - DJANGO_SETTINGS_MODULE=backend.settings
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_NAME=codingdrill_dev
-      - DB_USER=dev_user
-      - DB_PASSWORD=dev_password
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     networks:
       app-network:
         aliases:
