@@ -20,7 +20,7 @@ fineTuning/
 backend.dev/
 backend.dev/backend/
 backend.dev/requirements.txt
-backend.dev/requirements.dev.txt
+backend.dev/requirements_dev.txt
 
 # Python
 __pycache__/
@@ -36,4 +36,4 @@ static/
 
 # 依存関係ファイル
 requirements.txt
-requirements.dev.txt
+requirements_dev.txt
